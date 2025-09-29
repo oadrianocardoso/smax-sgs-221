@@ -42,8 +42,8 @@
   const GROUPS = {
     amarelo: {
       cls: 'tmx-hl-yellow',
-      whole: ['jurisprudência','jurisprudencia','distribuidor','acessar','DJEN','Diário Eletrônico','automatização', 'ceman', 'Central de Mandados', 'movimentar', 'dois fatores', 'Renajud', 'Sisbajud',
-              'Autenticador', 'carta', 'evento', 'cadastro',
+      whole: ['jurisprudência','jurisprudencia','distribuidor','acessar','DJEN','Diário Eletrônico','automatização', 'ceman', 'Central de Mandados', 'mandado', 'mandados', 'movimentar', 'dois fatores', 'Renajud', 'Sisbajud',
+              'Autenticador', 'carta', 'evento', 'cadastro', 'automação', 'automações', 'migrar', 'migrador', 'migração', 'perito','perita',
 
              ],
       substr: ['acess','mail'],
@@ -52,12 +52,12 @@
     vermelho: {
       cls: 'tmx-hl-red',
       whole: ['ERRO_AGENDAMENTO_EVENTO', 'ERRO_ENVIO_INTIMACAO_DJEN', 'Cookie not found', 'Item 04 do Comunicado 435/2025'],
-      substr: ['erro', 'errado', 'réu revel', 'Cookie not found', 'Urgente', 'urgência','help_outline'],
+      substr: ['erro', 'errado', 'réu revel', 'Cookie not found', 'Urgente', 'urgência','help_outline', 'Plantão'],
       custom: []
     },
     verde: {
       cls: 'tmx-hl-green',
-      whole: ['taxa','taxas','custa','custas','restituir','restituição','guia', 'diligência', 'diligencia', 'justiça gratuíta'],
+      whole: ['taxa','taxas','custa','custas','restituir','restituição','guia', 'diligência', 'diligencia', 'justiça gratuíta', 'parcelamento', 'parcelamento das custas'],
       substr: [],
       custom: []
     },
@@ -211,23 +211,23 @@
     }
 
       const CORES = {
-          "ADRIANO":            { bg: "#ffeb3b", fg: "#000" },   // amarelo
-          "DANIEL CRUZ":        { bg: "#ff7043", fg: "#fff" },   // laranja
-          "DANIEL LEAL":        { bg: "#8d6e63", fg: "#fff" },   // marrom
-          "GLAUCO":             { bg: "#26c6da", fg: "#000" },   // ciano
-          "ISA / DOUGLAS":      { bg: "#ab47bc", fg: "#fff" },   // roxo
-          "IVAN":               { bg: "#9ccc65", fg: "#000" },   // verde claro
-          "JOAO GABRIEL":       { bg: "#42a5f5", fg: "#fff" },   // azul
-          "LAIS":               { bg: "#f06292", fg: "#fff" },   // rosa
-          "LEONARDO":           { bg: "#7e57c2", fg: "#fff" },   // roxo escuro
-          "LUANA":              { bg: "#ffca28", fg: "#000" },   // amarelo ouro
-          "LUIS FELIPE":        { bg: "#26a69a", fg: "#fff" },   // verde água
-          "MARCELO A":          { bg: "#ef5350", fg: "#fff" },   // vermelho
-          "MARCELO M":          { bg: "#5c6bc0", fg: "#fff" },   // índigo
-          "MARLON":             { bg: "#66bb6a", fg: "#000" },   // verde
-          "ROBSON":             { bg: "#ffa726", fg: "#000" },   // laranja claro
-          "SAMUEL":             { bg: "#29b6f6", fg: "#000" },   // azul claro
-          "YVES / IONE":        { bg: "#8bc34a", fg: "#000" }    // verde limão
+          "ADRIANO":       { bg: "#E6C84F", fg: "#000" }, // dourado suave
+          "DANIEL CRUZ":   { bg: "#D96B39", fg: "#fff" }, // laranja queimado claro
+          "DANIEL LEAL":   { bg: "#8B5E3C", fg: "#fff" }, // marrom médio
+          "GLAUCO":        { bg: "#4FBFC0", fg: "#000" }, // turquesa pastel
+          "ISA / DOUGLAS": { bg: "#9C7ED1", fg: "#fff" }, // roxo claro
+          "IVAN":          { bg: "#6E6E6E", fg: "#fff" }, // cinza médio
+          "JOAO GABRIEL":  { bg: "#5C8DD8", fg: "#fff" }, // azul médio
+          "LAIS":          { bg: "#E68AAE", fg: "#000" }, // rosa pastel
+          "LEONARDO":      { bg: "#5D4C92", fg: "#fff" }, // índigo médio
+          "LUANA":         { bg: "#E68C3A", fg: "#000" }, // laranja suave
+          "LUIS FELIPE":   { bg: "#4FA59B", fg: "#000" }, // verde água médio
+          "MARCELO A":     { bg: "#C94F52", fg: "#fff" }, // vermelho moderado
+          "MARCELO M":     { bg: "#6377B9", fg: "#fff" }, // azul royal claro
+          "MARLON":        { bg: "#6CBF6E", fg: "#000" }, // verde médio
+          "ROBSON":        { bg: "#E6896A", fg: "#000" }, // coral claro
+          "SAMUEL":        { bg: "#66B8E3", fg: "#000" }, // azul claro médio
+          "YVES / IONE":   { bg: "#A7D76E", fg: "#000" }, // verde limão suave
       };
 
 
