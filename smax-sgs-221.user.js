@@ -43,7 +43,7 @@
     amarelo: {
       cls: 'tmx-hl-yellow',
       whole: ['jurisprudência','jurisprudencia','distribuidor','acessar','DJEN','Diário Eletrônico','automatização', 'ceman', 'Central de Mandados', 'mandado', 'mandados', 'movimentar', 'dois fatores', 'Renajud', 'Sisbajud',
-              'Autenticador', 'carta', 'evento', 'cadastro', 'automação', 'automações', 'migrar', 'migrador', 'migração', 'perito','perita',
+              'Autenticador', 'carta', 'evento', 'cadastro', 'automação', 'automações', 'migrar', 'migrador', 'migração', 'perito','perita', 'localizadores', 'localizador',
 
              ],
       substr: ['acess','mail'],
@@ -211,24 +211,25 @@
     }
 
       const CORES = {
-          "ADRIANO":       { bg: "#E6C84F", fg: "#000" }, // dourado suave
-          "DANIEL CRUZ":   { bg: "#D96B39", fg: "#fff" }, // laranja queimado claro
-          "DANIEL LEAL":   { bg: "#8B5E3C", fg: "#fff" }, // marrom médio
-          "GLAUCO":        { bg: "#4FBFC0", fg: "#000" }, // turquesa pastel
-          "ISA / DOUGLAS": { bg: "#9C7ED1", fg: "#fff" }, // roxo claro
-          "IVAN":          { bg: "#6E6E6E", fg: "#fff" }, // cinza médio
-          "JOAO GABRIEL":  { bg: "#5C8DD8", fg: "#fff" }, // azul médio
-          "LAIS":          { bg: "#E68AAE", fg: "#000" }, // rosa pastel
-          "LEONARDO":      { bg: "#5D4C92", fg: "#fff" }, // índigo médio
-          "LUANA":         { bg: "#E68C3A", fg: "#000" }, // laranja suave
-          "LUIS FELIPE":   { bg: "#4FA59B", fg: "#000" }, // verde água médio
-          "MARCELO A":     { bg: "#C94F52", fg: "#fff" }, // vermelho moderado
-          "MARCELO M":     { bg: "#6377B9", fg: "#fff" }, // azul royal claro
-          "MARLON":        { bg: "#6CBF6E", fg: "#000" }, // verde médio
-          "ROBSON":        { bg: "#E6896A", fg: "#000" }, // coral claro
-          "SAMUEL":        { bg: "#66B8E3", fg: "#000" }, // azul claro médio
-          "YVES / IONE":   { bg: "#A7D76E", fg: "#000" }, // verde limão suave
-      };
+          "ADRIANO":       { bg: "#E6E66A", fg: "#000" }, // amarelo suave
+          "DANIEL CRUZ":   { bg: "#CC6666", fg: "#000" }, // vermelho claro
+          "DANIEL LEAL":   { bg: "#E6A85C", fg: "#000" }, // laranja pastel
+          "GLAUCO":        { bg: "#4E9E4E", fg: "#fff" }, // verde médio
+          "ISA / DOUGLAS": { bg: "#5C6FA6", fg: "#fff" }, // azul marinho claro
+          "IVAN":          { bg: "#9A9A52", fg: "#000" }, // oliva claro
+          "JOAO GABRIEL":  { bg: "#5C7ED8", fg: "#fff" }, // azul médio
+          "LAIS":          { bg: "#D966D9", fg: "#000" }, // magenta suave
+          "LEONARDO":      { bg: "#8E5A8E", fg: "#fff" }, // roxo médio
+          "LUANA":         { bg: "#7ACC7A", fg: "#000" }, // verde claro suave
+          "LUIS FELIPE":   { bg: "#5CA3A3", fg: "#000" }, // teal claro
+          "MARCELO A":     { bg: "#A05252", fg: "#fff" }, // marrom suave
+          "MARCELO M":     { bg: "#66CCCC", fg: "#000" }, // ciano suave
+          "MARLON":        { bg: "#A0A0A0", fg: "#000" }, // cinza claro médio
+          "ROBSON":        { bg: "#CCCCCC", fg: "#000" }, // cinza muito claro
+          "SAMUEL":        { bg: "#66A3CC", fg: "#000" }, // azul celeste
+          "YVES / IONE":   { bg: "#4D4D4D", fg: "#fff" }, // grafite
+
+    };
 
 
     if (cell) {
@@ -295,4 +296,61 @@
   const obs = new MutationObserver(runAll);
   obs.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true });
   setInterval(runAll, 1500);
+
+    /* =========================================================
+   *  AUMENTAR TAMANHO DA EXIBIÇÃO DOS COMENTÁRIOS NAS DISCUSSÕES
+   * =======================================================*/
+
+(function () {
+  'use strict';
+
+  const CSS_ID = 'tmx-auto-height-comment-items';
+
+  function injectCss() {
+    if (document.getElementById(CSS_ID)) return;
+    const style = document.createElement('style');
+    style.id = CSS_ID;
+    style.textContent = `
+      .comment-items {
+        height: auto !important;
+        max-height: none !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function applyInlineStyle(el) {
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.maxHeight = 'none';
+  }
+
+  function applyToExisting() {
+    document.querySelectorAll('.comment-items').forEach(applyInlineStyle);
+  }
+
+  function observeDom() {
+    const observer = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        if (m.addedNodes && m.addedNodes.length) {
+          m.addedNodes.forEach(node => {
+            if (node.nodeType !== 1) return;
+            if (node.matches && node.matches('.comment-items')) {
+              applyInlineStyle(node);
+            } else {
+              node.querySelectorAll && node.querySelectorAll('.comment-items').forEach(applyInlineStyle);
+            }
+          });
+        }
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  injectCss();
+  applyToExisting();
+  observeDom();
+})();
+
 })();
