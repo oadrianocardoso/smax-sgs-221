@@ -51,7 +51,7 @@
     },
     vermelho: {
       cls: 'tmx-hl-red',
-      whole: ['ERRO_AGENDAMENTO_EVENTO', 'ERRO_ENVIO_INTIMACAO_DJEN', 'Cookie not found', 'Item 04 do Comunicado 435/2025'],
+      whole: ['ERRO_AGENDAMENTO_EVENTO', 'ERRO_ENVIO_INTIMACAO_DJEN', 'Cookie not found', 'Item 04 do Comunicado 435/2025', 'Erro ao gerar o Documento Comprobatório Renajud'],
       substr: ['erro', 'errado', 'réu revel', 'Cookie not found', 'Urgente', 'urgência','help_outline', 'Plantão'],
       custom: []
     },
