@@ -24,7 +24,7 @@
     .tmx-hl-red    { background:#d32f2f; color:#fff; font-weight:700; border-radius:3px; padding:0 .16em; }
     .tmx-hl-green  { background:#2e7d32; color:#fff; font-weight:700; border-radius:3px; padding:0 .14em; }
     .tmx-hl-blue   { background:#1e88e5; color:#fff; font-weight:700; border-radius:3px; padding:0 .14em; }
-    .tmx-hl-pink   { background:#000; color:#ffeb3b; font-weight:700; border-radius:3px; padding:0 .14em; }
+    .tmx-hl-pink   { background:#FC0FC0; color:#000; font-weight:700; border-radius:3px; padding:0 .14em; }
 
     .tmx-juizdireito-hit { background:#1e88e5 !important; color:#fff !important; font-weight:700 !important; }
 
@@ -51,7 +51,7 @@
     },
     vermelho: {
       cls: 'tmx-hl-red',
-      whole: ['ERRO_AGENDAMENTO_EVENTO', 'ERRO_ENVIO_INTIMACAO_DJEN', 'Cookie not found', 'Item 04 do Comunicado 435/2025', 'Erro ao gerar o Documento Comprobatório Renajud'],
+      whole: ['ERRO_AGENDAMENTO_EVENTO', 'ERRO_ENVIO_INTIMACAO_DJEN', 'ERRO_ENVIO_INTIMAÇÃO_DJEN', 'Cookie not found', 'Item 04 do Comunicado 435/2025', 'Erro ao gerar o Documento Comprobatório Renajud'],
       substr: ['erro', 'errado', 'réu revel', 'Cookie not found', 'Urgente', 'urgência','help_outline', 'Plantão'],
       custom: []
     },
@@ -69,7 +69,7 @@
     },
     rosa: {
       cls: 'tmx-hl-pink',
-      whole: ['BdOrigem'],
+      whole: ['BdOrigem', 'CDM'],
       substr: ['BdOrigem'],
       custom: []
     }
@@ -265,22 +265,25 @@
     pickLinks().forEach(marcarNomePorID);
   }
 
-  /* =========================================================
-   *  3) COLUNA l3 r3: JUIZ/JUÍZA DE DIREITO
-   * =======================================================*/
-  const COL_SELECTOR = '.slick-cell.l3.r3';
-  const RE_MAGISTRADO = /\b(?:(ju[ií]z(?:a)?\s+de\s+direito)|(1[ºª]\s+ju[ií]z(?:a)?\s+substitut[oa]))\b/i;
+/* =========================================================
+ *  3) COLUNA l3 r3: JUIZ/JUÍZA DE DIREITO (abrangente)
+ * =======================================================*/
+const COL_SELECTOR = '.slick-cell.l3.r3';
+const RE_MAGISTRADO = /ju[ií]z[a-záéíóúçãõ]*\b/i; // pega juiz, juíza, juizas, juízes, etc.
 
-  function updateSolicitanteCells(root = document) {
-    root.querySelectorAll(COL_SELECTOR).forEach(el => {
-      const txt = (el.textContent || '').trim();
-      if (RE_MAGISTRADO.test(txt)) {
-        el.classList.add('tmx-juizdireito-hit');
-      } else {
-        el.classList.remove('tmx-juizdireito-hit');
-      }
-    });
-  }
+function updateSolicitanteCells(root = document) {
+  root.querySelectorAll(COL_SELECTOR).forEach(el => {
+    const txt = (el.textContent || '').trim();
+    if (RE_MAGISTRADO.test(txt)) {
+      el.classList.add('tmx-juizdireito-hit');
+    } else {
+      el.classList.remove('tmx-juizdireito-hit');
+    }
+  });
+}
+
+
+
 
   /* =========================================================
    *  4) ORQUESTRAÇÃO
