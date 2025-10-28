@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      1.1.1
+// @version      1.1.2
 // @description  Destaca termos, pinta células e ajustes de UX no SMAX SGS 2.2.1 do TJSP (sem painel)
 // @author       ADRIANO AUGUSTO CARDOSO E SANTOS
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -75,7 +75,7 @@
     },
     rosa: {
       cls: 'tmx-hl-pink',
-      whole: ['BdOrigem','CDM'],
+      whole: ['BdOrigem','CDM', 'Controladoria Digital de Mandados'],
       substr: [],
       custom: []
     }
