@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      1.1.4
+// @version      1.1.5
 // @description  Destaca termos, pinta células e ajustes de UX no SMAX SGS 2.2.1 do TJSP (sem painel)
 // @author       ADRIANO AUGUSTO CARDOSO E SANTOS
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -282,7 +282,7 @@
   /* =========================================================
    *  3) COLUNA l3 r3: JUIZ/JUÍZA DE DIREITO (abrangente)
    * =======================================================*/
-  const COL_SELECTOR = '.slick-cell.l3.r3';
+  const COL_SELECTOR = '.slick-cell.l3.r3, .slick-cell.l4.r4';
   const RE_MAGISTRADO = /\bju[ií]z(?:es|a)?\b/iu;
 
   function updateSolicitanteCells(root = document) {
@@ -467,47 +467,24 @@
 
 
     // ==UserScript==
-// @name         SMAX - 3 Grupos de Alerta em Avatares
-// @namespace    https://suporte.tjsp.jus.br/
-// @version      2.0
-// @description  Substitui o avatar por ícones de alerta (1, 2 ou 3 caveiras) conforme o grupo de pessoas
-// @match        https://suporte.tjsp.jus.br/saw/*
-// @grant        none
-// ==/UserScript==
-
 (function () {
   'use strict';
 
-  /* =============================
-      🧾 CONFIGURAÇÃO DOS GRUPOS
-     ============================= */
+  // 💀 Ícone do Grupo 1
+  const ICON_CAVEIRA_URL = 'https://cdn-icons-png.flaticon.com/512/564/564619.png';
+
+  // 🧾 GRUPO 1 – Pessoas sinalizadas
   const GRUPO_1 = [
-    '',
-  ];
-  const GRUPO_2 = [
-    'DIEGO OLIVEIRA DA SILVA','GUILHERME CESAR DE SOUSA','THIAGO TADEU FAUSTINO DE OLIVEIRA','JANAINA DOS PASSOS SILVESTRE','PEDRO HENRIQUE PALACIO BARITTI',
-     'MARCOS PAULO SILVA MADALENA','GUSTAVO DE MEIRA GONÇALVES','Bruna Marques dos Santos','Rodrigo Silva Oliveira','RYAN SOUZA CARVALHO','JULIANA LINO DOS SANTOS ROSA',
-      'TATIANE ARAUJO DA CRUZ','MARIA FERNANDA DE OLIVEIRA BENTO','Victor Viana Roca','DIOGO MENDONÇA ANICETO','GIOVANNA CORADINI TEIXEIRA','LUCAS CARNEIRO PERES FERREIRA',
-      'Davi dos Reis Garcia','ESTER NAILI DOS SANTOS','David Lopes de Oliveira','KARINE BARBARA VITOR DE LIMA SOUZA','ALESSANDRA SOUSA NUNES','BRENO MEDEIROS MALFATI',
-      'Joyce da Silva Oliveira','FABIANO BARBOSA DOS REIS','JEFFERSON SILVA DE CARVALHO SOARES','Rafaella Silva Lima Petrolini','ADRIANA DA SILVA FERREIRA OLIVEIRA',
-      'CASSIA SANTOS ALVES DE LIMA','JUAN CAMPOS DE SOUZA','LUCAS ALVES DOS SANTOS','Kaue Nunes Silva Farrelly','ADRIANO ZILLI','KELLY FERREIRA DE FREITAS','Tatiana Lourenço da Costa Antunes'
-  ];
-  const GRUPO_3 = [
-    ''
+    "DIEGO OLIVEIRA DA SILVA","GUILHERME CESAR DE SOUSA","THIAGO TADEU FAUSTINO DE OLIVEIRA","JANAINA DOS PASSOS SILVESTRE","PEDRO HENRIQUE PALACIO BARITTI",
+    "MARCOS PAULO SILVA MADALENA","GUSTAVO DE MEIRA GONÇALVES","BRUNA MARQUES DOS SANTOS","RODRIGO SILVA OLIVEIRA","RYAN SOUZA CARVALHO","JULIANA LINO DOS SANTOS ROSA",
+    "TATIANE ARAUJO DA CRUZ","MARIA FERNANDA DE OLIVEIRA BENTO","VICTOR VIANA ROCA","DIOGO MENDONÇA ANICETO","GIOVANNA CORADINI TEIXEIRA","LUCAS CARNEIRO PERES FERREIRA",
+    "DAVI DOS REIS GARCIA","ESTER NAILI DOS SANTOS","DAVID LOPES DE OLIVEIRA","KARINE BARBARA VITOR DE LIMA SOUZA","ALESSANDRA SOUSA NUNES","BRENO MEDEIROS MALFATI",
+    "JOYCE DA SILVA OLIVEIRA","FABIANO BARBOSA DOS REIS","JEFFERSON SILVA DE CARVALHO SOARES","RAFAELLA SILVA LIMA PETROLINI","ADRIANA DA SILVA FERREIRA OLIVEIRA",
+    "CASSIA SANTOS ALVES DE LIMA","JUAN CAMPOS DE SOUZA","LUCAS ALVES DOS SANTOS","KAUE NUNES SILVA FARRELLY","ADRIANO ZILLI","KELLY FERREIRA DE FREITAS",
+    "TATIANA LOURENÇO DA COSTA ANTUNES","GISLENE FERREIRA SANT'ANA RAMOS", "Dalete Rodrigues Silva", "Karina Nicolau Samaan", "Davi dos Reis Garcia", "Gabriel Teixeira Ludvig", "NATALIA YURIE SHIBA", "Paulo Roberto Massoca", "DEAULAS DE CAMPOS SALVIANO"
   ];
 
-  /* =============================
-      💀 ÍCONES DOS NÍVEIS
-     ============================= */
-  const ICONS = {
-    1: 'https://cdn-icons-png.flaticon.com/512/1828/1828884.png', // caveira simples
-    2: 'https://cdn-icons-png.flaticon.com/512/564/564619.png',   // caveira dupla (exemplo)
-    3: 'https://cdn-icons-png.flaticon.com/512/1400/1400307.png', // caveira vermelha (alerta crítico)
-  };
-
-  /* =============================
-      ⚙️ FUNÇÕES DE SUPORTE
-     ============================= */
+  // Normaliza nome (remove acentos, caixa alta)
   const normalize = (s) =>
     (s || '')
       .toString()
@@ -516,51 +493,54 @@
       .trim()
       .toUpperCase();
 
-  const MAPA_NOMES = new Map();
-  GRUPO_1.forEach((n) => MAPA_NOMES.set(normalize(n), 1));
-  GRUPO_2.forEach((n) => MAPA_NOMES.set(normalize(n), 2));
-  GRUPO_3.forEach((n) => MAPA_NOMES.set(normalize(n), 3));
+  const LISTA = new Set(GRUPO_1.map(normalize));
 
-  function getNomeVisivel($el) {
-    const texto = $el.clone().children().remove().end().text();
-    return normalize(texto);
+  function getVisibleText(el) {
+    const clone = el.cloneNode(true);
+    while (clone.firstChild) {
+      if (clone.firstChild.nodeType === Node.ELEMENT_NODE) {
+        clone.removeChild(clone.firstChild);
+      } else break;
+    }
+    return clone.textContent || '';
   }
 
-  function aplicarCaveira(personItem) {
+  function aplicarAlerta(personItem) {
     try {
-      const $item = window.jQuery ? window.jQuery(personItem) : null;
-      if (!$item) return;
+      if (!(personItem instanceof HTMLElement)) return;
 
-      const nome = getNomeVisivel($item);
-      const nivel = MAPA_NOMES.get(nome);
-      if (!nivel) return;
+      const nomeVisivel = getVisibleText(personItem);
+      const chave = normalize(nomeVisivel);
+      if (!LISTA.has(chave)) return;
 
-      const img = $item.find('img.ts-avatar, img.pl-shared-item-img, img.ts-image').get(0);
-      if (!img || img.dataset.__alertaApplied === '1') return;
+      const img =
+        personItem.querySelector('img.ts-avatar, img.pl-shared-item-img, img.ts-image') ||
+        personItem.querySelector('img');
 
-      img.dataset.__alertaApplied = '1';
-      img.src = ICONS[nivel];
-      img.alt = `Nível ${nivel} de alerta`;
-      img.title = `Usuário com alerta nível ${nivel}`;
+      if (img && img.dataset.__g1Applied !== '1') {
+        img.dataset.__g1Applied = '1';
+        img.src = ICON_CAVEIRA_URL;
+        img.alt = 'Usuário sinalizado (Grupo 1)';
+        img.title = 'Usuário sinalizado (Grupo 1)';
 
-      const cores = {
-        1: '#ffb400', // amarelo
-        2: '#ff6a00', // laranja
-        3: '#ff0000', // vermelho
-      };
+        Object.assign(img.style, {
+          border: '3px solid #ff0000',
+          borderRadius: '50%',
+          padding: '2px',
+          backgroundColor: '#ff000022',
+          boxShadow: '0 0 10px #ff0000',
+        });
+      }
 
-      Object.assign(img.style, {
-        border: `3px solid ${cores[nivel]}`,
-        borderRadius: '50%',
-        padding: '2px',
-        backgroundColor: `${cores[nivel]}22`,
-        boxShadow: `0 0 10px ${cores[nivel]}`,
-      });
+      // deixa o nome em vermelho e negrito
+      personItem.style.color = '#ff0000';
+      //personItem.style.fontWeight = 'bold';
+
     } catch (_) {}
   }
 
   function varrerPagina() {
-    document.querySelectorAll('span.pl-person-item').forEach(aplicarCaveira);
+    document.querySelectorAll('span.pl-person-item').forEach(aplicarAlerta);
   }
 
   const obs = new MutationObserver(() => varrerPagina());
