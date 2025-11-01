@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      1.1.2
+// @version      1.1.4
 // @description  Destaca termos, pinta células e ajustes de UX no SMAX SGS 2.2.1 do TJSP (sem painel)
 // @author       ADRIANO AUGUSTO CARDOSO E SANTOS
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -75,7 +75,7 @@
     },
     rosa: {
       cls: 'tmx-hl-pink',
-      whole: ['BdOrigem','CDM', 'Controladoria Digital de Mandados'],
+      whole: ['BdOrigem','CDM', 'Controladoria Digital de Mandados', 'Devolvido sem cumprimento', 'Devolvidos sem cumprimento'],
       substr: [],
       custom: []
     }
@@ -464,5 +464,114 @@
     attributeFilter: ['class', 'style', 'aria-expanded']
   });
   window.addEventListener('beforeunload', () => obsMain.disconnect(), { once: true });
+
+
+    // ==UserScript==
+// @name         SMAX - 3 Grupos de Alerta em Avatares
+// @namespace    https://suporte.tjsp.jus.br/
+// @version      2.0
+// @description  Substitui o avatar por ícones de alerta (1, 2 ou 3 caveiras) conforme o grupo de pessoas
+// @match        https://suporte.tjsp.jus.br/saw/*
+// @grant        none
+// ==/UserScript==
+
+(function () {
+  'use strict';
+
+  /* =============================
+      🧾 CONFIGURAÇÃO DOS GRUPOS
+     ============================= */
+  const GRUPO_1 = [
+    '',
+  ];
+  const GRUPO_2 = [
+    'DIEGO OLIVEIRA DA SILVA','GUILHERME CESAR DE SOUSA','THIAGO TADEU FAUSTINO DE OLIVEIRA','JANAINA DOS PASSOS SILVESTRE','PEDRO HENRIQUE PALACIO BARITTI',
+     'MARCOS PAULO SILVA MADALENA','GUSTAVO DE MEIRA GONÇALVES','Bruna Marques dos Santos','Rodrigo Silva Oliveira','RYAN SOUZA CARVALHO','JULIANA LINO DOS SANTOS ROSA',
+      'TATIANE ARAUJO DA CRUZ','MARIA FERNANDA DE OLIVEIRA BENTO','Victor Viana Roca','DIOGO MENDONÇA ANICETO','GIOVANNA CORADINI TEIXEIRA','LUCAS CARNEIRO PERES FERREIRA',
+      'Davi dos Reis Garcia','ESTER NAILI DOS SANTOS','David Lopes de Oliveira','KARINE BARBARA VITOR DE LIMA SOUZA','ALESSANDRA SOUSA NUNES','BRENO MEDEIROS MALFATI',
+      'Joyce da Silva Oliveira','FABIANO BARBOSA DOS REIS','JEFFERSON SILVA DE CARVALHO SOARES','Rafaella Silva Lima Petrolini','ADRIANA DA SILVA FERREIRA OLIVEIRA',
+      'CASSIA SANTOS ALVES DE LIMA','JUAN CAMPOS DE SOUZA','LUCAS ALVES DOS SANTOS','Kaue Nunes Silva Farrelly','ADRIANO ZILLI','KELLY FERREIRA DE FREITAS','Tatiana Lourenço da Costa Antunes'
+  ];
+  const GRUPO_3 = [
+    ''
+  ];
+
+  /* =============================
+      💀 ÍCONES DOS NÍVEIS
+     ============================= */
+  const ICONS = {
+    1: 'https://cdn-icons-png.flaticon.com/512/1828/1828884.png', // caveira simples
+    2: 'https://cdn-icons-png.flaticon.com/512/564/564619.png',   // caveira dupla (exemplo)
+    3: 'https://cdn-icons-png.flaticon.com/512/1400/1400307.png', // caveira vermelha (alerta crítico)
+  };
+
+  /* =============================
+      ⚙️ FUNÇÕES DE SUPORTE
+     ============================= */
+  const normalize = (s) =>
+    (s || '')
+      .toString()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim()
+      .toUpperCase();
+
+  const MAPA_NOMES = new Map();
+  GRUPO_1.forEach((n) => MAPA_NOMES.set(normalize(n), 1));
+  GRUPO_2.forEach((n) => MAPA_NOMES.set(normalize(n), 2));
+  GRUPO_3.forEach((n) => MAPA_NOMES.set(normalize(n), 3));
+
+  function getNomeVisivel($el) {
+    const texto = $el.clone().children().remove().end().text();
+    return normalize(texto);
+  }
+
+  function aplicarCaveira(personItem) {
+    try {
+      const $item = window.jQuery ? window.jQuery(personItem) : null;
+      if (!$item) return;
+
+      const nome = getNomeVisivel($item);
+      const nivel = MAPA_NOMES.get(nome);
+      if (!nivel) return;
+
+      const img = $item.find('img.ts-avatar, img.pl-shared-item-img, img.ts-image').get(0);
+      if (!img || img.dataset.__alertaApplied === '1') return;
+
+      img.dataset.__alertaApplied = '1';
+      img.src = ICONS[nivel];
+      img.alt = `Nível ${nivel} de alerta`;
+      img.title = `Usuário com alerta nível ${nivel}`;
+
+      const cores = {
+        1: '#ffb400', // amarelo
+        2: '#ff6a00', // laranja
+        3: '#ff0000', // vermelho
+      };
+
+      Object.assign(img.style, {
+        border: `3px solid ${cores[nivel]}`,
+        borderRadius: '50%',
+        padding: '2px',
+        backgroundColor: `${cores[nivel]}22`,
+        boxShadow: `0 0 10px ${cores[nivel]}`,
+      });
+    } catch (_) {}
+  }
+
+  function varrerPagina() {
+    document.querySelectorAll('span.pl-person-item').forEach(aplicarCaveira);
+  }
+
+  const obs = new MutationObserver(() => varrerPagina());
+  obs.observe(document.body, { childList: true, subtree: true });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', varrerPagina);
+  } else {
+    varrerPagina();
+  }
+})();
+
 
 })();
