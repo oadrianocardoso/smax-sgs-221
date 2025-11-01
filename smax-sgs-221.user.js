@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      1.1.5
+// @version      1.1.6
 // @description  Destaca termos, pinta células e ajustes de UX no SMAX SGS 2.2.1 do TJSP (sem painel)
 // @author       ADRIANO AUGUSTO CARDOSO E SANTOS
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -481,7 +481,8 @@
     "DAVI DOS REIS GARCIA","ESTER NAILI DOS SANTOS","DAVID LOPES DE OLIVEIRA","KARINE BARBARA VITOR DE LIMA SOUZA","ALESSANDRA SOUSA NUNES","BRENO MEDEIROS MALFATI",
     "JOYCE DA SILVA OLIVEIRA","FABIANO BARBOSA DOS REIS","JEFFERSON SILVA DE CARVALHO SOARES","RAFAELLA SILVA LIMA PETROLINI","ADRIANA DA SILVA FERREIRA OLIVEIRA",
     "CASSIA SANTOS ALVES DE LIMA","JUAN CAMPOS DE SOUZA","LUCAS ALVES DOS SANTOS","KAUE NUNES SILVA FARRELLY","ADRIANO ZILLI","KELLY FERREIRA DE FREITAS",
-    "TATIANA LOURENÇO DA COSTA ANTUNES","GISLENE FERREIRA SANT'ANA RAMOS", "Dalete Rodrigues Silva", "Karina Nicolau Samaan", "Davi dos Reis Garcia", "Gabriel Teixeira Ludvig", "NATALIA YURIE SHIBA", "Paulo Roberto Massoca", "DEAULAS DE CAMPOS SALVIANO"
+    "TATIANA LOURENÇO DA COSTA ANTUNES","GISLENE FERREIRA SANT'ANA RAMOS", "Dalete Rodrigues Silva", "Karina Nicolau Samaan", "Davi dos Reis Garcia", "Gabriel Teixeira Ludvig",
+    "NATALIA YURIE SHIBA", "Paulo Roberto Massoca", "DEAULAS DE CAMPOS SALVIANO", "LARISSA FERREIRA FUMERO", "CARLOS HENRIQUE SCALA DE ALMEIDA"
   ];
 
   // Normaliza nome (remove acentos, caixa alta)
@@ -520,8 +521,8 @@
       if (img && img.dataset.__g1Applied !== '1') {
         img.dataset.__g1Applied = '1';
         img.src = ICON_CAVEIRA_URL;
-        img.alt = 'Usuário sinalizado (Grupo 1)';
-        img.title = 'Usuário sinalizado (Grupo 1)';
+        img.alt = 'Alerta de Usuário Detrator';
+        img.title = 'Alerta de Usuário Detrator';
 
         Object.assign(img.style, {
           border: '3px solid #ff0000',
