@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         SMAX SGS 221 (unificado)
+// @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
 // @version      2.0.0
-// @description  Destaques, badges por ID, marca Juiz/Juíza na coluna “Solicitado por.Título” e TAGs automáticas só na coluna “Descrição”; UX tweaks (sem painel).
+// @description  2.0
 // @author       ADRIANO
 // @match        https://suporte.tjsp.jus.br/saw/*
 // @match        https://suporte.tjsp.jus.br/saw/Requests*
