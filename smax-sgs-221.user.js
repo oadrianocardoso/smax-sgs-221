@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      2.2
-// @description  Teste 2.2
+// @version      2.3
+// @description  Teste 2.2 (organizado e renomeado)
 // @author       ADRIANO
 // @match        https://suporte.tjsp.jus.br/saw/*
 // @match        https://suporte.tjsp.jus.br/saw/Requests*
@@ -17,7 +17,7 @@
 (() => {
   'use strict';
 
-  /* =============== Preferências fixas (sem painel) =============== */
+  /* ====================== Preferências ====================== */
   const prefs = {
     highlightsOn: true,
     nameBadgesOn: true,
@@ -27,7 +27,7 @@
     autoTagsOn: true,
   };
 
-  /* ====================== ESTILOS ====================== */
+  /* ====================== CSS Global ====================== */
   GM_addStyle(`
     /* highlights */
     .tmx-hl-yellow { background:#ffeb3b; color:#000; font-weight:700; border-radius:5px; padding:0 .14em; }
@@ -45,11 +45,11 @@
     .slick-cell.tmx-namecell:focus-within { outline: 2px solid rgba(0,0,0,.25); outline-offset: 2px; }
     .slick-cell.tmx-namecell:hover { box-shadow: 0 0 0 2px rgba(0,0,0,.08) inset; }
 
-    /* TAGs automáticas (CSS blindado, sem herdar nada) */
+    /* TAGs automáticas (CSS blindado) */
     .tag-smax, .tag-smax * { all: unset !important; }
     .tag-smax {
       display: inline-block !important;
-      background: #e0e0e0 !important; /* cinza claro */
+      background: #e0e0e0 !important;
       color: #000 !important;
       font-weight: 700 !important;
       border-radius: 3px !important;
@@ -61,73 +61,56 @@
       line-height: inherit !important;
       text-decoration: none !important;
     }
-    .tag-smax [class^="tmx-hl-"], .tag-smax [class*=" tmx-hl-"] {
-      all: unset !important;
-      background: none !important;
-      color: inherit !important;
-    }
+    .tag-smax [class^="tmx-hl-"], .tag-smax [class*=" tmx-hl-"] { all: unset !important; background: none !important; color: inherit !important; }
 
     /* comentários */
     .comment-items { height: auto !important; max-height: none !important; }
   `);
 
-  /* ===================== Helpers ====================== */
-  const debounced = (fn, wait=120) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); }; };
-  const getSlickViewport = (root=document) => root.querySelector('.slick-viewport') || root;
+  /* ====================== Helpers ====================== */
+  const debounce = (fn, wait=120) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); }; };
+  const getGridViewport = (root=document) => root.querySelector('.slick-viewport') || root;
+  const escapeReg = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const normalizeText = t => (t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 
   /* =========================================================
-   *  1) DESTAQUES POR GRUPOS DE CORES (em .slick-cell)
+   *  1) Destaques por cores (tokens/regex)
    * =======================================================*/
-  const GROUPS = {
-    amarelo: {
-      cls: 'tmx-hl-yellow',
-      whole: ['jurisprudência','jurisprudencia','distribuidor','acessar','DJEN','Diário Eletrônico','automatização','ceman','Central de Mandados','mandado','mandados','movimentar','dois fatores','Renajud','Sisbajud','Autenticador','carta','evento','cadastro','automação','automações','migrar','migrador','migração','perito','perita','localizadores','localizador'],
-      substr: ['acess','mail'],
-      custom: []
-    },
-    vermelho: {
-      cls: 'tmx-hl-red',
-      whole: ['ERRO_AGENDAMENTO_EVENTO','ERRO_ENVIO_INTIMACAO_DJEN','ERRO_ENVIO_INTIMAÇÃO_DJEN','Item 04 do Comunicado 435/2025','Erro ao gerar o Documento Comprobatório Renajud','Cookie not found','Urgente','urgência','Plantão'],
-      substr: ['erro','errado','réu revel','help_outline'],
-      custom: []
-    },
-    verde: {
-      cls: 'tmx-hl-green',
-      whole: ['taxa','taxas','custa','custas','restituir','restituição','guia','diligência','diligencia','justiça gratuíta','parcelamento','parcelamento das custas'],
-      substr: [],
-      custom: []
-    },
-    azul: {
-      cls: 'tmx-hl-blue',
-      whole: ['magistrado','magistrada'],
-      substr: [],
-      custom: [/\bju[ií]z(?:es|a)?\b/giu]
-    },
-    rosa: {
-      cls: 'tmx-hl-pink',
-      whole: ['BdOrigem','CDM','Controladoria Digital de Mandados','Devolvido sem cumprimento','Devolvidos sem cumprimento'],
-      substr: [],
-      custom: []
-    }
+  const HL_GROUPS = {
+    amarelo: { cls:'tmx-hl-yellow',
+      whole:['jurisprudência','jurisprudencia','distribuidor','acessar','DJEN','Diário Eletrônico','automatização','ceman','Central de Mandados','mandado','mandados','movimentar','dois fatores','Renajud','Sisbajud','Autenticador','carta','evento','cadastro','automação','automações','migrar','migrador','migração','perito','perita','localizadores','localizador'],
+      substr:['acess','mail'], custom:[] },
+    vermelho:{ cls:'tmx-hl-red',
+      whole:['ERRO_AGENDAMENTO_EVENTO','ERRO_ENVIO_INTIMACAO_DJEN','ERRO_ENVIO_INTIMAÇÃO_DJEN','Item 04 do Comunicado 435/2025','Erro ao gerar o Documento Comprobatório Renajud','Cookie not found','Urgente','urgência','Plantão'],
+      substr:['erro','errado','réu revel','help_outline'], custom:[] },
+    verde:{ cls:'tmx-hl-green',
+      whole:['taxa','taxas','custa','custas','restituir','restituição','guia','diligência','diligencia','justiça gratuíta','parcelamento','parcelamento das custas'],
+      substr:[], custom:[] },
+    azul:{ cls:'tmx-hl-blue',
+      whole:['magistrado','magistrada'], substr:[], custom:[/\bju[ií]z(?:es|a)?\b/giu] },
+    rosa:{ cls:'tmx-hl-pink',
+      whole:['BdOrigem','CDM','Controladoria Digital de Mandados','Devolvido sem cumprimento','Devolvidos sem cumprimento'],
+      substr:[], custom:[] },
   };
-  const GROUP_ORDER = ['vermelho','rosa','amarelo','verde','azul'];
-  const escapeReg = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  function buildRegexesFromGroup(g) {
+  const HL_ORDER = ['vermelho','rosa','amarelo','verde','azul'];
+
+  const buildHighlightRegexes = (g) => {
     const regs = [];
     if (g.whole?.length) regs.push(new RegExp(`(?<![\\p{L}\\d_])(${g.whole.map(escapeReg).join('|')})(?![\\p{L}\\d_])`, 'giu'));
     if (g.substr?.length) regs.push(new RegExp(`(${g.substr.map(escapeReg).join('|')})`, 'giu'));
     if (g.custom?.length) regs.push(...g.custom);
     return regs;
-  }
-  const GROUP_LIST = Object.entries(GROUPS).map(([name, cfg]) => ({ name, cls: cfg.cls, regexes: buildRegexesFromGroup(cfg) }));
-  const ORDERED_GROUPS = GROUP_LIST.slice().sort((a,b) => GROUP_ORDER.indexOf(a.name) - GROUP_ORDER.indexOf(b.name));
+  };
 
+  const HL_LIST = Object.entries(HL_GROUPS).map(([name,cfg]) => ({ name, cls:cfg.cls, regexes: buildHighlightRegexes(cfg) }));
+  const HL_ORDERED = HL_LIST.slice().sort((a,b)=>HL_ORDER.indexOf(a.name)-HL_ORDER.indexOf(b.name));
   const processedTextNodes = new WeakSet();
-  function unwrapHighlights(root) {
+
+  const unwrapCellHighlights = (root) =>
     root.querySelectorAll('.tmx-hl-yellow, .tmx-hl-red, .tmx-hl-green, .tmx-hl-blue, .tmx-hl-pink')
-      .forEach(span => span.replaceWith(document.createTextNode(span.textContent || '')));
-  }
-  function highlightWithRegex(container, regex, cls) {
+        .forEach(span => span.replaceWith(document.createTextNode(span.textContent || '')));
+
+  function highlightMatchesInNode(container, regex, cls) {
     const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
       acceptNode(node) {
         if (processedTextNodes.has(node)) return NodeFilter.FILTER_REJECT;
@@ -143,12 +126,15 @@
         return NodeFilter.FILTER_ACCEPT;
       }
     });
+
     const nodes = [];
     for (let n; (n = walker.nextNode()); ) nodes.push(n);
+
     for (const textNode of nodes) {
       const text = textNode.nodeValue;
       if (!regex.test(text)) { regex.lastIndex = 0; continue; }
       regex.lastIndex = 0;
+
       const frag = document.createDocumentFragment();
       let last = 0, m;
       while ((m = regex.exec(text)) !== null) {
@@ -163,25 +149,28 @@
       textNode.parentNode.replaceChild(frag, textNode);
     }
   }
-  function processCell(cell) {
+
+  function sweepHighlightsInCell(cell) {
     if (!prefs.highlightsOn) return;
     const current = (cell.textContent || '').trim();
     const last = cell.getAttribute('data-tmx-last') || '';
     if (current === last) return;
-    unwrapHighlights(cell);
-    for (const g of ORDERED_GROUPS) for (const re of g.regexes) highlightWithRegex(cell, re, g.cls);
+
+    unwrapCellHighlights(cell);
+    for (const g of HL_ORDERED) for (const re of g.regexes) highlightMatchesInNode(cell, re, g.cls);
     cell.setAttribute('data-tmx-last', (cell.textContent || '').trim());
   }
-  function processCellHighlights(root=document) {
+
+  function applyHighlightsInGrid(root=document) {
     if (!prefs.highlightsOn) return;
-    const scope = getSlickViewport(root);
-    scope.querySelectorAll('.slick-cell').forEach(processCell);
+    const scope = getGridViewport(root);
+    scope.querySelectorAll('.slick-cell').forEach(sweepHighlightsInCell);
   }
 
   /* =========================================================
-   *  2) MARCAR NOMES POR FINAIS DE ID (CÉLULA INTEIRA)
+   *  2) Badges por finais de ID (célula inteira)
    * =======================================================*/
-  const gruposNomes = {
+  const NAME_GROUPS = {
     "ADRIANO":[0,1,2,3,4,5],"DANIEL CRUZ":[6,7,8,9,10,11],"DANIEL LEAL":[12,13,14,15,16,17],
     "GLAUCO":[18,19,20,21,22],"ISA":[23,24,25,26,27,28],"IVAN":[29,30,31,32,33,34],
     "JOAO GABRIEL":[35,36,37,38,39,40],"LAIS":[41,42,43,44,45,46],"LEONARDO":[47,48,49,50,51,52],
@@ -189,75 +178,88 @@
     "DOUGLAS":[71,72,73,74,75],"MARLON":[76,77,78,79,80,81],"ROBSON":[82,83,84,85,86,87],
     "SAMUEL":[88,89,90,91,92,93],"YVES / IONE":[94,95,96,97,98,99],
   };
-  const MARK_ATTR = 'adMarcado';
-  const LINK_SELECTORS = ['a.entity-link-id', '.slick-row a'];
-  const processedLinks = new WeakSet();
-  const mapaNome = {};
-  for (const [nome, nums] of Object.entries(gruposNomes)) nums.forEach(n => { mapaNome[String(n).padStart(2,'0')] = nome; });
+  const NAME_COLOR = {
+    "ADRIANO":{bg:"#E6E66A",fg:"#000"},"DANIEL CRUZ":{bg:"#CC6666",fg:"#000"},
+    "DANIEL LEAL":{bg:"#E6A85C",fg:"#000"},"GLAUCO":{bg:"#4E9E4E",fg:"#fff"},
+    "ISA":{bg:"#5C6FA6",fg:"#fff"},"IVAN":{bg:"#9A9A52",fg:"#000"},
+    "JOAO GABRIEL":{bg:"#5C7ED8",fg:"#fff"},"LAIS":{bg:"#D966D9",fg:"#000"},
+    "LEONARDO":{bg:"#8E5A8E",fg:"#fff"},"LUANA":{bg:"#7ACC7A",fg:"#000"},
+    "LUIS FELIPE":{bg:"#5CA3A3",fg:"#000"},"MARCELO":{bg:"#A05252",fg:"#fff"},
+    "DOUGLAS":{bg:"#66CCCC",fg:"#000"},"MARLON":{bg:"#A0A0A0",fg:"#000"},
+    "ROBSON":{bg:"#CCCCCC",fg:"#000"},"SAMUEL":{bg:"#66A3CC",fg:"#000"},
+    "YVES / IONE":{bg:"#4D4D4D",fg:"#fff"},
+  };
 
-  function pickLinks() {
+  const NAME_MARK_ATTR = 'adMarcado';
+  const LINK_PICKERS = ['a.entity-link-id', '.slick-row a'];
+  const processedLinks = new WeakSet();
+
+  const SUFFIX_MAP = (() => {
+    const map = {};
+    for (const [nome, nums] of Object.entries(NAME_GROUPS)) {
+      nums.forEach(n => { map[String(n).padStart(2,'0')] = nome; });
+    }
+    return map;
+  })();
+
+  const pickAllLinks = () => {
     const set = new Set();
-    for (const sel of LINK_SELECTORS) document.querySelectorAll(sel).forEach(a => set.add(a));
+    for (const sel of LINK_PICKERS) document.querySelectorAll(sel).forEach(a => set.add(a));
     return Array.from(set);
-  }
-  function extraiNumeroFinal(texto) {
-    const m = String(texto).match(/(\d{2,})\D*$/);
+  };
+
+  const extractTrailingDigits = (text) => {
+    const m = String(text).match(/(\d{2,})\D*$/);
     return m ? m[1] : '';
-  }
-  function processNameTags() {
+  };
+
+  function applyNameBadges() {
     if (!prefs.nameBadgesOn) return;
-    pickLinks().forEach(link => {
+    pickAllLinks().forEach(link => {
       if (!link || processedLinks.has(link)) return;
-      const texto = (link.textContent || '').trim();
-      const numero = extraiNumeroFinal(texto);
-      if (!numero) { processedLinks.add(link); return; }
-      const finais2 = numero.slice(-2).padStart(2,'0');
-      const nome = mapaNome[finais2];
+      const label = (link.textContent || '').trim();
+      const digits = extractTrailingDigits(label);
+      if (!digits) { processedLinks.add(link); return; }
+
+      const suffix2 = digits.slice(-2).padStart(2,'0');
+      const owner = SUFFIX_MAP[suffix2];
       const cell = link.closest('.slick-cell');
-      const CORES = {
-        "ADRIANO":{bg:"#E6E66A",fg:"#000"},"DANIEL CRUZ":{bg:"#CC6666",fg:"#000"},
-        "DANIEL LEAL":{bg:"#E6A85C",fg:"#000"},"GLAUCO":{bg:"#4E9E4E",fg:"#fff"},
-        "ISA":{bg:"#5C6FA6",fg:"#fff"},"IVAN":{bg:"#9A9A52",fg:"#000"},
-        "JOAO GABRIEL":{bg:"#5C7ED8",fg:"#fff"},"LAIS":{bg:"#D966D9",fg:"#000"},
-        "LEONARDO":{bg:"#8E5A8E",fg:"#fff"},"LUANA":{bg:"#7ACC7A",fg:"#000"},
-        "LUIS FELIPE":{bg:"#5CA3A3",fg:"#000"},"MARCELO":{bg:"#A05252",fg:"#fff"},
-        "DOUGLAS":{bg:"#66CCCC",fg:"#000"},"MARLON":{bg:"#A0A0A0",fg:"#000"},
-        "ROBSON":{bg:"#CCCCCC",fg:"#000"},"SAMUEL":{bg:"#66A3CC",fg:"#000"},
-        "YVES / IONE":{bg:"#4D4D4D",fg:"#fff"},
-      };
-      if (cell && nome && CORES[nome]) {
-        const {bg,fg} = CORES[nome];
+
+      if (cell && owner && NAME_COLOR[owner]) {
+        const { bg, fg } = NAME_COLOR[owner];
         cell.classList.add('tmx-namecell');
         cell.style.background = bg;
         cell.style.color = fg || '';
         cell.querySelectorAll('a').forEach(a => { a.style.color = 'inherit'; });
       }
-      if (nome && !link.dataset[MARK_ATTR]) {
+
+      if (owner && !link.dataset[NAME_MARK_ATTR]) {
         const tag = document.createElement('span');
-        tag.textContent = ' ' + nome;
+        tag.textContent = ' ' + owner;
         tag.style.marginLeft = '6px';
         tag.style.fontWeight = '600';
-        if (CORES[nome]) {
-          tag.style.background = CORES[nome].bg;
-          tag.style.color = CORES[nome].fg;
+        const c = NAME_COLOR[owner];
+        if (c) {
+          tag.style.background = c.bg;
+          tag.style.color = c.fg;
           tag.style.padding = '0 4px';
           tag.style.borderRadius = '4px';
         }
         link.insertAdjacentElement('afterend', tag);
-        link.dataset[MARK_ATTR] = '1';
+        link.dataset[NAME_MARK_ATTR] = '1';
       }
+
       processedLinks.add(link);
     });
   }
 
   /* =========================================================
-   *  3) JUIZ/JUÍZA — apenas na coluna "Solicitado por.Título"
-   *     (usa o header data-aid para localizar o índice lN/rN)
+   *  3) Marca "Solicitado por.Título" se for juiz/juíza
    * =======================================================*/
   const RE_MAGISTRADO = /\bju[ií]z(?:es|a)?(?:\s+de\s+direito)?\b/i;
   const AID_SOLICITADO_POR = 'grid_header_RequestedByPerson.Title';
 
-  function getColSelectorByHeaderAid(aid) {
+  function getColumnSelectorByHeaderAid(aid) {
     const headers = Array.from(document.querySelectorAll('.slick-header-columns .slick-header-column'));
     const target = headers.find(h => h.getAttribute('data-aid') === aid);
     if (!target) return null;
@@ -266,10 +268,10 @@
     return `.slick-row .slick-cell.l${idx}.r${idx}`;
   }
 
-  function updateSolicitanteCells(root=document) {
+  function markMagistrateColumn(root=document) {
     if (!prefs.magistradoOn) return;
-    const scope = getSlickViewport(root);
-    const colSel = getColSelectorByHeaderAid(AID_SOLICITADO_POR);
+    const scope = getGridViewport(root);
+    const colSel = getColumnSelectorByHeaderAid(AID_SOLICITADO_POR);
     if (!colSel) return;
     scope.querySelectorAll(colSel).forEach(cell => {
       const txt = (cell.textContent || '').trim();
@@ -279,35 +281,36 @@
   }
 
   /* =========================================================
-   *  4) TAGs automáticas — apenas na coluna "Descrição"
-   *     (usa header data-aid para localizar lN/rN)
+   *  4) TAGs automáticas na coluna "Descrição"
    * =======================================================*/
   const AID_DESCRICAO = 'grid_header_Description';
 
-  const regrasTags = [
-    { palavras: ["mandado","oficial de justiça","central de mandos"], tag: "CEMAN" },
-    { palavras: ["custas","taxa","diligência","diligências"], tag: "CUSTAS" },
-    { palavras: ["atp","automatização","automação","regra"], tag: "ATP" },
-    { palavras: ["cadastrar","cadastro"], tag: "CADASTROS" },
-    { palavras: ["acesso","login","acessar","fatores","autenticador","autenticação","authenticator","senha"], tag: "LOGIN" },
-    { palavras: ["Migrado","Migrados","Migração","Migrador","migrar"], tag: "MIGRADOR" },
-    { palavras: ["Carta","Cartas"], tag: "CORREIOS" },
-    { palavras: ["DJEN"], tag: "DJEN" },
-    { palavras: ["Renajud","Sisbajud"], tag: "ACIONAMENTOS" },
-    { palavras: ["Distribuição","Redistribuir","Remeter"], tag: "DISTRIBUIÇÃO" },
+  const AUTO_TAG_RULES = [
+    { palavras:["mandado","oficial de justiça","central de mandos"], tag:"CEMAN" },
+    { palavras:["custas","taxa","diligência","diligências"],        tag:"CUSTAS" },
+    { palavras:["atp","automatização","automação","regra"],          tag:"ATP" },
+    { palavras:["cadastrar","cadastro"],                              tag:"CADASTROS" },
+    { palavras:["acesso","login","acessar","fatores","autenticador","autenticação","authenticator","senha"], tag:"LOGIN" },
+    { palavras:["Migrado","Migrados","Migração","Migrador","migrar"], tag:"MIGRADOR" },
+    { palavras:["Carta","Cartas"],                                    tag:"CORREIOS" },
+    { palavras:["DJEN"],                                              tag:"DJEN" },
+    { palavras:["Renajud","Sisbajud"],                                tag:"ACIONAMENTOS" },
+    { palavras:["Distribuição","Redistribuir","Remeter"],             tag:"DISTRIBUIÇÃO" },
   ];
-  const norm = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-  const jaTemTagNoInicio = html => /\[\s*[A-Z]+\s*\]/.test(html.replace(/<[^>]+>/g,'').slice(0, 24));
 
-  function processarCelulaDescricao(el) {
+  const hasLeadingTag = html => /\[\s*[A-Z]+\s*\]/.test(html.replace(/<[^>]+>/g,'').slice(0,24));
+
+  function tagDescriptionCellOnce(el) {
     if (el.dataset.smaxTagged === '1') return;
-    const txt = el.textContent?.trim();
-    if (!txt) return;
+    const plain = el.textContent?.trim();
+    if (!plain) return;
+
     const htmlAtual = el.innerHTML.trim();
-    if (jaTemTagNoInicio(htmlAtual)) { el.dataset.smaxTagged = '1'; return; }
-    const n = norm(txt);
-    for (const r of regrasTags) {
-      if (r.palavras.some(p => n.includes(norm(p)))) {
+    if (hasLeadingTag(htmlAtual)) { el.dataset.smaxTagged = '1'; return; }
+
+    const n = normalizeText(plain);
+    for (const r of AUTO_TAG_RULES) {
+      if (r.palavras.some(p => n.includes(normalizeText(p)))) {
         el.innerHTML = `<span class="tag-smax">[${r.tag}]</span> ${htmlAtual}`;
         el.dataset.smaxTagged = '1';
         break;
@@ -315,25 +318,24 @@
     }
   }
 
-  function aplicarTagsDescricao() {
+  function applyAutoTagsInDescription() {
     if (!prefs.autoTagsOn) return;
-    const colSel = getColSelectorByHeaderAid(AID_DESCRICAO);
+    const colSel = getColumnSelectorByHeaderAid(AID_DESCRICAO);
     if (!colSel) return;
     const nodes = document.querySelectorAll(`${colSel}:not([data-smax-tagged])`);
-    const MAX_POR_CICLO = 500;
+    const MAX_PER_TICK = 500;
     let count = 0;
     for (const el of nodes) {
-      processarCelulaDescricao(el);
-      if (++count >= MAX_POR_CICLO) break;
+      tagDescriptionCellOnce(el);
+      if (++count >= MAX_PER_TICK) break;
     }
   }
 
   /* =========================================================
-   *  5) Comentários: altura automática
+   *  5) Comentários auto-altura
    * =======================================================*/
-  (function enlargeComments() {
+  function initAutoHeightComments() {
     if (!prefs.enlargeCommentsOn) return;
-    // CSS já injetado no GM_addStyle acima
     const obs = new MutationObserver(muts => {
       for (const m of muts) {
         m.addedNodes?.forEach(node => {
@@ -352,38 +354,39 @@
     });
     obs.observe(document.body, { childList:true, subtree:true });
     window.addEventListener('beforeunload', () => obs.disconnect(), { once:true });
-  })();
+  }
 
   /* =========================================================
-   *  6) Recolher "Oferta de Catálogo" e remover seções
+   *  6) Recolher "Oferta de Catálogo" + remover seções
    * =======================================================*/
-  (function sectionsTweaks() {
+  function initSectionTweaks() {
     if (!prefs.collapseOn) return;
+
     const SECTION_SELECTOR = '#form-section-5, [data-aid="section-catalog-offering"]';
-    const IDS_PARA_REMOVER = ['form-section-1','form-section-7','form-section-8'];
+    const IDS_TO_REMOVE = ['form-section-1','form-section-7','form-section-8'];
     const collapsedOnce = new WeakSet();
 
-    function isOpen(sectionEl) {
+    const isOpen = (sectionEl) => {
       const content = sectionEl?.querySelector?.('.pl-entity-page-component-content');
       return !!content && !content.classList.contains('ng-hide');
-    }
-    function syntheticClick(el) {
-      try { el.click(); }
-      catch { el.dispatchEvent(new MouseEvent('click', { bubbles:true, cancelable:true })); }
-    }
-    function fixAriaAndIcon(headerEl, sectionEl) {
+    };
+    const syntheticClick = (el) => { try { el.click(); } catch { el.dispatchEvent(new MouseEvent('click', { bubbles:true, cancelable:true })); } };
+    const fixAriaAndIcon = (headerEl, sectionEl) => {
       if (!headerEl || !sectionEl) return;
       if (headerEl.getAttribute('aria-expanded') !== 'false') headerEl.setAttribute('aria-expanded','false');
       const sr = sectionEl.querySelector('.pl-entity-page-component-header-sr');
       if (sr && /Expandido/i.test(sr.textContent || '')) sr.textContent = sr.textContent.replace(/Expandido/ig,'Recolhido');
       const icon = headerEl.querySelector('[pl-bidi-collapse-arrow]') || headerEl.querySelector('.icon-arrow-med-down, .icon-arrow-med-right');
       if (icon) { icon.classList.remove('icon-arrow-med-down'); icon.classList.add('icon-arrow-med-right'); }
-    }
-    function collapseOnce(sectionEl) {
+    };
+
+    function collapseSectionOnce(sectionEl) {
       if (sectionEl.dataset.userInteracted === '1') return;
       if (collapsedOnce.has(sectionEl)) return;
+
       const header = sectionEl.querySelector('.pl-entity-page-component-header[role="button"]');
       if (!header) return;
+
       if (isOpen(sectionEl)) {
         syntheticClick(header);
         setTimeout(()=>fixAriaAndIcon(header,sectionEl),0);
@@ -392,13 +395,14 @@
       }
       collapsedOnce.add(sectionEl);
     }
-    function removerSecoes() {
-      IDS_PARA_REMOVER.forEach(id => { const el = document.getElementById(id); if (el && el.parentNode) el.remove(); });
-    }
+
+    const removeSections = () => IDS_TO_REMOVE.forEach(id => { const el = document.getElementById(id); if (el && el.parentNode) el.remove(); });
+
     function applyAll() {
-      document.querySelectorAll(SECTION_SELECTOR).forEach(collapseOnce);
-      removerSecoes();
+      document.querySelectorAll(SECTION_SELECTOR).forEach(collapseSectionOnce);
+      removeSections();
     }
+
     document.addEventListener('click', (e)=>{
       const header = e.target.closest('.pl-entity-page-component-header[role="button"]');
       if (!header) return;
@@ -406,51 +410,55 @@
       if (sectionEl) sectionEl.dataset.userInteracted = '1';
     }, { capture:true });
 
-    const schedule = debounced(applyAll, 100);
+    const schedule = debounce(applyAll, 100);
     const obs = new MutationObserver(()=>schedule());
     setTimeout(applyAll, 300);
     obs.observe(document.documentElement, { childList:true, subtree:true });
     window.addEventListener('beforeunload', () => obs.disconnect(), { once:true });
-  })();
+  }
 
   /* =========================================================
    *  7) Orquestração (um único observer com debounce)
    * =======================================================*/
-  function runAll() {
+  function runAllFeatures() {
     const work = () => {
-      processCellHighlights();
-      processNameTags();
-      updateSolicitanteCells();
-      aplicarTagsDescricao();
+      applyHighlightsInGrid();
+      applyNameBadges();
+      markMagistrateColumn();
+      applyAutoTagsInDescription();
     };
     if ('requestIdleCallback' in window) requestIdleCallback(work, { timeout: 500 });
     else setTimeout(work, 0);
   }
-  const scheduleRunAll = debounced(runAll, 80);
 
-  runAll();
+  const scheduleRunAllFeatures = debounce(runAllFeatures, 80);
 
-  const obsMain = new MutationObserver(()=>scheduleRunAll());
-  obsMain.observe(document.body, {
-    childList: true,
-    subtree: true,
-    characterData: true,
-    attributes: true,
-    attributeFilter: ['class','style','aria-expanded']
-  });
+  function initOrchestrator() {
+    runAllFeatures();
 
-  // Cabeçalho pode mudar indices lN/rN quando mostra/oculta/reordena colunas
-  const header = document.querySelector('.slick-header-columns') || document.body;
-  const obsHeader = new MutationObserver(()=>scheduleRunAll());
-  obsHeader.observe(header, { childList:true, subtree:true, attributes:true });
+    const obsMain = new MutationObserver(()=>scheduleRunAllFeatures());
+    obsMain.observe(document.body, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ['class','style','aria-expanded']
+    });
 
-  window.addEventListener('scroll', scheduleRunAll, true);
-  window.addEventListener('resize', scheduleRunAll, { passive:true });
-  window.addEventListener('beforeunload', () => { obsMain.disconnect(); obsHeader.disconnect(); }, { once:true });
+    // Cabeçalho pode mudar índices lN/rN ao mostrar/ocultar/reordenar
+    const headerEl = document.querySelector('.slick-header-columns') || document.body;
+    const obsHeader = new MutationObserver(()=>scheduleRunAllFeatures());
+    obsHeader.observe(headerEl, { childList:true, subtree:true, attributes:true });
 
-  /* =============== (Opcional) Ícone caveira em pessoas lista =============== */
-  (function grupo1Caveira() {
-    // deixe aqui embaixo; se não quiser, basta comentar esta função.
+    window.addEventListener('scroll', scheduleRunAllFeatures, true);
+    window.addEventListener('resize', scheduleRunAllFeatures, { passive:true });
+    window.addEventListener('beforeunload', () => { obsMain.disconnect(); obsHeader.disconnect(); }, { once:true });
+  }
+
+  /* =========================================================
+   *  8) Destacar usuários detratores (caveira)
+   * =======================================================*/
+  function initFlagUsersSkull() {
     const ICON_CAVEIRA_URL = 'https://cdn-icons-png.flaticon.com/512/564/564619.png';
     const GRUPO_1 = [
       "DIEGO OLIVEIRA DA SILVA","GUILHERME CESAR DE SOUSA","THIAGO TADEU FAUSTINO DE OLIVEIRA","JANAINA DOS PASSOS SILVESTRE","PEDRO HENRIQUE PALACIO BARITTI",
@@ -462,21 +470,26 @@
       "TATIANA LOURENÇO DA COSTA ANTUNES","GISLENE FERREIRA SANT'ANA RAMOS","Dalete Rodrigues Silva","Karina Nicolau Samaan","Davi dos Reis Garcia","Gabriel Teixeira Ludvig",
       "NATALIA YURIE SHIBA","Paulo Roberto Massoca","DEAULAS DE CAMPOS SALVIANO","LARISSA FERREIRA FUMERO","CARLOS HENRIQUE SCALA DE ALMEIDA","FABRICIO CHRISTIANO TANOBE LYRA"
     ];
-    const normalize = s => (s||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toUpperCase();
-    const LISTA = new Set(GRUPO_1.map(normalize));
-    function getVisibleText(el) {
+
+    const normalizeName = s => (s||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toUpperCase();
+    const FLAG_SET = new Set(GRUPO_1.map(normalizeName));
+
+    function getVisibleLeadingText(el) {
       const clone = el.cloneNode(true);
       while (clone.firstChild) {
-        if (clone.firstChild.nodeType === Node.ELEMENT_NODE) clone.removeChild(clone.firstChild); else break;
+        if (clone.firstChild.nodeType === Node.ELEMENT_NODE) clone.removeChild(clone.firstChild);
+        else break;
       }
       return clone.textContent || '';
     }
-    function aplicarAlerta(personItem) {
+
+    function applySkullAlert(personItem) {
       try {
         if (!(personItem instanceof HTMLElement)) return;
-        const nomeVisivel = getVisibleText(personItem);
-        const chave = normalize(nomeVisivel);
-        if (!LISTA.has(chave)) return;
+        const nomeVisivel = getVisibleLeadingText(personItem);
+        const chave = normalizeName(nomeVisivel);
+        if (!FLAG_SET.has(chave)) return;
+
         const img = personItem.querySelector('img.ts-avatar, img.pl-shared-item-img, img.ts-image') || personItem.querySelector('img');
         if (img && img.dataset.__g1Applied !== '1') {
           img.dataset.__g1Applied = '1';
@@ -491,14 +504,22 @@
         personItem.style.color = '#ff0000';
       } catch {}
     }
-    const obs = new MutationObserver(()=>document.querySelectorAll('span.pl-person-item').forEach(aplicarAlerta));
-    obs.observe(document.body, { childList:true, subtree:true });
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', ()=>document.querySelectorAll('span.pl-person-item').forEach(aplicarAlerta));
-    } else {
-      document.querySelectorAll('span.pl-person-item').forEach(aplicarAlerta);
-    }
-    window.addEventListener('beforeunload', () => obs.disconnect(), { once:true });
-  })();
 
+    const obs = new MutationObserver(()=>document.querySelectorAll('span.pl-person-item').forEach(applySkullAlert));
+    obs.observe(document.body, { childList:true, subtree:true });
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', ()=>document.querySelectorAll('span.pl-person-item').forEach(applySkullAlert));
+    } else {
+      document.querySelectorAll('span.pl-person-item').forEach(applySkullAlert);
+    }
+
+    window.addEventListener('beforeunload', () => obs.disconnect(), { once:true });
+  }
+
+  /* ====================== Boot ====================== */
+  initAutoHeightComments();
+  initSectionTweaks();
+  initOrchestrator();
+  initFlagUsersSkull(); // comente esta linha se não quiser a “caveira”
 })();
