@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      2.3
+// @version      2.4
 // @description  Teste 2.2 (organizado e renomeado)
 // @author       ADRIANO
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -468,7 +468,8 @@
       "JOYCE DA SILVA OLIVEIRA","FABIANO BARBOSA DOS REIS","JEFFERSON SILVA DE CARVALHO SOARES","RAFAELLA SILVA LIMA PETROLINI","ADRIANA DA SILVA FERREIRA OLIVEIRA",
       "CASSIA SANTOS ALVES DE LIMA","JUAN CAMPOS DE SOUZA","LUCAS ALVES DOS SANTOS","KAUE NUNES SILVA FARRELLY","ADRIANO ZILLI","KELLY FERREIRA DE FREITAS",
       "TATIANA LOURENÇO DA COSTA ANTUNES","GISLENE FERREIRA SANT'ANA RAMOS","Dalete Rodrigues Silva","Karina Nicolau Samaan","Davi dos Reis Garcia","Gabriel Teixeira Ludvig",
-      "NATALIA YURIE SHIBA","Paulo Roberto Massoca","DEAULAS DE CAMPOS SALVIANO","LARISSA FERREIRA FUMERO","CARLOS HENRIQUE SCALA DE ALMEIDA","FABRICIO CHRISTIANO TANOBE LYRA"
+      "NATALIA YURIE SHIBA","Paulo Roberto Massoca","DEAULAS DE CAMPOS SALVIANO","LARISSA FERREIRA FUMERO","CARLOS HENRIQUE SCALA DE ALMEIDA","FABRICIO CHRISTIANO TANOBE LYRA",
+      "JACKSON ALCANTARA SANTANA"
     ];
 
     const normalizeName = s => (s||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toUpperCase();
