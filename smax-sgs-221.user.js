@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      2.4
+// @version      2.5
 // @description  Teste 2.2 (organizado e renomeado)
 // @author       ADRIANO
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -311,7 +311,7 @@
     const n = normalizeText(plain);
     for (const r of AUTO_TAG_RULES) {
       if (r.palavras.some(p => n.includes(normalizeText(p)))) {
-        el.innerHTML = `<span class="tag-smax">[${r.tag}]</span> ${htmlAtual}`;
+        el.innerHTML = `<span class="tag-smax">${r.tag}</span> ${htmlAtual}`;
         el.dataset.smaxTagged = '1';
         break;
       }
