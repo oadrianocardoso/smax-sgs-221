@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      2.0.1
-// @description  Teste 2.0
+// @version      2.2
+// @description  Teste 2.2
 // @author       ADRIANO
 // @match        https://suporte.tjsp.jus.br/saw/*
 // @match        https://suporte.tjsp.jus.br/saw/Requests*
