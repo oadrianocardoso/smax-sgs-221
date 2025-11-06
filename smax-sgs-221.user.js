@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      2.5
+// @version      2.6
 // @description  Teste 2.2 (organizado e renomeado)
 // @author       ADRIANO
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -461,15 +461,56 @@
   function initFlagUsersSkull() {
     const ICON_CAVEIRA_URL = 'https://cdn-icons-png.flaticon.com/512/564/564619.png';
     const GRUPO_1 = [
-      "DIEGO OLIVEIRA DA SILVA","GUILHERME CESAR DE SOUSA","THIAGO TADEU FAUSTINO DE OLIVEIRA","JANAINA DOS PASSOS SILVESTRE","PEDRO HENRIQUE PALACIO BARITTI",
-      "MARCOS PAULO SILVA MADALENA","GUSTAVO DE MEIRA GONÇALVES","BRUNA MARQUES DOS SANTOS","RODRIGO SILVA OLIVEIRA","RYAN SOUZA CARVALHO","JULIANA LINO DOS SANTOS ROSA",
-      "TATIANE ARAUJO DA CRUZ","MARIA FERNANDA DE OLIVEIRA BENTO","VICTOR VIANA ROCA","DIOGO MENDONÇA ANICETO","GIOVANNA CORADINI TEIXEIRA","LUCAS CARNEIRO PERES FERREIRA",
-      "DAVI DOS REIS GARCIA","ESTER NAILI DOS SANTOS","DAVID LOPES DE OLIVEIRA","KARINE BARBARA VITOR DE LIMA SOUZA","ALESSANDRA SOUSA NUNES","BRENO MEDEIROS MALFATI",
-      "JOYCE DA SILVA OLIVEIRA","FABIANO BARBOSA DOS REIS","JEFFERSON SILVA DE CARVALHO SOARES","RAFAELLA SILVA LIMA PETROLINI","ADRIANA DA SILVA FERREIRA OLIVEIRA",
-      "CASSIA SANTOS ALVES DE LIMA","JUAN CAMPOS DE SOUZA","LUCAS ALVES DOS SANTOS","KAUE NUNES SILVA FARRELLY","ADRIANO ZILLI","KELLY FERREIRA DE FREITAS",
-      "TATIANA LOURENÇO DA COSTA ANTUNES","GISLENE FERREIRA SANT'ANA RAMOS","Dalete Rodrigues Silva","Karina Nicolau Samaan","Davi dos Reis Garcia","Gabriel Teixeira Ludvig",
-      "NATALIA YURIE SHIBA","Paulo Roberto Massoca","DEAULAS DE CAMPOS SALVIANO","LARISSA FERREIRA FUMERO","CARLOS HENRIQUE SCALA DE ALMEIDA","FABRICIO CHRISTIANO TANOBE LYRA",
-      "JACKSON ALCANTARA SANTANA"
+    "Adriano Zilli",
+    "Adriana Da Silva Ferreira Oliveira",
+    "Alessandra Sousa Nunes",
+    "Bruna Marques Dos Santos",
+    "Breno Medeiros Malfati",
+    "Carlos Henrique Scala De Almeida",
+    "Cassia Santos Alves De Lima",
+    "Dalete Rodrigues Silva",
+    "David Lopes De Oliveira",
+    "Davi Dos Reis Garcia",
+    "Deaulas De Campos Salviano",
+    "Diego Oliveira Da Silva",
+    "Diogo Mendonça Aniceto",
+    "Elaine Moriya",
+    "Ester Naili Dos Santos",
+    "Fabiano Barbosa Dos Reis",
+    "Fabricio Christiano Tanobe Lyra",
+    "Gabriel Teixeira Ludvig",
+    "Gilberto Sintoni Junior",
+    "Giovanna Coradini Teixeira",
+    "Gislene Ferreira Sant'Ana Ramos",
+    "Guilherme Cesar De Sousa",
+    "Gustavo De Meira Gonçalves",
+    "Jackson Alcantara Santana",
+    "Janaina Dos Passos Silvestre",
+    "Jefferson Silva De Carvalho Soares",
+    "Joyce Da Silva Oliveira",
+    "Juan Campos De Souza",
+    "Juliana Lino Dos Santos Rosa",
+    "Karina Nicolau Samaan",
+    "Karine Barbara Vitor De Lima Souza",
+    "Kaue Nunes Silva Farrelly",
+    "Kelly Ferreira De Freitas",
+    "Larissa Ferreira Fumero",
+    "Lucas Alves Dos Santos",
+    "Lucas Carneiro Peres Ferreira",
+    "Marcos Paulo Silva Madalena",
+    "Maria Fernanda De Oliveira Bento",
+    "Natalia Yurie Shiba",
+    "Paulo Roberto Massoca",
+    "Pedro Henrique Palacio Baritti",
+    "Rafaella Silva Lima Petrolini",
+    "Renata Aparecida Mendes Bonvechio",
+    "Rodrigo Silva Oliveira",
+    "Ryan Souza Carvalho",
+    "Tatiana Lourenço Da Costa Antunes",
+    "Tatiane Araujo Da Cruz",
+    "Thiago Tadeu Faustino De Oliveira",
+    "Tiago Carvalho De Freitas Meneses",
+    "Victor Viana Roca"
     ];
 
     const normalizeName = s => (s||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toUpperCase();
