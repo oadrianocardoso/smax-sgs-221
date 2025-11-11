@@ -89,10 +89,9 @@
     azul:{ cls:'tmx-hl-blue',
       whole:['magistrado','magistrada'], substr:[], custom:[/\bju[ií]z(?:es|a)?\b/giu] },
     rosa:{ cls:'tmx-hl-pink',
-      whole:['BdOrigem','CDM','Controladoria Digital de Mandados','Devolvido sem cumprimento','Devolvidos sem cumprimento', 'Colégio Recursal', 'Colégio', 'peças',
+      whole:[/*'BdOrigem','CDM','Controladoria Digital de Mandados','Devolvido sem cumprimento','Devolvidos sem cumprimento', 'Colégio Recursal', 'Colégio', 'peças',
              'documentos', 'CodProcessoSlOrigem', 'DPO', 'ERRO ACESSAR O DOCUMENTO: ATRIBUTO', 'em branco ou inválida', 'ODBC Driver', 'CPF', 'CNPJ', 'cumprimento',
-            'mídia', 'mídias'
-            ],
+            'mídia', 'mídias'*/],
       substr:[], custom:[] },
   };
   const HL_ORDER = ['vermelho','rosa','amarelo','verde','azul'];
