@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      2.7
+// @version      2.8
 // @description  Teste 2.2 (organizado e renomeado)
 // @author       ADRIANO
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -22,7 +22,7 @@
     highlightsOn: true,
     nameBadgesOn: true,
     magistradoOn: true,
-    collapseOn: true,
+    collapseOn: false,
     enlargeCommentsOn: true,
     autoTagsOn: true,
   };
@@ -89,7 +89,10 @@
     azul:{ cls:'tmx-hl-blue',
       whole:['magistrado','magistrada'], substr:[], custom:[/\bju[ií]z(?:es|a)?\b/giu] },
     rosa:{ cls:'tmx-hl-pink',
-      whole:['BdOrigem','CDM','Controladoria Digital de Mandados','Devolvido sem cumprimento','Devolvidos sem cumprimento'],
+      whole:['BdOrigem','CDM','Controladoria Digital de Mandados','Devolvido sem cumprimento','Devolvidos sem cumprimento', 'Colégio Recursal', 'Colégio', 'peças',
+             'documentos', 'CodProcessoSlOrigem', 'DPO', 'ERRO ACESSAR O DOCUMENTO: ATRIBUTO', 'em branco ou inválida', 'ODBC Driver', 'CPF', 'CNPJ', 'cumprimento',
+            'mídia', 'mídias'
+            ],
       substr:[], custom:[] },
   };
   const HL_ORDER = ['vermelho','rosa','amarelo','verde','azul'];
@@ -170,17 +173,113 @@
   /* =========================================================
    *  2) Badges por finais de ID (célula inteira)
    * =======================================================*/
+
+  // Lista sem GLAUCO (definir APENAS UMA VEZ no arquivo!)
   const NAME_GROUPS = {
-    "ADRIANO":[0,1,2,3,4,5],"DANIEL CRUZ":[6,7,8,9,10,11],"DANIEL LEAL":[12,13,14,15,16,17],
-    "GLAUCO":[18,19,20,21,22],"ISA":[23,24,25,26,27,28],"IVAN":[29,30,31,32,33,34],
-    "JOAO GABRIEL":[35,36,37,38,39,40],"LAIS":[41,42,43,44,45,46],"LEONARDO":[47,48,49,50,51,52],
-    "LUANA":[53,54,55,56,57,58],"LUIS FELIPE":[59,60,61,62,63,64],"MARCELO":[65,66,67,68,69,70],
-    "DOUGLAS":[71,72,73,74,75],"MARLON":[76,77,78,79,80,81],"ROBSON":[82,83,84,85,86,87],
-    "SAMUEL":[88,89,90,91,92,93],"YVES / IONE":[94,95,96,97,98,99],
+    "ADRIANO":[0,1,2,3,4,5],
+    "DANIEL CRUZ":[6,7,8,9,10,11],
+    "DANIEL LEAL":[12,13,14,15,16,17],
+    "ISA":[23,24,25,26,27,28],
+    "IVAN":[29,30,31,32,33,34],
+    "JOAO GABRIEL":[35,36,37,38,39,40],
+    "LAIS":[41,42,43,44,45,46],
+    "LEONARDO":[47,48,49,50,51,52],
+    "LUANA":[53,54,55,56,57,58],
+    "LUIS FELIPE":[59,60,61,62,63,64],
+    "MARCELO":[65,66,67,68,69,70],
+    "DOUGLAS":[71,72,73,74,75],
+    "MARLON":[76,77,78,79,80,81],
+    "ROBSON":[82,83,84,85,86,87],
+    "SAMUEL":[88,89,90,91,92,93],
+    "YVES / IONE":[94,95,96,97,98,99],
   };
+
+  // Ausências/férias
+  const AUSENTES = []; // ex.: ["LUANA"]
+
+  // Finais especiais (ex-GLAUCO)
+  const GLAUCO_FINAIS = new Set([18,19,20,21,22]);
+
+  // Índice sub-final → dono (aceita "0"/"00" .. "99")
+  const SUB_TO_OWNER = (() => {
+    const m = new Map();
+    for (const [nome, finais] of Object.entries(NAME_GROUPS)) {
+      for (const f of finais) {
+        const s1 = String(f);
+        const s2 = String(f).padStart(2,'0');
+        m.set(s1, nome);
+        m.set(s2, nome);
+      }
+    }
+    return m;
+  })();
+
+  const isAtivo = (nome) => nome && !AUSENTES.includes(nome);
+
+  function donoSubfinal(sub) {
+    const nome = SUB_TO_OWNER.get(sub);
+    return isAtivo(nome) ? nome : null;
+  }
+
+  // Regra: se termina em 18..22, IGNORA os 2 últimos dígitos e decide pelos anteriores
+  function resolverGlauco(numeroStr) {
+    const num = (numeroStr || "").replace(/\D/g, "");
+    if (!num) return null;
+
+    for (const g of GLAUCO_FINAIS) {
+      const suf = String(g); // "18".."22"
+      if (num.endsWith(suf)) {
+        let base = num.slice(0, -2); // descarta os 2 últimos dígitos
+        if (!base) return null;
+
+        // tenta: últimos 2 dígitos → último 1 → encurta e repete
+        while (base.length > 0) {
+          if (base.length >= 2) {
+            const sub2 = base.slice(-2);
+            const dono2 = donoSubfinal(sub2);
+            if (dono2) return dono2;
+          }
+          const sub1 = base.slice(-1);
+          const dono1 = donoSubfinal(sub1);
+          if (dono1) return dono1;
+
+          base = base.slice(0, -1);
+        }
+        return null;
+      }
+    }
+    return null;
+  }
+
+  // Resolver geral com fallback
+  function getResponsavel(numeroStr) {
+    let n = (numeroStr || "").replace(/\D/g, "");
+    if (!n) return null;
+
+    while (n.length > 0) {
+      // 1) regra especial 18..22
+      const viaGlauco = resolverGlauco(n);
+      if (viaGlauco) return viaGlauco;
+
+      // 2) caso normal: últimos 2 → último 1
+      if (n.length >= 2) {
+        const sub2 = n.slice(-2);
+        const dono2 = donoSubfinal(sub2);
+        if (dono2) return dono2;
+      }
+      const sub1 = n.slice(-1);
+      const dono1 = donoSubfinal(sub1);
+      if (dono1) return dono1;
+
+      // 3) fallback: encurtar e tentar de novo
+      n = n.slice(0, -1);
+    }
+    return null;
+  }
+
   const NAME_COLOR = {
     "ADRIANO":{bg:"#E6E66A",fg:"#000"},"DANIEL CRUZ":{bg:"#CC6666",fg:"#000"},
-    "DANIEL LEAL":{bg:"#E6A85C",fg:"#000"},"GLAUCO":{bg:"#4E9E4E",fg:"#fff"},
+    "DANIEL LEAL":{bg:"#E6A85C",fg:"#000"},
     "ISA":{bg:"#5C6FA6",fg:"#fff"},"IVAN":{bg:"#9A9A52",fg:"#000"},
     "JOAO GABRIEL":{bg:"#5C7ED8",fg:"#fff"},"LAIS":{bg:"#D966D9",fg:"#000"},
     "LEONARDO":{bg:"#8E5A8E",fg:"#fff"},"LUANA":{bg:"#7ACC7A",fg:"#000"},
@@ -194,14 +293,7 @@
   const LINK_PICKERS = ['a.entity-link-id', '.slick-row a'];
   const processedLinks = new WeakSet();
 
-  const SUFFIX_MAP = (() => {
-    const map = {};
-    for (const [nome, nums] of Object.entries(NAME_GROUPS)) {
-      nums.forEach(n => { map[String(n).padStart(2,'0')] = nome; });
-    }
-    return map;
-  })();
-
+  // pega links únicos
   const pickAllLinks = () => {
     const set = new Set();
     for (const sel of LINK_PICKERS) document.querySelectorAll(sel).forEach(a => set.add(a));
@@ -221,8 +313,8 @@
       const digits = extractTrailingDigits(label);
       if (!digits) { processedLinks.add(link); return; }
 
-      const suffix2 = digits.slice(-2).padStart(2,'0');
-      const owner = SUFFIX_MAP[suffix2];
+      // >>> AGORA usa a regra completa (getResponsavel) <<<
+      const owner = getResponsavel(digits);
       const cell = link.closest('.slick-cell');
 
       if (cell && owner && NAME_COLOR[owner]) {
@@ -461,56 +553,19 @@
   function initFlagUsersSkull() {
     const ICON_CAVEIRA_URL = 'https://cdn-icons-png.flaticon.com/512/564/564619.png';
     const GRUPO_1 = [
-    "Adriano Zilli",
-    "Adriana Da Silva Ferreira Oliveira",
-    "Alessandra Sousa Nunes",
-    "Bruna Marques Dos Santos",
-    "Breno Medeiros Malfati",
-    "Carlos Henrique Scala De Almeida",
-    "Cassia Santos Alves De Lima",
-    "Dalete Rodrigues Silva",
-    "David Lopes De Oliveira",
-    "Davi Dos Reis Garcia",
-    "Deaulas De Campos Salviano",
-    "Diego Oliveira Da Silva",
-    "Diogo Mendonça Aniceto",
-    "Elaine Moriya",
-    "Ester Naili Dos Santos",
-    "Fabiano Barbosa Dos Reis",
-    "Fabricio Christiano Tanobe Lyra",
-    "Gabriel Teixeira Ludvig",
-    "Gilberto Sintoni Junior",
-    "Giovanna Coradini Teixeira",
-    "Gislene Ferreira Sant'Ana Ramos",
-    "Guilherme Cesar De Sousa",
-    "Gustavo De Meira Gonçalves",
-    "Jackson Alcantara Santana",
-    "Janaina Dos Passos Silvestre",
-    "Jefferson Silva De Carvalho Soares",
-    "Joyce Da Silva Oliveira",
-    "Juan Campos De Souza",
-    "Juliana Lino Dos Santos Rosa",
-    "Karina Nicolau Samaan",
-    "Karine Barbara Vitor De Lima Souza",
-    "Kaue Nunes Silva Farrelly",
-    "Kelly Ferreira De Freitas",
-    "Larissa Ferreira Fumero",
-    "Lucas Alves Dos Santos",
-    "Lucas Carneiro Peres Ferreira",
-    "Marcos Paulo Silva Madalena",
-    "Maria Fernanda De Oliveira Bento",
-    "Natalia Yurie Shiba",
-    "Paulo Roberto Massoca",
-    "Pedro Henrique Palacio Baritti",
-    "Rafaella Silva Lima Petrolini",
-    "Renata Aparecida Mendes Bonvechio",
-    "Rodrigo Silva Oliveira",
-    "Ryan Souza Carvalho",
-    "Tatiana Lourenço Da Costa Antunes",
-    "Tatiane Araujo Da Cruz",
-    "Thiago Tadeu Faustino De Oliveira",
-    "Tiago Carvalho De Freitas Meneses",
-    "Victor Viana Roca"
+      "Adriano Zilli","Adriana Da Silva Ferreira Oliveira","Alessandra Sousa Nunes","Bruna Marques Dos Santos",
+      "Breno Medeiros Malfati","Carlos Henrique Scala De Almeida","Cassia Santos Alves De Lima","Dalete Rodrigues Silva",
+      "David Lopes De Oliveira","Davi Dos Reis Garcia","Deaulas De Campos Salviano","Diego Oliveira Da Silva",
+      "Diogo Mendonça Aniceto","Elaine Moriya","Ester Naili Dos Santos","Fabiano Barbosa Dos Reis",
+      "Fabricio Christiano Tanobe Lyra","Gabriel Teixeira Ludvig","Gilberto Sintoni Junior","Giovanna Coradini Teixeira",
+      "Gislene Ferreira Sant'Ana Ramos","Guilherme Cesar De Sousa","Gustavo De Meira Gonçalves","Jackson Alcantara Santana",
+      "Janaina Dos Passos Silvestre","Jefferson Silva De Carvalho Soares","Joyce Da Silva Oliveira","Juan Campos De Souza",
+      "Juliana Lino Dos Santos Rosa","Karina Nicolau Samaan","Karine Barbara Vitor De Lima Souza","Kaue Nunes Silva Farrelly",
+      "Kelly Ferreira De Freitas","Larissa Ferreira Fumero","Lucas Alves Dos Santos","Lucas Carneiro Peres Ferreira",
+      "Marcos Paulo Silva Madalena","Maria Fernanda De Oliveira Bento","Natalia Yurie Shiba","Paulo Roberto Massoca",
+      "Pedro Henrique Palacio Baritti","Rafaella Silva Lima Petrolini","Renata Aparecida Mendes Bonvechio","Rodrigo Silva Oliveira",
+      "Ryan Souza Carvalho","Tatiana Lourenço Da Costa Antunes","Tatiane Araujo Da Cruz","Thiago Tadeu Faustino De Oliveira",
+      "Tiago Carvalho De Freitas Meneses","Victor Viana Roca"
     ];
 
     const normalizeName = s => (s||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toUpperCase();
