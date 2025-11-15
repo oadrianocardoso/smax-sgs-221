@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      2.9
+// @version      3
 // @description  Teste 2.2 (organizado e renomeado)
 // @author       ADRIANO
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -89,9 +89,7 @@
     azul:{ cls:'tmx-hl-blue',
       whole:['magistrado','magistrada'], substr:[], custom:[/\bju[ií]z(?:es|a)?\b/giu] },
     rosa:{ cls:'tmx-hl-pink',
-      whole:[/*'BdOrigem','CDM','Controladoria Digital de Mandados','Devolvido sem cumprimento','Devolvidos sem cumprimento', 'Colégio Recursal', 'Colégio', 'peças',
-             'documentos', 'CodProcessoSlOrigem', 'DPO', 'ERRO ACESSAR O DOCUMENTO: ATRIBUTO', 'em branco ou inválida', 'ODBC Driver', 'CPF', 'CNPJ', 'cumprimento',
-            'mídia', 'mídias'*/],
+      whole:['inesperado'],
       substr:[], custom:[] },
   };
   const HL_ORDER = ['vermelho','rosa','amarelo','verde','azul'];
@@ -174,24 +172,24 @@
    * =======================================================*/
 
   // Lista sem GLAUCO (definir APENAS UMA VEZ no arquivo!)
-  const NAME_GROUPS = {
-    "ADRIANO":[0,1,2,3,4,5],
-    "DANIEL CRUZ":[6,7,8,9,10,11],
-    "DANIEL LEAL":[12,13,14,15,16,17],
-    "ISA":[23,24,25,26,27,28],
-    "IVAN":[29,30,31,32,33,34],
-    "JOAO GABRIEL":[35,36,37,38,39,40],
-    "LAIS":[41,42,43,44,45,46],
-    "LEONARDO":[47,48,49,50,51,52],
-    "LUANA":[53,54,55,56,57,58],
-    "LUIS FELIPE":[59,60,61,62,63,64],
-    "MARCELO":[65,66,67,68,69,70],
-    "DOUGLAS":[71,72,73,74,75],
-    "MARLON":[76,77,78,79,80,81],
-    "ROBSON":[82,83,84,85,86,87],
-    "SAMUEL":[88,89,90,91,92,93],
-    "YVES / IONE":[94,95,96,97,98,99],
-  };
+    const NAME_GROUPS = {
+        "ADRIANO":       [0,1,2,3,4,5,6],
+        "DANIEL LEAL":   [7,8,9,10,11,12],
+        "DOUGLAS":       [13,14,15,16,17,18,19],
+        "IONE":          [20,21,22,23,24,25],
+        "ISA":           [26,27,28,29,30,31,32],
+        "IVAN":          [33,34,35,36,37,38,39],
+        "LAIS":          [40,41,42,43,44,45,46],
+        "LEONARDO":      [47,48,49,50,51,52,53],
+        "LUANA":         [54,55,56,57,58,59,60],
+        "LUIS FELIPE":   [61,62,63,64,65,66,67],
+        "MARCELO":       [68,69,70,71,72,73,74],
+        "MARLON":        [75,76,77,78,79,80,81],
+        "ROBSON":        [82,83,84,85,86,87],
+        "SAMUEL":        [88,89,90,91,92,93],
+        "YVES":          [94,95,96,97,98,99]
+    };
+
 
   // Ausências/férias
   const AUSENTES = []; // ex.: ["LUANA"]
@@ -277,16 +275,23 @@
   }
 
   const NAME_COLOR = {
-    "ADRIANO":{bg:"#E6E66A",fg:"#000"},"DANIEL CRUZ":{bg:"#CC6666",fg:"#000"},
-    "DANIEL LEAL":{bg:"#E6A85C",fg:"#000"},
-    "ISA":{bg:"#5C6FA6",fg:"#fff"},"IVAN":{bg:"#9A9A52",fg:"#000"},
-    "JOAO GABRIEL":{bg:"#5C7ED8",fg:"#fff"},"LAIS":{bg:"#D966D9",fg:"#000"},
-    "LEONARDO":{bg:"#8E5A8E",fg:"#fff"},"LUANA":{bg:"#7ACC7A",fg:"#000"},
-    "LUIS FELIPE":{bg:"#5CA3A3",fg:"#000"},"MARCELO":{bg:"#A05252",fg:"#fff"},
-    "DOUGLAS":{bg:"#66CCCC",fg:"#000"},"MARLON":{bg:"#A0A0A0",fg:"#000"},
-    "ROBSON":{bg:"#CCCCCC",fg:"#000"},"SAMUEL":{bg:"#66A3CC",fg:"#000"},
-    "YVES / IONE":{bg:"#4D4D4D",fg:"#fff"},
+      "ADRIANO":            {bg:"#E6E66A", fg:"#000"},
+      "DANIEL LEAL":        {bg:"#E6A85C", fg:"#000"},
+      "DOUGLAS":            {bg:"#66CCCC", fg:"#000"},
+      "IONE":               {bg:"#4D4D4D", fg:"#fff"},
+      "ISA":                {bg:"#5C6FA6", fg:"#fff"},
+      "IVAN":               {bg:"#9A9A52", fg:"#000"},
+      "LAIS":               {bg:"#D966D9", fg:"#000"},
+      "LEONARDO":           {bg:"#8E5A8E", fg:"#fff"},
+      "LUANA":              {bg:"#7ACC7A", fg:"#000"},
+      "LUIS FELIPE":        {bg:"#5CA3A3", fg:"#000"},
+      "MARCELO":            {bg:"#A05252", fg:"#fff"},
+      "MARLON":             {bg:"#A0A0A0", fg:"#000"},
+      "ROBSON":             {bg:"#CCCCCC", fg:"#000"},
+      "SAMUEL":             {bg:"#66A3CC", fg:"#000"},
+      "YVES":               {bg:"#4D4D4D", fg:"#fff"},
   };
+
 
   const NAME_MARK_ATTR = 'adMarcado';
   const LINK_PICKERS = ['a.entity-link-id', '.slick-row a'];
