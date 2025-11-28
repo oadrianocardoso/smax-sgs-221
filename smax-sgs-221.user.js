@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      3.3
-// @description  Teste 2.2 (organizado e renomeado)
-// @author       ADRIANO
+// @version      3.12
+// @description  SMAX SGS 221
+// @author       ADRIANO AUGUSTO CARDOSO E SANTOS
 // @match        https://suporte.tjsp.jus.br/saw/*
 // @match        https://suporte.tjsp.jus.br/saw/Requests*
 // @run-at       document-idle
@@ -17,14 +17,79 @@
 (() => {
   'use strict';
 
-  /* ====================== Preferências ====================== */
-  const prefs = {
-    highlightsOn: true,
-    nameBadgesOn: true,
-    magistradoOn: true,
-    collapseOn: false,
-    enlargeCommentsOn: true,
-    autoTagsOn: true,
+  /* =========================================================
+   *  CONFIG ÚNICA – EDITE AQUI
+   * =======================================================*/
+  const CONFIG = {
+    /* 1) Preferências gerais (liga/desliga recursos) */
+    prefs: {
+      highlightsOn:      true,  // destaques coloridos por palavra
+      nameBadgesOn:      true,  // cores por finais de ID
+      magistradoOn:      true,  // destacar juiz/juíza em "Solicitado por"
+      collapseOn:        true,  // recolher "Oferta de Catálogo"
+      enlargeCommentsOn: true,  // comentários com auto-altura
+      autoTagsOn:        true   // TAGs automáticas na coluna Descrição
+    },
+
+    /* 2) Finais de cada atendente */
+    nameGroups: {
+      "ADRIANO":       [0,1,2,3,4,5,6],
+      "DANIEL LEAL":   [7,8,9,10,11,12],
+      "DOUGLAS":       [13,14,15,16,17,18,19],
+      "IONE":          [20,21,22,23,24,25],
+      "ISA":           [26,27,28,29,30,31,32],
+      "IVAN":          [33,34,35,36,37,38,39],
+      "LAIS":          [40,41,42,43,44,45,46],
+      "LEONARDO":      [47,48,49,50,51,52,53],
+      "LUANA":         [54,55,56,57,58,59,60],
+      "LUIS FELIPE":   [61,62,63,64,65,66,67],
+      "MARCELO":       [68,69,70,71,72,73,74],
+      "MARLON":        [75,76,77,78,79,80,81],
+      "ROBSON":        [82,83,84,85,86,87],
+      "SAMUEL":        [88,89,90,91,92,93],
+      "YVES":          [94,95,96,97,98,99]
+    },
+
+    /* 3) Cores de cada atendente (badge na célula) */
+    nameColors: {
+      "ADRIANO":            {bg:"#E6E66A", fg:"#000"},
+      "DANIEL LEAL":        {bg:"#E6A85C", fg:"#000"},
+      "DOUGLAS":            {bg:"#66CCCC", fg:"#000"},
+      "IONE":               {bg:"#4D4D4D", fg:"#fff"},
+      "ISA":                {bg:"#5C6FA6", fg:"#fff"},
+      "IVAN":               {bg:"#9A9A52", fg:"#000"},
+      "LAIS":               {bg:"#D966D9", fg:"#000"},
+      "LEONARDO":           {bg:"#8E5A8E", fg:"#fff"},
+      "LUANA":              {bg:"#7ACC7A", fg:"#000"},
+      "LUIS FELIPE":        {bg:"#5CA3A3", fg:"#000"},
+      "MARCELO":            {bg:"#A05252", fg:"#fff"},
+      "MARLON":             {bg:"#A0A0A0", fg:"#000"},
+      "ROBSON":             {bg:"#CCCCCC", fg:"#000"},
+      "SAMUEL":             {bg:"#66A3CC", fg:"#000"},
+      "YVES":               {bg:"#4D4D4D", fg:"#fff"}
+    },
+
+    /* 4) Atendentes AUSENTES/FÉRIAS
+       - Esses nunca recebem carga.
+    */
+    ausentes: ["ISA"],
+
+    /* 5) Lista de usuários detratores (opcional) */
+    grupo1: [
+      "Adriano Zilli","Adriana Da Silva Ferreira Oliveira","Alessandra Sousa Nunes","Bruna Marques Dos Santos",
+      "Breno Medeiros Malfati","Carlos Henrique Scala De Almeida","Cassia Santos Alves De Lima","Dalete Rodrigues Silva",
+      "David Lopes De Oliveira","Davi Dos Reis Garcia","Deaulas De Campos Salviano","Diego Oliveira Da Silva",
+      "Diogo Mendonça Aniceto","Elaine Moriya","Ester Naili Dos Santos","Fabiano Barbosa Dos Reis",
+      "Fabricio Christiano Tanobe Lyra","Gabriel Teixeira Ludvig","Gilberto Sintoni Junior","Giovanna Coradini Teixeira",
+      "Gislene Ferreira Sant'Ana Ramos","Guilherme Cesar De Sousa","Gustavo De Meira Gonçalves","Jackson Alcantara Santana",
+      "Janaina Dos Passos Silvestre","Jefferson Silva De Carvalho Soares","Joyce Da Silva Oliveira","Juan Campos De Souza",
+      "Juliana Lino Dos Santos Rosa","Karina Nicolau Samaan","Karine Barbara Vitor De Lima Souza","Kaue Nunes Silva Farrelly",
+      "Kelly Ferreira De Freitas","Larissa Ferreira Fumero","Lucas Alves Dos Santos","Lucas Carneiro Peres Ferreira",
+      "Marcos Paulo Silva Madalena","Maria Fernanda De Oliveira Bento","Natalia Yurie Shiba","Paulo Roberto Massoca",
+      "Pedro Henrique Palacio Baritti","Rafaella Silva Lima Petrolini","Renata Aparecida Mendes Bonvechio","Rodrigo Silva Oliveira",
+      "Ryan Souza Carvalho","Tatiana Lourenço Da Costa Antunes","Tatiane Araujo Da Cruz","Thiago Tadeu Faustino De Oliveira",
+      "Tiago Carvalho De Freitas Meneses","Victor Viana Roca","GERSON DA MATTA"
+    ]
   };
 
   /* ====================== CSS Global ====================== */
@@ -61,10 +126,41 @@
       line-height: inherit !important;
       text-decoration: none !important;
     }
-    .tag-smax [class^="tmx-hl-"], .tag-smax [class*=" tmx-hl-"] { all: unset !important; background: none !important; color: inherit !important; }
+    .tag-smax [class^="tmx-hl-"], .tag-smax [class*=" tmx-hl-"] {
+      all: unset !important;
+      background: none !important;
+      color: inherit !important;
+    }
 
     /* comentários */
     .comment-items { height: auto !important; max-height: none !important; }
+
+    /* Modal preview IMG */
+    .tmPreviewModal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999999;
+    }
+    .tmPreviewClose {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      font-size: 30px;
+      color: #fff;
+      cursor: pointer;
+      z-index: 1000000;
+    }
+    .tmPreviewImg {
+      max-width: 90%;
+      max-height: 90%;
+      border: 3px solid #fff;
+      box-shadow: 0 0 20px #000;
+      background: #fff;
+    }
   `);
 
   /* ====================== Helpers ====================== */
@@ -73,36 +169,81 @@
   const escapeReg = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const normalizeText = t => (t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 
+  /* ====================== Config derivada do CONFIG ====================== */
+  const prefs       = CONFIG.prefs;
+  const NAME_GROUPS = CONFIG.nameGroups;
+  const NAME_COLOR  = CONFIG.nameColors;
+  const AUSENTES    = CONFIG.ausentes || [];
+  let   GRUPO_1     = CONFIG.grupo1 || [];
+
   /* =========================================================
    *  1) Destaques por cores (tokens/regex)
+   *  (se quiser mais palavras, edite DIRETO aqui)
    * =======================================================*/
   const HL_GROUPS = {
-    amarelo: { cls:'tmx-hl-yellow',
-      whole:['jurisprudência','jurisprudencia','distribuidor','acessar','DJEN','Diário Eletrônico','automatização','ceman','Central de Mandados','mandado','mandados','movimentar','dois fatores','Renajud','Sisbajud','Autenticador','carta','evento','cadastro','automação','automações','migrar','migrador','migração','perito','perita','localizadores','localizador'],
-      substr:['acess','mail'], custom:[] },
-    vermelho:{ cls:'tmx-hl-red',
-      whole:['ERRO_AGENDAMENTO_EVENTO','ERRO_ENVIO_INTIMACAO_DJEN','ERRO_ENVIO_INTIMAÇÃO_DJEN','Item 04 do Comunicado 435/2025','Erro ao gerar o Documento Comprobatório Renajud','Cookie not found','Urgente','urgência','Plantão'],
-      substr:['erro','errado','réu revel','help_outline'], custom:[] },
-    verde:{ cls:'tmx-hl-green',
-      whole:['taxa','taxas','custa','custas','restituir','restituição','guia','diligência','diligencia','justiça gratuíta','parcelamento','parcelamento das custas', 'desvincular', 'desvinculação'],
-      substr:[], custom:[] },
-    azul:{ cls:'tmx-hl-blue',
-      whole:['magistrado','magistrada'], substr:[], custom:[/\bju[ií]z(?:es|a)?\b/giu] },
-    rosa:{ cls:'tmx-hl-pink',
+    amarelo: {
+      cls:'tmx-hl-yellow',
+      whole:[
+        'jurisprudência','jurisprudencia','distribuidor','acessar','DJEN','Diário Eletrônico',
+        'automatização','ceman','Central de Mandados','mandado','mandados','movimentar',
+        'dois fatores','Renajud','Sisbajud','Autenticador','carta','evento','cadastro',
+        'automação','automações','migrar','migrador','migração','perito','perita',
+        'localizadores','localizador'
+      ],
+      substr:['acess','mail'],
+      custom:[]
+    },
+    vermelho:{
+      cls:'tmx-hl-red',
+      whole:[
+        'ERRO_AGENDAMENTO_EVENTO','ERRO_ENVIO_INTIMACAO_DJEN','ERRO_ENVIO_INTIMAÇÃO_DJEN',
+        'Item 04 do Comunicado 435/2025','Erro ao gerar o Documento Comprobatório Renajud',
+        'Cookie not found','Urgente','urgência','Plantão'
+      ],
+      substr:['erro','errado','réu revel','help_outline'],
+      custom:[]
+    },
+    verde:{
+      cls:'tmx-hl-green',
+      whole:[
+        'taxa','taxas','custa','custas','restituir','restituição','guia','diligência',
+        'diligencia','justiça gratuíta','parcelamento','parcelamento das custas',
+        'desvincular','desvinculação'
+      ],
+      substr:[],
+      custom:[]
+    },
+    azul:{
+      cls:'tmx-hl-blue',
+      whole:['magistrado','magistrada'],
+      substr:[],
+      custom:[/\bju[ií]z(?:es|a)?\b/giu]
+    },
+    rosa:{
+      cls:'tmx-hl-pink',
       whole:['inesperado'],
-      substr:[], custom:[] },
+      substr:[],
+      custom:[]
+    }
   };
+
   const HL_ORDER = ['vermelho','rosa','amarelo','verde','azul'];
 
   const buildHighlightRegexes = (g) => {
     const regs = [];
-    if (g.whole?.length) regs.push(new RegExp(`(?<![\\p{L}\\d_])(${g.whole.map(escapeReg).join('|')})(?![\\p{L}\\d_])`, 'giu'));
-    if (g.substr?.length) regs.push(new RegExp(`(${g.substr.map(escapeReg).join('|')})`, 'giu'));
+    if (g.whole?.length) regs.push(new RegExp(
+      `(?<![\\p{L}\\d_])(${g.whole.map(escapeReg).join('|')})(?![\\p{L}\\d_])`,
+      'giu'
+    ));
+    if (g.substr?.length) regs.push(new RegExp(
+      `(${g.substr.map(escapeReg).join('|')})`,
+      'giu'
+    ));
     if (g.custom?.length) regs.push(...g.custom);
     return regs;
   };
 
-  const HL_LIST = Object.entries(HL_GROUPS).map(([name,cfg]) => ({ name, cls:cfg.cls, regexes: buildHighlightRegexes(cfg) }));
+  const HL_LIST    = Object.entries(HL_GROUPS).map(([name,cfg]) => ({ name, cls:cfg.cls, regexes: buildHighlightRegexes(cfg) }));
   const HL_ORDERED = HL_LIST.slice().sort((a,b)=>HL_ORDER.indexOf(a.name)-HL_ORDER.indexOf(b.name));
   const processedTextNodes = new WeakSet();
 
@@ -153,11 +294,15 @@
   function sweepHighlightsInCell(cell) {
     if (!prefs.highlightsOn) return;
     const current = (cell.textContent || '').trim();
-    const last = cell.getAttribute('data-tmx-last') || '';
+    const last    = cell.getAttribute('data-tmx-last') || '';
     if (current === last) return;
 
     unwrapCellHighlights(cell);
-    for (const g of HL_ORDERED) for (const re of g.regexes) highlightMatchesInNode(cell, re, g.cls);
+    for (const g of HL_ORDERED) {
+      for (const re of g.regexes) {
+        highlightMatchesInNode(cell, re, g.cls);
+      }
+    }
     cell.setAttribute('data-tmx-last', (cell.textContent || '').trim());
   }
 
@@ -168,32 +313,15 @@
   }
 
   /* =========================================================
-   *  2) Badges por finais de ID (célula inteira)
+   *  2) Badges por finais de ID com AUSENTES
+   *  (SEM lógica de ACTIVE_NAMES, só ausentes)
    * =======================================================*/
-
-  // Lista sem GLAUCO (definir APENAS UMA VEZ no arquivo!)
-  const NAME_GROUPS = {
-    "ADRIANO":       [0,1,2,3,4,5,6],
-    "DANIEL LEAL":   [7,8,9,10,11,12],
-    "DOUGLAS":       [13,14,15,16,17,18,19],
-    "IONE":          [20,21,22,23,24,25],
-    "ISA":           [26,27,28,29,30,31,32],
-    "IVAN":          [33,34,35,36,37,38,39],
-    "LAIS":          [40,41,42,43,44,45,46],
-    "LEONARDO":      [47,48,49,50,51,52,53],
-    "LUANA":         [54,55,56,57,58,59,60],
-    "LUIS FELIPE":   [61,62,63,64,65,66,67],
-    "MARCELO":       [68,69,70,71,72,73,74],
-    "MARLON":        [75,76,77,78,79,80,81],
-    "ROBSON":        [82,83,84,85,86,87],
-    "SAMUEL":        [88,89,90,91,92,93],
-    "YVES":          [94,95,96,97,98,99]
+  const isAtivo = (nome) => {
+    if (!nome) return false;
+    if (AUSENTES.includes(nome)) return false;
+    return true;
   };
 
-  // Ausências/férias
-  const AUSENTES = []; // ex.: ["LUANA"]
-
-  // Índice sub-final → dono (aceita "0"/"00" .. "99")
   const SUB_TO_OWNER = (() => {
     const m = new Map();
     for (const [nome, finais] of Object.entries(NAME_GROUPS)) {
@@ -207,63 +335,57 @@
     return m;
   })();
 
-  const isAtivo = (nome) => nome && !AUSENTES.includes(nome);
-
-  function donoSubfinal(sub) {
-    const nome = SUB_TO_OWNER.get(sub);
-    return isAtivo(nome) ? nome : null;
-  }
-
-  // Resolver geral com fallback (SEM regra especial Glauco)
+  /**
+   * Lógica ausentes:
+   * - Primeiro tenta pelos 2 últimos dígitos.
+   * - Se for de alguém AUSENTE, corta o último dígito e tenta de novo com os 2 últimos restantes.
+   *   Ex.: 70922029 → "29" = ISA (ausente) → corta "9" → 7092202 → "02" = ADRIANO.
+   * - Se não houver com 2 dígitos, tenta 1 dígito, também respeitando ausentes.
+   * - Vai encurtando da direita para a esquerda até achar um ativo.
+   */
   function getResponsavel(numeroStr) {
     let n = (numeroStr || "").replace(/\D/g, "");
     if (!n) return null;
 
     while (n.length > 0) {
-      // últimos 2 dígitos
+      // tenta pelos últimos 2 dígitos
       if (n.length >= 2) {
-        const sub2 = n.slice(-2);
-        const dono2 = donoSubfinal(sub2);
-        if (dono2) return dono2;
+        const sub2  = n.slice(-2);
+        const dono2 = SUB_TO_OWNER.get(sub2);
+        if (dono2) {
+          if (isAtivo(dono2)) return dono2;
+          // dono2 ausente → descarta o último dígito e tenta de novo
+          n = n.slice(0, -1);
+          continue;
+        }
       }
 
-      // último dígito
-      const sub1 = n.slice(-1);
-      const dono1 = donoSubfinal(sub1);
-      if (dono1) return dono1;
+      // tenta pelo último dígito
+      const sub1  = n.slice(-1);
+      const dono1 = SUB_TO_OWNER.get(sub1);
+      if (dono1) {
+        if (isAtivo(dono1)) return dono1;
+        // ausente → corta último dígito e continua
+        n = n.slice(0, -1);
+        continue;
+      }
 
-      // fallback: encurta
+      // nenhum dono encontrado para esses finais → encurta
       n = n.slice(0, -1);
     }
+
     return null;
   }
 
-  const NAME_COLOR = {
-    "ADRIANO":            {bg:"#E6E66A", fg:"#000"},
-    "DANIEL LEAL":        {bg:"#E6A85C", fg:"#000"},
-    "DOUGLAS":            {bg:"#66CCCC", fg:"#000"},
-    "IONE":               {bg:"#4D4D4D", fg:"#fff"},
-    "ISA":                {bg:"#5C6FA6", fg:"#fff"},
-    "IVAN":               {bg:"#9A9A52", fg:"#000"},
-    "LAIS":               {bg:"#D966D9", fg:"#000"},
-    "LEONARDO":           {bg:"#8E5A8E", fg:"#fff"},
-    "LUANA":              {bg:"#7ACC7A", fg:"#000"},
-    "LUIS FELIPE":        {bg:"#5CA3A3", fg:"#000"},
-    "MARCELO":            {bg:"#A05252", fg:"#fff"},
-    "MARLON":             {bg:"#A0A0A0", fg:"#000"},
-    "ROBSON":             {bg:"#CCCCCC", fg:"#000"},
-    "SAMUEL":             {bg:"#66A3CC", fg:"#000"},
-    "YVES":               {bg:"#4D4D4D", fg:"#fff"},
-  };
-
   const NAME_MARK_ATTR = 'adMarcado';
-  const LINK_PICKERS = ['a.entity-link-id', '.slick-row a'];
+  const LINK_PICKERS   = ['a.entity-link-id', '.slick-row a'];
   const processedLinks = new WeakSet();
 
-  // pega links únicos
   const pickAllLinks = () => {
     const set = new Set();
-    for (const sel of LINK_PICKERS) document.querySelectorAll(sel).forEach(a => set.add(a));
+    for (const sel of LINK_PICKERS) {
+      document.querySelectorAll(sel).forEach(a => set.add(a));
+    }
     return Array.from(set);
   };
 
@@ -276,31 +398,31 @@
     if (!prefs.nameBadgesOn) return;
     pickAllLinks().forEach(link => {
       if (!link || processedLinks.has(link)) return;
-      const label = (link.textContent || '').trim();
+      const label  = (link.textContent || '').trim();
       const digits = extractTrailingDigits(label);
       if (!digits) { processedLinks.add(link); return; }
 
       const owner = getResponsavel(digits);
-      const cell = link.closest('.slick-cell');
+      const cell  = link.closest('.slick-cell');
 
       if (cell && owner && NAME_COLOR[owner]) {
         const { bg, fg } = NAME_COLOR[owner];
         cell.classList.add('tmx-namecell');
         cell.style.background = bg;
-        cell.style.color = fg || '';
+        cell.style.color      = fg || '';
         cell.querySelectorAll('a').forEach(a => { a.style.color = 'inherit'; });
       }
 
       if (owner && !link.dataset[NAME_MARK_ATTR]) {
         const tag = document.createElement('span');
         tag.textContent = ' ' + owner;
-        tag.style.marginLeft = '6px';
-        tag.style.fontWeight = '600';
+        tag.style.marginLeft  = '6px';
+        tag.style.fontWeight  = '600';
         const c = NAME_COLOR[owner];
         if (c) {
-          tag.style.background = c.bg;
-          tag.style.color = c.fg;
-          tag.style.padding = '0 4px';
+          tag.style.background   = c.bg;
+          tag.style.color        = c.fg;
+          tag.style.padding      = '0 4px';
           tag.style.borderRadius = '4px';
         }
         link.insertAdjacentElement('afterend', tag);
@@ -314,12 +436,12 @@
   /* =========================================================
    *  3) Marca "Solicitado por.Título" se for juiz/juíza
    * =======================================================*/
-  const RE_MAGISTRADO = /\bju[ií]z(?:es|a)?(?:\s+de\s+direito)?\b/i;
+  const RE_MAGISTRADO      = /\bju[ií]z(?:es|a)?(?:\s+de\s+direito)?\b/i;
   const AID_SOLICITADO_POR = 'grid_header_RequestedByPerson.Title';
 
   function getColumnSelectorByHeaderAid(aid) {
     const headers = Array.from(document.querySelectorAll('.slick-header-columns .slick-header-column'));
-    const target = headers.find(h => h.getAttribute('data-aid') === aid);
+    const target  = headers.find(h => h.getAttribute('data-aid') === aid);
     if (!target) return null;
     const idx = headers.indexOf(target);
     if (idx < 0) return null;
@@ -328,7 +450,7 @@
 
   function markMagistrateColumn(root=document) {
     if (!prefs.magistradoOn) return;
-    const scope = getGridViewport(root);
+    const scope  = getGridViewport(root);
     const colSel = getColumnSelectorByHeaderAid(AID_SOLICITADO_POR);
     if (!colSel) return;
     scope.querySelectorAll(colSel).forEach(cell => {
@@ -346,17 +468,18 @@
   const AUTO_TAG_RULES = [
     { palavras:["mandado","oficial de justiça","central de mandos"], tag:"CEMAN" },
     { palavras:["custas","taxa","diligência","diligências"],        tag:"CUSTAS" },
-    { palavras:["atp","automatização","automação","regra"],          tag:"ATP" },
-    { palavras:["cadastrar","cadastro"],                              tag:"CADASTROS" },
+    { palavras:["atp","automatização","automação","regra"],         tag:"ATP" },
+    { palavras:["cadastrar","cadastro"],                            tag:"CADASTROS" },
     { palavras:["acesso","login","acessar","fatores","autenticador","autenticação","authenticator","senha"], tag:"LOGIN" },
     { palavras:["Migrado","Migrados","Migração","Migrador","migrar"], tag:"MIGRADOR" },
-    { palavras:["Carta","Cartas"],                                    tag:"CORREIOS" },
-    { palavras:["DJEN"],                                              tag:"DJEN" },
-    { palavras:["Renajud","Sisbajud"],                                tag:"ACIONAMENTOS" },
-    { palavras:["Distribuição","Redistribuir","Remeter"],             tag:"DISTRIBUIÇÃO" },
+    { palavras:["Carta","Cartas"],                                  tag:"CORREIOS" },
+    { palavras:["DJEN"],                                            tag:"DJEN" },
+    { palavras:["Renajud","Sisbajud"],                              tag:"ACIONAMENTOS" },
+    { palavras:["Distribuição","Redistribuir","Remeter"],           tag:"DISTRIBUIÇÃO" },
   ];
 
-  const hasLeadingTag = html => /\[\s*[A-Z]+\s*\]/.test(html.replace(/<[^>]+>/g,'').slice(0,24));
+  const hasLeadingTag = html =>
+    /\[\s*[A-Z]+\s*\]/.test(html.replace(/<[^>]+>/g,'').slice(0,24));
 
   function tagDescriptionCellOnce(el) {
     if (el.dataset.smaxTagged === '1') return;
@@ -364,7 +487,10 @@
     if (!plain) return;
 
     const htmlAtual = el.innerHTML.trim();
-    if (hasLeadingTag(htmlAtual)) { el.dataset.smaxTagged = '1'; return; }
+    if (hasLeadingTag(htmlAtual)) {
+      el.dataset.smaxTagged = '1';
+      return;
+    }
 
     const n = normalizeText(plain);
     for (const r of AUTO_TAG_RULES) {
@@ -399,11 +525,11 @@
         m.addedNodes?.forEach(node => {
           if (node.nodeType !== 1) return;
           if (node.matches?.('.comment-items')) {
-            node.style.height = 'auto';
+            node.style.height    = 'auto';
             node.style.maxHeight = 'none';
           } else {
             node.querySelectorAll?.('.comment-items').forEach(el => {
-              el.style.height = 'auto';
+              el.style.height    = 'auto';
               el.style.maxHeight = 'none';
             });
           }
@@ -420,25 +546,50 @@
   function initSectionTweaks() {
     if (!prefs.collapseOn) return;
 
-    const SECTION_SELECTOR = '#form-section-5, [data-aid="section-catalog-offering"]';
-    const IDS_TO_REMOVE = ['form-section-1','form-section-7','form-section-8'];
+    const OFERTA_SELECTOR =
+      '[aria-label*="Oferta de catálogo"], [data-aid="section-catalog-offering"]';
+
+    const ARIA_PATTERNS = [
+      'Peça Relacionada',
+      'Hardware',
+      'Informações SCCD'
+    ];
+
     const collapsedOnce = new WeakSet();
 
     const isOpen = (sectionEl) => {
       const content = sectionEl?.querySelector?.('.pl-entity-page-component-content');
       return !!content && !content.classList.contains('ng-hide');
     };
-    const syntheticClick = (el) => { try { el.click(); } catch { el.dispatchEvent(new MouseEvent('click', { bubbles:true, cancelable:true })); } };
+
+    const syntheticClick = (el) => {
+      try {
+        el.click();
+      } catch {
+        el.dispatchEvent(new MouseEvent('click', { bubbles:true, cancelable:true }));
+      }
+    };
+
     const fixAriaAndIcon = (headerEl, sectionEl) => {
       if (!headerEl || !sectionEl) return;
-      if (headerEl.getAttribute('aria-expanded') !== 'false') headerEl.setAttribute('aria-expanded','false');
+      if (headerEl.getAttribute('aria-expanded') !== 'false') {
+        headerEl.setAttribute('aria-expanded', 'false');
+      }
       const sr = sectionEl.querySelector('.pl-entity-page-component-header-sr');
-      if (sr && /Expandido/i.test(sr.textContent || '')) sr.textContent = sr.textContent.replace(/Expandido/ig,'Recolhido');
-      const icon = headerEl.querySelector('[pl-bidi-collapse-arrow]') || headerEl.querySelector('.icon-arrow-med-down, .icon-arrow-med-right');
-      if (icon) { icon.classList.remove('icon-arrow-med-down'); icon.classList.add('icon-arrow-med-right'); }
+      if (sr && /Expandido/i.test(sr.textContent || '')) {
+        sr.textContent = sr.textContent.replace(/Expandido/ig, 'Recolhido');
+      }
+      const icon =
+        headerEl.querySelector('[pl-bidi-collapse-arrow]') ||
+        headerEl.querySelector('.icon-arrow-med-down, .icon-arrow-med-right');
+      if (icon) {
+        icon.classList.remove('icon-arrow-med-down');
+        icon.classList.add('icon-arrow-med-right');
+      }
     };
 
     function collapseSectionOnce(sectionEl) {
+      if (!sectionEl) return;
       if (sectionEl.dataset.userInteracted === '1') return;
       if (collapsedOnce.has(sectionEl)) return;
 
@@ -447,36 +598,165 @@
 
       if (isOpen(sectionEl)) {
         syntheticClick(header);
-        setTimeout(()=>fixAriaAndIcon(header,sectionEl),0);
+        setTimeout(() => fixAriaAndIcon(header, sectionEl), 0);
       } else {
-        fixAriaAndIcon(header,sectionEl);
+        fixAriaAndIcon(header, sectionEl);
       }
       collapsedOnce.add(sectionEl);
     }
 
-    const removeSections = () => IDS_TO_REMOVE.forEach(id => { const el = document.getElementById(id); if (el && el.parentNode) el.remove(); });
-
-    function applyAll() {
-      document.querySelectorAll(SECTION_SELECTOR).forEach(collapseSectionOnce);
-      removeSections();
+    function collapseOfertaCatalogo() {
+      document.querySelectorAll(OFERTA_SELECTOR).forEach(node => {
+        const sectionEl = node.closest('.form-section, .pl-entity-page-component') || node;
+        collapseSectionOnce(sectionEl);
+      });
     }
 
-    document.addEventListener('click', (e)=>{
-      const header = e.target.closest('.pl-entity-page-component-header[role="button"]');
-      if (!header) return;
-      const sectionEl = header.closest('#form-section-5, [data-aid="section-catalog-offering"]');
-      if (sectionEl) sectionEl.dataset.userInteracted = '1';
-    }, { capture:true });
+    function removeSectionsByAriaLabel() {
+      document
+        .querySelectorAll('[data-aid="section-hardware"], [data-aid="section-sccd"], [data-aid="section-related-piece"]')
+        .forEach(node => {
+          const wrapper =
+            node.closest('.form-section, .pl-entity-page-component') ||
+            node.closest('div') ||
+            node;
+          if (wrapper && wrapper.parentNode) wrapper.parentNode.removeChild(wrapper);
+        });
+
+      ARIA_PATTERNS.forEach(label => {
+        document
+          .querySelectorAll(`[aria-label*="${label}"]`)
+          .forEach(node => {
+            const wrapper =
+              node.closest('.form-section, .pl-entity-page-component') ||
+              node.closest('div') ||
+              node;
+            if (wrapper && wrapper.parentNode) wrapper.parentNode.removeChild(wrapper);
+          });
+      });
+    }
+
+    function applyAll() {
+      collapseOfertaCatalogo();
+      removeSectionsByAriaLabel();
+    }
+
+    const isOfertaSection = (el) => {
+      if (!el) return false;
+      return (
+        el.matches?.(OFERTA_SELECTOR) ||
+        !!el.querySelector?.(OFERTA_SELECTOR)
+      );
+    };
+
+    document.addEventListener(
+      'click',
+      (e) => {
+        const header = e.target.closest('.pl-entity-page-component-header[role="button"]');
+        if (!header) return;
+        const sectionEl = header.closest('.form-section, .pl-entity-page-component');
+        if (isOfertaSection(sectionEl)) {
+          sectionEl.dataset.userInteracted = '1';
+        }
+      },
+      { capture:true }
+    );
 
     const schedule = debounce(applyAll, 100);
-    const obs = new MutationObserver(()=>schedule());
+    const obs = new MutationObserver(() => schedule());
     setTimeout(applyAll, 300);
     obs.observe(document.documentElement, { childList:true, subtree:true });
     window.addEventListener('beforeunload', () => obs.disconnect(), { once:true });
   }
 
   /* =========================================================
-   *  7) Orquestração (um único observer com debounce)
+   *  7) Anexos no topo + Preview IMG/PDF
+   * =======================================================*/
+  function moveAttachmentsIntoForm() {
+    const attachments = document.querySelector('div.pl-entity-page-component[data-aid="attachments"]');
+    const form        = document.querySelector('ng-form[name="form"]');
+    if (!attachments || !form) return;
+
+    attachments.style.display = '';
+    if (attachments.parentNode === form && form.firstElementChild === attachments) return;
+
+    form.insertBefore(attachments, form.firstElementChild);
+  }
+
+  function openImageModal(objUrl) {
+    const modal = document.createElement('div');
+    modal.className = 'tmPreviewModal';
+
+    const closeBtn = document.createElement('div');
+    closeBtn.className = 'tmPreviewClose';
+    closeBtn.textContent = '✖';
+    closeBtn.onclick = () => {
+      URL.revokeObjectURL(objUrl);
+      modal.remove();
+    };
+
+    const img = document.createElement('img');
+    img.className = 'tmPreviewImg';
+    img.src = objUrl;
+
+    modal.appendChild(closeBtn);
+    modal.appendChild(img);
+    document.body.appendChild(modal);
+  }
+
+  function wirePreviewLinks() {
+    const area = document.querySelector('#attachmentsArea');
+    if (!area) return;
+
+    const links = area.querySelectorAll('a[ng-href*="/rest/"][href*="/file-list/"]');
+
+    links.forEach(link => {
+      if (link._tmPreviewBound) return;
+      link._tmPreviewBound = true;
+
+      link.removeAttribute('download');
+
+      const name    = (link.textContent || '').trim().toLowerCase();
+      const isPdf   = name.endsWith('.pdf');
+      const isImage = name.match(/\.(png|jpg|jpeg|gif|bmp|webp)$/i);
+
+      link.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        try {
+          if (isPdf) {
+            const resp = await fetch(link.href);
+            const blob = await resp.blob();
+            const url  = URL.createObjectURL(blob);
+            window.open(url, '_blank');
+            setTimeout(() => URL.revokeObjectURL(url), 60 * 1000);
+            return;
+          }
+
+          if (isImage) {
+            const resp = await fetch(link.href);
+            const blob = await resp.blob();
+            const url  = URL.createObjectURL(blob);
+            openImageModal(url);
+            return;
+          }
+
+          window.open(link.href, '_blank');
+        } catch (err) {
+          alert('Erro ao abrir anexo: ' + err);
+        }
+      });
+    });
+  }
+
+  function runAttachmentsFeature() {
+    moveAttachmentsIntoForm();
+    wirePreviewLinks();
+  }
+
+  /* =========================================================
+   *  8) Orquestração
    * =======================================================*/
   function runAllFeatures() {
     const work = () => {
@@ -484,9 +764,12 @@
       applyNameBadges();
       markMagistrateColumn();
       applyAutoTagsInDescription();
+      runAttachmentsFeature();
     };
-    if ('requestIdleCallback' in window) requestIdleCallback(work, { timeout: 500 });
-    else setTimeout(work, 0);
+    if ('requestIdleCallback' in window)
+      requestIdleCallback(work, { timeout: 500 });
+    else
+      setTimeout(work, 0);
   }
 
   const scheduleRunAllFeatures = debounce(runAllFeatures, 80);
@@ -503,37 +786,23 @@
       attributeFilter: ['class','style','aria-expanded']
     });
 
-    // Cabeçalho pode mudar índices lN/rN ao mostrar/ocultar/reordenar
     const headerEl = document.querySelector('.slick-header-columns') || document.body;
     const obsHeader = new MutationObserver(()=>scheduleRunAllFeatures());
     obsHeader.observe(headerEl, { childList:true, subtree:true, attributes:true });
 
     window.addEventListener('scroll', scheduleRunAllFeatures, true);
     window.addEventListener('resize', scheduleRunAllFeatures, { passive:true });
-    window.addEventListener('beforeunload', () => { obsMain.disconnect(); obsHeader.disconnect(); }, { once:true });
+    window.addEventListener('beforeunload', () => {
+      obsMain.disconnect();
+      obsHeader.disconnect();
+    }, { once:true });
   }
 
   /* =========================================================
-   *  8) Destacar usuários detratores (caveira)
+   *  9) Usuários Detratores
    * =======================================================*/
   function initFlagUsersSkull() {
     const ICON_CAVEIRA_URL = 'https://cdn-icons-png.flaticon.com/512/564/564619.png';
-    const GRUPO_1 = [
-      "Adriano Zilli","Adriana Da Silva Ferreira Oliveira","Alessandra Sousa Nunes","Bruna Marques Dos Santos",
-      "Breno Medeiros Malfati","Carlos Henrique Scala De Almeida","Cassia Santos Alves De Lima","Dalete Rodrigues Silva",
-      "David Lopes De Oliveira","Davi Dos Reis Garcia","Deaulas De Campos Salviano","Diego Oliveira Da Silva",
-      "Diogo Mendonça Aniceto","Elaine Moriya","Ester Naili Dos Santos","Fabiano Barbosa Dos Reis",
-      "Fabricio Christiano Tanobe Lyra","Gabriel Teixeira Ludvig","Gilberto Sintoni Junior","Giovanna Coradini Teixeira",
-      "Gislene Ferreira Sant'Ana Ramos","Guilherme Cesar De Sousa","Gustavo De Meira Gonçalves","Jackson Alcantara Santana",
-      "Janaina Dos Passos Silvestre","Jefferson Silva De Carvalho Soares","Joyce Da Silva Oliveira","Juan Campos De Souza",
-      "Juliana Lino Dos Santos Rosa","Karina Nicolau Samaan","Karine Barbara Vitor De Lima Souza","Kaue Nunes Silva Farrelly",
-      "Kelly Ferreira De Freitas","Larissa Ferreira Fumero","Lucas Alves Dos Santos","Lucas Carneiro Peres Ferreira",
-      "Marcos Paulo Silva Madalena","Maria Fernanda De Oliveira Bento","Natalia Yurie Shiba","Paulo Roberto Massoca",
-      "Pedro Henrique Palacio Baritti","Rafaella Silva Lima Petrolini","Renata Aparecida Mendes Bonvechio","Rodrigo Silva Oliveira",
-      "Ryan Souza Carvalho","Tatiana Lourenço Da Costa Antunes","Tatiane Araujo Da Cruz","Thiago Tadeu Faustino De Oliveira",
-      "Tiago Carvalho De Freitas Meneses","Victor Viana Roca","GERSON DA MATTA"
-    ];
-
     const normalizeName = s => (s||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toUpperCase();
     const FLAG_SET = new Set(GRUPO_1.map(normalizeName));
 
@@ -550,29 +819,37 @@
       try {
         if (!(personItem instanceof HTMLElement)) return;
         const nomeVisivel = getVisibleLeadingText(personItem);
-        const chave = normalizeName(nomeVisivel);
+        const chave       = normalizeName(nomeVisivel);
         if (!FLAG_SET.has(chave)) return;
 
-        const img = personItem.querySelector('img.ts-avatar, img.pl-shared-item-img, img.ts-image') || personItem.querySelector('img');
+        const img = personItem.querySelector('img.ts-avatar, img.pl-shared-item-img, img.ts-image') ||
+                    personItem.querySelector('img');
         if (img && img.dataset.__g1Applied !== '1') {
           img.dataset.__g1Applied = '1';
-          img.src = ICON_CAVEIRA_URL;
-          img.alt = 'Alerta de Usuário Detrator';
+          img.src   = ICON_CAVEIRA_URL;
+          img.alt   = 'Alerta de Usuário Detrator';
           img.title = 'Alerta de Usuário Detrator';
           Object.assign(img.style, {
-            border:'3px solid #ff0000', borderRadius:'50%', padding:'2px',
-            backgroundColor:'#ff000022', boxShadow:'0 0 10px #ff0000'
+            border:'3px solid #ff0000',
+            borderRadius:'50%',
+            padding:'2px',
+            backgroundColor:'#ff000022',
+            boxShadow:'0 0 10px #ff0000'
           });
         }
         personItem.style.color = '#ff0000';
       } catch {}
     }
 
-    const obs = new MutationObserver(()=>document.querySelectorAll('span.pl-person-item').forEach(applySkullAlert));
+    const obs = new MutationObserver(() =>
+      document.querySelectorAll('span.pl-person-item').forEach(applySkullAlert)
+    );
     obs.observe(document.body, { childList:true, subtree:true });
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', ()=>document.querySelectorAll('span.pl-person-item').forEach(applySkullAlert));
+      document.addEventListener('DOMContentLoaded', () =>
+        document.querySelectorAll('span.pl-person-item').forEach(applySkullAlert)
+      );
     } else {
       document.querySelectorAll('span.pl-person-item').forEach(applySkullAlert);
     }
@@ -584,5 +861,5 @@
   initAutoHeightComments();
   initSectionTweaks();
   initOrchestrator();
-  initFlagUsersSkull(); // comente esta linha se não quiser a “caveira”
+  initFlagUsersSkull();
 })();
