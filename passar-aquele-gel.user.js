@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Passar aquele GEL!
 // @namespace    https://github.com/oadrianocardoso
-// @version      4.0
+// @version      4.1
 // @description  Adiciona um botão "Formatar" na última barra de ferramentas de todas as instâncias CKEditor (plCkeditorX), aplicando ajuste em <p> e <img> em cada editor separadamente.
 // @author       ADRIANO / ChatGPT
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -12,12 +12,17 @@
 (function () {
   'use strict';
 
+  // 🔑 PONTO CRÍTICO:
+  // Quando rodar como @require dentro de um script com @grant,
+  // precisamos usar unsafeWindow para acessar o CKEDITOR da página.
+  const root = (typeof unsafeWindow !== 'undefined') ? unsafeWindow : window;
+  const doc  = root.document || document;
+
   const CUSTOM_BTN_ID_BASE = 'cke_meubotao';
   const ICON_URL           = 'https://suporte.tjsp.jus.br/v30/lib/ckeditor/prod/plugins/icons.png?t=O0B2';
   const ICON_POS           = '0 -528px'; // bandeirinha
 
   function getButtonIdForEditor(editor) {
-    // Um ID único por editor, pra não conflitar entre instâncias
     return `${CUSTOM_BTN_ID_BASE}_${editor.name}`;
   }
 
@@ -60,7 +65,7 @@
 
       const btnId = getButtonIdForEditor(editor);
 
-      // Já existe nesse editor? só reconfigura (caso CKEditor tenha mexido)
+      // Já existe nesse editor? só reconfigura
       const existing = container.querySelector('#' + btnId);
       if (existing) {
         configureButtonAppearance(existing, btnId);
@@ -95,7 +100,6 @@
 
       configureButtonAppearance(newBtn, btnId);
 
-      // Clique → formata <p> e <img> dentro desse editor específico
       newBtn.addEventListener('click', function (e) {
         e.preventDefault();
         console.log('[CKE Botão Custom] Clique no botão de formatação para editor:', editor.name);
@@ -108,10 +112,7 @@
 
         let html = editable.innerHTML || '';
 
-        // <p> sem style → <p style="margin-bottom: 1em;">
         html = html.replace(/<p(?![^>]*\bstyle=)/g, '<p style="margin-bottom: 1em;"');
-
-        // <img> sem style → <img style="border: 3px solid #000;">
         html = html.replace(/<img(?![^>]*\bstyle=)/g, '<img style="border: 3px solid #000;"');
 
         editable.innerHTML = html;
@@ -128,25 +129,24 @@
   }
 
   function hookCkeditor() {
-    if (!window.CKEDITOR) {
+    if (!root.CKEDITOR) {
       console.warn('[CKE Botão Custom] CKEDITOR ainda não está disponível.');
       return;
     }
 
-    // Toda nova instância que ficar pronta (inclui Solução, Comentário, etc.)
-    CKEDITOR.on('instanceReady', function (evt) {
+    // novas instâncias
+    root.CKEDITOR.on('instanceReady', function (evt) {
       const editor = evt.editor;
       if (!editor) return;
 
-      // Pequeno delay só pra garantir que a toolbar terminou de montar
       setTimeout(function () {
         addCustomButtonForEditor(editor);
       }, 300);
     });
 
-    // Se já houverem instâncias carregadas quando o script rodar
-    Object.keys(CKEDITOR.instances).forEach(name => {
-      const editor = CKEDITOR.instances[name];
+    // instâncias já existentes
+    Object.keys(root.CKEDITOR.instances).forEach(name => {
+      const editor = root.CKEDITOR.instances[name];
       if (!editor) return;
 
       setTimeout(function () {
@@ -158,17 +158,17 @@
   function init() {
     console.log('[CKE Botão Custom] Script Tampermonkey iniciado (todas as instâncias CKEditor).');
 
-    const interval = setInterval(function () {
-      if (window.CKEDITOR) {
-        clearInterval(interval);
+    const interval = root.setInterval(function () {
+      if (root.CKEDITOR) {
+        root.clearInterval(interval);
         hookCkeditor();
       }
     }, 500);
   }
 
-  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  if (doc.readyState === 'complete' || doc.readyState === 'interactive') {
     init();
   } else {
-    window.addEventListener('DOMContentLoaded', init);
+    doc.addEventListener('DOMContentLoaded', init);
   }
 })();
