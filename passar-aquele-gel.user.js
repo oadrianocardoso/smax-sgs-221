@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Passar aquele GEL!
 // @namespace    https://github.com/oadrianocardoso
-// @version      4.1
+// @version      4.2
 // @description  Adiciona um botão "Formatar" na última barra de ferramentas de todas as instâncias CKEditor (plCkeditorX), aplicando ajuste em <p> e <img> em cada editor separadamente.
 // @author       ADRIANO / ChatGPT
 // @match        https://suporte.tjsp.jus.br/saw/*
