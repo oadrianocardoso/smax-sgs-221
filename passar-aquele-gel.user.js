@@ -156,7 +156,7 @@
   }
 
   function init() {
-    console.log('[CKE Botão Custom] Script Tampermonkey iniciado (todas as instâncias CKEditor).');
+    console.log('[CKE Botão Custom] Script Tampermonkey iniciado (todas as instâncias CKEditor 221).');
 
     const interval = root.setInterval(function () {
       if (root.CKEDITOR) {
