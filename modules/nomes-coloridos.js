@@ -1,7 +1,6 @@
 (function (root) {
   'use strict';
 
-  // Namespace global
   const SMAX   = root.SMAX = root.SMAX || {};
   const CONFIG = SMAX.config || {};
   const prefs  = CONFIG.prefs || { nameBadgesOn: true };
@@ -10,7 +9,6 @@
   // CONFIG LOCAL DO MÓDULO
   // =========================
 
-  // Finais de cada atendente
   const NAME_GROUPS = {
     "ADRIANO":       [0,1,2,3,4,5,6],
     "DANIEL LEAL":   [7,8,9,10,11,12],
@@ -29,7 +27,6 @@
     "YVES":          [94,95,96,97,98,99]
   };
 
-  // Cores de cada atendente
   const NAME_COLOR = {
     "ADRIANO":            {bg:"#E6E66A", fg:"#000"},
     "DANIEL LEAL":        {bg:"#E6A85C", fg:"#000"},
@@ -48,7 +45,6 @@
     "YVES":               {bg:"#4D4D4D", fg:"#fff"}
   };
 
-  // Atendentes que NÃO recebem carga
   const AUSENTES = ["ISA"];
 
   // =========================
@@ -65,7 +61,6 @@
     return true;
   }
 
-  // Mapa: finais ? dono
   const SUB_TO_OWNER = (() => {
     const m = new Map();
     for (const [nome, finais] of Object.entries(NAME_GROUPS)) {
@@ -84,19 +79,16 @@
     if (!n) return null;
 
     while (n.length > 0) {
-      // tenta com 2 dígitos
       if (n.length >= 2) {
         const sub2  = n.slice(-2);
         const dono2 = SUB_TO_OWNER.get(sub2);
         if (dono2) {
           if (isAtivo(dono2)) return dono2;
-          // dono ausente ? encurta e tenta dnv
           n = n.slice(0, -1);
           continue;
         }
       }
 
-      // tenta com 1 dígito
       const sub1  = n.slice(-1);
       const dono1 = SUB_TO_OWNER.get(sub1);
       if (dono1) {
@@ -105,7 +97,6 @@
         continue;
       }
 
-      // nenhum dono ? encurta
       n = n.slice(0, -1);
     }
 
@@ -169,9 +160,44 @@
     });
   }
 
-  SMAX.badges = { apply: applyNameBadges };
+  function getConfig() {
+    return {
+      nameGroups: structuredClone(NAME_GROUPS),
+      nameColors: structuredClone(NAME_COLOR),
+      ausentes:   AUSENTES.slice()
+    };
+  }
 
-  // ?? Log para confirmar carregamento do módulo
-  console.log('[SMAX Nomes Coloridos] módulo carregado.');
+  function setConfig(newCfg = {}) {
+    const { nameGroups, nameColors, ausentes } = newCfg;
+
+    if (nameGroups && typeof nameGroups === 'object') {
+      Object.keys(NAME_GROUPS).forEach(k => delete NAME_GROUPS[k]);
+      Object.entries(nameGroups).forEach(([k, v]) => {
+        NAME_GROUPS[k] = Array.isArray(v) ? v.slice() : [];
+      });
+    }
+
+    if (nameColors && typeof nameColors === 'object') {
+      Object.keys(NAME_COLOR).forEach(k => delete NAME_COLOR[k]);
+      Object.entries(nameColors).forEach(([k, v]) => {
+        NAME_COLOR[k] = { bg: v.bg || '#ffffff', fg: v.fg || '#000000' };
+      });
+    }
+
+    if (Array.isArray(ausentes)) {
+      AUSENTES.splice(0, AUSENTES.length, ...ausentes);
+    }
+
+    console.log('[SMAX badges] config atualizada via menu', { NAME_GROUPS, NAME_COLOR, AUSENTES });
+  }
+
+  SMAX.badges = {
+    apply: applyNameBadges,
+    getConfig,
+    setConfig
+  };
+
+  console.log('[SMAX badges] módulo carregado (config local + get/setConfig)');
 
 })(typeof unsafeWindow !== 'undefined' ? unsafeWindow : window);
