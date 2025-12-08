@@ -13,8 +13,6 @@
       autoTagsOn:        true
     },
 
-    
-
   function debounce(fn, wait = 120) {
     let t;
     return (...args) => {
