@@ -1,4 +1,4 @@
-(function (root) {
+ï»¿(function (root) {
   'use strict';
 
   const SMAX   = root.SMAX = root.SMAX || {};
@@ -94,7 +94,7 @@
 
     const header = doc.createElement('div');
     header.className = 'smax-dash-header';
-    header.textContent = 'SMAX ? Mini-dashboard';
+    header.textContent = 'SMAX â€“ Mini-dashboard';
 
     const body = doc.createElement('div');
     body.className = 'smax-dash-body';
@@ -105,7 +105,7 @@
     return panel;
   }
 
-  // Descobre índice da coluna pelo data-aid ou pelo texto do cabeçalho
+  // Descobre Ã­ndice da coluna pelo data-aid ou pelo texto do cabeÃ§alho
   function getColumnIndexByAidOrTitle(aidCandidates, textCandidates) {
     const headers = Array.from(root.document.querySelectorAll('.slick-header-columns .slick-header-column'));
     if (!headers.length) return -1;
@@ -118,7 +118,7 @@
       }
     }
 
-    // 2) Fallback: tenta pelo texto do cabeçalho
+    // 2) Fallback: tenta pelo texto do cabeÃ§alho
     if (textCandidates && textCandidates.length) {
       for (let i = 0; i < headers.length; i++) {
         const txt = normalizeText(headers[i].textContent || '');
@@ -143,7 +143,7 @@
     const norm = normalizeText(raw);
     if (!raw && !norm) return false;
 
-    if (norm.includes('urgente') || norm.includes('plantao') || norm.includes('plantão')) {
+    if (norm.includes('urgente') || norm.includes('plantao') || norm.includes('plantÃ£o')) {
       return true;
     }
     if (raw.includes('ERRO_') || raw.includes('Erro ao') || raw.includes('ERRO ')) {
@@ -166,7 +166,7 @@
         'grid_header_AssignedToPerson.DisplayName',
         'grid_header_AssignedToPerson'
       ],
-      ['atribuído a', 'atribuido a', 'responsável', 'responsavel', 'pessoa']
+      ['atribuÃ­do a', 'atribuido a', 'responsÃ¡vel', 'responsavel', 'pessoa']
     );
 
     const idxGroup = getColumnIndexByAidOrTitle(
@@ -175,7 +175,7 @@
         'grid_header_AssignedToGroup.DisplayName',
         'grid_header_AssignedToGroup'
       ],
-      ['atribuído para grupo', 'grupo']
+      ['atribuÃ­do para grupo', 'grupo']
     );
 
     const idxStatus = getColumnIndexByAidOrTitle(
@@ -184,7 +184,7 @@
         'grid_header_Status.DisplayName',
         'grid_header_Status'
       ],
-      ['status', 'situação', 'situacao']
+      ['status', 'situaÃ§Ã£o', 'situacao']
     );
 
     const countsByName = new Map();
@@ -200,7 +200,7 @@
       const group  = (cellGroup && cellGroup.textContent  || '').trim();
       const status = (cellStatus && cellStatus.textContent|| '').trim();
 
-      const keyName = person || group || 'Sem responsável';
+      const keyName = person || group || 'Sem responsÃ¡vel';
       if (!countsByName.has(keyName)) countsByName.set(keyName, 0);
       countsByName.set(keyName, countsByName.get(keyName) + 1);
 
@@ -266,12 +266,12 @@
 
     const sec2Title = doc.createElement('div');
     sec2Title.className = 'smax-dash-section-title';
-    sec2Title.textContent = 'Críticos (urg./plantão/ERRO)';
+    sec2Title.textContent = 'CrÃ­ticos (urg./plantÃ£o/ERRO)';
     body.appendChild(sec2Title);
 
     const criticalInfo = doc.createElement('div');
     criticalInfo.className = 'smax-dash-critical';
-    criticalInfo.textContent = `${criticalCount} chamado(s) crítico(s) na visão atual.`;
+    criticalInfo.textContent = `${criticalCount} chamado(s) crÃ­tico(s) na visÃ£o atual.`;
     body.appendChild(criticalInfo);
   }
 
