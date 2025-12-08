@@ -1,4 +1,5 @@
-﻿(function (root) {
+﻿// @version      2.0
+(function (root) {
   'use strict';
 
   const SMAX   = root.SMAX = root.SMAX || {};
@@ -13,7 +14,7 @@
     const doc = root.document;
 
     const OFERTA_SELECTOR =
-      '[aria-label*="Oferta de catálogo"], [data-aid="section-catalog-offering"], [class="suggested-solution-area"]';
+      '[aria-label*="Oferta de catálogo"], [data-aid="section-catalog-offering"]';
 
     const ARIA_PATTERNS = [
       'Peça Relacionada',
