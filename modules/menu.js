@@ -4,19 +4,19 @@
   const SMAX = root.SMAX = root.SMAX || {};
   const STORAGE_KEY = 'SMAX_SGS221_CONFIG';
 
-  // DefiniÁ„o das preferÍncias que v„o aparecer no menu
+  // Defini√ß√£o das prefer√™ncias que v√£o aparecer no menu
   const PREF_DEFS = [
     { key: 'highlightsOn',      label: 'Destaques (palavras coloridas)' },
     { key: 'nameBadgesOn',      label: 'Badges por finais de ID' },
     { key: 'magistradoOn',      label: 'Destacar Magistrado em "Solicitado por"' },
-    { key: 'autoTagsOn',        label: 'Tags autom·ticas na DescriÁ„o' },
-    { key: 'enlargeCommentsOn', label: 'Coment·rios com altura autom·tica' },
-    { key: 'collapseOn',        label: 'Recolher "Oferta de Cat·logo" / remover seÁıes' }
-    // se quiser depois: anexos/detratores etc podem virar prefs tambÈm
+    { key: 'autoTagsOn',        label: 'Tags autom√°ticas na Descri√ß√£o' },
+    { key: 'enlargeCommentsOn', label: 'Coment√°rios com altura autom√°tica' },
+    { key: 'collapseOn',        label: 'Recolher "Oferta de Cat√°logo" / remover se√ß√µes' }
+    // se quiser depois: anexos/detratores etc podem virar prefs tamb√©m
   ];
 
   /* ==========================
-   * PersistÍncia de config
+   * Persist√™ncia de config
    * ========================= */
 
   function loadConfig() {
@@ -29,7 +29,7 @@
       console.warn('[SMAX menu] Erro ao ler config do localStorage:', e);
     }
 
-    // Mescla prefs padr„o + gravadas
+    // Mescla prefs padr√£o + gravadas
     const mergedPrefs = Object.assign(
       {},
       base.prefs || {},
@@ -54,7 +54,7 @@
   }
 
   /* ==========================
-   * UI (bot„o + painel)
+   * UI (bot√£o + painel)
    * ========================= */
 
   function injectCss() {
@@ -186,7 +186,7 @@
 
     const footer = doc.createElement('div');
     footer.className = 'smax-menu-footer';
-    footer.textContent = 'As alteraÁıes s„o salvas automaticamente.';
+    footer.textContent = 'As altera√ß√µes s√£o salvas automaticamente.';
 
     panel.appendChild(header);
     panel.appendChild(body);
@@ -215,7 +215,7 @@
       createButton();
     }
 
-    console.log('[SMAX menu] mÛdulo de menu carregado');
+    console.log('[SMAX menu] m√≥dulo de menu carregado');
   }
 
   SMAX.menu = { init, loadConfig, saveConfig };
