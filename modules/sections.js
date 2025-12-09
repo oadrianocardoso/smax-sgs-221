@@ -1,4 +1,4 @@
-﻿// @version      2.0
+﻿// @version      2.1
 (function (root) {
   'use strict';
 
@@ -15,6 +15,10 @@
 
     const OFERTA_SELECTOR =
       '[aria-label*="Oferta de catálogo"], [data-aid="section-catalog-offering"]';
+
+    // NOVO: seletor da seção Classificação
+    const CLASSIFICACAO_SELECTOR =
+      '[data-aid="section-classification"], [aria-label^="Classificação"], [aria-label*="Classificação."]';
 
     const ARIA_PATTERNS = [
       'Peça Relacionada',
@@ -39,16 +43,32 @@
 
     const fixAriaAndIcon = (headerEl, sectionEl) => {
       if (!headerEl || !sectionEl) return;
+
+      // aria-expanded no header
       if (headerEl.getAttribute('aria-expanded') !== 'false') {
         headerEl.setAttribute('aria-expanded', 'false');
       }
+
+      // Texto "xxx. Expandido" -> "xxx. Recolhido" no header SR
       const sr = sectionEl.querySelector('.pl-entity-page-component-header-sr');
       if (sr && /Expandido/i.test(sr.textContent || '')) {
         sr.textContent = sr.textContent.replace(/Expandido/ig, 'Recolhido');
       }
+
+      // NOVO: ajustar o aria-label do container da seção
+      const currentLabel = sectionEl.getAttribute('aria-label');
+      if (currentLabel && /Expandido/i.test(currentLabel)) {
+        sectionEl.setAttribute(
+          'aria-label',
+          currentLabel.replace(/Expandido/ig, 'Recolhido')
+        );
+      }
+
+      // Ícone de seta (down -> right)
       const icon =
         headerEl.querySelector('[pl-bidi-collapse-arrow]') ||
         headerEl.querySelector('.icon-arrow-med-down, .icon-arrow-med-right');
+
       if (icon) {
         icon.classList.remove('icon-arrow-med-down');
         icon.classList.add('icon-arrow-med-right');
@@ -74,6 +94,14 @@
 
     function collapseOfertaCatalogo() {
       doc.querySelectorAll(OFERTA_SELECTOR).forEach(node => {
+        const sectionEl = node.closest('.form-section, .pl-entity-page-component') || node;
+        collapseSectionOnce(sectionEl);
+      });
+    }
+
+    // NOVO: colapsar inicialmente a seção "Classificação"
+    function collapseClassificacao() {
+      doc.querySelectorAll(CLASSIFICACAO_SELECTOR).forEach(node => {
         const sectionEl = node.closest('.form-section, .pl-entity-page-component') || node;
         collapseSectionOnce(sectionEl);
       });
@@ -105,14 +133,18 @@
 
     function applyAll() {
       collapseOfertaCatalogo();
+      collapseClassificacao();     // NOVO: aplicar à seção Classificação
       removeSectionsByAriaLabel();
     }
 
-    const isOfertaSection = (el) => {
+    // NOVO: função para saber se é seção que estamos rastreando (Oferta ou Classificação)
+    const isTrackedSection = (el) => {
       if (!el) return false;
       return (
         el.matches?.(OFERTA_SELECTOR) ||
-        !!el.querySelector?.(OFERTA_SELECTOR)
+        el.matches?.(CLASSIFICACAO_SELECTOR) ||
+        !!el.querySelector?.(OFERTA_SELECTOR) ||
+        !!el.querySelector?.(CLASSIFICACAO_SELECTOR)
       );
     };
 
@@ -122,7 +154,7 @@
         const header = e.target.closest('.pl-entity-page-component-header[role="button"]');
         if (!header) return;
         const sectionEl = header.closest('.form-section, .pl-entity-page-component');
-        if (isOfertaSection(sectionEl)) {
+        if (isTrackedSection(sectionEl)) {
           sectionEl.dataset.userInteracted = '1';
         }
       },

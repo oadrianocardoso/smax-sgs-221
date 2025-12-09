@@ -10,31 +10,31 @@
   const getViewport   = utils.getGridViewport || (d => (d || root.document));
   const normalizeText = utils.normalizeText || (s => (s || '').toLowerCase());
 
-  // Definição dos filtros rápidos
+  // Definiï¿½ï¿½o dos filtros rï¿½pidos
   const QUICK_FILTERS = [
     {
       id: 'CEMAN',
       label: 'CEMAN',
       tag: 'CEMAN',
-      keywords: ['mandado', 'oficial de justiça', 'central de mandados']
+      keywords: ['mandado', 'oficial de justiÃ§a', 'central de mandados']
     },
     {
       id: 'MIGRADOR',
       label: 'MIGRADOR',
       tag: 'MIGRADOR',
-      keywords: ['migrado', 'migração', 'migrador', 'migrar']
+      keywords: ['migrado', 'migraÃ§Ã£o', 'migrador', 'migrar']
     },
     {
       id: 'DJEN',
       label: 'DJEN',
       tag: 'DJEN',
-      keywords: ['djen', 'diário da justiça eletrônico', 'diario da justica']
+      keywords: ['djen', 'diÃ¡rio da justiÃ§a eletrÃ´nico', 'diÃ¡rio da justica']
     },
     {
       id: 'ATP',
       label: 'ATP',
       tag: 'ATP',
-      keywords: ['atp', 'automatização', 'automacao', 'regra de atp', 'regra de automatização']
+      keywords: ['atp', 'automatizaÃ§Ã£o', 'automaÃ§Ã£o', 'regra de atp', 'regra de automatizaÃ§Ã£o']
     },
     {
       id: 'LOGIN',
@@ -99,7 +99,7 @@
 
     const label = doc.createElement('span');
     label.className = 'smax-qf-label';
-    label.textContent = 'Filtros rápidos:';
+    label.textContent = 'Filtros rï¿½pidos:';
     bar.appendChild(label);
 
     QUICK_FILTERS.forEach(f => {
@@ -178,7 +178,7 @@
     const start = () => {
       buildBar();
       debouncedApply();
-      console.log('[SMAX filters] módulo de filtros rápidos carregado');
+      console.log('[SMAX filters] mÃ³dulo de filtros rÃ¡pidos carregado');
     };
 
     if (doc.readyState === 'loading') {

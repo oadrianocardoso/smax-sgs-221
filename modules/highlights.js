@@ -11,10 +11,10 @@
     amarelo: {
       cls:'tmx-hl-yellow',
       whole:[
-        'jurisprudÃªncia','jurisprudencia','distribuidor','acessar','DJEN','DiÃ¡rio EletrÃ´nico',
-        'automatizaÃ§Ã£o','ceman','Central de Mandados','mandado','mandados','movimentar',
+        'jurisprudência','jurisprudencia','distribuidor','acessar','DJEN','Diário Eletrônico',
+        'automatização','ceman','Central de Mandados','mandado','mandados','movimentar',
         'dois fatores','Renajud','Sisbajud','Autenticador','carta','evento','cadastro',
-        'automaÃ§Ã£o','automaÃ§Ãµes','migrar','migrador','migraÃ§Ã£o','perito','perita',
+        'automação','automações','migrar','migrador','migração','perito','perita',
         'localizadores','localizador'
       ],
       substr:['acess','mail'],
@@ -25,17 +25,17 @@
       whole:[
         'ERRO_AGENDAMENTO_EVENTO','ERRO_ENVIO_INTIMACAO_DJEN','ERRO_ENVIO_INTIMAÃ‡ÃƒO_DJEN',
         'Item 04 do Comunicado 435/2025','Erro ao gerar o Documento ComprobatÃ³rio Renajud',
-        'Cookie not found','Urgente','urgÃªncia','PlantÃ£o'
+        'Cookie not found','Urgente','urgência','plantão'
       ],
-      substr:['erro','errado','rÃ©u revel','help_outline'],
+      substr:['erro','errado','réy revel','help_outline'],
       custom:[]
     },
     verde:{
       cls:'tmx-hl-green',
       whole:[
-        'taxa','taxas','custa','custas','restituir','restituiÃ§Ã£o','guia','diligÃªncia',
-        'diligencia','justiÃ§a gratuÃ­ta','parcelamento','parcelamento das custas',
-        'desvincular','desvinculaÃ§Ã£o'
+        'taxa','taxas','custa','custas','restituir','restituição','guia','diligência',
+        'diligencia','justiça gratuíta','parcelamento','parcelamento das custas',
+        'desvincular','desvinculação'
       ],
       substr:[],
       custom:[]
