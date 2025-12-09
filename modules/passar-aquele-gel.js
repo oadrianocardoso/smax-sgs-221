@@ -22,26 +22,97 @@
     var ICON_POS_QUOTE     = '0 -192px'; // ícone de Citação (blockquote)
     var QUICK_ICONS = ['✅','⚠️','❗','ℹ️','💡','👉','📝','🔎','📌','🚨'];
 
-    function pickIconViaPrompt() {
-      var msg = 'Escolha um ícone para inserir:\n\n';
-      msg += '1) ✅  (OK / sucesso)\n';
-      msg += '2) ⚠️  (atenção / alerta)\n';
-      msg += '3) ❗  (importante)\n';
-      msg += '4) ℹ️  (informação)\n';
-      msg += '5) 💡  (dica / ideia)\n';
-      msg += '6) 👉  (apontar item)\n';
-      msg += '7) 📝  (anotação)\n';
-      msg += '8) 🔎  (consulta / pesquisa)\n';
-      msg += '9) 📌  (destaque / fixar)\n';
-      msg += '10) 🚨 (urgente)\n\n';
-      msg += 'Digite o número do ícone desejado (ou deixe vazio para cancelar):';
+    // Insere o ícone no editor usando as mesmas estratégias já usadas antes
+    function insertIconToEditor(editor, chosen) {
+      try {
+        if (!chosen) return;
+        if (typeof editor.insertHtml === 'function') {
+          editor.insertHtml(chosen + ' ');
+        } else if (typeof editor.insertText === 'function') {
+          editor.insertText(chosen + ' ');
+        } else {
+          var html = editor.getData() || '';
+          editor.setData(html + chosen + ' ');
+          if (typeof editor.updateElement === 'function') editor.updateElement();
+        }
+      } catch (err) {
+        console.error('[CKE GEL] insertIconToEditor falhou:', err);
+      }
+    }
 
-      var answer = (root && root.window && root.window.prompt) ? root.window.prompt(msg, '1') : window.prompt(msg, '1');
-      if (!answer) return null;
+    // Cria um popup de seleção de ícones (dropdown) similar ao botão de bgcolor
+    function createIconPickerPopup(editor, anchorBtn, iconBtnId) {
+      try {
+        var menuId = iconBtnId + '_menu';
+        // evita recriar
+        var existing = document.getElementById(menuId);
+        if (existing) return existing;
 
-      var idx = parseInt(answer, 10);
-      if (isNaN(idx) || idx < 1 || idx > QUICK_ICONS.length) return null;
-      return QUICK_ICONS[idx - 1];
+        var menu = document.createElement('div');
+        menu.id = menuId;
+        menu.setAttribute('role', 'listbox');
+        menu.style.position = 'absolute';
+        menu.style.zIndex = 99999;
+        menu.style.background = '#fff';
+        menu.style.border = '1px solid #ccc';
+        menu.style.padding = '6px';
+        menu.style.display = 'none';
+        menu.style.boxShadow = '0 2px 6px rgba(0,0,0,0.2)';
+        menu.style.borderRadius = '2px';
+        menu.style.whiteSpace = 'nowrap';
+
+        // cria botões
+        for (var i = 0; i < QUICK_ICONS.length; i++) {
+          (function (ico) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.setAttribute('role', 'option');
+            b.style.margin = '2px';
+            b.style.padding = '4px 6px';
+            b.style.fontSize = '16px';
+            b.style.cursor = 'pointer';
+            b.style.border = '1px solid transparent';
+            b.style.background = 'transparent';
+            b.textContent = ico;
+            b.addEventListener('click', function (ev) {
+              ev.preventDefault();
+              try {
+                insertIconToEditor(editor, ico);
+              } catch (e) { console.error(e); }
+              menu.style.display = 'none';
+            });
+            menu.appendChild(b);
+          })(QUICK_ICONS[i]);
+        }
+
+        document.body.appendChild(menu);
+
+        // positionador simples
+        function openMenu() {
+          try {
+            var rect = anchorBtn.getBoundingClientRect();
+            menu.style.display = 'block';
+            // posiciona abaixo do botão
+            menu.style.left = (rect.left + window.pageXOffset) + 'px';
+            menu.style.top = (rect.bottom + window.pageYOffset + 4) + 'px';
+          } catch (e) {}
+        }
+
+        // fecha ao clicar fora
+        function onDocClick(e) {
+          if (!menu.contains(e.target) && e.target !== anchorBtn && !anchorBtn.contains(e.target)) {
+            menu.style.display = 'none';
+          }
+        }
+        document.addEventListener('click', onDocClick);
+
+        // anexa função utilitária ao menu para abrir
+        menu.openMenu = openMenu;
+        return menu;
+      } catch (err) {
+        console.error('[CKE GEL] createIconPickerPopup falhou:', err);
+        return null;
+      }
     }
 
     function configureIconButtonAppearance(btn, iconId) {
