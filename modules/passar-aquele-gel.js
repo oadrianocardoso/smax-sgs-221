@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Passar aquele GEL! (+ Citação)
 // @namespace    https://github.com/oadrianocardoso
-// @version      5.0
+// @version      5.5
 // @description  Adiciona um botão "Formatar" e um botão "Citação" na barra de ferramentas de todas as instâncias CKEditor (plCkeditorX), aplicando ajuste em <p> e <img> via getData/setData e permitindo aplicar blockquote com um clique, sem quebrar outros scripts (ES5 only).
 // @author       ADRIANO / ChatGPT
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -20,6 +20,58 @@
     var ICON_URL           = 'https://suporte.tjsp.jus.br/v30/lib/ckeditor/prod/plugins/icons.png?t=O0B2';
     var ICON_POS_FORMATAR  = '0 -528px'; // bandeirinha (GEL)
     var ICON_POS_QUOTE     = '0 -192px'; // ícone de Citação (blockquote)
+    var QUICK_ICONS = ['✅','⚠️','❗','ℹ️','💡','👉','📝','🔎','📌','🚨'];
+
+    function pickIconViaPrompt() {
+      var msg = 'Escolha um ícone para inserir:\n\n';
+      msg += '1) ✅  (OK / sucesso)\n';
+      msg += '2) ⚠️  (atenção / alerta)\n';
+      msg += '3) ❗  (importante)\n';
+      msg += '4) ℹ️  (informação)\n';
+      msg += '5) 💡  (dica / ideia)\n';
+      msg += '6) 👉  (apontar item)\n';
+      msg += '7) 📝  (anotação)\n';
+      msg += '8) 🔎  (consulta / pesquisa)\n';
+      msg += '9) 📌  (destaque / fixar)\n';
+      msg += '10) 🚨 (urgente)\n\n';
+      msg += 'Digite o número do ícone desejado (ou deixe vazio para cancelar):';
+
+      var answer = (root && root.window && root.window.prompt) ? root.window.prompt(msg, '1') : window.prompt(msg, '1');
+      if (!answer) return null;
+
+      var idx = parseInt(answer, 10);
+      if (isNaN(idx) || idx < 1 || idx > QUICK_ICONS.length) return null;
+      return QUICK_ICONS[idx - 1];
+    }
+
+    function configureIconButtonAppearance(btn, iconId) {
+      if (!btn) return;
+      try {
+        btn.id = iconId;
+        btn.classList.remove('cke_button_disabled');
+        btn.removeAttribute('aria-disabled');
+        btn.setAttribute('aria-disabled', 'false');
+        btn.classList.add('cke_button_off');
+        btn.setAttribute('href', 'javascript:void(0)');
+        btn.setAttribute('title', 'Inserir ícone');
+
+        var label = btn.querySelector('.cke_button_label');
+        if (label) {
+          label.id = iconId + '_label';
+          label.textContent = 'Ícone';
+        }
+
+        var icon = btn.querySelector('.cke_button_icon');
+        if (icon) {
+          icon.className = icon.className.replace(/__\w+_icon/, '__iconpicker_icon');
+          icon.style.backgroundImage = 'url("' + ICON_URL + '")';
+          icon.style.backgroundPosition = ICON_POS_QUOTE;
+          icon.style.backgroundSize = 'auto';
+        }
+      } catch (err) {
+        console.error('[CKE GEL] configureIconButtonAppearance falhou:', err);
+      }
+    }
 
     function getButtonIdForEditor(editor) {
       return CUSTOM_BTN_ID_BASE + '_' + editor.name;
@@ -139,48 +191,81 @@
         }
 
         // ======================
-        // 2) BOTÃO "Formatar"
+        // 2) BOTÃO "Formatar" +  ÍCONE à ESQUERDA
         // ======================
         var formatBtn = container.querySelector('#' + btnId);
+        var iconBtnId = btnId + '_iconpicker';
+        var iconBtn = container.querySelector('#' + iconBtnId);
 
         if (!formatBtn && quoteBtn) {
           formatBtn = quoteBtn.cloneNode(true);
-
           formatBtn.removeAttribute('onclick');
           formatBtn.removeAttribute('onkeydown');
           formatBtn.removeAttribute('onfocus');
-
           configureButtonAppearance(formatBtn, btnId);
 
-          formatBtn.addEventListener('click', function (e) {
+          // cria o botão de ícone (não inserido ainda)
+          iconBtn = quoteBtn.cloneNode(true);
+          iconBtn.removeAttribute('onclick');
+          iconBtn.removeAttribute('onkeydown');
+          iconBtn.removeAttribute('onfocus');
+          configureIconButtonAppearance(iconBtn, iconBtnId);
+
+          // handler do botão de ícone: abre prompt e insere no editor
+          iconBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            console.log('[CKE GEL] Clique no botão de formatação para editor:', editor.name);
-
             try {
-              var html = editor.getData() || '';
-
-              html = html.replace(
-                /<p(?![^>]*\bstyle=)([^>]*)>/gi,
-                '<p style="margin-bottom: 1em;"$1>'
-              );
-
-              html = html.replace(
-                /<img(?![^>]*\bstyle=)([^>]*?)\/?\>/gi,
-                '<img style="border: 3px solid #000;"$1>'
-              );
-
-              editor.setData(html);
-              if (typeof editor.updateElement === 'function') {
-                editor.updateElement();
+              var chosen = pickIconViaPrompt();
+              if (!chosen) return;
+              if (typeof editor.insertHtml === 'function') {
+                editor.insertHtml(chosen + ' ');
+              } else if (typeof editor.insertText === 'function') {
+                editor.insertText(chosen + ' ');
+              } else {
+                // fallback: append ao conteúdo
+                var html = editor.getData() || '';
+                editor.setData(html + chosen + ' ');
+                if (typeof editor.updateElement === 'function') editor.updateElement();
               }
             } catch (err) {
-              console.error('[CKE GEL] Erro no handler de formatação:', err);
+              console.error('[CKE GEL] Erro ao inserir ícone:', err);
             }
           });
 
+          // insere os botões: quoteBtn -> iconBtn -> formatBtn
           quoteBtn.parentNode.insertBefore(formatBtn, quoteBtn.nextSibling);
+          formatBtn.parentNode.insertBefore(iconBtn, formatBtn);
         } else {
+          // se formatBtn já existe, garante que o iconBtn exista e esteja configurado
           configureButtonAppearance(formatBtn, btnId);
+          if (!iconBtn && formatBtn && formatBtn.parentNode) {
+            iconBtn = formatBtn.cloneNode(true);
+            iconBtn.removeAttribute('onclick');
+            iconBtn.removeAttribute('onkeydown');
+            iconBtn.removeAttribute('onfocus');
+            configureIconButtonAppearance(iconBtn, iconBtnId);
+            iconBtn.addEventListener('click', function (e) {
+              e.preventDefault();
+              try {
+                var chosen = pickIconViaPrompt();
+                if (!chosen) return;
+                if (typeof editor.insertHtml === 'function') {
+                  editor.insertHtml(chosen + ' ');
+                } else if (typeof editor.insertText === 'function') {
+                  editor.insertText(chosen + ' ');
+                } else {
+                  var html = editor.getData() || '';
+                  editor.setData(html + chosen + ' ');
+                  if (typeof editor.updateElement === 'function') editor.updateElement();
+                }
+              } catch (err) {
+                console.error('[CKE GEL] Erro ao inserir ícone:', err);
+              }
+            });
+            formatBtn.parentNode.insertBefore(iconBtn, formatBtn);
+          } else if (iconBtn) {
+            configureIconButtonAppearance(iconBtn, iconBtnId);
+          }
         }
 
       } catch (e) {
