@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Passar aquele GEL! (+ Citação)
 // @namespace    https://github.com/oadrianocardoso
-// @version      4.5
+// @version      4.6
 // @description  Adiciona um botão "Formatar" e um botão "Citação" em todas as instâncias CKEditor, aplicando ajuste em <p> e <img> de forma segura (getData/setData).
 // @author       ADRIANO / ChatGPT
 // @match        https://suporte.tjsp.jus.br/saw/*
