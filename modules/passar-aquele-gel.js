@@ -152,6 +152,15 @@
             // falha silenciosa
           }
         }
+        // deixa o botão com aparência expansível (seta) como o bgcolor
+        try {
+          btn.classList.add('cke_button_expandable');
+          if (!btn.querySelector('.cke_button_arrow')) {
+            var arr = document.createElement('span');
+            arr.className = 'cke_button_arrow';
+            btn.appendChild(arr);
+          }
+        } catch (e) {}
       } catch (err) {
         console.error('[CKE GEL] configureIconButtonAppearance falhou:', err);
       }
