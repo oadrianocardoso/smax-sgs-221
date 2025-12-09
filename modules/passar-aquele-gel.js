@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Passar aquele GEL! (+ Citação)
 // @namespace    https://github.com/oadrianocardoso
-// @version      5.8
+// @version      5.9
 // @description  Adiciona um botão "Formatar" e um botão "Citação" na barra de ferramentas de todas as instâncias CKEditor (plCkeditorX), aplicando ajuste em <p> e <img> via getData/setData e permitindo aplicar blockquote com um clique, sem quebrar outros scripts (ES5 only).
 // @author       ADRIANO / ChatGPT
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -20,7 +20,18 @@
     var ICON_URL           = 'https://suporte.tjsp.jus.br/v30/lib/ckeditor/prod/plugins/icons.png?t=O0B2';
     var ICON_POS_FORMATAR  = '0 -528px'; // bandeirinha (GEL)
     var ICON_POS_QUOTE     = '0 -192px'; // ícone de Citação (blockquote)
-    var QUICK_ICONS = ['✅','⚠️','❗','ℹ️','💡','👉','📝','🔎','📌','🚨'];
+    var QUICK_ICONS = [
+      '✅','⚠️','❗','ℹ️','💡','👉','📝','🔎','📌','🚨',
+      '🔥','⭐','✨','⚙️','🛠️','📎','🔗','🧾','🗂️','📁',
+      '📄','🧠','🧭','📅','🕒','⏳','🧪','🧬','🧯','🧰',
+      '🧱','🛡️','🧷','🧵','🧶','💬','🗨️','🏷️','🔔','🔕',
+      '📢','📣','🎯','🏆','🏅','🥇','💯','➕','➖','✖️',
+      '➗','🔁','🔀','🔂','🔄','🔃','🔍','🔎','📝','📌',
+      '📍','📎','🖇️','🔒','🔓','🔑','🧾','📊','📈','📉',
+      '📋','📎','📚','📖','🔖','🕮','🗒️','🗓️','📆','📇',
+      '🔆','🔅','🌟','💫','💥','🎉','🎊','🎈','🎁','🎗️',
+      '💡','🔦','🏮','🕯️','🔌','🔋','⚡','☑️','✔️','🔘'
+    ];
 
     // Insere o ícone no editor usando as mesmas estratégias já usadas antes
     function insertIconToEditor(editor, chosen) {
@@ -61,18 +72,27 @@
         menu.style.borderRadius = '2px';
         menu.style.whiteSpace = 'nowrap';
 
-        // cria botões
+        // cria botões em grade 10x10
+        menu.style.display = 'none';
+        menu.style.gridTemplateColumns = 'repeat(10, 28px)';
+        menu.style.display = 'none';
+        menu.style.gap = '4px';
+        menu.style.alignItems = 'center';
         for (var i = 0; i < QUICK_ICONS.length; i++) {
           (function (ico) {
             var b = document.createElement('button');
             b.type = 'button';
             b.setAttribute('role', 'option');
-            b.style.margin = '2px';
-            b.style.padding = '4px 6px';
+            b.style.width = '28px';
+            b.style.height = '28px';
+            b.style.margin = '0';
+            b.style.padding = '0';
             b.style.fontSize = '16px';
+            b.style.lineHeight = '28px';
             b.style.cursor = 'pointer';
             b.style.border = '1px solid transparent';
             b.style.background = 'transparent';
+            b.style.textAlign = 'center';
             b.textContent = ico;
             b.addEventListener('click', function (ev) {
               ev.preventDefault();
@@ -147,7 +167,7 @@
             icon.style.textAlign = 'center';
             icon.style.padding = '0';
             // conteúdo visível padrão para o botão de ícone
-            icon.textContent = '🔣';
+            icon.textContent = '💡';
           } catch (e) {
             // falha silenciosa
           }
