@@ -111,7 +111,8 @@
         function openMenu() {
           try {
             var rect = anchorBtn.getBoundingClientRect();
-            menu.style.display = 'block';
+            // usar grid para respeitar gridTemplateColumns (10x10)
+            menu.style.display = 'grid';
             // posiciona abaixo do botão
             menu.style.left = (rect.left + window.pageXOffset) + 'px';
             menu.style.top = (rect.bottom + window.pageYOffset + 4) + 'px';
