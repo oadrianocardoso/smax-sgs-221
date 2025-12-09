@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Passar aquele GEL! (+ Citação)
 // @namespace    https://github.com/oadrianocardoso
-// @version      5.5
+// @version      5.6
 // @description  Adiciona um botão "Formatar" e um botão "Citação" na barra de ferramentas de todas as instâncias CKEditor (plCkeditorX), aplicando ajuste em <p> e <img> via getData/setData e permitindo aplicar blockquote com um clique, sem quebrar outros scripts (ES5 only).
 // @author       ADRIANO / ChatGPT
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -63,10 +63,23 @@
 
         var icon = btn.querySelector('.cke_button_icon');
         if (icon) {
-          icon.className = icon.className.replace(/__\w+_icon/, '__iconpicker_icon');
-          icon.style.backgroundImage = 'url("' + ICON_URL + '")';
-          icon.style.backgroundPosition = ICON_POS_QUOTE;
-          icon.style.backgroundSize = 'auto';
+          // Exibir emoji diretamente (evita sprite invisível)
+          try {
+            icon.className = icon.className.replace(/__\w+_icon/, '__iconpicker_icon');
+          } catch (e) {}
+          try {
+            icon.style.backgroundImage = 'none';
+            icon.style.backgroundPosition = '';
+            icon.style.backgroundSize = '';
+            icon.style.fontSize = '16px';
+            icon.style.lineHeight = '18px';
+            icon.style.textAlign = 'center';
+            icon.style.padding = '0';
+            // conteúdo visível padrão para o botão de ícone
+            icon.textContent = '🔣';
+          } catch (e) {
+            // falha silenciosa
+          }
         }
       } catch (err) {
         console.error('[CKE GEL] configureIconButtonAppearance falhou:', err);
@@ -186,6 +199,23 @@
           });
 
           lastGroup.appendChild(quoteBtn);
+          // Observador para garantir reinserção caso a toolbar seja reconstruída
+          try {
+            if (typeof MutationObserver !== 'undefined' && !lastGroup._ckeGelObserver) {
+              lastGroup._ckeGelObserver = true;
+              var mo = new MutationObserver(function (mutations) {
+                // atraso pequeno para evitar loops durante mutações em lote
+                setTimeout(function () {
+                  try {
+                    addCustomButtonForEditor(editor);
+                  } catch (e) {
+                    console.error('[CKE GEL] reinserção via MutationObserver falhou:', e);
+                  }
+                }, 100);
+              });
+              try { mo.observe(lastGroup, { childList: true }); } catch (e) {}
+            }
+          } catch (e) {}
         } else {
           configureQuoteButtonAppearance(quoteBtn, quoteId);
         }
