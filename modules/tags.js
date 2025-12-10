@@ -9,17 +9,71 @@
 
   const AID_DESCRICAO = 'grid_header_Description';
 
+  // =========================
+  // CSS ESPECÍFICO DO MÓDULO
+  // =========================
+
+  let cssInitialized = false;
+
+  function ensureCss() {
+    if (cssInitialized) return;
+    cssInitialized = true;
+
+    if (typeof GM_addStyle !== 'function') {
+      console.warn('[SMAX tags] GM_addStyle não disponível.');
+      return;
+    }
+
+    GM_addStyle(`
+      .tag-smax, .tag-smax * {
+        all: unset !important;
+      }
+
+      .tag-smax {
+        display: inline-block !important;
+        background: #e0e0e0 !important;
+        color: #000 !important;
+        font-weight: 700 !important;
+        border-radius: 3px !important;
+        padding: 0 4px !important;
+        margin-right: 4px !important;
+        white-space: nowrap !important;
+        font-size: inherit !important;
+        font-family: inherit !important;
+        line-height: inherit !important;
+        text-decoration: none !important;
+      }
+
+      .tag-smax [class^="tmx-hl-"],
+      .tag-smax [class*=" tmx-hl-"] {
+        all: unset !important;
+        background: none !important;
+        color: inherit !important;
+      }
+    `);
+  }
+
+  // =========================
+  // REGRAS DE AUTO-TAG (UTF-8 OK)
+  // =========================
+
   const AUTO_TAG_RULES = [
-    { palavras:["mandado","oficial de justiça","central de mandos"], tag:"CEMAN" },
-    { palavras:["custas","taxa","diligência","diligências"],        tag:"CUSTAS" },
-    { palavras:["atp","automatização","automação","regra"],         tag:"ATP" },
-    { palavras:["cadastrar","cadastro"],                            tag:"CADASTROS" },
-    { palavras:["acesso","login","acessar","fatores","autenticador","autenticação","authenticator","senha"], tag:"LOGIN" },
-    { palavras:["Migrado","Migrados","Migração","Migrador","migrar"], tag:"MIGRADOR" },
-    { palavras:["Carta","Cartas"],                                  tag:"CORREIOS" },
-    { palavras:["DJEN"],                                            tag:"DJEN" },
-    { palavras:["Renajud","Sisbajud"],                              tag:"ACIONAMENTOS" },
-    { palavras:["Distribuição","Redistribuir","Remeter"],           tag:"DISTRIBUIÇÃO" },
+    { palavras:["mandado","oficial de justiça","central de mandados"], tag:"CEMAN" },
+    { palavras:["custas","taxa","diligência","diligências"],          tag:"CUSTAS" },
+    { palavras:["atp","automatização","automação","regra"],           tag:"ATP" },
+    { palavras:["cadastrar","cadastro"],                              tag:"CADASTROS" },
+    {
+      palavras:[
+        "acesso","login","acessar","fatores",
+        "autenticador","autenticação","authenticator","senha"
+      ],
+      tag:"LOGIN"
+    },
+    { palavras:["migrado","migrados","migração","migrador","migrar"], tag:"MIGRADOR" },
+    { palavras:["carta","cartas"],                                    tag:"CORREIOS" },
+    { palavras:["DJEN"],                                              tag:"DJEN" },
+    { palavras:["Renajud","Sisbajud"],                                tag:"ACIONAMENTOS" },
+    { palavras:["distribuição","redistribuir","remeter"],             tag:"DISTRIBUIÇÃO" }
   ];
 
   function getColumnSelectorByHeaderAid(aid) {
@@ -38,6 +92,7 @@
 
   function tagDescriptionCellOnce(el) {
     if (el.dataset.smaxTagged === '1') return;
+
     const plain = el.textContent?.trim();
     if (!plain) return;
 
@@ -59,6 +114,10 @@
 
   function applyAutoTagsInDescription() {
     if (!prefs.autoTagsOn) return;
+
+    // garante que o CSS da tag está carregado
+    ensureCss();
+
     const colSel = getColumnSelectorByHeaderAid(AID_DESCRICAO);
     if (!colSel) return;
 

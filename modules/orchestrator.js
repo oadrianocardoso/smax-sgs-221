@@ -31,7 +31,7 @@
     const doc = root.document;
 
     try {
-      SMAX.css        && SMAX.css.init        && SMAX.css.init();
+      // CSS agora está dentro de cada módulo, então não chamamos mais SMAX.css.init()
       SMAX.comments   && SMAX.comments.init   && SMAX.comments.init();
       SMAX.sections   && SMAX.sections.init   && SMAX.sections.init();
       SMAX.detratores && SMAX.detratores.init && SMAX.detratores.init();
@@ -52,7 +52,11 @@
 
     const headerEl = doc.querySelector('.slick-header-columns') || doc.body;
     const obsHeader = new MutationObserver(() => scheduleRunAll());
-    obsHeader.observe(headerEl, { childList:true, subtree:true, attributes:true });
+    obsHeader.observe(headerEl, {
+      childList:true,
+      subtree:true,
+      attributes:true
+    });
 
     root.addEventListener('scroll', scheduleRunAll, true);
     root.addEventListener('resize', scheduleRunAll, { passive:true });

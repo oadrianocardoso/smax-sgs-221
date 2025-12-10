@@ -3,6 +3,56 @@
 
   const SMAX = root.SMAX = root.SMAX || {};
 
+  // =========================
+  // CSS ESPECÍFICO DO MÓDULO
+  // =========================
+
+  let cssInitialized = false;
+
+  function ensureCss() {
+    if (cssInitialized) return;
+    cssInitialized = true;
+
+    if (typeof GM_addStyle !== 'function') {
+      console.warn('[SMAX attachments] GM_addStyle não disponível.');
+      return;
+    }
+
+    GM_addStyle(`
+      .tmPreviewModal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.75);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999999;
+      }
+
+      .tmPreviewClose {
+        position: fixed;
+        top: 20px;
+        right: 30px;
+        font-size: 30px;
+        color: #fff;
+        cursor: pointer;
+        z-index: 1000000;
+      }
+
+      .tmPreviewImg {
+        max-width: 90%;
+        max-height: 90%;
+        border: 3px solid #fff;
+        box-shadow: 0 0 20px #000;
+        background: #fff;
+      }
+    `);
+  }
+
+  // =========================
+  // LÓGICA DO MÓDULO
+  // =========================
+
   function moveAttachmentsIntoForm() {
     const doc = root.document;
     const attachments = doc.querySelector('div.pl-entity-page-component[data-aid="attachments"]');
@@ -48,6 +98,7 @@
       if (link._tmPreviewBound) return;
       link._tmPreviewBound = true;
 
+      // não força download, vamos abrir/preview
       link.removeAttribute('download');
 
       const name    = (link.textContent || '').trim().toLowerCase();
@@ -76,6 +127,7 @@
             return;
           }
 
+          // fallback para outros tipos de arquivo
           root.open(link.href, '_blank');
         } catch (err) {
           alert('Erro ao abrir anexo: ' + err);
@@ -85,6 +137,9 @@
   }
 
   function apply() {
+    // garante CSS carregado
+    ensureCss();
+
     moveAttachmentsIntoForm();
     wirePreviewLinks();
   }

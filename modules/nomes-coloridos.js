@@ -6,7 +6,7 @@
   const prefs  = CONFIG.prefs || { nameBadgesOn: true };
 
   // =========================
-  // CONFIG LOCAL DO M�DULO
+  // CONFIG LOCAL DO MÓDULO
   // =========================
 
   const NAME_GROUPS = {
@@ -48,7 +48,40 @@
   const AUSENTES = ["ISA"];
 
   // =========================
-  // L�GICA DO M�DULO
+  // CSS ESPECÍFICO DO MÓDULO
+  // =========================
+
+  let cssInitialized = false;
+
+  function ensureCss() {
+    if (cssInitialized) return;
+    cssInitialized = true;
+
+    if (typeof GM_addStyle !== 'function') {
+      console.warn('[SMAX badges] GM_addStyle não disponível.');
+      return;
+    }
+
+    GM_addStyle(`
+      .slick-cell.tmx-namecell {
+        font-weight:700 !important;
+        transition: box-shadow .15s ease;
+      }
+      .slick-cell.tmx-namecell a {
+        color: inherit !important;
+      }
+      .slick-cell.tmx-namecell:focus-within {
+        outline: 2px solid rgba(0,0,0,.25);
+        outline-offset: 2px;
+      }
+      .slick-cell.tmx-namecell:hover {
+        box-shadow: 0 0 0 2px rgba(0,0,0,.08) inset;
+      }
+    `);
+  }
+
+  // =========================
+  // LÓGICA DO MÓDULO
   // =========================
 
   const NAME_MARK_ATTR = 'adMarcado';
@@ -118,6 +151,9 @@
 
   function applyNameBadges() {
     if (!prefs.nameBadgesOn) return;
+
+    // garante CSS carregado
+    ensureCss();
 
     pickAllLinks().forEach(link => {
       if (!link || processedLinks.has(link)) return;
@@ -198,6 +234,6 @@
     setConfig
   };
 
-  console.log('[SMAX badges] m�dulo carregado (config local + get/setConfig)');
+  console.log('[SMAX badges] módulo carregado (config local + get/setConfig)');
 
 })(typeof unsafeWindow !== 'undefined' ? unsafeWindow : window);

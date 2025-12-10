@@ -7,50 +7,82 @@
   const utils  = SMAX.utils  || {};
   const { getGridViewport, escapeReg } = utils;
 
+  // ==========================
+  // CSS ESPECÃFICO DO MÃ“DULO
+  // ==========================
+  let cssInitialized = false;
+
+  function ensureCss() {
+    if (cssInitialized) return;
+    cssInitialized = true;
+
+    if (typeof GM_addStyle !== 'function') {
+      console.warn('[SMAX.highlights] GM_addStyle nÃ£o disponÃ­vel.');
+      return;
+    }
+
+    GM_addStyle(`
+      .tmx-hl-yellow { background:#ffeb3b; color:#000; font-weight:700; border-radius:5px; padding:0 .14em; }
+      .tmx-hl-red    { background:#d32f2f; color:#fff; font-weight:700; border-radius:3px; padding:0 .16em; }
+      .tmx-hl-green  { background:#2e7d32; color:#fff; font-weight:700; border-radius:3px; padding:0 .14em; }
+      .tmx-hl-blue   { background:#1e88e5; color:#fff; font-weight:700; border-radius:3px; padding:0 .14em; }
+      .tmx-hl-pink   { background:#FC0FC0; color:#000; font-weight:700; border-radius:3px; padding:0 .14em; }
+
+      .tmx-juizdireito-hit {
+        background:#1e88e5 !important;
+        color:#fff !important;
+        font-weight:700 !important;
+      }
+    `);
+  }
+
+  // ==========================
+  // LISTAS DE HIGHLIGHT (UTF-8 OK)
+  // ==========================
   const HL_GROUPS = {
     amarelo: {
-      cls:'tmx-hl-yellow',
-      whole:[
-        'jurisprudência','jurisprudencia','distribuidor','acessar','DJEN','Diário Eletrônico',
-        'automatização','ceman','Central de Mandados','mandado','mandados','movimentar',
+      cls: 'tmx-hl-yellow',
+      whole: [
+        'jurisprudÃªncia','jurisprudencia','distribuidor','acessar','DJEN','DiÃ¡rio EletrÃ´nico',
+        'automatizaÃ§Ã£o','ceman','Central de Mandados','mandado','mandados','movimentar',
         'dois fatores','Renajud','Sisbajud','Autenticador','carta','evento','cadastro',
-        'automação','automações','migrar','migrador','migração','perito','perita',
+        'automaÃ§Ã£o','automaÃ§Ãµes','migrar','migrador','migraÃ§Ã£o','perito','perita',
         'localizadores','localizador'
       ],
-      substr:['acess','mail'],
-      custom:[]
+      substr: ['acess','mail'],
+      custom: []
     },
-    vermelho:{
-      cls:'tmx-hl-red',
-      whole:[
+    vermelho: {
+      cls: 'tmx-hl-red',
+      whole: [
         'ERRO_AGENDAMENTO_EVENTO','ERRO_ENVIO_INTIMACAO_DJEN','ERRO_ENVIO_INTIMAÃ‡ÃƒO_DJEN',
         'Item 04 do Comunicado 435/2025','Erro ao gerar o Documento ComprobatÃ³rio Renajud',
-        'Cookie not found','Urgente','urgência','plantão'
+        'Cookie not found','Urgente','urgÃªncia','plantÃ£o'
       ],
-      substr:['erro','errado','réy revel','help_outline'],
-      custom:[]
+      substr: ['erro','errado','rÃ©u revel','help_outline'],
+      custom: []
     },
-    verde:{
-      cls:'tmx-hl-green',
-      whole:[
-        'taxa','taxas','custa','custas','restituir','restituição','guia','diligência',
-        'diligencia','justiça gratuíta','parcelamento','parcelamento das custas',
-        'desvincular','desvinculação'
+    verde: {
+      cls: 'tmx-hl-green',
+      whole: [
+        'taxa','taxas','custa','custas','restituir','restituiÃ§Ã£o','guia','diligÃªncia',
+        'diligencia','justiÃ§a gratuita','parcelamento','parcelamento das custas',
+        'desvincular','desvinculaÃ§Ã£o'
       ],
-      substr:[],
-      custom:[]
+      substr: [],
+      custom: []
     },
-    azul:{
-      cls:'tmx-hl-blue',
-      whole:['magistrado','magistrada'],
-      substr:[],
-      custom:[/\bju[iÃ­]z(?:es|a)?\b/giu]
+    azul: {
+      cls: 'tmx-hl-blue',
+      whole: ['magistrado','magistrada'],
+      substr: [],
+      custom: [/\bju[iÃ­]z(?:es|a)?\b/giu]
     },
-    rosa:{
-      cls:'tmx-hl-pink',
-      whole:['inesperado'],
-      substr:[],
-      custom:[]
+    rosa: {
+      cls: 'tmx-hl-pink',
+      whole: ['inesperado'],
+      substr: [],
+      custom: []
     }
   };
 
@@ -76,31 +108,55 @@
     return regs;
   }
 
-  const HL_LIST    = Object.entries(HL_GROUPS).map(([name,cfg]) => ({ name, cls:cfg.cls, regexes: buildHighlightRegexes(cfg) }));
-  const HL_ORDERED = HL_LIST.slice().sort((a,b)=>HL_ORDER.indexOf(a.name)-HL_ORDER.indexOf(b.name));
+  const HL_LIST    = Object.entries(HL_GROUPS).map(([name, cfg]) => ({
+    name,
+    cls: cfg.cls,
+    regexes: buildHighlightRegexes(cfg)
+  }));
+
+  const HL_ORDERED = HL_LIST.slice().sort(
+    (a, b) => HL_ORDER.indexOf(a.name) - HL_ORDER.indexOf(b.name)
+  );
 
   function unwrapCellHighlights(rootEl) {
     (rootEl || root.document).querySelectorAll(
       '.tmx-hl-yellow, .tmx-hl-red, .tmx-hl-green, .tmx-hl-blue, .tmx-hl-pink'
-    ).forEach(span => span.replaceWith(root.document.createTextNode(span.textContent || '')));
+    ).forEach(span =>
+      span.replaceWith(root.document.createTextNode(span.textContent || ''))
+    );
   }
 
   function highlightMatchesInNode(container, regex, cls) {
     const doc = container.ownerDocument || root.document;
-    const walker = doc.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
-      acceptNode(node) {
-        const t = node.nodeValue;
-        if (!t || !t.trim()) return NodeFilter.FILTER_REJECT;
-        const pe = node.parentElement;
-        if (!pe) return NodeFilter.FILTER_REJECT;
-        if (pe.closest('input,textarea,[contenteditable],[role="button"],[aria-live]')) return NodeFilter.FILTER_REJECT;
-        const pcls = pe.classList;
-        if (pcls?.contains('tmx-hl-yellow') || pcls?.contains('tmx-hl-red') ||
-            pcls?.contains('tmx-hl-green')  || pcls?.contains('tmx-hl-blue') ||
-            pcls?.contains('tmx-hl-pink')) return NodeFilter.FILTER_REJECT;
-        return NodeFilter.FILTER_ACCEPT;
+    const walker = doc.createTreeWalker(
+      container,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode(node) {
+          const t = node.nodeValue;
+          if (!t || !t.trim()) return NodeFilter.FILTER_REJECT;
+          const pe = node.parentElement;
+          if (!pe) return NodeFilter.FILTER_REJECT;
+
+          if (pe.closest('input,textarea,[contenteditable],[role="button"],[aria-live]')) {
+            return NodeFilter.FILTER_REJECT;
+          }
+
+          const pcls = pe.classList;
+          if (
+            pcls?.contains('tmx-hl-yellow') ||
+            pcls?.contains('tmx-hl-red')   ||
+            pcls?.contains('tmx-hl-green') ||
+            pcls?.contains('tmx-hl-blue')  ||
+            pcls?.contains('tmx-hl-pink')
+          ) {
+            return NodeFilter.FILTER_REJECT;
+          }
+
+          return NodeFilter.FILTER_ACCEPT;
+        }
       }
-    });
+    );
 
     const nodes = [];
     for (let n; (n = walker.nextNode()); ) nodes.push(n);
@@ -113,35 +169,46 @@
       const frag = doc.createDocumentFragment();
       let last = 0, m;
       while ((m = regex.exec(text)) !== null) {
-        if (m.index > last) frag.appendChild(doc.createTextNode(text.slice(last, m.index)));
+        if (m.index > last) {
+          frag.appendChild(doc.createTextNode(text.slice(last, m.index)));
+        }
         const span = doc.createElement('span');
         span.className = cls;
         span.textContent = m[0];
         frag.appendChild(span);
         last = m.index + m[0].length;
       }
-      if (last < text.length) frag.appendChild(doc.createTextNode(text.slice(last)));
+      if (last < text.length) {
+        frag.appendChild(doc.createTextNode(text.slice(last)));
+      }
       textNode.parentNode.replaceChild(frag, textNode);
     }
   }
 
   function sweepHighlightsInCell(cell) {
     if (!prefs.highlightsOn) return;
+
     const current = (cell.textContent || '').trim();
     const last    = cell.getAttribute('data-tmx-last') || '';
     if (current === last) return;
 
     unwrapCellHighlights(cell);
+
     for (const g of HL_ORDERED) {
       for (const re of g.regexes) {
         highlightMatchesInNode(cell, re, g.cls);
       }
     }
+
     cell.setAttribute('data-tmx-last', (cell.textContent || '').trim());
   }
 
   function apply() {
     if (!prefs.highlightsOn) return;
+
+    // garante CSS carregado antes de aplicar
+    ensureCss();
+
     const scope = getGridViewport(root.document);
     scope.querySelectorAll('.slick-cell').forEach(sweepHighlightsInCell);
   }
