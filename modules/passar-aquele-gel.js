@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Passar aquele GEL! (+ Citação)
 // @namespace    https://github.com/oadrianocardoso
-// @version      6
+// @version      7.0
 // @description  Adiciona um botão "Formatar" e um botão "Citação" na barra de ferramentas de todas as instâncias CKEditor (plCkeditorX), aplicando ajuste em <p> e <img> via getData/setData e permitindo aplicar blockquote com um clique, sem quebrar outros scripts (ES5 only).
 // @author       ADRIANO / ChatGPT
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -21,16 +21,35 @@
     var ICON_POS_FORMATAR  = '0 -528px'; // bandeirinha (GEL)
     var ICON_POS_QUOTE     = '0 -192px'; // ícone de Citação (blockquote)
     var QUICK_ICONS = [
-      '✅','⚠️','❗','ℹ️','💡','👉','📝','🔎','📌','🚨',
-      '🔥','⭐','✨','⚙️','🛠️','📎','🔗','🧾','🗂️','📁',
-      '📄','🧠','🧭','📅','🕒','⏳','🧪','🧬','🧯','🧰',
-      '🧱','🛡️','🧷','🧵','🧶','💬','🗨️','🏷️','🔔','🔕',
-      '📢','📣','🎯','🏆','🏅','🥇','💯','➕','➖','✖️',
-      '➗','🔁','🔀','🔂','🔄','🔃','🔍','🔎','📝','📌',
-      '📍','📎','🖇️','🔒','🔓','🔑','🧾','📊','📈','📉',
-      '📋','📎','📚','📖','🔖','🕮','🗒️','🗓️','📆','📇',
-      '🔆','🔅','🌟','💫','💥','🎉','🎊','🎈','🎁','🎗️',
-      '💡','🔦','🏮','🕯️','🔌','🔋','⚡','☑️','✔️','🔘'
+      // 1 — ALERTA / ERRO
+      '⚠️','❗','‼️','🚨','🔥','❌','🛑','⛔','☢️','☣️',
+    
+      // 2 — AVISO / ATENÇÃO
+      '🔔','🔕','📢','📣','📯','🔊','🔉','🔈','💬','🗨️',
+    
+      // 3 — INFORMAÇÃO
+      'ℹ️','💡','📌','📍','🔎','🔍','📝','🧾','📄','📘',
+    
+      // 4 — SUCESSO / OK
+      '✅','✔️','☑️','👌','👍','🙌','🎯','🏆','🥇','💯',
+    
+      // 5 — TEMPO / STATUS
+      '⏳','⌛','🕒','🕑','🕐','🗓️','📅','🗂️','🔄','🔁',
+    
+      // 6 — PROCESSO / AÇÕES
+      '⚙️','🛠️','🔧','🔨','🧰','🔗','📎','🖇️','🧷','📌',
+    
+      // 7 — ORGANIZAÇÃO / DOCUMENTOS
+      '📁','📂','🗃️','🗄️','📊','📈','📉','📋','🗒️','📚',
+    
+      // 8 — DIREÇÃO / PASSOS
+      '👉','➡️','⬅️','⬆️','⬇️','🔜','🔙','🔛','🔝','🔚',
+    
+      // 9 — DESTAQUES / IMPORTANTE
+      '⭐','🌟','✨','💫','💥','🎉','🎊','🎈','🎗️','🎀',
+    
+      // 10 — TÉCNICO / SISTEMA
+      '💻','🖥️','🖱️','⌨️','🛡️','🔒','🔓','🔑','🧪','🧬'
     ];
 
     // Insere o ícone no editor usando as mesmas estratégias já usadas antes
@@ -335,6 +354,36 @@
           formatBtn.removeAttribute('onfocus');
           configureButtonAppearance(formatBtn, btnId);
 
+          // handler do botão Formatar: aplica alterações em <p> e <img>
+          try {
+            if (!formatBtn._ckeGelFormatHandler) {
+              formatBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                try {
+                  console.log('[CKE GEL] Formatando conteúdo no editor:', editor && editor.name);
+                  var html = editor.getData ? (editor.getData() || '') : '';
+
+                  html = html.replace(/<p(?![^>]*\bstyle=)([^>]*)>/gi, '<p style="margin-bottom: 1em;"$1>');
+
+                  html = html.replace(/<img(?![^>]*\bstyle=)([^>]*?)\/?\>/gi, '<img style="border: 3px solid #000;"$1>');
+
+                  if (typeof editor.setData === 'function') {
+                    editor.setData(html);
+                  }
+                  if (typeof editor.updateElement === 'function') {
+                    editor.updateElement();
+                  }
+                  console.log('[CKE GEL] Formatação aplicada com sucesso via setData().');
+                } catch (err) {
+                  console.error('[CKE GEL] Erro no handler de formatação:', err);
+                }
+              });
+              formatBtn._ckeGelFormatHandler = true;
+            }
+          } catch (e) {
+            console.error('[CKE GEL] Não foi possível anexar handler de formatação:', e);
+          }
+
           // cria o botão de ícone (não inserido ainda)
           iconBtn = quoteBtn.cloneNode(true);
           iconBtn.removeAttribute('onclick');
@@ -374,6 +423,33 @@
                 console.error('[CKE GEL] Erro ao abrir seletor de ícones:', err);
               }
             });
+            // garante handler de formatação caso não exista
+            try {
+              if (!formatBtn._ckeGelFormatHandler) {
+                formatBtn.addEventListener('click', function (e) {
+                  e.preventDefault();
+                  try {
+                    console.log('[CKE GEL] Formatando conteúdo no editor:', editor && editor.name);
+                    var html = editor.getData ? (editor.getData() || '') : '';
+
+                    html = html.replace(/<p(?![^>]*\bstyle=)([^>]*)>/gi, '<p style="margin-bottom: 1em;"$1>');
+
+                    html = html.replace(/<img(?![^>]*\bstyle=)([^>]*?)\/?\>/gi, '<img style="border: 3px solid #000;"$1>');
+
+                    if (typeof editor.setData === 'function') {
+                      editor.setData(html);
+                    }
+                    if (typeof editor.updateElement === 'function') {
+                      editor.updateElement();
+                    }
+                    console.log('[CKE GEL] Formatação aplicada com sucesso via setData().');
+                  } catch (err) {
+                    console.error('[CKE GEL] Erro no handler de formatação:', err);
+                  }
+                });
+                formatBtn._ckeGelFormatHandler = true;
+              }
+            } catch (e) {}
             formatBtn.parentNode.insertBefore(iconBtn, formatBtn);
           } else if (iconBtn) {
             configureIconButtonAppearance(iconBtn, iconBtnId);
