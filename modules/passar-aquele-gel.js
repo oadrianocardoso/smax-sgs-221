@@ -1,13 +1,8 @@
 // ==UserScript==
 // @name         Passar aquele GEL! (+ Citação)
 // @namespace    https://github.com/oadrianocardoso
-<<<<<<< HEAD
-// @version      7.0
-// @description  Adiciona um botão "Formatar" e um botão "Citação" na barra de ferramentas de todas as instâncias CKEditor (plCkeditorX), aplicando ajuste em <p> e <img> via getData/setData e permitindo aplicar blockquote com um clique, sem quebrar outros scripts (ES5 only).
-=======
 // @version      6.4
 // @description  Adiciona botões "Formatar" e "Citação" na barra do CKEditor (plCkeditorX), formatando <p> e <img> via getData/setData e aplicando blockquote com um clique, sem quebrar outros scripts (ES5 only).
->>>>>>> ff3e1b49c128f43affcc8883657280c7a0f55b00
 // @author       ADRIANO / ChatGPT
 // @match        https://suporte.tjsp.jus.br/saw/*
 // @run-at       document-end
