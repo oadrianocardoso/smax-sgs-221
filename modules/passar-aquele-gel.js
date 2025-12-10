@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Passar aquele GEL! (+ Citação)
 // @namespace    https://github.com/oadrianocardoso
-// @version      6.4
+// @version      7.0
 // @description  Adiciona botões "Formatar" e "Citação" na barra do CKEditor (plCkeditorX), formatando <p> e <img> via getData/setData e aplicando blockquote com um clique, sem quebrar outros scripts (ES5 only).
 // @author       ADRIANO / ChatGPT
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -20,7 +20,6 @@
     var ICON_URL           = 'https://suporte.tjsp.jus.br/v30/lib/ckeditor/prod/plugins/icons.png?t=O0B2';
     var ICON_POS_FORMATAR  = '0 -528px'; // bandeirinha (GEL)
     var ICON_POS_QUOTE     = '0 -192px'; // ícone de Citação (blockquote)
-<<<<<<< HEAD
     var QUICK_ICONS = [
       // 1 — ALERTA / ERRO
       '⚠️','❗','‼️','🚨','🔥','❌','🛑','⛔','☢️','☣️',
@@ -52,8 +51,6 @@
       // 10 — TÉCNICO / SISTEMA
       '💻','🖥️','🖱️','⌨️','🛡️','🔒','🔓','🔑','🧪','🧬'
     ];
-=======
->>>>>>> ff3e1b49c128f43affcc8883657280c7a0f55b00
 
     // ==========================================================
     //  FUNÇÃO PRINCIPAL: FORMATAR <P> E <IMG> DO EDITOR
@@ -294,7 +291,6 @@
           configureButtonAppearance(formatBtn, btnId);
           attachFormatClick(editor, formatBtn);
 
-<<<<<<< HEAD
           // handler do botão Formatar: aplica alterações em <p> e <img>
           try {
             if (!formatBtn._ckeGelFormatHandler) {
@@ -344,61 +340,10 @@
           });
 
           // insere os botões: quoteBtn -> iconBtn -> formatBtn
-=======
->>>>>>> ff3e1b49c128f43affcc8883657280c7a0f55b00
           quoteBtn.parentNode.insertBefore(formatBtn, quoteBtn.nextSibling);
         } else if (formatBtn) {
           configureButtonAppearance(formatBtn, btnId);
-<<<<<<< HEAD
-          if (!iconBtn && formatBtn && formatBtn.parentNode) {
-            iconBtn = formatBtn.cloneNode(true);
-            iconBtn.removeAttribute('onclick');
-            iconBtn.removeAttribute('onkeydown');
-            iconBtn.removeAttribute('onfocus');
-            configureIconButtonAppearance(iconBtn, iconBtnId);
-            iconBtn.addEventListener('click', function (e) {
-              e.preventDefault();
-              try {
-                var popup = createIconPickerPopup(editor, iconBtn, iconBtnId);
-                if (popup && typeof popup.openMenu === 'function') popup.openMenu();
-              } catch (err) {
-                console.error('[CKE GEL] Erro ao abrir seletor de ícones:', err);
-              }
-            });
-            // garante handler de formatação caso não exista
-            try {
-              if (!formatBtn._ckeGelFormatHandler) {
-                formatBtn.addEventListener('click', function (e) {
-                  e.preventDefault();
-                  try {
-                    console.log('[CKE GEL] Formatando conteúdo no editor:', editor && editor.name);
-                    var html = editor.getData ? (editor.getData() || '') : '';
-
-                    html = html.replace(/<p(?![^>]*\bstyle=)([^>]*)>/gi, '<p style="margin-bottom: 1em;"$1>');
-
-                    html = html.replace(/<img(?![^>]*\bstyle=)([^>]*?)\/?\>/gi, '<img style="border: 3px solid #000;"$1>');
-
-                    if (typeof editor.setData === 'function') {
-                      editor.setData(html);
-                    }
-                    if (typeof editor.updateElement === 'function') {
-                      editor.updateElement();
-                    }
-                    console.log('[CKE GEL] Formatação aplicada com sucesso via setData().');
-                  } catch (err) {
-                    console.error('[CKE GEL] Erro no handler de formatação:', err);
-                  }
-                });
-                formatBtn._ckeGelFormatHandler = true;
-              }
-            } catch (e) {}
-            formatBtn.parentNode.insertBefore(iconBtn, formatBtn);
-          } else if (iconBtn) {
-            configureIconButtonAppearance(iconBtn, iconBtnId);
-          }
-=======
           attachFormatClick(editor, formatBtn);
->>>>>>> ff3e1b49c128f43affcc8883657280c7a0f55b00
         }
 
       } catch (e) {
