@@ -320,6 +320,67 @@
       }
     }
 
+    // Aplica as transformações de formatação ao conteúdo do editor
+    function applyFormatToEditor(editor) {
+      try {
+        if (!editor || typeof editor.getData !== 'function') return;
+        var html = editor.getData() || '';
+
+        // adiciona style em <p> que não tenham atributo style
+        try {
+          html = html.replace(/<p(?![^>]*\bstyle=)([^>]*)>/gi, '<p style="margin-bottom: 1em;"$1>');
+        } catch (e) {
+          // falha silenciosa na regex
+        }
+
+        // adiciona style em <img> que não tenham atributo style
+        try {
+          html = html.replace(/<img(?![^>]*\bstyle=)([^>]*?)\/?\>/gi, '<img style="border: 3px solid #000;"$1>');
+        } catch (e) {
+          // falha silenciosa na regex
+        }
+
+        // atualiza o editor com o HTML modificado
+        try {
+          if (typeof editor.setData === 'function') {
+            editor.setData(html);
+          } else if (typeof editor.insertHtml === 'function') {
+            // fallback: limpa e insere
+            editor.setData(html);
+          }
+          if (typeof editor.updateElement === 'function') editor.updateElement();
+        } catch (e) {
+          console.error('[CKE GEL] Falha ao aplicar formatação no editor:', e);
+        }
+      } catch (err) {
+        console.error('[CKE GEL] applyFormatToEditor erro:', err);
+      }
+    }
+
+    // Garante que o botão "Formatar" tenha o handler de clique correto
+    function configureFormatButtonBehavior(btn, editor) {
+      try {
+        if (!btn || !editor) return;
+        // evita múltiplos handlers
+        if (btn._ckeGelFormatHandlerAttached) return;
+        btn._ckeGelFormatHandlerAttached = true;
+
+        btn.addEventListener('click', function (e) {
+          try {
+            e.preventDefault();
+          } catch (er) {}
+          try {
+            console.log('[CKE GEL] Aplicando formatação (p/img) no editor:', editor && editor.name);
+            applyFormatToEditor(editor);
+          } catch (err) {
+            console.error('[CKE GEL] Erro no handler Formatar:', err);
+          }
+        });
+      } catch (err) {
+        console.error('[CKE GEL] configureFormatButtonBehavior falhou:', err);
+      }
+    }
+
     function addCustomButtonForEditor(editor) {
       try {
         var container = editor && editor.container && editor.container.$;
@@ -399,6 +460,8 @@
           formatBtn.removeAttribute('onkeydown');
           formatBtn.removeAttribute('onfocus');
           configureButtonAppearance(formatBtn, btnId);
+          // garante que o botão Formatar tenha o comportamento de aplicar estilos em <p> e <img>
+          try { configureFormatButtonBehavior(formatBtn, editor); } catch (e) {}
 
           // cria o botão de ícone (não inserido ainda)
           iconBtn = quoteBtn.cloneNode(true);
@@ -424,6 +487,8 @@
         } else {
           // se formatBtn já existe, garante que o iconBtn exista e esteja configurado
           configureButtonAppearance(formatBtn, btnId);
+          // garante que o botão Formatar tenha o comportamento de aplicar estilos em <p> e <img>
+          try { configureFormatButtonBehavior(formatBtn, editor); } catch (e) {}
           if (!iconBtn && formatBtn && formatBtn.parentNode) {
             iconBtn = formatBtn.cloneNode(true);
             iconBtn.removeAttribute('onclick');
