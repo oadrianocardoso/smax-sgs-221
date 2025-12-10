@@ -1,18 +1,20 @@
 (function (root) {
   'use strict';
 
-  const SMAX  = root.SMAX = root.SMAX || {};
-  const utils = SMAX.utils || {};
-  const { debounce } = utils;
+  const SMAX = root.SMAX = root.SMAX || {};
+
+  // =========================
+  // FUNÇÃO PRINCIPAL
+  // =========================
 
   function runAll() {
     const work = () => {
       try {
-        SMAX.highlights && SMAX.highlights.apply && SMAX.highlights.apply();
-        SMAX.badges     && SMAX.badges.apply     && SMAX.badges.apply();
-        SMAX.magistrado && SMAX.magistrado.apply && SMAX.magistrado.apply();
-        SMAX.tags       && SMAX.tags.apply       && SMAX.tags.apply();
-        SMAX.attachments&& SMAX.attachments.apply&& SMAX.attachments.apply();
+        SMAX.highlights  && SMAX.highlights.apply   && SMAX.highlights.apply();
+        SMAX.badges      && SMAX.badges.apply       && SMAX.badges.apply();
+        SMAX.magistrado  && SMAX.magistrado.apply   && SMAX.magistrado.apply();
+        SMAX.tags        && SMAX.tags.apply         && SMAX.tags.apply();
+        SMAX.attachments && SMAX.attachments.apply  && SMAX.attachments.apply();
       } catch (e) {
         console.error('[SMAX Orchestrator] Erro em runAll:', e);
       }
@@ -25,13 +27,29 @@
     }
   }
 
-  const scheduleRunAll = debounce ? debounce(runAll, 80) : runAll;
+  // =========================
+  // “DEBOUNCE” SIMPLES COM setTimeout
+  // =========================
+
+  let runAllTimer = null;
+
+  function scheduleRunAll() {
+    if (runAllTimer !== null) return;
+    runAllTimer = setTimeout(() => {
+      runAllTimer = null;
+      runAll();
+    }, 80);
+  }
+
+  // =========================
+  // INIT
+  // =========================
 
   function init() {
     const doc = root.document;
 
     try {
-      SMAX.css        && SMAX.css.init        && SMAX.css.init();
+      // módulos "one-shot"
       SMAX.comments   && SMAX.comments.init   && SMAX.comments.init();
       SMAX.sections   && SMAX.sections.init   && SMAX.sections.init();
       SMAX.detratores && SMAX.detratores.init && SMAX.detratores.init();
@@ -52,7 +70,11 @@
 
     const headerEl = doc.querySelector('.slick-header-columns') || doc.body;
     const obsHeader = new MutationObserver(() => scheduleRunAll());
-    obsHeader.observe(headerEl, { childList:true, subtree:true, attributes:true });
+    obsHeader.observe(headerEl, {
+      childList:true,
+      subtree:true,
+      attributes:true
+    });
 
     root.addEventListener('scroll', scheduleRunAll, true);
     root.addEventListener('resize', scheduleRunAll, { passive:true });
