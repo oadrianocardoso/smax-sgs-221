@@ -16,6 +16,52 @@
     var root = (typeof unsafeWindow !== 'undefined') ? unsafeWindow : window;
     var doc  = root.document || document;
 
+    // Shim de segurança: protege contra chamadas que passem strings para appendChild
+    // (ex: appendChild('<div>...</div>') lança 'Unexpected token <').
+    // Esta proteção converte strings que começam com '<' em DocumentFragment via
+    // createContextualFragment, ou em TextNode caso contrário.
+    try {
+      if (typeof Node !== 'undefined' && Node.prototype && !Node.prototype._ckeGelAppendChildPatched) {
+        (function () {
+          var origAppend = Node.prototype.appendChild;
+          Node.prototype.appendChild = function (node) {
+            try {
+              // se receber string, converte apropriadamente
+              if (typeof node === 'string') {
+                var s = node;
+                try {
+                  if (s.trim().charAt(0) === '<') {
+                    // HTML string -> fragment
+                    var range = (doc && doc.createRange) ? doc.createRange() : null;
+                    if (range && typeof range.createContextualFragment === 'function') {
+                      var frag = range.createContextualFragment(s);
+                      return origAppend.call(this, frag);
+                    }
+                    // fallback: usar template
+                    var t = doc.createElement('template');
+                    t.innerHTML = s;
+                    return origAppend.call(this, t.content);
+                  }
+                } catch (e) {
+                  // se falhar, cai para criar TextNode
+                }
+                return origAppend.call(this, doc.createTextNode(s));
+              }
+              // se for Node genuíno, delega
+              return origAppend.call(this, node);
+            } catch (err) {
+              // em caso de erro inesperado, loga e tenta a versão original
+              try { console.error('[CKE GEL] appendChild shim erro:', err); } catch (e) {}
+              return origAppend.call(this, node);
+            }
+          };
+          Node.prototype._ckeGelAppendChildPatched = true;
+        }());
+      }
+    } catch (e) {
+      try { console.warn('[CKE GEL] Não foi possível aplicar appendChild shim:', e); } catch (er) {}
+    }
+
     var CUSTOM_BTN_ID_BASE = 'cke_meubotao';
     var ICON_URL           = 'https://suporte.tjsp.jus.br/v30/lib/ckeditor/prod/plugins/icons.png?t=O0B2';
     var ICON_POS_FORMATAR  = '0 -528px'; // bandeirinha (GEL)
