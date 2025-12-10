@@ -17,7 +17,7 @@
     "Marcos Paulo Silva Madalena","Maria Fernanda De Oliveira Bento","Natalia Yurie Shiba","Paulo Roberto Massoca",
     "Pedro Henrique Palacio Baritti","Rafaella Silva Lima Petrolini","Renata Aparecida Mendes Bonvechio","Rodrigo Silva Oliveira",
     "Ryan Souza Carvalho","Tatiana Lourenço Da Costa Antunes","Tatiane Araujo Da Cruz","Thiago Tadeu Faustino De Oliveira",
-    "Tiago Carvalho De Freitas Meneses","Victor Viana Roca","GERSON DA MATTA"
+    "Tiago Carvalho De Freitas Meneses","Victor Viana Roca","GERSON DA MATTA", "ROGE NAIM TENN"
   ];
 
   function init() {
