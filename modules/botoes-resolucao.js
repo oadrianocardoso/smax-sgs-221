@@ -1,423 +1,252 @@
+// ==UserScript==
+// @name         SMAX - Topo CloseTime completo (Picker + Salvar + Lifecycle)
+// @namespace    https://github.com/oadrianocardoso
+// @version      3.0
+// @description  Adiciona topo funcional no CloseTime: EntityPicker (read-only), Salvar, Salvar e fechar e Lifecycle com menu próprio. Robusto contra Angular re-render.
+// @author       ADRIANO / ChatGPT
+// @match        https://suporte.tjsp.jus.br/saw/*
+// @run-at       document-idle
+// @grant        GM_addStyle
+// ==/UserScript==
+
 (function () {
   'use strict';
 
-  var LOG = '[TMX-CLOSETIME-MENU-ROBUST]';
+  /* ================= CONFIG ================= */
 
-  // ====== ORIGINAIS ======
-  var ORIG_SAVE_SELECTOR =
+  const TARGET_SELECTOR = '#onlyResolution_CloseTime_container';
+
+  const ORIG_SAVE_SELECTOR =
     'button[data-aid="tool-bar-btn-save"].tool-bar-btn-save';
 
-  var ORIG_SAVE_CLOSE_SELECTOR =
+  const ORIG_SAVE_CLOSE_SELECTOR =
     'button[data-aid="tool-bar-btn-save-and-close"].tool-bar-btn-save-and-close';
 
-  // Em alguns estados o lifecycle muda classes (minimized/regular),
-  // então buscamos pela visão do lifecycle e pegamos QUALQUER overview-buttons-container dentro dela,
-  // EXCLUINDO clones.
-  var ORIG_LIFECYCLE_BOX_SELECTOR =
+  const ORIG_LIFECYCLE_SELECTOR =
     'div.pl-lifecycle-overview[data-aid="lifecycle-overview"] ' +
     'div.overview-buttons-container:not(.tmx-clone-lifecycle)';
 
-  // ====== DESTINO ======
-  var TARGET_SELECTOR = '#onlyResolution_CloseTime_container';
+  const ORIG_ENTITY_PICKER_SELECTOR =
+    '.entity-picker-input-wrapper';
 
-  // ====== CLASSES ======
-  var CLS_WRAP      = 'tmx-top-actions';
-  var CLS_SAVE      = 'tmx-clone-save';
-  var CLS_SAVECL    = 'tmx-clone-save-close';
-  var CLS_LC        = 'tmx-clone-lifecycle';
-  var CLS_MENU      = 'tmx-lc-menu';
-  var CLS_MENU_ITEM = 'tmx-lc-menu-item';
-  var ATTR_BOUND    = 'data-tmx-bound';
+  /* ================= CLASSES ================= */
 
-  function log() {
-    try { console.log.apply(console, [LOG].concat([].slice.call(arguments))); } catch (e) {}
-  }
+  const CLS_WRAP      = 'tmx-top-actions';
+  const CLS_PICKER    = 'tmx-clone-entity-picker';
+  const CLS_SAVE      = 'tmx-clone-save';
+  const CLS_SAVECL    = 'tmx-clone-save-close';
+  const CLS_LC        = 'tmx-clone-lifecycle';
+  const CLS_MENU      = 'tmx-lifecycle-menu';
+  const CLS_MENU_ITEM = 'tmx-lifecycle-menu-item';
+
+  const ATTR_BOUND = 'data-tmx-bound';
+
+  /* ================= HELPERS ================= */
 
   function removeIds(root) {
-    var els = root.querySelectorAll('[id]');
-    for (var i = 0; i < els.length; i++) els[i].removeAttribute('id');
-  }
-
-  function ensureWrapper(dst) {
-    var wrap = dst.querySelector('.' + CLS_WRAP);
-    if (wrap) return wrap;
-
-    wrap = document.createElement('div');
-    wrap.className = CLS_WRAP;
-    dst.insertBefore(wrap, dst.firstChild || null);
-    return wrap;
-  }
-
-  function ensureFirst(dst, node) {
-    if (dst.firstChild !== node) dst.insertBefore(node, dst.firstChild || null);
-  }
-
-  function ensureAfter(parent, anchor, node) {
-    if (!parent || !node) return;
-    if (node.parentNode !== parent) parent.appendChild(node);
-    if (anchor && anchor.parentNode === parent && anchor.nextSibling !== node) {
-      parent.insertBefore(node, anchor.nextSibling);
-    }
+    root.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
   }
 
   function clickLikeUser(el) {
-    if (!el || el.disabled) return false;
+    if (!el || el.disabled) return;
     try {
-      var ev = document.createEvent('MouseEvents');
-      ev.initMouseEvent('click', true, true, window, 1);
-      el.dispatchEvent(ev);
-      return true;
-    } catch (e) {
-      try { el.click(); return true; } catch (e2) {}
-    }
-    return false;
-  }
-
-  function syncDisabledState(cloneBtn, origBtn) {
-    if (!cloneBtn || !origBtn) return;
-
-    var disabled = !!origBtn.disabled ||
-      origBtn.classList.contains('disabled') ||
-      origBtn.classList.contains('plToolbarItemDisabled') ||
-      origBtn.getAttribute('aria-disabled') === 'true';
-
-    if (disabled) {
-      cloneBtn.setAttribute('disabled', 'disabled');
-      cloneBtn.setAttribute('aria-disabled', 'true');
-      cloneBtn.classList.add('disabled');
-      cloneBtn.classList.add('plToolbarItemDisabled');
-    } else {
-      cloneBtn.removeAttribute('disabled');
-      cloneBtn.setAttribute('aria-disabled', 'false');
-      cloneBtn.classList.remove('disabled');
-      cloneBtn.classList.remove('plToolbarItemDisabled');
+      el.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+    } catch {
+      el.click();
     }
   }
 
-  // ====== localizar lifecycle original (mesmo escondido) ======
-  function getOrigLifecycleBox() {
-    // querySelector acha mesmo com ng-hide (continua no DOM)
-    var box = document.querySelector(ORIG_LIFECYCLE_BOX_SELECTOR);
-    return box || null;
+  function ensureWrapper(dst) {
+    let wrap = dst.querySelector('.' + CLS_WRAP);
+    if (!wrap) {
+      wrap = document.createElement('div');
+      wrap.className = CLS_WRAP;
+      dst.prepend(wrap);
+    }
+    return wrap;
   }
 
-  // ====== CLONES ======
-  function ensureSaveClone(wrap) {
-    var existing = wrap.querySelector('.' + CLS_SAVE);
-    if (existing) return existing;
-
-    var src = document.querySelector(ORIG_SAVE_SELECTOR);
-    if (!src) return null;
-
-    var clone = src.cloneNode(true);
-    clone.classList.add(CLS_SAVE);
-    removeIds(clone);
-    clone.style.display = 'inline-flex';
-    clone.style.alignItems = 'center';
-    wrap.appendChild(clone);
-    return clone;
+  function ensureAfter(parent, anchor, node) {
+    if (!node) return;
+    if (!anchor) parent.appendChild(node);
+    else if (anchor.nextSibling !== node)
+      parent.insertBefore(node, anchor.nextSibling);
   }
 
-  function ensureSaveCloseClone(wrap) {
-    var existing = wrap.querySelector('.' + CLS_SAVECL);
+  /* ================= ENTITY PICKER ================= */
+
+  function ensureEntityPickerClone(wrap) {
+    let existing = wrap.querySelector('.' + CLS_PICKER);
     if (existing) return existing;
 
-    var src = document.querySelector(ORIG_SAVE_CLOSE_SELECTOR);
+    let src = document.querySelector(ORIG_ENTITY_PICKER_SELECTOR);
     if (!src) return null;
 
-    var clone = src.cloneNode(true);
-    clone.classList.add(CLS_SAVECL);
+    let clone = src.cloneNode(true);
+    clone.classList.add(CLS_PICKER);
     removeIds(clone);
-    clone.style.display = 'inline-flex';
-    clone.style.alignItems = 'center';
-    wrap.appendChild(clone);
-    return clone;
-  }
 
-  function ensureLifecycleClone(wrap) {
-    var existing = wrap.querySelector('.' + CLS_LC);
-    if (existing) return existing;
-
-    var src = getOrigLifecycleBox();
-    if (!src) return null;
-
-    var clone = src.cloneNode(true);
-    clone.classList.add(CLS_LC);
-    removeIds(clone);
-    clone.style.display = 'inline-flex';
-    clone.style.alignItems = 'center';
-
-    // esconda menus bootstrap clonados (usaremos menu próprio)
-    var ul = clone.querySelector('ul.dropdown-menu');
-    if (ul) ul.style.display = 'none';
+    clone.style.pointerEvents = 'none';
+    clone.style.opacity = '0.95';
 
     wrap.appendChild(clone);
     return clone;
   }
 
-  // ====== PROXY (Salvar / Salvar e fechar) ======
-  function bindButtonProxy(cloneBtn, origSelector) {
-    if (!cloneBtn) return;
-    if (cloneBtn.getAttribute(ATTR_BOUND) === '1') return;
-    cloneBtn.setAttribute(ATTR_BOUND, '1');
+  /* ================= SAVE BUTTONS ================= */
 
-    cloneBtn.addEventListener('click', function (e) {
+  function ensureButtonClone(wrap, selector, cls) {
+    let existing = wrap.querySelector('.' + cls);
+    if (existing) return existing;
+
+    let src = document.querySelector(selector);
+    if (!src) return null;
+
+    let clone = src.cloneNode(true);
+    clone.classList.add(cls);
+    removeIds(clone);
+    clone.style.display = 'inline-flex';
+
+    clone.addEventListener('click', e => {
       e.preventDefault();
       e.stopPropagation();
-      if (e.stopImmediatePropagation) e.stopImmediatePropagation();
-
-      var orig = document.querySelector(origSelector);
-      if (!orig || orig.disabled) return;
-      clickLikeUser(orig);
+      clickLikeUser(document.querySelector(selector));
     }, true);
+
+    wrap.appendChild(clone);
+    return clone;
   }
 
-  // ====== MENU PRÓPRIO (LIFECYCLE) ======
-  function ensureMenuElement() {
-    var menu = document.querySelector('.' + CLS_MENU);
-    if (menu) return menu;
+  /* ================= LIFECYCLE MENU ================= */
 
-    menu = document.createElement('div');
-    menu.className = CLS_MENU;
-    menu.style.display = 'none';
-    menu.setAttribute('data-open', '0');
-    document.body.appendChild(menu);
-    return menu;
+  function getLifecycleBox() {
+    return document.querySelector(ORIG_LIFECYCLE_SELECTOR);
   }
 
-  function hideMenu(menu) {
-    if (!menu) return;
-    menu.style.display = 'none';
-    menu.setAttribute('data-open', '0');
-  }
+  function getLifecycleOptions() {
+    let box = getLifecycleBox();
+    if (!box) return [];
 
-  function showMenu(menu, anchorEl) {
-    if (!menu || !anchorEl) return;
-    var r = anchorEl.getBoundingClientRect();
-    menu.style.left = (r.left + window.scrollX) + 'px';
-    menu.style.top  = (r.bottom + window.scrollY + 4) + 'px';
-    menu.style.display = 'block';
-    menu.setAttribute('data-open', '1');
-  }
+    let opts = [];
 
-  function buildMenu(menu, options) {
-    menu.innerHTML = '';
-    for (var i = 0; i < options.length; i++) {
-      var opt = options[i];
-      var item = document.createElement('div');
-      item.className = CLS_MENU_ITEM + (opt.disabled ? ' tmx-disabled' : '');
-      item.setAttribute('data-phase-id', opt.phaseId);
-      item.textContent = opt.label;
-      menu.appendChild(item);
-    }
-  }
-
-  function getLifecycleOptionsFromOriginal() {
-    var origBox = getOrigLifecycleBox();
-    if (!origBox) return [];
-
-    var opts = [];
-
-    // botão principal
-    var mainBtn = origBox.querySelector('button[target-phase-id]');
-    if (mainBtn) {
-      opts.push({
-        phaseId: mainBtn.getAttribute('target-phase-id') || '',
-        label: (mainBtn.textContent || '').replace(/\s+/g, ' ').trim(),
-        disabled: !!mainBtn.disabled || mainBtn.classList.contains('disabled-action'),
-        isMain: true
-      });
-    }
-
-    // itens do dropdown (quando existe no DOM)
-    var items = origBox.querySelectorAll('ul.dropdown-menu a[target-phase-id]');
-    for (var i = 0; i < items.length; i++) {
-      var a = items[i];
-      var phaseId = a.getAttribute('target-phase-id') || '';
-      var label = (a.textContent || '').replace(/\s+/g, ' ').trim();
-      if (!phaseId || !label) continue;
-
-      var disabled = a.classList.contains('disabled-action') || a.classList.contains('disabled');
-
-      // evita duplicar
-      var dup = false;
-      for (var j = 0; j < opts.length; j++) {
-        if (opts[j].phaseId === phaseId && opts[j].label === label) { dup = true; break; }
-      }
-      if (!dup) opts.push({ phaseId: phaseId, label: label, disabled: disabled, isMain: false });
-    }
+    box.querySelectorAll('[target-phase-id]').forEach(el => {
+      let label = el.textContent.trim();
+      let phaseId = el.getAttribute('target-phase-id');
+      if (!phaseId || !label) return;
+      if (!opts.find(o => o.phaseId === phaseId))
+        opts.push({ phaseId, label });
+    });
 
     return opts;
   }
 
-  function clickOriginalLifecyclePhase(phaseId) {
-    var origBox = getOrigLifecycleBox();
-    if (!origBox) return false;
+  function ensureLifecycleClone(wrap) {
+    let existing = wrap.querySelector('.' + CLS_LC);
+    if (existing) return existing;
 
-    var el = origBox.querySelector('[target-phase-id="' + phaseId + '"]');
-    if (!el) return false;
-    if (el.disabled || el.classList.contains('disabled-action')) return false;
+    let src = getLifecycleBox();
+    if (!src) return null;
 
-    return clickLikeUser(el);
+    let clone = src.cloneNode(true);
+    clone.classList.add(CLS_LC);
+    removeIds(clone);
+
+    clone.querySelectorAll('ul.dropdown-menu').forEach(ul => ul.remove());
+
+    clone.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      showLifecycleMenu(clone);
+    }, true);
+
+    wrap.appendChild(clone);
+    return clone;
   }
 
-  function bindLifecycleMenu(lifecycleClone) {
-    if (!lifecycleClone) return;
-    if (lifecycleClone.getAttribute(ATTR_BOUND) === '1') return;
-    lifecycleClone.setAttribute(ATTR_BOUND, '1');
-
-    var menu = ensureMenuElement();
-
-    function refreshAndOpen(anchor) {
-      var opts = getLifecycleOptionsFromOriginal();
-      if (!opts.length) return;
-
-      buildMenu(menu, opts);
-      showMenu(menu, anchor);
+  function showLifecycleMenu(anchor) {
+    let menu = document.querySelector('.' + CLS_MENU);
+    if (!menu) {
+      menu = document.createElement('div');
+      menu.className = CLS_MENU;
+      document.body.appendChild(menu);
     }
 
-    // setinha do clone (abre menu próprio)
-    lifecycleClone.addEventListener('click', function (e) {
-      var t = e.target;
+    menu.innerHTML = '';
+    getLifecycleOptions().forEach(opt => {
+      let item = document.createElement('div');
+      item.className = CLS_MENU_ITEM;
+      item.textContent = opt.label;
+      item.onclick = () => clickLikeUser(
+        getLifecycleBox().querySelector('[target-phase-id="' + opt.phaseId + '"]')
+      );
+      menu.appendChild(item);
+    });
 
-      // impede bootstrap/Angular do clone
-      e.preventDefault();
-      e.stopPropagation();
-      if (e.stopImmediatePropagation) e.stopImmediatePropagation();
-
-      var toggle = (t && t.closest) ? t.closest('button[data-aid="dropdown-toggle"]') : null;
-      if (toggle) {
-        if (menu.getAttribute('data-open') === '1') hideMenu(menu);
-        else refreshAndOpen(toggle);
-        return;
-      }
-
-      // clique no botão principal -> dispara a ação principal do original
-      var opts = getLifecycleOptionsFromOriginal();
-      if (!opts.length) return;
-
-      if (!opts[0].disabled) clickOriginalLifecyclePhase(opts[0].phaseId);
-      hideMenu(menu);
-    }, true);
-
-    // clique em itens do menu próprio
-    menu.addEventListener('click', function (e) {
-      var item = e.target;
-      if (!item || !item.classList || !item.classList.contains(CLS_MENU_ITEM)) return;
-
-      e.preventDefault();
-      e.stopPropagation();
-      if (e.stopImmediatePropagation) e.stopImmediatePropagation();
-
-      if (item.classList.contains('tmx-disabled')) return;
-
-      var phaseId = item.getAttribute('data-phase-id');
-      if (phaseId) clickOriginalLifecyclePhase(phaseId);
-
-      hideMenu(menu);
-    }, true);
-
-    // clique fora fecha
-    document.addEventListener('mousedown', function (e) {
-      if (menu.getAttribute('data-open') !== '1') return;
-      if (menu.contains(e.target)) return;
-      hideMenu(menu);
-    }, true);
-
-    // ESC fecha
-    document.addEventListener('keydown', function (e) {
-      if (menu.getAttribute('data-open') !== '1') return;
-      var key = e.key || e.keyCode;
-      if (key === 'Escape' || key === 27) hideMenu(menu);
-    }, true);
-
-    log('Lifecycle menu próprio ligado (robusto p/ hidden).');
+    let r = anchor.getBoundingClientRect();
+    menu.style.left = (r.left + window.scrollX) + 'px';
+    menu.style.top  = (r.bottom + window.scrollY + 4) + 'px';
+    menu.style.display = 'block';
   }
 
-  // ====== CSS ======
-    GM_addStyle([
-        TARGET_SELECTOR + ' .' + CLS_WRAP + ' {',
-        '  display: flex;',
-        '  flex-wrap: nowrap;',
-        '  align-items: center;',
-        '  gap: 8px;',
-        '  margin-bottom: 8px;',
-        '  overflow-x: auto;',
-        '}',
+  document.addEventListener('mousedown', e => {
+    let menu = document.querySelector('.' + CLS_MENU);
+    if (menu && !menu.contains(e.target)) menu.style.display = 'none';
+  });
 
-        TARGET_SELECTOR + ' .' + CLS_WRAP + ' > * { white-space: nowrap; }',
+  /* ================= CSS ================= */
 
-        TARGET_SELECTOR + ' .' + CLS_LC + ' {',
-        '  display: inline-flex !important;',
-        '  align-items: center;',
-        '  margin: 0 !important;',
-        '}',
+  GM_addStyle(`
+    #onlyResolution_CloseTime_label { display: none !important; }
 
-        /* ===== OCULTAR LABEL "Hora de fechamento" ===== */
-        '#onlyResolution_CloseTime_label {',
-        '  display: none !important;',
-        '}',
+    .${CLS_WRAP} {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
 
-        /* ===== MENU PRÓPRIO DO LIFECYCLE ===== */
-        '.' + CLS_MENU + ' {',
-        '  position: absolute;',
-        '  z-index: 999999;',
-        '  min-width: 180px;',
-        '  background: #fff;',
-        '  border: 1px solid #cfcfcf;',
-        '  border-radius: 4px;',
-        '  box-shadow: 0 6px 16px rgba(0,0,0,.15);',
-        '  padding: 6px 0;',
-        '}',
+    .${CLS_PICKER} { max-width: 320px; }
 
-        '.' + CLS_MENU_ITEM + ' {',
-        '  padding: 8px 12px;',
-        '  cursor: pointer;',
-        '  font-size: 13px;',
-        '}',
+    .${CLS_MENU} {
+      position: absolute;
+      z-index: 999999;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0 6px 16px rgba(0,0,0,.15);
+    }
 
-        '.' + CLS_MENU_ITEM + ':hover { background: #f3f6fb; }',
+    .${CLS_MENU_ITEM} {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
 
-        '.' + CLS_MENU_ITEM + '.tmx-disabled {',
-        '  opacity: .45;',
-        '  cursor: not-allowed;',
-        '}'
-    ].join('\n'));
+    .${CLS_MENU_ITEM}:hover {
+      background: #f3f6fb;
+    }
+  `);
 
+  /* ================= LOOP ================= */
 
-  // ====== LOOP PERSISTENTE ======
   function tick() {
-    var dst = document.querySelector(TARGET_SELECTOR);
+    let dst = document.querySelector(TARGET_SELECTOR);
     if (!dst) return;
 
-    var wrap = ensureWrapper(dst);
-    ensureFirst(dst, wrap);
+    let wrap = ensureWrapper(dst);
 
-    var cSave = ensureSaveClone(wrap);
-    var cSaveClose = ensureSaveCloseClone(wrap);
-    var cLC = ensureLifecycleClone(wrap);
+    let cPicker = ensureEntityPickerClone(wrap);
+    let cSave   = ensureButtonClone(wrap, ORIG_SAVE_SELECTOR, CLS_SAVE);
+    let cSaveCl = ensureButtonClone(wrap, ORIG_SAVE_CLOSE_SELECTOR, CLS_SAVECL);
+    let cLC     = ensureLifecycleClone(wrap);
 
-    // ordem
-    if (cSave) ensureAfter(wrap, null, cSave);
-    if (cSaveClose) ensureAfter(wrap, cSave, cSaveClose);
-    if (cLC) ensureAfter(wrap, cSaveClose || cSave, cLC);
-
-    // proxy save
-    bindButtonProxy(cSave, ORIG_SAVE_SELECTOR);
-    bindButtonProxy(cSaveClose, ORIG_SAVE_CLOSE_SELECTOR);
-
-    // lifecycle menu próprio
-    bindLifecycleMenu(cLC);
-
-    // disabled sync
-    syncDisabledState(cSave, document.querySelector(ORIG_SAVE_SELECTOR));
-    syncDisabledState(cSaveClose, document.querySelector(ORIG_SAVE_CLOSE_SELECTOR));
+    ensureAfter(wrap, null, cPicker);
+    ensureAfter(wrap, cPicker, cSave);
+    ensureAfter(wrap, cSave, cSaveCl);
+    ensureAfter(wrap, cSaveCl, cLC);
   }
 
   tick();
-  setTimeout(tick, 300);
-  setTimeout(tick, 900);
   setInterval(tick, 1500);
-
-  log('Ativo: robusto p/ lifecycle hidden/minimized.');
 })();
