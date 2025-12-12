@@ -1,6 +1,8 @@
 (function (root) {
   'use strict';
 
+  console.log('[SMAX] Módulo Destaca Atendente carregado');
+
   const SMAX   = root.SMAX = root.SMAX || {};
   const CONFIG = SMAX.config || {};
   const prefs  = CONFIG.prefs || {};
@@ -27,26 +29,25 @@
   };
 
   const DEFAULT_NAME_COLORS = {
-    "ADRIANO":            {bg:"#E6E66A", fg:"#000"},
-    "DANIEL LEAL":        {bg:"#E6A85C", fg:"#000"},
-    "DOUGLAS":            {bg:"#66CCCC", fg:"#000"},
-    "IONE":               {bg:"#4D4D4D", fg:"#fff"},
-    "ISA":                {bg:"#5C6FA6", fg:"#fff"},
-    "IVAN":               {bg:"#9A9A52", fg:"#000"},
-    "LAIS":               {bg:"#D966D9", fg:"#000"},
-    "LEONARDO":           {bg:"#8E5A8E", fg:"#fff"},
-    "LUANA":              {bg:"#7ACC7A", fg:"#000"},
-    "LUIS FELIPE":        {bg:"#5CA3A3", fg:"#000"},
-    "MARCELO":            {bg:"#A05252", fg:"#fff"},
-    "MARLON":             {bg:"#A0A0A0", fg:"#000"},
-    "ROBSON":             {bg:"#CCCCCC", fg:"#000"},
-    "SAMUEL":             {bg:"#66A3CC", fg:"#000"},
-    "YVES":               {bg:"#E6E66A", fg:"#fff"}
+    "ADRIANO":      {bg:"#E6E66A", fg:"#000"},
+    "DANIEL LEAL":  {bg:"#E6A85C", fg:"#000"},
+    "DOUGLAS":      {bg:"#66CCCC", fg:"#000"},
+    "IONE":         {bg:"#4D4D4D", fg:"#fff"},
+    "ISA":          {bg:"#5C6FA6", fg:"#fff"},
+    "IVAN":         {bg:"#9A9A52", fg:"#000"},
+    "LAIS":         {bg:"#D966D9", fg:"#000"},
+    "LEONARDO":     {bg:"#8E5A8E", fg:"#fff"},
+    "LUANA":        {bg:"#7ACC7A", fg:"#000"},
+    "LUIS FELIPE":  {bg:"#5CA3A3", fg:"#000"},
+    "MARCELO":      {bg:"#A05252", fg:"#fff"},
+    "MARLON":       {bg:"#A0A0A0", fg:"#000"},
+    "ROBSON":       {bg:"#CCCCCC", fg:"#000"},
+    "SAMUEL":       {bg:"#66A3CC", fg:"#000"},
+    "YVES":         {bg:"#E6E66A", fg:"#fff"}
   };
 
   const DEFAULT_AUSENTES = ["ISA"];
 
-  // Se tiver em CONFIG, usa o que veio de fora; senão, usa os defaults embutidos
   const NAME_GROUPS = CONFIG.nameGroups || DEFAULT_NAME_GROUPS;
   const NAME_COLOR  = CONFIG.nameColors || DEFAULT_NAME_COLORS;
   const AUSENTES    = Array.isArray(CONFIG.ausentes) ? CONFIG.ausentes : DEFAULT_AUSENTES;
