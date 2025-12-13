@@ -1,9 +1,9 @@
 (function (root) {
   'use strict';
 
-  const SMAX = root.SMAX = root.SMAX || {};
+  var SMAX = root.SMAX = root.SMAX || {};
 
-  const CONFIG = {
+  var CONFIG = {
     prefs: {
       highlightsOn:      true,
       nameBadgesOn:      true,
@@ -11,8 +11,9 @@
       collapseOn:        true,
       enlargeCommentsOn: true,
       autoTagsOn:        true
-    },
-    
+    }
+  };
+
   function debounce(fn, wait) {
     var t;
     if (typeof wait === 'undefined') wait = 120;
@@ -27,7 +28,7 @@
   }
 
   function getGridViewport(doc) {
-    const d = doc || root.document;
+    var d = doc || root.document;
     return d.querySelector('.slick-viewport') || d;
   }
 
@@ -36,18 +37,19 @@
   }
 
   function normalizeText(t) {
-    return (t || '')
-      .normalize('NFD')
+    t = (t || '');
+    // OBS: se seu ambiente suportar, ok. Se não, eu te passo fallback sem normalize()
+    return t.normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .toLowerCase();
   }
 
   SMAX.config = CONFIG;
   SMAX.utils  = {
-    debounce,
-    getGridViewport,
-    escapeReg,
-    normalizeText
+    debounce: debounce,
+    getGridViewport: getGridViewport,
+    escapeReg: escapeReg,
+    normalizeText: normalizeText
   };
 
 })(typeof unsafeWindow !== 'undefined' ? unsafeWindow : window);
