@@ -13,11 +13,16 @@
       autoTagsOn:        true
     },
     
-  function debounce(fn, wait = 120) {
-    let t;
-    return (...args) => {
+  function debounce(fn, wait) {
+    var t;
+    if (typeof wait === 'undefined') wait = 120;
+
+    return function () {
+      var args = arguments;
       clearTimeout(t);
-      t = setTimeout(() => fn(...args), wait);
+      t = setTimeout(function () {
+        fn.apply(null, args);
+      }, wait);
     };
   }
 
