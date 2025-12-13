@@ -43,7 +43,7 @@
     "MARLON":       {bg:"#A0A0A0", fg:"#000"},
     "ROBSON":       {bg:"#CCCCCC", fg:"#000"},
     "SAMUEL":       {bg:"#66A3CC", fg:"#000"},
-    "YVES":         {bg:"#E6E66A", fg:"#fff"}
+    "YVES":         {bg:"#2F4F8F", fg:"#fff"}
   };
 
   const DEFAULT_AUSENTES = ["ISA"];
