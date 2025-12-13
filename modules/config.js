@@ -1,4 +1,4 @@
-(function (root) {
+;(function (root) {
   'use strict';
 
   var SMAX = root.SMAX = root.SMAX || {};
@@ -38,10 +38,8 @@
 
   function normalizeText(t) {
     t = (t || '');
-    // OBS: se seu ambiente suportar, ok. Se não, eu te passo fallback sem normalize()
-    return t.normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase();
+    // se der erro aqui depois, te mando fallback sem normalize()
+    return t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   }
 
   SMAX.config = CONFIG;
