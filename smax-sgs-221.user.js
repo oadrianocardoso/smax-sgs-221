@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      7.4
+// @version      7.5
 // @description  SMAX SGS 221 (modularizado)
 // @author       ADRIANO AUGUSTO CARDOSO E SANTOS
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -15,21 +15,21 @@
 // @supportURL   https://github.com/oadrianocardoso/smax-sgs-221/issues
 
 
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/config.js?v=7.4
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/css.js?v=7.4
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/highlights.js?v=7.4
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/badges.js?v=7.4
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/magistrado.js?v=7.4
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/tags.js?v=7.4
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/comments.js?v=7.4
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/sections.js?v=7.4
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/attachments.js?v=7.4
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/detratores.js?v=7.4
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/botoes-resolucao.js?v=7.4
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/destaca-atendente.js?v=7.4
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/passar-aquele-gel.js?v=7.4
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/dados-eproc.js?v=7.4
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/orchestrator.js?v=7.4
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/config.js?v=7.5
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/css.js?v=7.5
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/highlights.js?v=7.5
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/badges.js?v=7.5
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/magistrado.js?v=7.5
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/tags.js?v=7.5
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/comments.js?v=7.5
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/sections.js?v=7.5
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/attachments.js?v=7.5
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/detratores.js?v=7.5
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/botoes-resolucao.js?v=7.5
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/destaca-atendente.js?v=7.5
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/passar-aquele-gel.js?v=7.5
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/dados-eproc.js?v=7.5
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/orchestrator.js?v=7.5
 
 // ==/UserScript==
 
