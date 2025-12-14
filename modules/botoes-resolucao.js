@@ -236,15 +236,14 @@
 
     let wrap = ensureWrapper(dst);
 
-    let cPicker = ensureEntityPickerClone(wrap);
     let cSave   = ensureButtonClone(wrap, ORIG_SAVE_SELECTOR, CLS_SAVE);
     let cSaveCl = ensureButtonClone(wrap, ORIG_SAVE_CLOSE_SELECTOR, CLS_SAVECL);
     let cLC     = ensureLifecycleClone(wrap);
 
-    ensureAfter(wrap, null, cPicker);
-    ensureAfter(wrap, cPicker, cSave);
+    ensureAfter(wrap, null, cSave);
     ensureAfter(wrap, cSave, cSaveCl);
     ensureAfter(wrap, cSaveCl, cLC);
+
   }
 
   tick();
