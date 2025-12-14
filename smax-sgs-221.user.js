@@ -6,7 +6,7 @@
 // @author       ADRIANO AUGUSTO CARDOSO E SANTOS
 // @match        https://suporte.tjsp.jus.br/saw/*
 // @match        https://suporte.tjsp.jus.br/saw/Requests*
-// @run-at       document-idle
+// @run-at       document-start
 // @grant        GM_addStyle
 // @grant        unsafeWindow
 // @downloadURL  https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/smax-sgs-221.user.js

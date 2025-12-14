@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var LOG        = '[SMAX] Módulo Dados eProc carregado';
+  var LOG        = '[SMAX] Módulo Dados eProc';
   var MAX_TRIES  = 40;
   var INTERVAL   = 500;
 
@@ -9,9 +9,7 @@
   var blockInserted = false;
 
   function log() {
-    try {
-      console.log.apply(console, [LOG].concat([].slice.call(arguments)));
-    } catch (e) {}
+    try { console.log.apply(console, [LOG].concat([].slice.call(arguments))); } catch (e) {}
   }
 
   // ============================================================
@@ -24,7 +22,6 @@
       try { return navigator.clipboard.writeText(texto); } catch (e) {}
     }
 
-    // fallback
     try {
       var ta = document.createElement('textarea');
       ta.value = texto;
@@ -54,7 +51,6 @@
         var payload = btn.getAttribute('data-copy') || '';
         copiarTexto(payload);
 
-        // feedback leve (sem mexer no layout)
         btn.setAttribute('title', 'Copiado!');
         setTimeout(function () {
           try { btn.setAttribute('title', 'Copiar'); } catch (e) {}
@@ -73,114 +69,164 @@
       .replace(/'/g, '&#39;');
   }
 
-  // Para colocar o texto cru em atributo HTML com segurança
   function escapeAttr(str) {
     return escapeHtml(str).replace(/`/g, '&#96;');
   }
 
-  // Botão idêntico ao que você colou (mesmas classes/SVG), com data-copy
-function buildCopyButton(rawValue) {
-  var v = (rawValue == null) ? '' : String(rawValue);
+  function buildCopyButton(rawValue) {
+    var v = (rawValue == null) ? '' : String(rawValue);
 
-  return ''
-    + '<button class="flex gap-1 items-center select-none py-1"'
-    + ' aria-label="Copiar"'
-    + ' title="Copiar"'
-    + ' data-initdata-copy="1"'
-    + ' data-copy="' + escapeAttr(v) + '"'
-    + ' style="margin-left:8px; cursor:pointer; background:transparent; border:0; padding:0;">'
-    +   '<svg width="15" height="15" viewBox="0 0 24 24" fill="none"'
-    +        ' stroke="currentColor" stroke-width="1.75"'
-    +        ' stroke-linecap="round" stroke-linejoin="round"'
-    +        ' class="icon-sm">'
-    +     '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>'
-    +     '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>'
-    +   '</svg>'
-    + '</button>';
-}
-
+    return ''
+      + '<button class="flex gap-1 items-center select-none py-1"'
+      + ' aria-label="Copiar"'
+      + ' title="Copiar"'
+      + ' data-initdata-copy="1"'
+      + ' data-copy="' + escapeAttr(v) + '"'
+      + ' style="margin-left:8px; cursor:pointer; background:transparent; border:0; padding:0;">'
+      +   '<svg width="15" height="15" viewBox="0 0 24 24" fill="none"'
+      +        ' stroke="currentColor" stroke-width="1.75"'
+      +        ' stroke-linecap="round" stroke-linejoin="round"'
+      +        ' class="icon-sm">'
+      +     '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>'
+      +     '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>'
+      +   '</svg>'
+      + '</button>';
+  }
 
   // ============================================================
-  // 1) MutationObserver – detecta troca de tela no SMAX (SPA)
+  // 1) Detectar troca de tela (SPA) – history hook (mais confiável)
   // ============================================================
-  function enableAutoReload() {
-    var lastUrl = location.href;
+  function onRouteChange() {
+    blockInserted = false;
+    // NÃO zerar capturedData sempre: às vezes a navegação reaproveita o mesmo initData
+    // mas se quiser "limpar agressivo", descomente:
+    // capturedData = null;
+
+    log('Mudança de rota detectada → tentando reinserir bloco (se houver dados).');
+    setTimeout(function () { hookIntoNewPage(); }, 700);
+  }
+
+  function enableSpaRouteHooksOnce() {
+    if (enableSpaRouteHooksOnce._done) return;
+    enableSpaRouteHooksOnce._done = true;
 
     try {
-      var observer = new MutationObserver(function () {
-        if (location.href !== lastUrl) {
-          lastUrl = location.href;
-          blockInserted = false;
-          capturedData  = null;
-          log('Mudança de tela detectada → reiniciando lógica do bloco');
+      var _push = history.pushState;
+      history.pushState = function () {
+        var ret = _push.apply(this, arguments);
+        try { onRouteChange(); } catch (e) {}
+        return ret;
+      };
 
-          // dá um tempo pro SMAX montar a tela
-          setTimeout(function () {
-            hookIntoNewPage();
-          }, 700);
-        }
+      var _replace = history.replaceState;
+      history.replaceState = function () {
+        var ret = _replace.apply(this, arguments);
+        try { onRouteChange(); } catch (e) {}
+        return ret;
+      };
+
+      window.addEventListener('popstate', function () {
+        try { onRouteChange(); } catch (e) {}
       });
-
-      observer.observe(document, { childList: true, subtree: true });
     } catch (e) {
-      console.error(LOG, 'Erro ao configurar MutationObserver:', e);
+      console.error(LOG, 'Erro ao hookar history:', e);
     }
   }
 
   function hookIntoNewPage() {
-    // Se já tivermos JSON capturado (por navegação interna + XHR reaproveitado),
-    // tenta inserir o bloco de novo
     if (capturedData && !blockInserted) {
       tryInsertBlock();
     }
   }
 
   // ============================================================
-  // 2) Intercepta a chamada initializationDataByLayout/Request
+  // 2) Intercepta initializationDataByLayout (XHR + fetch)
   // ============================================================
-  (function hookXHR() {
-    var origOpen = XMLHttpRequest.prototype.open;
-    var origSend = XMLHttpRequest.prototype.send;
+  function isInitDataUrl(url) {
+    url = url || '';
+    return (
+      url.indexOf('/rest/213963628/entity-page/initializationDataByLayout/Request/') !== -1 &&
+      url.indexOf('layout=FORM_LAYOUT.withoutResolution,FORM_LAYOUT.onlyResolution') !== -1
+    );
+  }
 
-    XMLHttpRequest.prototype.open = function (method, url) {
-      this._url = url;
-      return origOpen.apply(this, arguments);
-    };
+  function handleInitDataResponseText(txt) {
+    try {
+      capturedData = JSON.parse(txt);
+      blockInserted = false;
+      log('JSON capturado. Tentando inserir bloco...');
+      tryInsertBlock();
+    } catch (e) {
+      console.error(LOG, 'Erro ao parsear JSON:', e);
+    }
+  }
 
-    XMLHttpRequest.prototype.send = function (body) {
-      try {
-        var url = this._url || '';
+  function hookNetworkOnce() {
+    if (hookNetworkOnce._done) return;
+    hookNetworkOnce._done = true;
 
-        var isInitData =
-          url.indexOf('/rest/213963628/entity-page/initializationDataByLayout/Request/') !== -1 &&
-          url.indexOf('layout=FORM_LAYOUT.withoutResolution,FORM_LAYOUT.onlyResolution') !== -1;
+    // ---- XHR
+    try {
+      var origOpen = XMLHttpRequest.prototype.open;
+      var origSend = XMLHttpRequest.prototype.send;
 
-        if (isInitData) {
-          log('Requisição initializationDataByLayout detectada:', url);
+      XMLHttpRequest.prototype.open = function (method, url) {
+        this._tmx_url = url;
+        return origOpen.apply(this, arguments);
+      };
 
-          var xhr = this;
-          xhr.addEventListener('load', function () {
-            try {
-              if (xhr.status === 200) {
-                capturedData  = JSON.parse(xhr.responseText);
-                blockInserted = false;
-                log('JSON capturado. Tentando inserir bloco...');
-                tryInsertBlock();
-              } else {
-                log('Status != 200 na initializationDataByLayout:', xhr.status);
+      XMLHttpRequest.prototype.send = function (body) {
+        try {
+          var url = this._tmx_url || '';
+          if (isInitDataUrl(url)) {
+            log('XHR initData detectada:', url);
+            var xhr = this;
+            xhr.addEventListener('load', function () {
+              try {
+                if (xhr.status === 200 && xhr.responseText) {
+                  handleInitDataResponseText(xhr.responseText);
+                } else {
+                  log('XHR initData status != 200:', xhr.status);
+                }
+              } catch (e) {
+                console.error(LOG, 'Erro no load XHR:', e);
               }
-            } catch (e) {
-              console.error(LOG, 'Erro ao processar resposta initializationDataByLayout:', e);
-            }
-          });
-        }
-      } catch (e) {
-        console.error(LOG, 'Erro ao inspecionar XHR:', e);
-      }
+            });
+          }
+        } catch (e) {}
+        return origSend.apply(this, arguments);
+      };
+    } catch (e1) {
+      console.error(LOG, 'Erro ao hookar XHR:', e1);
+    }
 
-      return origSend.apply(this, arguments);
-    };
-  })();
+    // ---- fetch
+    try {
+      if (window.fetch) {
+        var origFetch = window.fetch;
+        window.fetch = function (input, init) {
+          var url = '';
+          try {
+            url = (typeof input === 'string') ? input : (input && input.url) ? input.url : '';
+          } catch (e) {}
+
+          return origFetch.apply(this, arguments).then(function (resp) {
+            try {
+              if (resp && resp.ok && isInitDataUrl(url)) {
+                log('fetch initData detectada:', url);
+                resp.clone().text().then(function (txt) {
+                  if (txt) handleInitDataResponseText(txt);
+                });
+              }
+            } catch (e) {}
+            return resp;
+          });
+        };
+      }
+    } catch (e2) {
+      console.error(LOG, 'Erro ao hookar fetch:', e2);
+    }
+  }
 
   // ============================================================
   // 3) Encontrar o container do campo "Título"
@@ -188,27 +234,21 @@ function buildCopyButton(rawValue) {
   function findContainerInDoc(doc) {
     if (!doc) return null;
 
-    // Tenta pelo ID padrão do container
     var byId = doc.getElementById('withoutResolution_DisplayLabel_container');
     if (byId) return byId;
 
-    // Fallback: procura o input e sobe até o .field-container
     try {
       var input = doc.querySelector('input[data-aid="withoutResolution_DisplayLabel"]');
-      if (input && input.closest) {
-        return input.closest('.field-container');
-      }
+      if (input && input.closest) return input.closest('.field-container');
     } catch (e) {}
 
     return null;
   }
 
   function findContainerAnywhere() {
-    // Documento principal
     var c = findContainerInDoc(document);
     if (c) return c;
 
-    // Procura em iframes (SMAX usa bastante)
     for (var i = 0; i < window.frames.length; i++) {
       try {
         var frameDoc = window.frames[i].document;
@@ -223,14 +263,11 @@ function buildCopyButton(rawValue) {
   // 4) Extrair dados do JSON
   // ============================================================
   function extractInfo(data) {
-    if (!data || !data.EntityData) {
-      return {};
-    }
+    if (!data || !data.EntityData) return {};
 
     var props   = data.EntityData.properties         || {};
     var related = data.EntityData.related_properties || {};
 
-    // ----- Número do processo + usuário dos UserOptions -----
     var numeroProcesso = '';
     var usuarioDoCampo = '';
 
@@ -244,21 +281,15 @@ function buildCopyButton(rawValue) {
                       userOptions.complexTypeProperties[0].properties;
 
         if (complex) {
-          if (complex.NumerodoProcesso_c) {
-            numeroProcesso = complex.NumerodoProcesso_c;
-          }
-          if (complex.Usuario_c) {
-            usuarioDoCampo = complex.Usuario_c;
-          }
+          if (complex.NumerodoProcesso_c) numeroProcesso = complex.NumerodoProcesso_c;
+          if (complex.Usuario_c) usuarioDoCampo = complex.Usuario_c;
         }
       }
     } catch (e) {
       console.error(LOG, 'Erro ao parsear UserOptions:', e);
     }
 
-    // ----- Usuário "oficial" -----
     var usuario = '';
-
     if (related.RequestedForPerson && related.RequestedForPerson.Name) {
       usuario = related.RequestedForPerson.Name;
     } else if (related.RequestedByPerson && related.RequestedByPerson.Name) {
@@ -267,42 +298,32 @@ function buildCopyButton(rawValue) {
       usuario = usuarioDoCampo;
     }
 
-    // ----- Unidade vinda do related_properties -----
     var unidadeRelated = '';
     if (related.RegisteredForLocation) {
       var rl = related.RegisteredForLocation;
-      unidadeRelated =
-        rl.DisplayName ||
-        rl.DisplayLabel ||
-        rl.Name ||
-        '';
+      unidadeRelated = rl.DisplayName || rl.DisplayLabel || rl.Name || '';
     }
 
-    // ----- PredioLot_c (lotação) -----
     var unidadePredio = '';
-    if (props.PredioLot_c) {
-      unidadePredio = props.PredioLot_c;
-    }
+    if (props.PredioLot_c) unidadePredio = props.PredioLot_c;
 
-    // Regra final: se PredioLot existir, usamos como "unidade principal"
     var unidadeFinal = unidadePredio || unidadeRelated || '';
 
     return {
       numeroProcesso: numeroProcesso,
       usuario:        usuario,
-      unidade:        unidadeFinal,   // principal
-      unidadeRelated: unidadeRelated, // do RegisteredForLocation
-      unidadePredio:  unidadePredio   // do PredioLot_c
+      unidade:        unidadeFinal,
+      unidadeRelated: unidadeRelated,
+      unidadePredio:  unidadePredio
     };
   }
 
   // ============================================================
-  // 5) Montar e inserir o bloco abaixo do Título
+  // 5) Montar e inserir o bloco
   // ============================================================
   function insertBlock(container, data) {
     if (blockInserted) return;
 
-    // remove bloco anterior se existir (caso SPA tenha reaproveitado DOM)
     try {
       var old = container.parentNode && container.parentNode.querySelector
         ? container.parentNode.querySelector('#initdata_eproc_block')
@@ -314,25 +335,21 @@ function buildCopyButton(rawValue) {
 
     var info = extractInfo(data);
 
-    // valores crus (pra copiar)
-    var rawNumero        = info.numeroProcesso || '—';
-    var rawUsuario       = info.usuario        || '—';
-    var rawUnidade       = info.unidade        || '—';
-    var rawUnidadeRelated= info.unidadeRelated || '—';
+    var rawNumero         = info.numeroProcesso || '—';
+    var rawUsuario        = info.usuario        || '—';
+    var rawUnidade        = info.unidade        || '—';
+    var rawUnidadeRelated = info.unidadeRelated || '—';
 
-    // valores escapados (pra exibir)
-    var numero        = escapeHtml(rawNumero);
-    var usuario       = escapeHtml(rawUsuario);
-    var unidade       = escapeHtml(rawUnidade);
-    var unidadeRelated= escapeHtml(rawUnidadeRelated);
+    var numero         = escapeHtml(rawNumero);
+    var usuario        = escapeHtml(rawUsuario);
+    var unidade        = escapeHtml(rawUnidade);
+    var unidadeRelated = escapeHtml(rawUnidadeRelated);
 
     var rowStyle = 'display:flex; align-items:center; gap:6px;';
     var html =
       '<div class="field-container clearfix full-width" id="initdata_eproc_block">' +
         '<div class="label-container" style="width: 304px;">' +
-          '<label>' +
-            '<span class="label-text">Dados eProc</span>' +
-          '</label>' +
+          '<label><span class="label-text">Dados eProc</span></label>' +
         '</div>' +
         '<div class="control-container">' +
           '<div style="padding:8px; border:1px solid #ccc; border-radius:4px; font-size:14px; line-height:1.4;">' +
@@ -370,7 +387,7 @@ function buildCopyButton(rawValue) {
   }
 
   // ============================================================
-  // 6) Esperar ter JSON + container e então inserir
+  // 6) Esperar container e inserir
   // ============================================================
   function tryInsertBlock() {
     if (!capturedData || blockInserted) return;
@@ -391,18 +408,18 @@ function buildCopyButton(rawValue) {
   }
 
   // ============================================================
-  // 7) Inicialização
+  // 7) Init – IMPORTANTE: hook de rede tem que ser IMEDIATO
   // ============================================================
   function init() {
-    log('Script carregado. Aguardando initializationDataByLayout...');
     installCopyHandlerOnce();
-    enableAutoReload(); // já liga o observer pra navegação interna
+    enableSpaRouteHooksOnce();
+    log('Inicializado. Aguardando initData...');
+    // se já tiver dados (ex.: navegação interna), tenta inserir
+    setTimeout(function () { hookIntoNewPage(); }, 0);
   }
 
-  if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    init();
-  } else {
-    document.addEventListener('DOMContentLoaded', init);
-  }
+  // *** CHAVE DO SUCESSO: hook de rede fora do DOMContentLoaded ***
+  hookNetworkOnce();
+  init();
 
 })();
