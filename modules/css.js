@@ -4,10 +4,34 @@
   const SMAX = root.SMAX = root.SMAX || {};
 
   function init() {
-    // CSS agora é injetado diretamente pelos módulos (highlights, badges, tags, attachments, comments).
-    // Este módulo é mantido apenas para compatibilidade com versões antigas do userscript.
+    if (document.getElementById('smax-css-header-preto')) return;
+
+    const style = document.createElement('style');
+    style.id = 'smax-css-header-preto';
+    style.type = 'text/css';
+    style.textContent = `
+      .navbar.navbar-fixed-top.navbar-inline{
+        --headerBackgroundColor: #000000 !important;
+        --logoBackgroundColor:   #000000 !important;
+      }
+
+      .customBrandLogoContainer{
+        background-color: #000000 !important;
+      }
+
+      #menu-categories .menu-right-section{
+        background-color: #000000 !important;
+      }
+
+      .sub-menu-navbar .subitem-link a:hover{
+        border-bottom: 4px solid red !important;
+      }
+    `;
+
+    document.head.appendChild(style);
   }
 
   SMAX.css = { init };
 
 })(typeof unsafeWindow !== 'undefined' ? unsafeWindow : window);
+
