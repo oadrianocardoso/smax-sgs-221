@@ -94,14 +94,10 @@
   }
 
   // ============================================================
-  // 1) Detectar troca de tela (SPA) – history hook (mais confiável)
+  // 1) Detectar troca de tela (SPA) – history hook
   // ============================================================
   function onRouteChange() {
     blockInserted = false;
-    // NÃO zerar capturedData sempre: às vezes a navegação reaproveita o mesmo initData
-    // mas se quiser "limpar agressivo", descomente:
-    // capturedData = null;
-
     log('Mudança de rota detectada → tentando reinserir bloco (se houver dados).');
     setTimeout(function () { hookIntoNewPage(); }, 700);
   }
@@ -260,8 +256,42 @@
   }
 
   // ============================================================
-  // 4) Extrair dados do JSON
+  // 4) Extrair dados do JSON (inclui contagem de CommentId)
   // ============================================================
+  function countCommentIds(props) {
+    try {
+      if (!props) return 0;
+
+      var commentsRaw = props.Comments;
+      if (!commentsRaw) return 0;
+
+      var parsed = commentsRaw;
+
+      // Em geral vem como string JSON (ex.: "{\"Comment\":[...]}")
+      if (typeof parsed === 'string') {
+        parsed = parsed.trim();
+        if (!parsed) return 0;
+        parsed = JSON.parse(parsed);
+      }
+
+      if (!parsed) return 0;
+
+      var arr = parsed.Comment || parsed.comments || parsed.comment || null;
+      if (!arr) return 0;
+      if (!Array.isArray(arr)) arr = [arr];
+
+      var count = 0;
+      for (var i = 0; i < arr.length; i++) {
+        var cid = arr[i] && arr[i].CommentId;
+        if (cid) count++;
+      }
+      return count;
+    } catch (e) {
+      // Se falhar, não quebra o bloco
+      return 0;
+    }
+  }
+
   function extractInfo(data) {
     if (!data || !data.EntityData) return {};
 
@@ -309,12 +339,15 @@
 
     var unidadeFinal = unidadePredio || unidadeRelated || '';
 
+    var commentIdCount = countCommentIds(props);
+
     return {
       numeroProcesso: numeroProcesso,
       usuario:        usuario,
       unidade:        unidadeFinal,
       unidadeRelated: unidadeRelated,
-      unidadePredio:  unidadePredio
+      unidadePredio:  unidadePredio,
+      commentIdCount: commentIdCount
     };
   }
 
@@ -345,6 +378,8 @@
     var unidade        = escapeHtml(rawUnidade);
     var unidadeRelated = escapeHtml(rawUnidadeRelated);
 
+    var commentIdCount = info.commentIdCount || 0;
+
     var rowStyle = 'display:flex; align-items:center; gap:6px;';
     var html =
       '<div class="field-container clearfix full-width" id="initdata_eproc_block">' +
@@ -373,6 +408,16 @@
               '<div><strong>Lotação:</strong> ' + unidadeRelated + '</div>' +
               buildCopyButton(rawUnidadeRelated) +
             '</div>' +
+
+            // >>>>> NOVO: linha de comentários (se CommentId > 1)
+            (commentIdCount > 1
+              ? (
+                '<div style="margin-top:6px;">' +
+                  '<strong>‼️Comentários:</strong> Existem comentários nas discussões.' +
+                '</div>'
+              )
+              : ''
+            ) +
 
           '</div>' +
         '</div>' +
@@ -408,17 +453,15 @@
   }
 
   // ============================================================
-  // 7) Init – IMPORTANTE: hook de rede tem que ser IMEDIATO
+  // 7) Init – hook de rede tem que ser IMEDIATO
   // ============================================================
   function init() {
     installCopyHandlerOnce();
     enableSpaRouteHooksOnce();
     log('Inicializado. Aguardando initData...');
-    // se já tiver dados (ex.: navegação interna), tenta inserir
     setTimeout(function () { hookIntoNewPage(); }, 0);
   }
 
-  // *** CHAVE DO SUCESSO: hook de rede fora do DOMContentLoaded ***
   hookNetworkOnce();
   init();
 
