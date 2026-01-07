@@ -46,7 +46,7 @@
     "YVES":         {bg:"#2F4F8F", fg:"#fff"}
   };
 
-  const DEFAULT_AUSENTES = ["ADRIANO"];
+  const DEFAULT_AUSENTES = ["ADRIANO", "LUIS FELIPE", "YVES"];
 
   const NAME_GROUPS = CONFIG.nameGroups || DEFAULT_NAME_GROUPS;
   const NAME_COLOR  = CONFIG.nameColors || DEFAULT_NAME_COLORS;
