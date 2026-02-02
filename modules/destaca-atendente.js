@@ -53,7 +53,7 @@ const DEFAULT_NAME_COLORS = {
 };
 
 
-  const DEFAULT_AUSENTES = ["IONE"];
+  const DEFAULT_AUSENTES = ["IONE", "ISA"];
 
   const NAME_GROUPS = CONFIG.nameGroups || DEFAULT_NAME_GROUPS;
   const NAME_COLOR  = CONFIG.nameColors || DEFAULT_NAME_COLORS;
