@@ -247,5 +247,34 @@
   }
 
   tick();
-  setInterval(tick, 1500);
+
+  let tickTimer = null;
+  function scheduleTick(delay) {
+    if (tickTimer) {
+      clearTimeout(tickTimer);
+      tickTimer = null;
+    }
+    tickTimer = setTimeout(function () {
+      tickTimer = null;
+      tick();
+    }, Number(delay) || 0);
+  }
+
+  const obs = new MutationObserver(function () {
+    scheduleTick(80);
+  });
+
+  if (document.documentElement) {
+    obs.observe(document.documentElement, { childList: true, subtree: true });
+  }
+
+  const fallbackIntervalId = setInterval(function () {
+    tick();
+  }, 10000);
+
+  window.addEventListener('beforeunload', function () {
+    try { obs.disconnect(); } catch (e) {}
+    if (tickTimer) clearTimeout(tickTimer);
+    clearInterval(fallbackIntervalId);
+  }, { once: true });
 })();

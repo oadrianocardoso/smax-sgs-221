@@ -35,6 +35,7 @@
       SMAX.comments   && SMAX.comments.init   && SMAX.comments.init();
       SMAX.sections   && SMAX.sections.init   && SMAX.sections.init();
       SMAX.detratores && SMAX.detratores.init && SMAX.detratores.init();
+      SMAX.exportChamados && SMAX.exportChamados.init && SMAX.exportChamados.init();
     } catch (e) {
       console.error('[SMAX Orchestrator] Erro ao inicializar módulos one-shot:', e);
     }
@@ -44,15 +45,12 @@
     const obsMain = new MutationObserver(() => scheduleRunAll());
     obsMain.observe(doc.body, {
       childList: true,
-      subtree: true,
-      characterData: true,
-      attributes: true,
-      attributeFilter: ['class','style','aria-expanded']
+      subtree: true
     });
 
     const headerEl = doc.querySelector('.slick-header-columns') || doc.body;
     const obsHeader = new MutationObserver(() => scheduleRunAll());
-    obsHeader.observe(headerEl, { childList:true, subtree:true, attributes:true });
+    obsHeader.observe(headerEl, { childList:true, subtree:true });
 
     root.addEventListener('scroll', scheduleRunAll, true);
     root.addEventListener('resize', scheduleRunAll, { passive:true });

@@ -29,13 +29,25 @@
     return `.slick-row .slick-cell.l${idx}.r${idx}`;
   }
 
+  function clearMarks() {
+    root.document.querySelectorAll('.tmx-juizdireito-hit').forEach(cell => {
+      cell.classList.remove('tmx-juizdireito-hit');
+    });
+  }
+
   function markMagistrateColumn() {
-    if (!prefs.magistradoOn) return;
+    if (!prefs.magistradoOn) {
+      clearMarks();
+      return;
+    }
     ensureCss();
     const doc   = root.document;
     const scope = getGridViewport(doc);
     const colSel = getColumnSelectorByHeaderAid(AID_SOLICITADO_POR);
-    if (!colSel) return;
+    if (!colSel) {
+      clearMarks();
+      return;
+    }
     scope.querySelectorAll(colSel).forEach(cell => {
       const txt = (cell.textContent || '').trim();
       if (RE_MAGISTRADO.test(txt)) cell.classList.add('tmx-juizdireito-hit');

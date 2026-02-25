@@ -1,67 +1,51 @@
 (function (root) {
   'use strict';
 
-  console.log('[SMAX] Módulo Destaca Atendente carregado');
-
-  const SMAX   = root.SMAX = root.SMAX || {};
+  const SMAX = root.SMAX = root.SMAX || {};
   const CONFIG = SMAX.config || {};
-  const prefs  = CONFIG.prefs || {};
-
-  // =========================
-  // DEFAULTS EMBUTIDOS
-  // =========================
-const DEFAULT_NAME_GROUPS = {
-  "ADRIANO":             [0,1,2,3,4,5],
-  "DANIEL LEAL":         [6,7,8,9,10],
-  "DOUGLAS MACHADO":     [11,12,13,14,15],
-  "DOUGLAS SUGAHARA":    [16,17,18,19,20,21],
-  "IONE":                [22,23,24,25,26],
-  "ISA":                 [27,28,29,30,31,32],
-  "IVAN":                [33,34,35,36,37,38],
-  "LAIS AKEMI":          [39,40,41,42,43],
-  "LAIS MARTINS":        [44,45,46,47,48,49],
-  "LEONARDO":            [50,51,52,53,54,55],
-  "LUANA":               [56,57,58,59,60],
-  "LUIS FELIPE":         [61,62,63,64,65,66],
-  "MARCELO":             [67,68,69,70,71,72],
-  "MARLON":              [73,74,75,76,77],
-  "ROBSON":              [78,79,80,81,82,83],
-  "RODRIGO":             [84,85,86,87,88],
-  "SAMUEL":              [89,90,91,92,93,94],
-  "YVES":                [95,96,97,98,99]
-};
-
-const DEFAULT_NAME_COLORS = {
-  "ADRIANO":            { bg:"#E6E66A", fg:"#000" },
-  "DANIEL LEAL":        { bg:"#E6A85C", fg:"#000" },
-  "DOUGLAS MACHADO":    { bg:"#66CCCC", fg:"#000" },
-  "DOUGLAS SUGAHARA":   { bg:"#4FA6A6", fg:"#fff" },
-  "IONE":               { bg:"#4D4D4D", fg:"#fff" },
-  "ISA":                { bg:"#5C6FA6", fg:"#fff" },
-  "IVAN":               { bg:"#9A9A52", fg:"#000" },
-  "LAIS AKEMI":         { bg:"#D966D9", fg:"#000" },
-  "LAIS MARTINS":       { bg:"#B85CB8", fg:"#fff" }, 
-  "LEONARDO":           { bg:"#8E5A8E", fg:"#fff" },
-  "LUANA":              { bg:"#7ACC7A", fg:"#000" },
-  "LUIS FELIPE":        { bg:"#5CA3A3", fg:"#000" },
-  "MARCELO":            { bg:"#A05252", fg:"#fff" },
-  "MARLON":             { bg:"#A0A0A0", fg:"#000" },
-  "ROBSON":             { bg:"#CCCCCC", fg:"#000" },
-  "RODRIGO":            { bg:"#999999", fg:"#000" },
-  "SAMUEL":             { bg:"#66A3CC", fg:"#000" },
-  "YVES":               { bg:"#2F4F8F", fg:"#fff" }
-};
-
-
-  const DEFAULT_AUSENTES = ["IONE", "ISA"];
-
-  const NAME_GROUPS = CONFIG.nameGroups || DEFAULT_NAME_GROUPS;
-  const NAME_COLOR  = CONFIG.nameColors || DEFAULT_NAME_COLORS;
-  const AUSENTES    = Array.isArray(CONFIG.ausentes) ? CONFIG.ausentes : DEFAULT_AUSENTES;
+  const prefs = CONFIG.prefs || {};
 
   const NAME_MARK_ATTR = 'adMarcado';
-  const LINK_PICKERS   = ['a.entity-link-id', '.slick-row a'];
-  const processedLinks = new WeakSet();
+  const CELL_MARK_ATTR = 'smaxBadgeApplied';
+  const LINK_PICKERS = ['a.entity-link-id', '.slick-row a'];
+  const OWNER_TAG_CLASS = 'smax-owner-tag';
+
+  function isPlainObject(v) {
+    return Object.prototype.toString.call(v) === '[object Object]';
+  }
+
+  function normalizeName(value) {
+    return String(value || '').trim().toUpperCase();
+  }
+
+  function getLiveNameGroups() {
+    return isPlainObject(CONFIG.nameGroups) ? CONFIG.nameGroups : {};
+  }
+
+  function getLiveNameColors() {
+    return isPlainObject(CONFIG.nameColors) ? CONFIG.nameColors : {};
+  }
+
+  function getAusentesSet() {
+    if (!Array.isArray(CONFIG.ausentes)) return new Set();
+    return new Set(CONFIG.ausentes.map(normalizeName).filter(Boolean));
+  }
+
+  function buildOwnerMap(nameGroups) {
+    const map = new Map();
+    Object.entries(nameGroups || {}).forEach(([ownerName, finals]) => {
+      const owner = normalizeName(ownerName);
+      if (!owner || !Array.isArray(finals)) return;
+
+      finals.forEach(f => {
+        const n = Number(f);
+        if (!Number.isInteger(n) || n < 0 || n > 99) return;
+        map.set(String(n), owner);
+        map.set(String(n).padStart(2, '0'), owner);
+      });
+    });
+    return map;
+  }
 
   let cssInjected = false;
   function ensureCss() {
@@ -73,47 +57,32 @@ const DEFAULT_NAME_COLORS = {
       .slick-cell.tmx-namecell a { color: inherit !important; }
       .slick-cell.tmx-namecell:focus-within { outline: 2px solid rgba(0,0,0,.25); outline-offset: 2px; }
       .slick-cell.tmx-namecell:hover { box-shadow: 0 0 0 2px rgba(0,0,0,.08) inset; }
+      .${OWNER_TAG_CLASS} { margin-left: 6px; font-weight: 600; border-radius: 4px; padding: 0 4px; }
     `);
   }
 
-  function isAtivo(nome) {
+  function isAtivo(nome, ausentesSet) {
     if (!nome) return false;
-    if (AUSENTES.includes(nome)) return false;
-    return true;
+    return !ausentesSet.has(normalizeName(nome));
   }
 
-  const SUB_TO_OWNER = (() => {
-    const m = new Map();
-    for (const [nome, finais] of Object.entries(NAME_GROUPS)) {
-      for (const f of finais) {
-        const s1 = String(f);
-        const s2 = String(f).padStart(2, '0');
-        m.set(s1, nome);
-        m.set(s2, nome);
-      }
-    }
-    return m;
-  })();
-
-  function getResponsavel(numeroStr) {
-    let n = (numeroStr || "").replace(/\D/g, "");
+  function getResponsavel(numeroStr, ownerMap, ausentesSet) {
+    let n = (numeroStr || '').replace(/\D/g, '');
     if (!n) return null;
 
     while (n.length > 0) {
       if (n.length >= 2) {
-        const sub2  = n.slice(-2);
-        const dono2 = SUB_TO_OWNER.get(sub2);
+        const dono2 = ownerMap.get(n.slice(-2));
         if (dono2) {
-          if (isAtivo(dono2)) return dono2;
+          if (isAtivo(dono2, ausentesSet)) return dono2;
           n = n.slice(0, -1);
           continue;
         }
       }
 
-      const sub1  = n.slice(-1);
-      const dono1 = SUB_TO_OWNER.get(sub1);
+      const dono1 = ownerMap.get(n.slice(-1));
       if (dono1) {
-        if (isAtivo(dono1)) return dono1;
+        if (isAtivo(dono1, ausentesSet)) return dono1;
         n = n.slice(0, -1);
         continue;
       }
@@ -126,9 +95,9 @@ const DEFAULT_NAME_COLORS = {
 
   function pickAllLinks() {
     const set = new Set();
-    for (const sel of LINK_PICKERS) {
+    LINK_PICKERS.forEach(sel => {
       root.document.querySelectorAll(sel).forEach(a => set.add(a));
-    }
+    });
     return Array.from(set);
   }
 
@@ -137,47 +106,118 @@ const DEFAULT_NAME_COLORS = {
     return m ? m[1] : '';
   }
 
-  function applyNameBadges() {
-    if (!prefs.nameBadgesOn) return;
-    ensureCss();
-    pickAllLinks().forEach(link => {
-      if (!link || processedLinks.has(link)) return;
+  function findOwnerTag(link) {
+    let next = link.nextSibling;
+    while (next) {
+      if (next.nodeType === 1) {
+        if (next.classList && next.classList.contains(OWNER_TAG_CLASS)) return next;
+        return null;
+      }
+      next = next.nextSibling;
+    }
+    return null;
+  }
 
-      const label  = (link.textContent || '').trim();
+  function clearCellBadge(cell) {
+    if (!cell) return;
+    if (!cell.dataset[CELL_MARK_ATTR]) return;
+
+    cell.classList.remove('tmx-namecell');
+    cell.style.background = '';
+    cell.style.color = '';
+    cell.querySelectorAll('a').forEach(a => { a.style.color = ''; });
+    delete cell.dataset[CELL_MARK_ATTR];
+  }
+
+  function applyCellBadge(cell, color) {
+    if (!cell || !color) return;
+    cell.classList.add('tmx-namecell');
+    cell.style.background = color.bg;
+    cell.style.color = color.fg || '';
+    cell.querySelectorAll('a').forEach(a => { a.style.color = 'inherit'; });
+    cell.dataset[CELL_MARK_ATTR] = '1';
+  }
+
+  function clearLinkBadge(link) {
+    const tag = findOwnerTag(link);
+    if (tag) tag.remove();
+    delete link.dataset[NAME_MARK_ATTR];
+    clearCellBadge(link.closest('.slick-cell'));
+  }
+
+  function applyLinkBadge(link, owner, color) {
+    const cell = link.closest('.slick-cell');
+    if (cell) {
+      clearCellBadge(cell);
+      applyCellBadge(cell, color);
+    }
+
+    let tag = findOwnerTag(link);
+    if (!tag) {
+      tag = root.document.createElement('span');
+      tag.className = OWNER_TAG_CLASS;
+      link.insertAdjacentElement('afterend', tag);
+    }
+
+    tag.textContent = ' ' + owner;
+    if (color) {
+      tag.style.background = color.bg || '';
+      tag.style.color = color.fg || '';
+    } else {
+      tag.style.background = '';
+      tag.style.color = '';
+    }
+    link.dataset[NAME_MARK_ATTR] = '1';
+  }
+
+  function clearAllBadges() {
+    root.document.querySelectorAll(`.${OWNER_TAG_CLASS}`).forEach(el => el.remove());
+    pickAllLinks().forEach(a => {
+      delete a.dataset[NAME_MARK_ATTR];
+    });
+    root.document.querySelectorAll('.slick-cell.tmx-namecell').forEach(cell => {
+      clearCellBadge(cell);
+      cell.classList.remove('tmx-namecell');
+    });
+  }
+
+  function applyNameBadges() {
+    if (!prefs.nameBadgesOn) {
+      clearAllBadges();
+      return;
+    }
+
+    const nameGroups = getLiveNameGroups();
+    const nameColors = getLiveNameColors();
+    const ausentesSet = getAusentesSet();
+    const ownerMap = buildOwnerMap(nameGroups);
+
+    ensureCss();
+
+    const links = pickAllLinks();
+    if (!ownerMap.size || !links.length) {
+      clearAllBadges();
+      return;
+    }
+
+    links.forEach(link => {
+      if (!link) return;
+
+      const label = (link.textContent || '').trim();
       const digits = extractTrailingDigits(label);
       if (!digits) {
-        processedLinks.add(link);
+        clearLinkBadge(link);
         return;
       }
 
-      const owner = getResponsavel(digits);
-      const cell  = link.closest('.slick-cell');
-
-      if (cell && owner && NAME_COLOR[owner]) {
-        const { bg, fg } = NAME_COLOR[owner];
-        cell.classList.add('tmx-namecell');
-        cell.style.background = bg;
-        cell.style.color      = fg || '';
-        cell.querySelectorAll('a').forEach(a => { a.style.color = 'inherit'; });
+      const owner = getResponsavel(digits, ownerMap, ausentesSet);
+      if (!owner) {
+        clearLinkBadge(link);
+        return;
       }
 
-      if (owner && !link.dataset[NAME_MARK_ATTR]) {
-        const tag = root.document.createElement('span');
-        tag.textContent = ' ' + owner;
-        tag.style.marginLeft  = '6px';
-        tag.style.fontWeight  = '600';
-        const c = NAME_COLOR[owner];
-        if (c) {
-          tag.style.background   = c.bg;
-          tag.style.color        = c.fg;
-          tag.style.padding      = '0 4px';
-          tag.style.borderRadius = '4px';
-        }
-        link.insertAdjacentElement('afterend', tag);
-        link.dataset[NAME_MARK_ATTR] = '1';
-      }
-
-      processedLinks.add(link);
+      const color = nameColors[owner] || null;
+      applyLinkBadge(link, owner, color);
     });
   }
 

@@ -2,27 +2,24 @@
   'use strict';
 
   const SMAX = root.SMAX = root.SMAX || {};
+  const CONFIG = SMAX.config || {};
 
-  // Lista fixa de detratores (Grupo 1)
-  const DETRATORES_GRUPO_1 = [
-    "Adriano Zilli","Adriana Da Silva Ferreira Oliveira","Alessandra Sousa Nunes","Bruna Marques Dos Santos",
-    "Breno Medeiros Malfati","Carlos Henrique Scala De Almeida","Cassia Santos Alves De Lima","Dalete Rodrigues Silva",
-    "David Lopes De Oliveira","Davi Dos Reis Garcia","Deaulas De Campos Salviano","Diego Oliveira Da Silva",
-    "Diogo Mendonça Aniceto","Elaine Moriya","Ester Naili Dos Santos","Fabiano Barbosa Dos Reis",
-    "Fabricio Christiano Tanobe Lyra","Gabriel Teixeira Ludvig","Gilberto Sintoni Junior","Giovanna Coradini Teixeira",
-    "Gislene Ferreira Sant'Ana Ramos","Guilherme Cesar De Sousa","Gustavo De Meira Gonçalves","Jackson Alcantara Santana",
-    "Janaina Dos Passos Silvestre","Jefferson Silva De Carvalho Soares","Joyce Da Silva Oliveira","Juan Campos De Souza",
-    "Juliana Lino Dos Santos Rosa","Karina Nicolau Samaan","Karine Barbara Vitor De Lima Souza","Kaue Nunes Silva Farrelly",
-    "Kelly Ferreira De Freitas","Larissa Ferreira Fumero","Lucas Alves Dos Santos","Lucas Carneiro Peres Ferreira",
-    "Marcos Paulo Silva Madalena","Maria Fernanda De Oliveira Bento","Natalia Yurie Shiba","Paulo Roberto Massoca",
-    "Pedro Henrique Palacio Baritti","Rafaella Silva Lima Petrolini","Renata Aparecida Mendes Bonvechio","Rodrigo Silva Oliveira",
-    "Ryan Souza Carvalho","Tatiana Lourenço Da Costa Antunes","Tatiane Araujo Da Cruz","Thiago Tadeu Faustino De Oliveira",
-    "Tiago Carvalho De Freitas Meneses","Victor Viana Roca","GERSON DA MATTA", "ROGE NAIM TENN"
-  ];
+  function getDetratores() {
+    return Array.isArray(CONFIG.detratores) ? CONFIG.detratores : [];
+  }
 
   function init() {
     const doc = root.document;
+    if (!doc.body) {
+      const pendingApi = { sweep: () => {} };
+      doc.addEventListener('DOMContentLoaded', () => {
+        if (api === pendingApi) api = init();
+      }, { once: true });
+      return pendingApi;
+    }
+
     const ICON_CAVEIRA_URL = 'https://cdn-icons-png.flaticon.com/512/564/564619.png';
+    let sweepTimer = null;
 
     const normalizeName = s => (s || '').toString()
       .normalize('NFD')
@@ -30,35 +27,53 @@
       .trim()
       .toUpperCase();
 
-    // Set com nomes normalizados para busca rápida
-    const FLAG_SET = new Set(DETRATORES_GRUPO_1.map(normalizeName));
-
     function getVisibleLeadingText(el) {
-      const clone = el.cloneNode(true);
-      while (clone.firstChild) {
-        if (clone.firstChild.nodeType === Node.ELEMENT_NODE) clone.removeChild(clone.firstChild);
-        else break;
+      let out = '';
+      const nodes = el && el.childNodes ? el.childNodes : [];
+      for (let i = 0; i < nodes.length; i += 1) {
+        const n = nodes[i];
+        if (!n) continue;
+        if (n.nodeType === Node.ELEMENT_NODE) break;
+        if (n.nodeType === Node.TEXT_NODE) out += n.textContent || '';
       }
-      return clone.textContent || '';
+      return out;
     }
 
-    function applySkullAlert(personItem) {
+    function readNameFromElement(personItem) {
+      const raw = [
+        getVisibleLeadingText(personItem),
+        personItem.getAttribute('title') || '',
+        personItem.getAttribute('aria-label') || '',
+        personItem.textContent || ''
+      ]
+        .map(v => String(v || '').trim())
+        .find(Boolean) || '';
+      return raw;
+    }
+
+    function isDetratorName(nameRaw, flagList, flagSet) {
+      const key = normalizeName(nameRaw);
+      if (!key) return false;
+      if (flagSet.has(key)) return true;
+      if (key.length < 8) return false;
+      return flagList.some(flag => key.includes(flag) || flag.includes(key));
+    }
+
+    function applySkullAlert(personItem, flagList, flagSet) {
       try {
         if (!(personItem instanceof HTMLElement)) return;
 
-        const nomeVisivel = getVisibleLeadingText(personItem);
-        const chave       = normalizeName(nomeVisivel);
-
-        if (!FLAG_SET.has(chave)) return;
+        const nomeVisivel = readNameFromElement(personItem);
+        if (!isDetratorName(nomeVisivel, flagList, flagSet)) return;
 
         const img = personItem.querySelector('img.ts-avatar, img.pl-shared-item-img, img.ts-image') ||
                     personItem.querySelector('img');
 
         if (img && img.dataset.__g1Applied !== '1') {
           img.dataset.__g1Applied = '1';
-          img.src   = ICON_CAVEIRA_URL;
-          img.alt   = 'Alerta de Usuário Detrator';
-          img.title = 'Alerta de Usuário Detrator';
+          img.src = ICON_CAVEIRA_URL;
+          img.alt = 'Alerta de Usuario Detrator';
+          img.title = 'Alerta de Usuario Detrator';
           Object.assign(img.style, {
             border: '3px solid #ff0000',
             borderRadius: '50%',
@@ -68,29 +83,82 @@
           });
         }
 
-        personItem.style.color = '#ff0000';
+        if (personItem.dataset.__g1ColorApplied !== '1') {
+          personItem.style.color = '#ff0000';
+          personItem.dataset.__g1ColorApplied = '1';
+        }
       } catch (e) {
-        // silencioso
+        // noop
       }
     }
 
-    const obs = new MutationObserver(() =>
-      doc.querySelectorAll('span.pl-person-item').forEach(applySkullAlert)
-    );
+    function getCandidateNodes() {
+      return doc.querySelectorAll([
+        'span.pl-person-item',
+        '.pl-person-item',
+        '.pl-shared-item',
+        '.pl-shared-item-title',
+        '.rc-object-name',
+        '.ts-contact-name'
+      ].join(','));
+    }
+
+    function sweep() {
+      const flagList = getDetratores().map(normalizeName).filter(Boolean);
+      const flagSet = new Set(flagList);
+      if (!flagSet.size) return;
+      getCandidateNodes().forEach(item => applySkullAlert(item, flagList, flagSet));
+    }
+
+    function scheduleSweep(delay) {
+      if (sweepTimer) {
+        root.clearTimeout(sweepTimer);
+        sweepTimer = null;
+      }
+      sweepTimer = root.setTimeout(() => {
+        sweepTimer = null;
+        sweep();
+      }, Number(delay) || 0);
+    }
+
+    const obs = new MutationObserver(() => scheduleSweep(60));
 
     obs.observe(doc.body, { childList: true, subtree: true });
 
     if (doc.readyState === 'loading') {
-      doc.addEventListener('DOMContentLoaded', () =>
-        doc.querySelectorAll('span.pl-person-item').forEach(applySkullAlert)
-      );
+      doc.addEventListener('DOMContentLoaded', () => scheduleSweep(100));
     } else {
-      doc.querySelectorAll('span.pl-person-item').forEach(applySkullAlert);
+      scheduleSweep(100);
     }
 
-    root.addEventListener('beforeunload', () => obs.disconnect(), { once: true });
+    const intervalId = root.setInterval(() => {
+      if (doc.hidden) return;
+      scheduleSweep(0);
+    }, 3000);
+
+    root.addEventListener('beforeunload', () => {
+      obs.disconnect();
+      if (sweepTimer) root.clearTimeout(sweepTimer);
+      root.clearInterval(intervalId);
+    }, { once: true });
+
+    return {
+      sweep: () => scheduleSweep(0)
+    };
   }
 
-  SMAX.detratores = { init };
+  let api = null;
+
+  SMAX.detratores = {
+    init() {
+      if (api) return api;
+      api = init();
+      return api;
+    },
+    refresh() {
+      if (!api) api = init();
+      api?.sweep?.();
+    }
+  };
 
 })(typeof unsafeWindow !== 'undefined' ? unsafeWindow : window);

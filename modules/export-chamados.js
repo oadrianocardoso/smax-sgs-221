@@ -296,9 +296,9 @@
 
     if (exporting) {
       if (externalUi && typeof externalUi.error === 'function') {
-        externalUi.error('A exportacao EMS ja esta em execucao.');
+        externalUi.error('A exportacao ja esta em execucao.');
       }
-      alert('A exportacao EMS ja esta em execucao.');
+      alert('A exportacao ja esta em execucao.');
       return;
     }
 

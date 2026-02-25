@@ -7,9 +7,171 @@
 
   var capturedData  = null;
   var blockInserted = false;
+  var automatizadoresState = {
+    loaded: false,
+    names: new Set(),
+    namesList: [],
+    loadingPromise: null
+  };
 
   function log() {
     try { console.log.apply(console, [LOG].concat([].slice.call(arguments))); } catch (e) {}
+  }
+
+  function normalizeName(value) {
+    return String(value || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim()
+      .toUpperCase();
+  }
+
+  function getSmaxRoot() {
+    return (typeof unsafeWindow !== 'undefined') ? unsafeWindow : window;
+  }
+
+  function getDetratoresNormalized() {
+    var root = getSmaxRoot();
+    var cfg = (root && root.SMAX && root.SMAX.config) ? root.SMAX.config : {};
+    var list = Array.isArray(cfg.detratores) ? cfg.detratores : [];
+    return list.map(normalizeName).filter(Boolean);
+  }
+
+  function isDetratorName(rawName, normalizedDetratores) {
+    var key = normalizeName(rawName);
+    if (!key) return false;
+
+    var set = new Set(normalizedDetratores || []);
+    if (set.has(key)) return true;
+
+    if (key.length < 8) return false;
+    for (var i = 0; i < normalizedDetratores.length; i++) {
+      var flag = normalizedDetratores[i];
+      if (!flag) continue;
+      if (key.indexOf(flag) !== -1 || flag.indexOf(key) !== -1) return true;
+    }
+
+    return false;
+  }
+
+  function buildTag(label, bg, color) {
+    return ''
+      + '<span style="display:inline-flex; align-items:center; height:20px; padding:0 8px; border-radius:999px;'
+      + ' font-size:11px; font-weight:700; letter-spacing:.2px; background:' + bg + '; color:' + color + ';">'
+      + escapeHtml(label)
+      + '</span>';
+  }
+
+  function buildUserTagsHtml(rawUserName) {
+    var name = String(rawUserName || '').trim();
+    if (!name) return '';
+
+    var detratores = getDetratoresNormalized();
+    var isDetrator = isDetratorName(name, detratores);
+    var isAutomatizador = isAutomatizadorName(name);
+
+    var tags = [];
+    if (isDetrator) tags.push(buildTag('DETRATOR', '#FEE2E2', '#991B1B'));
+    if (isAutomatizador) tags.push(buildTag('AUTOMATIZADOR', '#DBEAFE', '#1E40AF'));
+    return tags.join('');
+  }
+
+  function isAutomatizadorName(rawName) {
+    var key = normalizeName(rawName);
+    if (!key) return false;
+
+    if (automatizadoresState.names.has(key)) return true;
+
+    var list = Array.isArray(automatizadoresState.namesList) ? automatizadoresState.namesList : [];
+    if (key.length < 8) return false;
+
+    for (var i = 0; i < list.length; i++) {
+      var item = list[i];
+      if (!item) continue;
+      if (key.indexOf(item) !== -1 || item.indexOf(key) !== -1) return true;
+    }
+
+    return false;
+  }
+
+  function renderUserTagsInCurrentBlock(rawUserName) {
+    try {
+      var block = document.getElementById('initdata_eproc_block');
+      if (!block) return;
+      var host = block.querySelector('.smax-eproc-user-tags');
+      if (!host) return;
+      host.innerHTML = buildUserTagsHtml(rawUserName);
+    } catch (e) {}
+  }
+
+  function refreshUserTagsWithRetry(rawUserName) {
+    // Dados de detratores/automatizadores podem chegar em tempos diferentes.
+    var delays = [0, 800, 1800, 3200];
+    for (var i = 0; i < delays.length; i++) {
+      (function (delay) {
+        setTimeout(function () {
+          renderUserTagsInCurrentBlock(rawUserName);
+        }, delay);
+      })(delays[i]);
+    }
+  }
+
+  function ensureAutomatizadoresLoaded() {
+    if (automatizadoresState.loaded && automatizadoresState.names.size > 0) {
+      return Promise.resolve(true);
+    }
+    if (automatizadoresState.loadingPromise) return automatizadoresState.loadingPromise;
+
+    automatizadoresState.loadingPromise = (async function () {
+      try {
+        var root = getSmaxRoot();
+        var supabase = root && root.SMAX ? root.SMAX.supabase : null;
+        if (!supabase || typeof supabase.request !== 'function' || !supabase.enabled) {
+          return false;
+        }
+
+        if (supabase.ready && typeof supabase.ready.then === 'function') {
+          try { await supabase.ready; } catch (eReady) {}
+        }
+
+        var candidates = [
+          'smax_automatizadores?select=nome&limit=5000',
+          'smax_automatizadores?select=nome,full_name,name&limit=5000',
+          'smax_automatizadores?select=*&limit=5000'
+        ];
+        var rows = [];
+        for (var i = 0; i < candidates.length; i++) {
+          try {
+            rows = await supabase.request(candidates[i]);
+            if (Array.isArray(rows) && rows.length) break;
+          } catch (eAlt) {
+            rows = [];
+          }
+        }
+
+        var names = new Set();
+        (Array.isArray(rows) ? rows : []).forEach(function (r) {
+          var n = normalizeName((r && (r.nome || r.full_name || r.name || r.nome_completo)) || '');
+          if (n) names.add(n);
+        });
+
+        automatizadoresState.names = names;
+        automatizadoresState.namesList = Array.from(names);
+        automatizadoresState.loaded = names.size > 0;
+        if (!automatizadoresState.loaded) {
+          console.warn(LOG, 'Tabela de automatizadores retornou vazia ou sem acesso de leitura.');
+        }
+        return automatizadoresState.loaded;
+      } catch (e) {
+        automatizadoresState.loaded = false;
+        console.warn(LOG, 'Falha ao carregar automatizadores:', e);
+        return false;
+      } finally {
+        automatizadoresState.loadingPromise = null;
+      }
+    })();
+
+    return automatizadoresState.loadingPromise;
   }
 
   // ============================================================
@@ -395,8 +557,7 @@
             '</div>' +
 
             '<div style="' + rowStyle + '">' +
-              '<div><strong>Usuário:</strong> ' + usuario + '</div>' +
-              buildCopyButton(rawUsuario) +
+              '<div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;"><strong>Usu\u00E1rio:</strong><span>' + usuario + '</span>' + buildCopyButton(rawUsuario) + '<span class="smax-eproc-user-tags" style="display:inline-flex; align-items:center; gap:6px;">' + buildUserTagsHtml(rawUsuario) + '</span></div>' +
             '</div>' +
 
             '<div style="' + rowStyle + '">' +
@@ -425,6 +586,10 @@
 
     try {
       container.insertAdjacentHTML('afterend', html);
+      refreshUserTagsWithRetry(rawUsuario);
+      ensureAutomatizadoresLoaded().then(function () {
+        refreshUserTagsWithRetry(rawUsuario);
+      });
       log('Bloco eproc inserido com sucesso.');
     } catch (e) {
       console.error(LOG, 'Erro ao inserir bloco eproc:', e);
@@ -458,6 +623,7 @@
   function init() {
     installCopyHandlerOnce();
     enableSpaRouteHooksOnce();
+    ensureAutomatizadoresLoaded();
     log('Inicializado. Aguardando initData...');
     setTimeout(function () { hookIntoNewPage(); }, 0);
   }
@@ -466,3 +632,6 @@
   init();
 
 })();
+
+
+

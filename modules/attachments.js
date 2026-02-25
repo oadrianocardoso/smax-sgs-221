@@ -2,6 +2,7 @@
   'use strict';
 
   const SMAX = root.SMAX = root.SMAX || {};
+  let attachmentsMoveDone = false;
 
   let cssInjected = false;
   function ensureCss() {
@@ -38,15 +39,21 @@
   }
 
   function moveAttachmentsIntoForm() {
+    if (attachmentsMoveDone) return;
+
     const doc = root.document;
     const attachments = doc.querySelector('div.pl-entity-page-component[data-aid="attachments"]');
     const form        = doc.querySelector('ng-form[name="form"]');
     if (!attachments || !form) return;
 
-    attachments.style.display = '';
-    if (attachments.parentNode === form && form.firstElementChild === attachments) return;
+    // Se ja estiver dentro do form, considera concluido e nao mexe mais.
+    if (attachments.parentNode === form) {
+      attachmentsMoveDone = true;
+      return;
+    }
 
-    form.insertBefore(attachments, form.firstElementChild);
+    form.insertBefore(attachments, form.firstElementChild || null);
+    attachmentsMoveDone = true;
   }
 
   function openImageModal(objUrl) {
