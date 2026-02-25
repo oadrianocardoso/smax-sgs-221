@@ -1517,8 +1517,8 @@
     fab.disabled = loading;
     fab.classList.toggle('smax-loading', loading);
     fab.setAttribute('aria-busy', loading ? 'true' : 'false');
-    fab.title = loading ? 'Carregando sistema...' : 'Configuracoes SMAX';
-    fab.textContent = loading ? 'Carregando sistema...' : '\u2699';
+    fab.title = loading ? 'Carregando...' : 'Configuracoes SMAX';
+    fab.textContent = loading ? 'Carregando...' : '\u2699';
   }
 
   async function openOverlay() {
