@@ -116,8 +116,7 @@
       props.GrupoUa_c,
       props.GroupUa_c,
       props.Department,
-      props.LocationName,
-      props.Name
+      props.LocationName
     ];
 
     for (const raw of candidates) {
@@ -127,9 +126,33 @@
     return '';
   }
 
-  async function detectLoggedUserTeam(availableCodes) {
+  function inferTeamCodeFromGroups(groupsValue, teamCodeByGroupId) {
+    const codeByGroup = isPlainObject(teamCodeByGroupId) ? teamCodeByGroupId : {};
+    const groups = Array.isArray(groupsValue) ? groupsValue : [];
+    if (!groups.length) return '';
+
+    for (const g of groups) {
+      const groupId = String(g || '').trim();
+      if (!groupId) continue;
+      if (codeByGroup[groupId]) return codeByGroup[groupId];
+    }
+
+    return '';
+  }
+
+  async function detectLoggedUserTeam(availableCodes, teamGroupIdsByCode) {
     const codes = Array.isArray(availableCodes) ? availableCodes.filter(Boolean) : [];
     if (!codes.length) return '';
+
+    const teamCodeByGroupId = {};
+    if (isPlainObject(teamGroupIdsByCode)) {
+      Object.keys(teamGroupIdsByCode).forEach(code => {
+        const groupId = Number(teamGroupIdsByCode[code]);
+        if (!codes.includes(code)) return;
+        if (!Number.isInteger(groupId) || groupId <= 0) return;
+        teamCodeByGroupId[String(groupId)] = code;
+      });
+    }
 
     const now = Date.now();
     if (
@@ -160,10 +183,14 @@
         const payload = await res.json().catch(() => null);
         const entity = Array.isArray(payload?.entities) ? payload.entities[0] : null;
         const props = isPlainObject(entity?.properties) ? entity.properties : {};
-        const teamCode = inferTeamCodeFromPerson(props, codes);
+        const fromGroups = inferTeamCodeFromGroups(props.Groups, teamCodeByGroupId);
+        const teamCode = fromGroups || inferTeamCodeFromPerson(props, codes);
 
         if (teamCode) {
           personTeamCache = { teamCode, ts: Date.now() };
+          if (fromGroups) {
+            console.log('[SMAX Supabase] Equipe detectada por Groups/id_smax_grupo:', teamCode);
+          }
           return teamCode;
         }
       } catch (e) {
@@ -475,7 +502,7 @@
     const teamGroupIds = teamState.teamGroupIds || {};
     const configuredTeamName = String(CONFIG.teamName || '').trim();
     const availableCodes = Object.keys(teams);
-    const detectedTeamName = await detectLoggedUserTeam(availableCodes);
+    const detectedTeamName = await detectLoggedUserTeam(availableCodes, teamGroupIds);
     const teamName = availableCodes.includes(detectedTeamName)
       ? detectedTeamName
       : (availableCodes.includes(configuredTeamName) ? configuredTeamName : (availableCodes[0] || DEFAULT_TEAM_CODE));

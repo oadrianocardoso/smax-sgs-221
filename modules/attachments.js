@@ -2,7 +2,6 @@
   'use strict';
 
   const SMAX = root.SMAX = root.SMAX || {};
-  let attachmentsMoveDone = false;
 
   let cssInjected = false;
   function ensureCss() {
@@ -39,21 +38,31 @@
   }
 
   function moveAttachmentsIntoForm() {
-    if (attachmentsMoveDone) return;
-
     const doc = root.document;
     const attachments = doc.querySelector('div.pl-entity-page-component[data-aid="attachments"]');
     const form        = doc.querySelector('ng-form[name="form"]');
     if (!attachments || !form) return;
 
-    // Se ja estiver dentro do form, considera concluido e nao mexe mais.
-    if (attachments.parentNode === form) {
-      attachmentsMoveDone = true;
+    attachments.style.display = '';
+
+    if (attachments.parentNode === form && form.firstElementChild === attachments) {
       return;
     }
 
     form.insertBefore(attachments, form.firstElementChild || null);
-    attachmentsMoveDone = true;
+  }
+
+  function getAttachmentUrl(link) {
+    const hrefAttr = link.getAttribute('href');
+    const ngHrefAttr = link.getAttribute('ng-href');
+    const rawUrl = hrefAttr || ngHrefAttr || (link.hasAttribute('href') ? link.href : '');
+    if (!rawUrl) return '';
+
+    try {
+      return new root.URL(rawUrl, root.location.href).href;
+    } catch (_) {
+      return rawUrl;
+    }
   }
 
   function openImageModal(objUrl) {
@@ -84,25 +93,27 @@
     const area = doc.querySelector('#attachmentsArea');
     if (!area) return;
 
-    const links = area.querySelectorAll('a[ng-href*="/rest/"][href*="/file-list/"]');
+    const links = area.querySelectorAll('a');
 
     links.forEach(link => {
       if (link._tmPreviewBound) return;
-      link._tmPreviewBound = true;
-
-      link.removeAttribute('download');
-
-      const name    = (link.textContent || '').trim().toLowerCase();
-      const isPdf   = name.endsWith('.pdf');
-      const isImage = name.match(/\.(png|jpg|jpeg|gif|bmp|webp)$/i);
 
       link.addEventListener('click', async (e) => {
+        const url = getAttachmentUrl(link);
+        if (!url || (!url.includes('/rest/') && !url.includes('/file-list/'))) return;
+
+        const name = ((link.textContent || '').trim() || url.split('?')[0].split('/').pop() || '').toLowerCase();
+        const isPdf = name.endsWith('.pdf');
+        const isImage = /\.(png|jpg|jpeg|gif|bmp|webp)$/i.test(name);
+
+        link.removeAttribute('download');
         e.preventDefault();
         e.stopPropagation();
 
         try {
           if (isPdf) {
-            const resp = await fetch(link.href);
+            const resp = await fetch(url, { credentials: 'include' });
+            if (!resp.ok) throw new Error('HTTP ' + resp.status);
             const blob = await resp.blob();
             const url  = root.URL.createObjectURL(blob);
             root.open(url, '_blank');
@@ -111,18 +122,21 @@
           }
 
           if (isImage) {
-            const resp = await fetch(link.href);
+            const resp = await fetch(url, { credentials: 'include' });
+            if (!resp.ok) throw new Error('HTTP ' + resp.status);
             const blob = await resp.blob();
             const url  = root.URL.createObjectURL(blob);
             openImageModal(url);
             return;
           }
 
-          root.open(link.href, '_blank');
+          root.open(url, '_blank');
         } catch (err) {
           alert('Erro ao abrir anexo: ' + err);
         }
       });
+
+      link._tmPreviewBound = true;
     });
   }
 
