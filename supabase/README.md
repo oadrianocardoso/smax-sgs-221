@@ -12,6 +12,7 @@ Run these files in Supabase SQL Editor, in order:
 - `supabase/migrations/20260224_007_seed_smax_automatizadores.sql`
 - `supabase/migrations/20260224_008_restore_specialist_colors.sql`
 - `supabase/migrations/20260302_010_add_specialist_scoped_rules.sql`
+- `supabase/migrations/20260302_011_normalize_specialist_tags.sql`
 
 It creates and seeds:
 
@@ -19,7 +20,8 @@ It creates and seeds:
 - `public.smax_specialists`
 - `public.smax_specialist_finals`
 - `public.smax_specialist_highlight_terms`
-- `public.smax_specialist_tag_rules`
+- `public.smax_specialist_tags`
+- `public.smax_specialist_tag_keywords`
 - `public.smax_highlight_groups`
 - `public.smax_highlight_terms`
 - `public.smax_detractors`
@@ -60,11 +62,19 @@ It creates and seeds:
 
 `20260302_010_add_specialist_scoped_rules.sql`:
 
-- creates `smax_specialist_highlight_terms` (palavras destacadas por especialista)
-- creates `smax_specialist_tag_rules` (tags automáticas por especialista)
+- creates `smax_specialist_highlight_terms` (highlight terms by specialist)
+- creates legacy `smax_specialist_tag_rules` (tags by specialist with `keywords` in an array)
 - migrates from legacy `smax_attendant_*` tables when they already exist
 - otherwise seeds from the current global rules
-- this is the current model used by the script (`1 especialista -> N tags`, `1 especialista -> N palavras destacadas`)
+- this migration is transitional for specialist-scoped rules
+
+`20260302_011_normalize_specialist_tags.sql`:
+
+- creates `smax_specialist_tags` (`1 specialist -> N tags`)
+- creates `smax_specialist_tag_keywords` (`1 tag -> N keywords`)
+- migrates data from `smax_specialist_tag_rules` when it already exists
+- otherwise seeds from the current global rules
+- this is the current model used by the script for tags
 
 ## 2) Quick validation queries
 
@@ -122,10 +132,11 @@ order by sort_order;
 ```
 
 ```sql
-select t.code as team_code, s.name, r.tag_label, r.keywords, r.sort_order
-from public.smax_specialist_tag_rules r
-join public.smax_specialists s on s.id = r.specialist_id
+select t.code as team_code, s.name, st.tag_label, kw.keyword, st.sort_order, kw.sort_order
+from public.smax_specialist_tags st
+join public.smax_specialists s on s.id = st.specialist_id
 join public.smax_teams t on t.id = s.team_id
-where r.is_active = true
-order by t.code, s.name, r.sort_order;
+left join public.smax_specialist_tag_keywords kw on kw.specialist_tag_id = st.id and kw.is_active = true
+where st.is_active = true
+order by t.code, s.name, st.sort_order, kw.sort_order;
 ```

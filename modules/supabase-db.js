@@ -389,6 +389,39 @@
     };
   }
 
+  async function loadSpecialistScopedAutoTagRules(specialistId) {
+    const sid = Number(specialistId);
+    if (!Number.isInteger(sid) || sid <= 0) return null;
+
+    try {
+      const tagRows = await request(
+        `smax_specialist_tags?select=id,tag_label,sort_order,is_active&specialist_id=eq.${sid}&is_active=eq.true&order=sort_order.asc,id.asc`
+      );
+      const tagIds = (Array.isArray(tagRows) ? tagRows : [])
+        .map(row => Number(row?.id))
+        .filter(id => Number.isInteger(id) && id > 0);
+      const keywordRows = tagIds.length
+        ? await request(
+          `smax_specialist_tag_keywords?select=specialist_tag_id,keyword,sort_order,is_active&is_active=eq.true&specialist_tag_id=${buildInFilter(tagIds)}&order=specialist_tag_id.asc,sort_order.asc,id.asc`
+        )
+        : [];
+      return buildAutoTagRulesFromNormalizedRows(tagRows, keywordRows);
+    } catch (e) {
+      if (!isMissingNormalizedSpecialistTagSchema(e)) throw e;
+    }
+
+    try {
+      const legacyRows = await request(
+        `smax_specialist_tag_rules?select=tag_label,keywords,sort_order,is_active&specialist_id=eq.${sid}&is_active=eq.true&order=sort_order.asc,id.asc`
+      );
+      return buildAutoTagRulesFromLegacyRows(legacyRows);
+    } catch (e) {
+      if (!isMissingLegacySpecialistTagSchema(e)) throw e;
+    }
+
+    return null;
+  }
+
   function findSpecialistForPerson(specialistsRows, personContext) {
     const rows = Array.isArray(specialistsRows) ? specialistsRows : [];
     const personId = Number(personContext?.personId);
@@ -484,13 +517,77 @@
       }));
   }
 
-  function isMissingScopedRulesSchema(error) {
+  function buildAutoTagRulesFromLegacyRows(rows) {
+    const out = [];
+    (Array.isArray(rows) ? rows : []).forEach(row => {
+      const rule = normalizeRule({
+        tag: row?.tag_label,
+        palavras: Array.isArray(row?.keywords)
+          ? row.keywords
+          : String(row?.keywords || '').split(',').map(v => v.trim()).filter(Boolean)
+      });
+      if (rule) out.push(rule);
+    });
+    return out;
+  }
+
+  function buildAutoTagRulesFromNormalizedRows(tagRows, keywordRows) {
+    const rows = Array.isArray(tagRows) ? tagRows : [];
+    const keywords = Array.isArray(keywordRows) ? keywordRows : [];
+    const keywordsByTagId = {};
+
+    keywords.forEach(row => {
+      const tagId = Number(row?.specialist_tag_id);
+      if (!Number.isInteger(tagId) || tagId <= 0) return;
+      if (!Array.isArray(keywordsByTagId[tagId])) keywordsByTagId[tagId] = [];
+      const keyword = String(row?.keyword || '').trim();
+      if (!keyword) return;
+      keywordsByTagId[tagId].push(keyword);
+    });
+
+    return rows
+      .map(row => ({
+        sort_order: Number(row?.sort_order || 0),
+        tag: String(row?.tag_label || '').trim(),
+        palavras: uniq(keywordsByTagId[Number(row?.id)] || [])
+      }))
+      .filter(rule => !!rule.tag && !!rule.palavras.length)
+      .sort((a, b) => {
+        const aOrder = Number(a?.sort_order || 0);
+        const bOrder = Number(b?.sort_order || 0);
+        if (aOrder !== bOrder) return aOrder - bOrder;
+        return a.tag.localeCompare(b.tag, 'pt-BR', { sensitivity: 'base' });
+      })
+      .map(rule => ({ tag: rule.tag, palavras: rule.palavras }));
+  }
+
+  function buildInFilter(values) {
+    const safe = (Array.isArray(values) ? values : [])
+      .map(v => Number(v))
+      .filter(v => Number.isInteger(v) && v > 0);
+    if (!safe.length) return '';
+    return `in.(${safe.join(',')})`;
+  }
+
+  function isMissingSpecialistTermsSchema(error) {
+    const msg = String(error?.message || '');
+    if (!msg) return false;
+    return msg.includes('smax_specialist_highlight_terms');
+  }
+
+  function isMissingNormalizedSpecialistTagSchema(error) {
     const msg = String(error?.message || '');
     if (!msg) return false;
     return (
-      msg.includes('smax_specialist_highlight_terms') ||
-      msg.includes('smax_specialist_tag_rules')
+      msg.includes('smax_specialist_tags') ||
+      msg.includes('smax_specialist_tag_keywords')
     );
+  }
+
+  function isMissingLegacySpecialistTagSchema(error) {
+    const msg = String(error?.message || '');
+    if (!msg) return false;
+    return msg.includes('smax_specialist_tag_rules');
   }
 
   function applyLoadedState(payload) {
@@ -603,39 +700,30 @@
     }
 
     let scopedTermsRows = Array.isArray(termsRows) ? termsRows : [];
-    let scopedAutoTagRows = Array.isArray(autoTagRows) ? autoTagRows : [];
+    let scopedAutoTagRules = Array.isArray(autoTagRows) ? buildAutoTagRulesFromLegacyRows(autoTagRows) : [];
     const matchedSpecialist = resolvedTeam?.specialistRow || findSpecialistForPerson(specialistsRows, personContext);
     let currentSpecialist = buildCurrentSpecialistState(matchedSpecialist, personContext, teamName, teamIdsByCode[teamName]);
 
     if (currentSpecialist.id) {
-      try {
-        const [specialistTermsRows, specialistTagRows] = await Promise.all([
-          request(`smax_specialist_highlight_terms?select=group_id,match_type,term,regex_flags,sort_order,is_active&specialist_id=eq.${currentSpecialist.id}&is_active=eq.true&order=group_id.asc,sort_order.asc,id.asc`),
-          request(`smax_specialist_tag_rules?select=tag_label,keywords,sort_order,is_active&specialist_id=eq.${currentSpecialist.id}&is_active=eq.true&order=sort_order.asc,id.asc`)
-        ]);
+      const [specialistTermsRows, specialistAutoTagRules] = await Promise.all([
+        request(`smax_specialist_highlight_terms?select=group_id,match_type,term,regex_flags,sort_order,is_active&specialist_id=eq.${currentSpecialist.id}&is_active=eq.true&order=group_id.asc,sort_order.asc,id.asc`)
+          .catch(e => {
+            if (!isMissingSpecialistTermsSchema(e)) throw e;
+            return null;
+          }),
+        loadSpecialistScopedAutoTagRules(currentSpecialist.id)
+      ]);
 
-        if (Array.isArray(specialistTermsRows)) scopedTermsRows = specialistTermsRows;
-        if (Array.isArray(specialistTagRows)) scopedAutoTagRows = specialistTagRows;
-      } catch (e) {
-        if (!isMissingScopedRulesSchema(e)) throw e;
-      }
+      if (Array.isArray(specialistTermsRows)) scopedTermsRows = specialistTermsRows;
+      if (Array.isArray(specialistAutoTagRules)) scopedAutoTagRules = specialistAutoTagRules;
     }
 
     const highlightGroups = buildHighlightState(groupsRows, scopedTermsRows);
     const detratores = (detratoresRows || []).map(r => String(r.full_name || '').trim()).filter(Boolean);
 
-    const autoTagRules = [];
-    if (Array.isArray(scopedAutoTagRows)) {
-      scopedAutoTagRows.forEach(row => {
-        const rule = normalizeRule({
-          tag: row.tag_label,
-          palavras: Array.isArray(row.keywords)
-            ? row.keywords
-            : String(row.keywords || '').split(',').map(v => v.trim()).filter(Boolean)
-        });
-        if (rule) autoTagRules.push(rule);
-      });
-    }
+    const autoTagRules = Array.isArray(scopedAutoTagRules)
+      ? scopedAutoTagRules.map(rule => normalizeRule(rule)).filter(Boolean)
+      : [];
 
     applyLoadedState({
       prefs,
@@ -795,7 +883,7 @@
     return buildCurrentSpecialistState(fallbackByName, seed, activeTeamCode, fallbackByName?.team_id);
   }
 
-  async function saveScopedRules(currentSpecialist, termBody, tagBody) {
+  async function saveScopedHighlightTerms(currentSpecialist, termBody) {
     if (!currentSpecialist?.id) return false;
 
     await request(`smax_specialist_highlight_terms?specialist_id=eq.${currentSpecialist.id}`, {
@@ -811,10 +899,99 @@
       });
     }
 
-    await request(`smax_specialist_tag_rules?specialist_id=eq.${currentSpecialist.id}`, {
+    return true;
+  }
+
+  async function saveScopedAutoTagsNormalized(currentSpecialist, tagBody) {
+    if (!currentSpecialist?.id) return false;
+
+    const existingTagRows = await request(
+      `smax_specialist_tags?select=id&specialist_id=eq.${currentSpecialist.id}&order=id.asc`
+    ).catch(e => {
+      if (!isMissingNormalizedSpecialistTagSchema(e)) throw e;
+      return null;
+    });
+
+    if (existingTagRows === null) return null;
+
+    const existingTagIds = (Array.isArray(existingTagRows) ? existingTagRows : [])
+      .map(row => Number(row?.id))
+      .filter(id => Number.isInteger(id) && id > 0);
+
+    if (existingTagIds.length) {
+      await request(`smax_specialist_tag_keywords?specialist_tag_id=${buildInFilter(existingTagIds)}`, {
+        method: 'DELETE',
+        headers: { Prefer: 'return=minimal' }
+      });
+    }
+
+    await request(`smax_specialist_tags?specialist_id=eq.${currentSpecialist.id}`, {
       method: 'DELETE',
       headers: { Prefer: 'return=minimal' }
     });
+
+    if (!Array.isArray(tagBody) || !tagBody.length) return true;
+
+    const tagsToInsert = tagBody.map(row => ({
+      specialist_id: currentSpecialist.id,
+      tag_label: row.tag_label,
+      sort_order: row.sort_order,
+      is_active: row.is_active !== false
+    }));
+
+    const insertedTagRows = await request('smax_specialist_tags?select=id,tag_label&on_conflict=specialist_id,tag_label', {
+      method: 'POST',
+      headers: { Prefer: 'resolution=merge-duplicates,return=representation' },
+      body: tagsToInsert
+    });
+
+    const tagIdByLabel = {};
+    (Array.isArray(insertedTagRows) ? insertedTagRows : []).forEach(row => {
+      const label = String(row?.tag_label || '').trim();
+      const id = Number(row?.id);
+      if (label && Number.isInteger(id) && id > 0) tagIdByLabel[label] = id;
+    });
+
+    const keywordBody = [];
+    tagBody.forEach(row => {
+      const tagId = Number(tagIdByLabel[row.tag_label]);
+      if (!Number.isInteger(tagId) || tagId <= 0) return;
+      const keywords = Array.isArray(row.keywords) ? row.keywords : [];
+      keywords.forEach((keyword, idx) => {
+        const value = String(keyword || '').trim();
+        if (!value) return;
+        keywordBody.push({
+          specialist_tag_id: tagId,
+          keyword: value,
+          sort_order: idx + 1,
+          is_active: true
+        });
+      });
+    });
+
+    if (keywordBody.length) {
+      await request('smax_specialist_tag_keywords?on_conflict=specialist_tag_id,keyword', {
+        method: 'POST',
+        headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
+        body: keywordBody
+      });
+    }
+
+    return true;
+  }
+
+  async function saveScopedAutoTagsLegacy(currentSpecialist, tagBody) {
+    if (!currentSpecialist?.id) return false;
+
+    try {
+      await request(`smax_specialist_tag_rules?specialist_id=eq.${currentSpecialist.id}`, {
+        method: 'DELETE',
+        headers: { Prefer: 'return=minimal' }
+      });
+    } catch (e) {
+      if (!isMissingLegacySpecialistTagSchema(e)) throw e;
+      return null;
+    }
 
     if (Array.isArray(tagBody) && tagBody.length) {
       await request('smax_specialist_tag_rules?on_conflict=specialist_id,tag_label', {
@@ -824,8 +1001,21 @@
       });
     }
 
-    CONFIG.currentSpecialist = currentSpecialist;
     return true;
+  }
+
+  async function saveScopedAutoTags(currentSpecialist, tagBody) {
+    if (!currentSpecialist?.id) return false;
+
+    const normalizedSaved = await saveScopedAutoTagsNormalized(currentSpecialist, tagBody);
+    if (normalizedSaved === true) return true;
+    if (normalizedSaved !== null) return false;
+
+    const legacySaved = await saveScopedAutoTagsLegacy(currentSpecialist, tagBody);
+    if (legacySaved === true) return true;
+    if (legacySaved !== null) return false;
+
+    return false;
   }
 
   async function saveAllToDb(snapshot) {
@@ -978,17 +1168,30 @@
     }
 
     const tagBody = getConfiguredTagRows(payload.autoTagRules);
-    try {
-      const currentSpecialist = resolveCurrentSpecialistForSave(payload.teamName, savedActiveTeamSpecialists);
-      const scopedSaved = await saveScopedRules(currentSpecialist, termBody, tagBody);
-      if (!scopedSaved) {
-        await saveLegacySharedHighlightTerms(termBody);
-        await saveLegacySharedAutoTags(tagBody);
+    const currentSpecialist = resolveCurrentSpecialistForSave(payload.teamName, savedActiveTeamSpecialists);
+
+    let scopedTermsSaved = false;
+    if (currentSpecialist?.id) {
+      try {
+        scopedTermsSaved = await saveScopedHighlightTerms(currentSpecialist, termBody);
+      } catch (e) {
+        if (!isMissingSpecialistTermsSchema(e)) throw e;
       }
-    } catch (e) {
-      if (!isMissingScopedRulesSchema(e)) throw e;
+    }
+    if (!scopedTermsSaved) {
       await saveLegacySharedHighlightTerms(termBody);
+    }
+
+    let scopedTagsSaved = false;
+    if (currentSpecialist?.id) {
+      scopedTagsSaved = await saveScopedAutoTags(currentSpecialist, tagBody);
+    }
+    if (!scopedTagsSaved) {
       await saveLegacySharedAutoTags(tagBody);
+    }
+
+    if (currentSpecialist?.id) {
+      CONFIG.currentSpecialist = currentSpecialist;
     }
 
     const p = payload.prefs || {};
