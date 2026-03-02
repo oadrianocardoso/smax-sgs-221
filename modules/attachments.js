@@ -2,6 +2,7 @@
   'use strict';
 
   const SMAX = root.SMAX = root.SMAX || {};
+  const AREA_BIND_ATTR = 'tmPreviewAreaBound';
 
   let cssInjected = false;
   function ensureCss() {
@@ -88,56 +89,69 @@
     doc.body.appendChild(modal);
   }
 
+  async function fetchAttachmentBlob(url) {
+    const fetchImpl = (root && typeof root.fetch === 'function')
+      ? root.fetch.bind(root)
+      : (typeof fetch === 'function' ? fetch : null);
+    if (!fetchImpl) throw new Error('fetch indisponivel');
+
+    const resp = await fetchImpl(url, {
+      method: 'GET',
+      credentials: 'include',
+      cache: 'no-store'
+    });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    return resp.blob();
+  }
+
+  async function handleAttachmentClick(e) {
+    const link = e.target && e.target.closest ? e.target.closest('a') : null;
+    if (!link) return;
+
+    const area = root.document.querySelector('#attachmentsArea');
+    if (!area || !area.contains(link)) return;
+
+    const url = getAttachmentUrl(link);
+    if (!url || (!url.includes('/rest/') && !url.includes('/file-list/'))) return;
+
+    const name = ((link.textContent || '').trim() || url.split('?')[0].split('/').pop() || '').toLowerCase();
+    const isPdf = name.endsWith('.pdf');
+    const isImage = /\.(png|jpg|jpeg|gif|bmp|webp)$/i.test(name);
+
+    link.removeAttribute('download');
+    e.preventDefault();
+    e.stopPropagation();
+
+    try {
+      if (isPdf) {
+        const blob = await fetchAttachmentBlob(url);
+        const objectUrl = root.URL.createObjectURL(blob);
+        root.open(objectUrl, '_blank');
+        root.setTimeout(() => root.URL.revokeObjectURL(objectUrl), 60 * 1000);
+        return;
+      }
+
+      if (isImage) {
+        const blob = await fetchAttachmentBlob(url);
+        const objectUrl = root.URL.createObjectURL(blob);
+        openImageModal(objectUrl);
+        return;
+      }
+
+      root.open(url, '_blank');
+    } catch (err) {
+      root.alert('Erro ao abrir anexo: ' + err);
+    }
+  }
+
   function wirePreviewLinks() {
     const doc = root.document;
     const area = doc.querySelector('#attachmentsArea');
     if (!area) return;
+    if (area.dataset[AREA_BIND_ATTR] === '1') return;
 
-    const links = area.querySelectorAll('a');
-
-    links.forEach(link => {
-      if (link._tmPreviewBound) return;
-
-      link.addEventListener('click', async (e) => {
-        const url = getAttachmentUrl(link);
-        if (!url || (!url.includes('/rest/') && !url.includes('/file-list/'))) return;
-
-        const name = ((link.textContent || '').trim() || url.split('?')[0].split('/').pop() || '').toLowerCase();
-        const isPdf = name.endsWith('.pdf');
-        const isImage = /\.(png|jpg|jpeg|gif|bmp|webp)$/i.test(name);
-
-        link.removeAttribute('download');
-        e.preventDefault();
-        e.stopPropagation();
-
-        try {
-          if (isPdf) {
-            const resp = await fetch(url, { credentials: 'include' });
-            if (!resp.ok) throw new Error('HTTP ' + resp.status);
-            const blob = await resp.blob();
-            const url  = root.URL.createObjectURL(blob);
-            root.open(url, '_blank');
-            setTimeout(() => root.URL.revokeObjectURL(url), 60 * 1000);
-            return;
-          }
-
-          if (isImage) {
-            const resp = await fetch(url, { credentials: 'include' });
-            if (!resp.ok) throw new Error('HTTP ' + resp.status);
-            const blob = await resp.blob();
-            const url  = root.URL.createObjectURL(blob);
-            openImageModal(url);
-            return;
-          }
-
-          root.open(url, '_blank');
-        } catch (err) {
-          alert('Erro ao abrir anexo: ' + err);
-        }
-      });
-
-      link._tmPreviewBound = true;
-    });
+    area.addEventListener('click', handleAttachmentClick, true);
+    area.dataset[AREA_BIND_ATTR] = '1';
   }
 
   function apply() {
