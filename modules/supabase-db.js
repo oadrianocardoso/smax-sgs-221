@@ -391,35 +391,20 @@
 
   async function loadSpecialistScopedAutoTagRules(specialistId) {
     const sid = Number(specialistId);
-    if (!Number.isInteger(sid) || sid <= 0) return null;
+    if (!Number.isInteger(sid) || sid <= 0) return [];
 
-    try {
-      const tagRows = await request(
-        `smax_specialist_tags?select=id,tag_label,sort_order,is_active&specialist_id=eq.${sid}&is_active=eq.true&order=sort_order.asc,id.asc`
-      );
-      const tagIds = (Array.isArray(tagRows) ? tagRows : [])
-        .map(row => Number(row?.id))
-        .filter(id => Number.isInteger(id) && id > 0);
-      const keywordRows = tagIds.length
-        ? await request(
-          `smax_specialist_tag_keywords?select=specialist_tag_id,keyword,sort_order,is_active&is_active=eq.true&specialist_tag_id=${buildInFilter(tagIds)}&order=specialist_tag_id.asc,sort_order.asc,id.asc`
-        )
-        : [];
-      return buildAutoTagRulesFromNormalizedRows(tagRows, keywordRows);
-    } catch (e) {
-      if (!isMissingNormalizedSpecialistTagSchema(e)) throw e;
-    }
-
-    try {
-      const legacyRows = await request(
-        `smax_specialist_tag_rules?select=tag_label,keywords,sort_order,is_active&specialist_id=eq.${sid}&is_active=eq.true&order=sort_order.asc,id.asc`
-      );
-      return buildAutoTagRulesFromLegacyRows(legacyRows);
-    } catch (e) {
-      if (!isMissingLegacySpecialistTagSchema(e)) throw e;
-    }
-
-    return null;
+    const tagRows = await request(
+      `smax_specialist_tags?select=id,tag_label,sort_order,is_active&specialist_id=eq.${sid}&is_active=eq.true&order=sort_order.asc,id.asc`
+    );
+    const tagIds = (Array.isArray(tagRows) ? tagRows : [])
+      .map(row => Number(row?.id))
+      .filter(id => Number.isInteger(id) && id > 0);
+    const keywordRows = tagIds.length
+      ? await request(
+        `smax_specialist_tag_keywords?select=specialist_tag_id,keyword,sort_order,is_active&is_active=eq.true&specialist_tag_id=${buildInFilter(tagIds)}&order=specialist_tag_id.asc,sort_order.asc,id.asc`
+      )
+      : [];
+    return buildAutoTagRulesFromNormalizedRows(tagRows, keywordRows);
   }
 
   function findSpecialistForPerson(specialistsRows, personContext) {
@@ -517,20 +502,6 @@
       }));
   }
 
-  function buildAutoTagRulesFromLegacyRows(rows) {
-    const out = [];
-    (Array.isArray(rows) ? rows : []).forEach(row => {
-      const rule = normalizeRule({
-        tag: row?.tag_label,
-        palavras: Array.isArray(row?.keywords)
-          ? row.keywords
-          : String(row?.keywords || '').split(',').map(v => v.trim()).filter(Boolean)
-      });
-      if (rule) out.push(rule);
-    });
-    return out;
-  }
-
   function buildAutoTagRulesFromNormalizedRows(tagRows, keywordRows) {
     const rows = Array.isArray(tagRows) ? tagRows : [];
     const keywords = Array.isArray(keywordRows) ? keywordRows : [];
@@ -567,27 +538,6 @@
       .filter(v => Number.isInteger(v) && v > 0);
     if (!safe.length) return '';
     return `in.(${safe.join(',')})`;
-  }
-
-  function isMissingSpecialistTermsSchema(error) {
-    const msg = String(error?.message || '');
-    if (!msg) return false;
-    return msg.includes('smax_specialist_highlight_terms');
-  }
-
-  function isMissingNormalizedSpecialistTagSchema(error) {
-    const msg = String(error?.message || '');
-    if (!msg) return false;
-    return (
-      msg.includes('smax_specialist_tags') ||
-      msg.includes('smax_specialist_tag_keywords')
-    );
-  }
-
-  function isMissingLegacySpecialistTagSchema(error) {
-    const msg = String(error?.message || '');
-    if (!msg) return false;
-    return msg.includes('smax_specialist_tag_rules');
   }
 
   function applyLoadedState(payload) {
@@ -653,10 +603,8 @@
       request('smax_specialists?select=id,team_id,name,nickname,bg_color,fg_color,is_absent,sort_order,smax_person_id,smax_location,smax_person_name&order=team_id.asc,sort_order.asc,name.asc'),
       request('smax_specialist_finals?select=specialist_id,final&order=specialist_id.asc,final.asc'),
       request('smax_highlight_groups?select=id,group_key,label,css_class,sort_order,is_active&is_active=eq.true&order=sort_order.asc,group_key.asc'),
-      request('smax_highlight_terms?select=group_id,match_type,term,regex_flags,sort_order,is_active&is_active=eq.true&order=group_id.asc,sort_order.asc,id.asc'),
       request('smax_detractors?select=full_name,sort_order,is_active&is_active=eq.true&order=sort_order.asc,id.asc'),
-      request('smax_feature_prefs?id=eq.1&select=highlights_on,name_badges_on,magistrado_on,collapse_on,enlarge_comments_on,auto_tags_on'),
-      request('smax_auto_tag_rules?select=tag_label,keywords,sort_order,is_active&is_active=eq.true&order=sort_order.asc,id.asc').catch(() => null)
+      request('smax_feature_prefs?id=eq.1&select=highlights_on,name_badges_on,magistrado_on,collapse_on,enlarge_comments_on,auto_tags_on')
     ];
 
     const [
@@ -664,10 +612,8 @@
       specialistsRows,
       finalsRows,
       groupsRows,
-      termsRows,
       detratoresRows,
-      prefsRows,
-      autoTagRows
+      prefsRows
     ] = await Promise.all(requests);
 
     const prefsRow = Array.isArray(prefsRows) && prefsRows[0] ? prefsRows[0] : {};
@@ -699,18 +645,14 @@
       console.log('[SMAX Supabase] Equipe detectada por smax_specialists/team_id:', detectedTeamName);
     }
 
-    let scopedTermsRows = Array.isArray(termsRows) ? termsRows : [];
-    let scopedAutoTagRules = Array.isArray(autoTagRows) ? buildAutoTagRulesFromLegacyRows(autoTagRows) : [];
+    let scopedTermsRows = [];
+    let scopedAutoTagRules = [];
     const matchedSpecialist = resolvedTeam?.specialistRow || findSpecialistForPerson(specialistsRows, personContext);
     let currentSpecialist = buildCurrentSpecialistState(matchedSpecialist, personContext, teamName, teamIdsByCode[teamName]);
 
     if (currentSpecialist.id) {
       const [specialistTermsRows, specialistAutoTagRules] = await Promise.all([
-        request(`smax_specialist_highlight_terms?select=group_id,match_type,term,regex_flags,sort_order,is_active&specialist_id=eq.${currentSpecialist.id}&is_active=eq.true&order=group_id.asc,sort_order.asc,id.asc`)
-          .catch(e => {
-            if (!isMissingSpecialistTermsSchema(e)) throw e;
-            return null;
-          }),
+        request(`smax_specialist_highlight_terms?select=group_id,match_type,term,regex_flags,sort_order,is_active&specialist_id=eq.${currentSpecialist.id}&is_active=eq.true&order=group_id.asc,sort_order.asc,id.asc`),
         loadSpecialistScopedAutoTagRules(currentSpecialist.id)
       ]);
 
@@ -846,26 +788,6 @@
     }
   }
 
-  async function saveLegacySharedHighlightTerms(termBody) {
-    await request('smax_highlight_terms?id=gte.0', { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
-    if (!Array.isArray(termBody) || !termBody.length) return;
-    await request('smax_highlight_terms?on_conflict=group_id,match_type,term,regex_flags', {
-      method: 'POST',
-      headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
-      body: termBody
-    });
-  }
-
-  async function saveLegacySharedAutoTags(tagBody) {
-    await request('smax_auto_tag_rules?id=gte.0', { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
-    if (!Array.isArray(tagBody) || !tagBody.length) return;
-    await request('smax_auto_tag_rules?on_conflict=tag_label', {
-      method: 'POST',
-      headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
-      body: tagBody
-    });
-  }
-
   function resolveCurrentSpecialistForSave(activeTeamCode, specialistsRows) {
     const seed = getCurrentSpecialistSeed();
     const current = findSpecialistForPerson(specialistsRows, seed);
@@ -907,12 +829,7 @@
 
     const existingTagRows = await request(
       `smax_specialist_tags?select=id&specialist_id=eq.${currentSpecialist.id}&order=id.asc`
-    ).catch(e => {
-      if (!isMissingNormalizedSpecialistTagSchema(e)) throw e;
-      return null;
-    });
-
-    if (existingTagRows === null) return null;
+    );
 
     const existingTagIds = (Array.isArray(existingTagRows) ? existingTagRows : [])
       .map(row => Number(row?.id))
@@ -978,44 +895,6 @@
     }
 
     return true;
-  }
-
-  async function saveScopedAutoTagsLegacy(currentSpecialist, tagBody) {
-    if (!currentSpecialist?.id) return false;
-
-    try {
-      await request(`smax_specialist_tag_rules?specialist_id=eq.${currentSpecialist.id}`, {
-        method: 'DELETE',
-        headers: { Prefer: 'return=minimal' }
-      });
-    } catch (e) {
-      if (!isMissingLegacySpecialistTagSchema(e)) throw e;
-      return null;
-    }
-
-    if (Array.isArray(tagBody) && tagBody.length) {
-      await request('smax_specialist_tag_rules?on_conflict=specialist_id,tag_label', {
-        method: 'POST',
-        headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
-        body: tagBody.map(row => Object.assign({ specialist_id: currentSpecialist.id }, row))
-      });
-    }
-
-    return true;
-  }
-
-  async function saveScopedAutoTags(currentSpecialist, tagBody) {
-    if (!currentSpecialist?.id) return false;
-
-    const normalizedSaved = await saveScopedAutoTagsNormalized(currentSpecialist, tagBody);
-    if (normalizedSaved === true) return true;
-    if (normalizedSaved !== null) return false;
-
-    const legacySaved = await saveScopedAutoTagsLegacy(currentSpecialist, tagBody);
-    if (legacySaved === true) return true;
-    if (legacySaved !== null) return false;
-
-    return false;
   }
 
   async function saveAllToDb(snapshot) {
@@ -1169,26 +1048,12 @@
 
     const tagBody = getConfiguredTagRows(payload.autoTagRules);
     const currentSpecialist = resolveCurrentSpecialistForSave(payload.teamName, savedActiveTeamSpecialists);
-
-    let scopedTermsSaved = false;
-    if (currentSpecialist?.id) {
-      try {
-        scopedTermsSaved = await saveScopedHighlightTerms(currentSpecialist, termBody);
-      } catch (e) {
-        if (!isMissingSpecialistTermsSchema(e)) throw e;
-      }
-    }
-    if (!scopedTermsSaved) {
-      await saveLegacySharedHighlightTerms(termBody);
+    if (!currentSpecialist?.id) {
+      throw new Error('Especialista logado nao identificado. O script salva palavras destacadas e tags apenas no modelo por especialista.');
     }
 
-    let scopedTagsSaved = false;
-    if (currentSpecialist?.id) {
-      scopedTagsSaved = await saveScopedAutoTags(currentSpecialist, tagBody);
-    }
-    if (!scopedTagsSaved) {
-      await saveLegacySharedAutoTags(tagBody);
-    }
+    await saveScopedHighlightTerms(currentSpecialist, termBody);
+    await saveScopedAutoTagsNormalized(currentSpecialist, tagBody);
 
     if (currentSpecialist?.id) {
       CONFIG.currentSpecialist = currentSpecialist;

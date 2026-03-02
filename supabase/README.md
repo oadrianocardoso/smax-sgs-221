@@ -13,6 +13,7 @@ Run these files in Supabase SQL Editor, in order:
 - `supabase/migrations/20260224_008_restore_specialist_colors.sql`
 - `supabase/migrations/20260302_010_add_specialist_scoped_rules.sql`
 - `supabase/migrations/20260302_011_normalize_specialist_tags.sql`
+- `supabase/migrations/20260302_012_drop_legacy_rule_tables.sql`
 
 It creates and seeds:
 
@@ -23,10 +24,8 @@ It creates and seeds:
 - `public.smax_specialist_tags`
 - `public.smax_specialist_tag_keywords`
 - `public.smax_highlight_groups`
-- `public.smax_highlight_terms`
 - `public.smax_detractors`
 - `public.smax_feature_prefs`
-- `public.smax_auto_tag_rules`
 - `public.smax_automatizadores`
 
 `20260224_003_team_scoped_finals.sql` enforces:
@@ -75,6 +74,13 @@ It creates and seeds:
 - migrates data from `smax_specialist_tag_rules` when it already exists
 - otherwise seeds from the current global rules
 - this is the current model used by the script for tags
+
+`20260302_012_drop_legacy_rule_tables.sql`:
+
+- drops `smax_specialist_tag_rules`
+- drops global legacy tables `smax_highlight_terms` and `smax_auto_tag_rules`
+- drops legacy `smax_attendant_*` tables when they still exist
+- after this migration, the script uses only the specialist-scoped schema
 
 ## 2) Quick validation queries
 
