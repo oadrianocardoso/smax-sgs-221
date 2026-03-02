@@ -11,12 +11,15 @@ Run these files in Supabase SQL Editor, in order:
 - `supabase/migrations/20260224_006_add_smax_person_fields_to_specialists.sql`
 - `supabase/migrations/20260224_007_seed_smax_automatizadores.sql`
 - `supabase/migrations/20260224_008_restore_specialist_colors.sql`
+- `supabase/migrations/20260302_010_add_specialist_scoped_rules.sql`
 
 It creates and seeds:
 
 - `public.smax_teams`
 - `public.smax_specialists`
 - `public.smax_specialist_finals`
+- `public.smax_specialist_highlight_terms`
+- `public.smax_specialist_tag_rules`
 - `public.smax_highlight_groups`
 - `public.smax_highlight_terms`
 - `public.smax_detractors`
@@ -54,6 +57,14 @@ It creates and seeds:
 
 - restores specialist color palette (`bg_color`, `fg_color`) by name matching
 - creates missing attendants in `SGS 2.2.1` when not found
+
+`20260302_010_add_specialist_scoped_rules.sql`:
+
+- creates `smax_specialist_highlight_terms` (palavras destacadas por especialista)
+- creates `smax_specialist_tag_rules` (tags automáticas por especialista)
+- migrates from legacy `smax_attendant_*` tables when they already exist
+- otherwise seeds from the current global rules
+- this is the current model used by the script (`1 especialista -> N tags`, `1 especialista -> N palavras destacadas`)
 
 ## 2) Quick validation queries
 
@@ -96,10 +107,12 @@ order by f.teams, f.final, f.specialist_id;
 ```
 
 ```sql
-select g.group_key, g.css_class, t.match_type, t.term, t.regex_flags, t.sort_order
-from public.smax_highlight_terms t
-join public.smax_highlight_groups g on g.id = t.group_id
-order by g.sort_order, t.match_type, t.sort_order;
+select t.code as team_code, s.name, g.group_key, h.match_type, h.term, h.sort_order
+from public.smax_specialist_highlight_terms h
+join public.smax_specialists s on s.id = h.specialist_id
+join public.smax_teams t on t.id = s.team_id
+join public.smax_highlight_groups g on g.id = h.group_id
+order by t.code, s.name, g.sort_order, h.match_type, h.sort_order;
 ```
 
 ```sql
@@ -109,8 +122,10 @@ order by sort_order;
 ```
 
 ```sql
-select tag_label, keywords, sort_order
-from public.smax_auto_tag_rules
-where is_active = true
-order by sort_order;
+select t.code as team_code, s.name, r.tag_label, r.keywords, r.sort_order
+from public.smax_specialist_tag_rules r
+join public.smax_specialists s on s.id = r.specialist_id
+join public.smax_teams t on t.id = s.team_id
+where r.is_active = true
+order by t.code, s.name, r.sort_order;
 ```

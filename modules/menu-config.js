@@ -13,6 +13,11 @@
     { key: 'autoTagsOn', label: 'Tags automáticas na descrição' }
   ];
 
+  const PREF_SECTION_BY_KEY = {
+    highlightsOn: 'palavras',
+    nameBadgesOn: 'especialistas',
+    autoTagsOn: 'tags'
+  };
   const SECTION_ORDER = ['geral', 'especialistas', 'palavras', 'tags', 'detratores', 'exportacao'];
   const TEAM_OPTIONS = ['SGS 2.2.1', 'SGS 2.2.2'];
   const PERSON_LAYOUT = 'Name,Avatar,Location,IsVIP,OrganizationalGroup,Upn,IsDeleted,FirstName,LastName,EmployeeNumber,Email';
@@ -88,19 +93,29 @@
     );
   }
 
-  function parseFinals(value) {
-    const parts = String(value || '')
-      .split(/[,\s;]+/)
-      .map(s => s.trim())
-      .filter(Boolean);
+  function expandFinalRange(fromValue, toValue) {
+    const start = Number(fromValue);
+    const end = Number(toValue);
+    if (!Number.isInteger(start) || !Number.isInteger(end)) return [];
+    if (start < 0 || start > 99 || end < 0 || end > 99) return [];
 
-    const nums = [];
-    parts.forEach(p => {
-      const n = Number(p);
-      if (!Number.isInteger(n) || n < 0 || n > 99) return;
-      nums.push(n);
-    });
-    return uniq(nums);
+    const from = Math.min(start, end);
+    const to = Math.max(start, end);
+    const out = [];
+    for (let n = from; n <= to; n += 1) out.push(n);
+    return out;
+  }
+
+  function getFinalRange(finals) {
+    const values = Array.isArray(finals)
+      ? uniq(finals.map(n => Number(n)).filter(n => Number.isInteger(n) && n >= 0 && n <= 99)).sort((a, b) => a - b)
+      : [];
+
+    if (!values.length) return { from: '', to: '' };
+    return {
+      from: String(values[0]),
+      to: String(values[values.length - 1])
+    };
   }
 
   function getTeamGroupId(teamCode) {
@@ -203,6 +218,45 @@
     const select = root.document.getElementById('smax-team-select');
     const groupId = Number(select?.value);
     return Number.isInteger(groupId) && groupId > 0 ? groupId : null;
+  }
+
+  function getAttendantScopeLabel() {
+    const current = isPlainObject(CONFIG.currentSpecialist) ? CONFIG.currentSpecialist : {};
+    const logged = isPlainObject(CONFIG.loggedPerson) ? CONFIG.loggedPerson : {};
+    const personName = String(current.personName || current.name || logged.personName || '').trim();
+    const teamCode = String(current.teamCode || logged.teamCode || CONFIG.teamName || '').trim();
+
+    if (personName && teamCode) return `${personName} | ${teamCode}`;
+    if (personName) return personName;
+    if (teamCode) return teamCode;
+    return 'especialista logado';
+  }
+
+  function getLoggedPersonLabel() {
+    const current = isPlainObject(CONFIG.currentSpecialist) ? CONFIG.currentSpecialist : {};
+    const logged = isPlainObject(CONFIG.loggedPerson) ? CONFIG.loggedPerson : {};
+    return String(current.personName || current.name || logged.personName || '').trim() || 'Nao identificado';
+  }
+
+  function getLoggedTeamLabel() {
+    const current = isPlainObject(CONFIG.currentSpecialist) ? CONFIG.currentSpecialist : {};
+    const logged = isPlainObject(CONFIG.loggedPerson) ? CONFIG.loggedPerson : {};
+    return String(current.teamCode || logged.teamCode || CONFIG.teamName || '').trim() || 'Nao identificada';
+  }
+
+  function renderAttendantScopeInfo() {
+    const message = `Regras pessoais do especialista: ${getAttendantScopeLabel()}.`;
+    ['smax-words-scope', 'smax-tags-scope'].forEach(id => {
+      const el = root.document.getElementById(id);
+      if (el) el.textContent = message;
+    });
+  }
+
+  function renderSessionInfo() {
+    const userEl = root.document.getElementById('smax-session-user');
+    const teamEl = root.document.getElementById('smax-session-team');
+    if (userEl) userEl.textContent = getLoggedPersonLabel();
+    if (teamEl) teamEl.textContent = getLoggedTeamLabel();
   }
 
   function cloneTeamData(data) {
@@ -311,10 +365,12 @@
       const c = isPlainObject(colors[name]) ? colors[name] : {};
       const m = isPlainObject(personMeta[name]) ? personMeta[name] : {};
       const personId = Number(m.id ?? m.personId);
+      const range = getFinalRange(groups[name]);
       return {
         name,
         alias: typeof aliases[name] === 'string' ? aliases[name] : '',
-        finals: Array.isArray(groups[name]) ? groups[name].join(', ') : '',
+        finalFrom: range.from,
+        finalTo: range.to,
         bg: normalizeHex(c.bg, '#E2E8F0'),
         fg: normalizeHex(c.fg, inferFg(c.bg)),
         ausente: ausentes.has(name),
@@ -442,6 +498,26 @@
         color: #64748b;
         font-size: 18px;
       }
+      #smax-config-overlay .smax-session-info {
+        margin-top: 12px;
+        display: grid;
+        gap: 6px;
+        padding: 12px 14px;
+        border: 1px solid #dbe2ed;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.72);
+      }
+      #smax-config-overlay .smax-session-line {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        font-size: 14px;
+        color: #334155;
+      }
+      #smax-config-overlay .smax-session-line strong {
+        color: #0f172a;
+      }
       #smax-config-overlay .smax-btn {
         border: 1px solid #cdd7e4;
         background: #fff;
@@ -558,6 +634,7 @@
         font-weight: 600;
       }
       #smax-config-overlay .smax-row input[type="text"],
+      #smax-config-overlay .smax-row input[type="number"],
       #smax-config-overlay .smax-row textarea,
       #smax-config-overlay textarea.smax-textarea,
       #smax-config-overlay input.smax-input {
@@ -575,6 +652,11 @@
         background: #fff;
         border-radius: 8px;
         padding: 2px;
+      }
+      #smax-config-overlay .smax-finals-range {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
       }
       #smax-config-overlay .smax-row .smax-row-del {
         border: 0;
@@ -620,6 +702,13 @@
         padding: 12px 14px;
         margin-bottom: 8px;
         background: #f8fafc;
+      }
+      #smax-config-overlay .smax-pref-row[data-target] {
+        cursor: pointer;
+      }
+      #smax-config-overlay .smax-pref-row[data-target]:hover {
+        border-color: #bfd0ea;
+        background: #f4f8fd;
       }
       #smax-config-overlay .smax-pref-row label { font-weight: 600; }
       #smax-config-overlay .smax-pref-row input { width: 19px; height: 19px; }
@@ -713,6 +802,15 @@
         color: #64748b;
         font-size: 13px;
         margin: 0 0 8px;
+      }
+      #smax-config-overlay .smax-scope-note {
+        margin: 0 0 12px;
+        padding: 10px 12px;
+        border: 1px solid #d5deea;
+        border-radius: 10px;
+        background: #f8fafc;
+        color: #334155;
+        font-size: 13px;
       }
       #smax-config-overlay .smax-export-status {
         border: 1px solid #d5deea;
@@ -832,6 +930,10 @@
             <div>
               <h2>Configurações - SMAX</h2>
               <p>Gerencie os recursos do script diretamente na tela.</p>
+              <div class="smax-session-info">
+                <div class="smax-session-line"><strong>Voce está logado como:</strong> <span id="smax-session-user">Carregando...</span></div>
+                <div class="smax-session-line"><strong>Equipe:</strong> <span id="smax-session-team">Carregando...</span></div>
+              </div>
             </div>
             <button class="smax-btn" type="button" id="smax-close-top">Fechar</button>
           </header>
@@ -860,7 +962,7 @@
                   <div class="smax-row smax-row-head">
                     <span>Nome</span>
                     <span>Apelido</span>
-                    <span>Finais</span>
+                    <span>Finais (De / Até)</span>
                     <span>Cor</span>
                     <span>Texto</span>
                     <span>Situacao</span>
@@ -873,7 +975,8 @@
               <div class="smax-card">
                 <div class="smax-card-h">Palavras Destacadas</div>
                 <div class="smax-card-b">
-                  <p class="smax-muted">Uma palavra por linha em cada bloco.</p>
+                  <p class="smax-muted">Essas palavras sao pessoais e valem apenas para o especialista logado.</p>
+                  <div class="smax-scope-note" id="smax-words-scope"></div>
                   <div id="smax-highlight-groups" class="smax-highlight-list"></div>
                 </div>
               </div>
@@ -882,7 +985,8 @@
               <div class="smax-card">
                 <div class="smax-card-h">Tags Automaticas</div>
                 <div class="smax-card-b">
-                  <p class="smax-muted">Defina a tag e as palavras-chave separadas por virgula.</p>
+                  <p class="smax-muted">Essas tags sao pessoais e valem apenas para o especialista logado.</p>
+                  <div class="smax-scope-note" id="smax-tags-scope"></div>
                   <div class="smax-row smax-row-head smax-tag-row">
                     <span>Tag</span>
                     <span>Palavras-chave</span>
@@ -952,6 +1056,8 @@
     PREF_FIELDS.forEach(field => {
       const row = root.document.createElement('div');
       row.className = 'smax-pref-row';
+      const targetSection = PREF_SECTION_BY_KEY[field.key];
+      if (targetSection) row.setAttribute('data-target', targetSection);
       row.innerHTML = `
         <label>${field.label}</label>
         <input type="checkbox" data-pref-key="${field.key}">
@@ -976,7 +1082,10 @@
       if (!name) return;
       const alias = (row.querySelector('.smax-alias')?.value || '').trim();
 
-      const finals = parseFinals(row.querySelector('.smax-finals')?.value || '');
+      const finals = expandFinalRange(
+        row.querySelector('.smax-final-from')?.value || '',
+        row.querySelector('.smax-final-to')?.value || ''
+      );
       const bg = normalizeHex(row.querySelector('.smax-bg')?.value, '#E2E8F0');
       const fg = normalizeHex(row.querySelector('.smax-fg')?.value, inferFg(bg));
       const ausente = !!row.querySelector('.smax-ausente')?.checked;
@@ -1110,7 +1219,8 @@
     host.appendChild(createSpecialistRow({
       name: person.name.toUpperCase(),
       alias: '',
-      finals: '',
+      finalFrom: '',
+      finalTo: '',
       bg: '#E2E8F0',
       fg: '#111111',
       ausente: false,
@@ -1146,7 +1256,8 @@
     const data = item || {
       name: '',
       alias: '',
-      finals: '',
+      finalFrom: '',
+      finalTo: '',
       bg: '#E2E8F0',
       fg: '#111111',
       ausente: false,
@@ -1155,12 +1266,15 @@
       personName: ''
     };
 
-    const row = root.document.createElement('div');
+      const row = root.document.createElement('div');
     row.className = 'smax-row smax-specialist-row';
     row.innerHTML = `
       <input type="text" class="smax-name" placeholder="Nome (ex: ADRIANO)" value="${escapeHtml(data.name)}">
       <input type="text" class="smax-alias" placeholder="Apelido" value="${escapeHtml(data.alias)}">
-      <input type="text" class="smax-finals" placeholder="Finais (ex: 0,1,2)" value="${escapeHtml(data.finals)}">
+      <div class="smax-finals-range">
+        <input type="number" min="0" max="99" class="smax-final-from" placeholder="De" value="${escapeHtml(data.finalFrom)}">
+        <input type="number" min="0" max="99" class="smax-final-to" placeholder="Ate" value="${escapeHtml(data.finalTo)}">
+      </div>
       <input type="color" class="smax-bg" value="${normalizeHex(data.bg, '#E2E8F0')}">
       <input type="color" class="smax-fg" value="${normalizeHex(data.fg, '#111111')}">
       <label class="smax-absent-wrap"><input type="checkbox" class="smax-ausente" ${data.ausente ? 'checked' : ''}> <span>Ausente</span></label>
@@ -1459,6 +1573,8 @@
     renderSpecialists();
     renderHighlightGroups(snap);
     renderTags(snap);
+    renderSessionInfo();
+    renderAttendantScopeInfo();
     renderDetratores(snap);
     renderExportStatus();
     setActiveSection(section || 'geral');
@@ -1562,6 +1678,13 @@
 
     overlay.querySelectorAll('.smax-nav-btn').forEach(btn => {
       btn.addEventListener('click', () => setActiveSection(btn.getAttribute('data-target')));
+    });
+
+    overlay.addEventListener('click', e => {
+      const prefRow = e.target.closest('.smax-pref-row[data-target]');
+      if (!prefRow) return;
+      const target = prefRow.getAttribute('data-target');
+      if (target) setActiveSection(target);
     });
 
     doc.getElementById('smax-close-top')?.addEventListener('click', closeOverlay);

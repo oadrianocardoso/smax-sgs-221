@@ -8,9 +8,15 @@
   const DEFAULT_PUBLISHABLE_KEY = 'sb_publishable_edgxgG6UACiJClDmH5eoiQ_h4D-i4wG';
   const DEFAULT_TEAM_CODE = 'SGS 2.2.1';
   const PERSON_ME_PATH = '/rest/213963628/personalization/person/me';
-  const PERSON_TEAM_CACHE_TTL_MS = 5 * 60 * 1000;
-  let personTeamCache = { teamCode: '', ts: 0 };
-  let personTeamPromise = null;
+  const PERSON_CONTEXT_CACHE_TTL_MS = 5 * 60 * 1000;
+  const EMPTY_PERSON_CONTEXT = Object.freeze({
+    teamCode: '',
+    personId: null,
+    personName: '',
+    personLocation: ''
+  });
+  let personContextCache = Object.assign({ ts: 0 }, EMPTY_PERSON_CONTEXT);
+  let personContextPromise = null;
 
   function isPlainObject(v) {
     return Object.prototype.toString.call(v) === '[object Object]';
@@ -85,92 +91,40 @@
       .toUpperCase();
   }
 
-  function inferTeamCodeFromRawText(rawText, availableCodes) {
-    const text = normalizeText(rawText);
-    if (!text || !Array.isArray(availableCodes) || !availableCodes.length) return '';
-
-    for (const code of availableCodes) {
-      const teamCode = String(code || '').trim();
-      if (!teamCode) continue;
-      const normalizedCode = normalizeText(teamCode);
-      if (normalizedCode && text.includes(normalizedCode)) return teamCode;
-    }
-
-    const genericMatch = text.match(/SGS\s*2[.,]?\s*2[.,]?\s*\d+/i);
-    if (genericMatch) {
-      const m = normalizeText(genericMatch[0]).replace(/\s+/g, ' ');
-      const target = m.replace(/[,]/g, '.').replace(/\s*/g, '');
-      for (const code of availableCodes) {
-        const c = normalizeText(code).replace(/\s*/g, '');
-        if (c === target) return code;
-      }
-    }
-
-    return '';
+  function normalizeNameKey(value) {
+    return normalizeText(value);
   }
 
-  function inferTeamCodeFromPerson(personProps, availableCodes) {
+  function extractLoggedPersonContext(personProps) {
     const props = isPlainObject(personProps) ? personProps : {};
-    const candidates = [
-      props.HomeLocation,
-      props.GrupoUa_c,
-      props.GroupUa_c,
-      props.Department,
-      props.LocationName
-    ];
-
-    for (const raw of candidates) {
-      const match = inferTeamCodeFromRawText(raw, availableCodes);
-      if (match) return match;
-    }
-    return '';
+    const personIdRaw = Number(props.Id ?? props.PersonId ?? props.personId);
+    return {
+      teamCode: '',
+      personId: Number.isInteger(personIdRaw) && personIdRaw > 0 ? personIdRaw : null,
+      personName: String(props.Name || props.DisplayName || props.FullName || '').trim(),
+      personLocation: String(props.Location || props.LocationName || props.HomeLocation || '').trim()
+    };
   }
 
-  function inferTeamCodeFromGroups(groupsValue, teamCodeByGroupId) {
-    const codeByGroup = isPlainObject(teamCodeByGroupId) ? teamCodeByGroupId : {};
-    const groups = Array.isArray(groupsValue) ? groupsValue : [];
-    if (!groups.length) return '';
-
-    for (const g of groups) {
-      const groupId = String(g || '').trim();
-      if (!groupId) continue;
-      if (codeByGroup[groupId]) return codeByGroup[groupId];
-    }
-
-    return '';
-  }
-
-  async function detectLoggedUserTeam(availableCodes, teamGroupIdsByCode) {
-    const codes = Array.isArray(availableCodes) ? availableCodes.filter(Boolean) : [];
-    if (!codes.length) return '';
-
-    const teamCodeByGroupId = {};
-    if (isPlainObject(teamGroupIdsByCode)) {
-      Object.keys(teamGroupIdsByCode).forEach(code => {
-        const groupId = Number(teamGroupIdsByCode[code]);
-        if (!codes.includes(code)) return;
-        if (!Number.isInteger(groupId) || groupId <= 0) return;
-        teamCodeByGroupId[String(groupId)] = code;
-      });
-    }
-
+  async function detectLoggedPersonContext() {
     const now = Date.now();
-    if (
-      personTeamCache.teamCode &&
-      (now - personTeamCache.ts) < PERSON_TEAM_CACHE_TTL_MS &&
-      codes.includes(personTeamCache.teamCode)
-    ) {
-      return personTeamCache.teamCode;
+    if ((now - personContextCache.ts) < PERSON_CONTEXT_CACHE_TTL_MS) {
+      return {
+        teamCode: personContextCache.teamCode || '',
+        personId: Number.isInteger(Number(personContextCache.personId)) ? Number(personContextCache.personId) : null,
+        personName: String(personContextCache.personName || '').trim(),
+        personLocation: String(personContextCache.personLocation || '').trim()
+      };
     }
 
-    if (personTeamPromise) return personTeamPromise;
+    if (personContextPromise) return personContextPromise;
 
-    personTeamPromise = (async () => {
+    personContextPromise = (async () => {
       try {
         const fetchImpl = (root && typeof root.fetch === 'function')
           ? root.fetch.bind(root)
           : (typeof fetch === 'function' ? fetch : null);
-        if (!fetchImpl || !root.location?.origin) return '';
+        if (!fetchImpl || !root.location?.origin) return Object.assign({}, EMPTY_PERSON_CONTEXT);
 
         const url = new URL(PERSON_ME_PATH, root.location.origin).toString();
         const res = await fetchImpl(url, {
@@ -178,30 +132,26 @@
           credentials: 'include',
           cache: 'no-store'
         });
-        if (!res.ok) return '';
+        if (!res.ok) return Object.assign({}, EMPTY_PERSON_CONTEXT);
 
         const payload = await res.json().catch(() => null);
         const entity = Array.isArray(payload?.entities) ? payload.entities[0] : null;
         const props = isPlainObject(entity?.properties) ? entity.properties : {};
-        const fromGroups = inferTeamCodeFromGroups(props.Groups, teamCodeByGroupId);
-        const teamCode = fromGroups || inferTeamCodeFromPerson(props, codes);
+        const context = extractLoggedPersonContext(props);
 
-        if (teamCode) {
-          personTeamCache = { teamCode, ts: Date.now() };
-          if (fromGroups) {
-            console.log('[SMAX Supabase] Equipe detectada por Groups/id_smax_grupo:', teamCode);
-          }
-          return teamCode;
+        if (context.personId || context.personName || context.personLocation) {
+          personContextCache = Object.assign({ ts: Date.now() }, EMPTY_PERSON_CONTEXT, context);
+          return Object.assign({}, EMPTY_PERSON_CONTEXT, context);
         }
       } catch (e) {
         console.warn('[SMAX Supabase] Nao foi possivel detectar equipe do usuario logado:', e);
       } finally {
-        personTeamPromise = null;
+        personContextPromise = null;
       }
-      return '';
+      return Object.assign({}, EMPTY_PERSON_CONTEXT);
     })();
 
-    return personTeamPromise;
+    return personContextPromise;
   }
 
   function readSupabaseRuntime() {
@@ -311,11 +261,13 @@
     const teams = {};
     const teamCodeById = {};
     const teamGroupIds = {};
+    const teamIdsByCode = {};
     (teamsRows || []).forEach(t => {
       const code = String(t.code || '').trim();
       if (!code) return;
       teams[code] = { nameGroups: {}, nameAliases: {}, nameColors: {}, ausentes: [], personMeta: {} };
       teamCodeById[t.id] = code;
+      teamIdsByCode[code] = Number(t.id);
       const groupId = Number(t.id_smax_grupo);
       if (Number.isInteger(groupId) && groupId > 0) {
         teamGroupIds[code] = groupId;
@@ -364,7 +316,7 @@
       teams[code].ausentes = uniq(teams[code].ausentes);
     });
 
-    return { teams, teamGroupIds };
+    return { teams, teamGroupIds, teamIdsByCode, teamCodeById };
   }
 
   function buildHighlightState(groupsRows, termsRows) {
@@ -404,6 +356,141 @@
       });
 
     return groups;
+  }
+
+  function resolveTeamFromSpecialists(personContext, specialistsRows, teamCodeById) {
+    const rows = Array.isArray(specialistsRows) ? specialistsRows : [];
+    const codeById = isPlainObject(teamCodeById) ? teamCodeById : {};
+    const personId = Number(personContext?.personId);
+
+    if (Number.isInteger(personId) && personId > 0) {
+      const byId = rows.find(row => Number(row?.smax_person_id) === personId);
+      if (byId) {
+        return {
+          teamCode: String(codeById[byId.team_id] || '').trim(),
+          specialistRow: byId
+        };
+      }
+    }
+
+    const personName = normalizeNameKey(personContext?.personName);
+    if (!personName) {
+      return { teamCode: '', specialistRow: null };
+    }
+
+    const byName = rows.find(row => {
+      const specialistName = normalizeNameKey(row?.smax_person_name || row?.name);
+      return specialistName && specialistName === personName;
+    }) || null;
+
+    return {
+      teamCode: byName ? String(codeById[byName.team_id] || '').trim() : '',
+      specialistRow: byName
+    };
+  }
+
+  function findSpecialistForPerson(specialistsRows, personContext) {
+    const rows = Array.isArray(specialistsRows) ? specialistsRows : [];
+    const personId = Number(personContext?.personId);
+    if (Number.isInteger(personId) && personId > 0) {
+      const byId = rows.find(row => Number(row?.smax_person_id) === personId);
+      if (byId) return byId;
+    }
+
+    const wanted = normalizeNameKey(personContext?.personName);
+    if (!wanted) return null;
+
+    return rows.find(row => {
+      const candidates = [row?.smax_person_name, row?.name];
+      return candidates.some(value => normalizeNameKey(value) === wanted);
+    }) || null;
+  }
+
+  function buildCurrentSpecialistState(specialistRow, personContext, teamCode, teamId) {
+    const row = isPlainObject(specialistRow) ? specialistRow : {};
+    const rawId = Number(row.id);
+    const rawPersonId = Number(row.smax_person_id ?? personContext?.personId);
+    return {
+      id: Number.isInteger(rawId) && rawId > 0 ? rawId : null,
+      teamId: Number.isInteger(Number(teamId)) && Number(teamId) > 0 ? Number(teamId) : null,
+      teamCode: String(teamCode || personContext?.teamCode || '').trim(),
+      name: String(row.name || '').trim(),
+      personId: Number.isInteger(rawPersonId) && rawPersonId > 0 ? rawPersonId : null,
+      personName: String(row.smax_person_name || personContext?.personName || '').trim(),
+      location: String(row.smax_location || personContext?.personLocation || '').trim()
+    };
+  }
+
+  function getCurrentSpecialistSeed() {
+    const current = isPlainObject(CONFIG.currentSpecialist) ? CONFIG.currentSpecialist : {};
+    const logged = isPlainObject(CONFIG.loggedPerson) ? CONFIG.loggedPerson : {};
+    const currentId = Number(current.id);
+    const currentTeamId = Number(current.teamId);
+    const personId = Number(current.personId ?? logged.personId);
+    return {
+      id: Number.isInteger(currentId) && currentId > 0 ? currentId : null,
+      teamId: Number.isInteger(currentTeamId) && currentTeamId > 0 ? currentTeamId : null,
+      teamCode: String(current.teamCode || logged.teamCode || '').trim(),
+      name: String(current.name || '').trim(),
+      personId: Number.isInteger(personId) && personId > 0 ? personId : null,
+      personName: String(current.personName || logged.personName || '').trim(),
+      location: String(current.location || logged.personLocation || '').trim()
+    };
+  }
+
+  function getConfiguredHighlightGroupRows(highlightGroups, groupIdByKey) {
+    const source = isPlainObject(highlightGroups) ? highlightGroups : {};
+    const out = [];
+
+    Object.keys(source).forEach(key => {
+      const groupId = Number(groupIdByKey?.[key]);
+      const cfg = isPlainObject(source[key]) ? source[key] : {};
+      if (!Number.isInteger(groupId) || groupId <= 0) return;
+
+      const whole = Array.isArray(cfg.whole) ? cfg.whole : [];
+      const substr = Array.isArray(cfg.substr) ? cfg.substr : [];
+      const regex = Array.isArray(cfg.regex) ? cfg.regex : [];
+
+      whole.forEach((term, idx) => {
+        const value = String(term || '').trim();
+        if (!value) return;
+        out.push({ group_id: groupId, match_type: 'whole', term: value, regex_flags: '', sort_order: idx + 1, is_active: true });
+      });
+      substr.forEach((term, idx) => {
+        const value = String(term || '').trim();
+        if (!value) return;
+        out.push({ group_id: groupId, match_type: 'substr', term: value, regex_flags: '', sort_order: idx + 1, is_active: true });
+      });
+      regex.forEach((entry, idx) => {
+        const pattern = String(entry?.pattern || entry || '').trim();
+        if (!pattern) return;
+        const flags = String(entry?.flags || 'giu').trim() || 'giu';
+        out.push({ group_id: groupId, match_type: 'regex', term: pattern, regex_flags: flags, sort_order: idx + 1, is_active: true });
+      });
+    });
+
+    return out;
+  }
+
+  function getConfiguredTagRows(autoTagRules) {
+    return (Array.isArray(autoTagRules) ? autoTagRules : [])
+      .map(rule => normalizeRule(rule))
+      .filter(Boolean)
+      .map((rule, idx) => ({
+        tag_label: rule.tag,
+        keywords: rule.palavras,
+        sort_order: idx + 1,
+        is_active: true
+      }));
+  }
+
+  function isMissingScopedRulesSchema(error) {
+    const msg = String(error?.message || '');
+    if (!msg) return false;
+    return (
+      msg.includes('smax_specialist_highlight_terms') ||
+      msg.includes('smax_specialist_tag_rules')
+    );
   }
 
   function applyLoadedState(payload) {
@@ -500,22 +587,46 @@
     const teamState = buildTeamState(teamsRows, specialistsRows, finalsRows);
     const teams = teamState.teams || {};
     const teamGroupIds = teamState.teamGroupIds || {};
+    const teamIdsByCode = teamState.teamIdsByCode || {};
+    const teamCodeById = teamState.teamCodeById || {};
     const configuredTeamName = String(CONFIG.teamName || '').trim();
     const availableCodes = Object.keys(teams);
-    const detectedTeamName = await detectLoggedUserTeam(availableCodes, teamGroupIds);
+    const rawPersonContext = await detectLoggedPersonContext();
+    const resolvedTeam = resolveTeamFromSpecialists(rawPersonContext, specialistsRows, teamCodeById);
+    const detectedTeamName = String(resolvedTeam?.teamCode || '').trim();
+    const personContext = Object.assign({}, rawPersonContext, detectedTeamName ? { teamCode: detectedTeamName } : null);
     const teamName = availableCodes.includes(detectedTeamName)
       ? detectedTeamName
       : (availableCodes.includes(configuredTeamName) ? configuredTeamName : (availableCodes[0] || DEFAULT_TEAM_CODE));
     if (detectedTeamName && teamName === detectedTeamName) {
-      console.log('[SMAX Supabase] Equipe detectada pelo perfil do usuario:', detectedTeamName);
+      console.log('[SMAX Supabase] Equipe detectada por smax_specialists/team_id:', detectedTeamName);
     }
 
-    const highlightGroups = buildHighlightState(groupsRows, termsRows);
+    let scopedTermsRows = Array.isArray(termsRows) ? termsRows : [];
+    let scopedAutoTagRows = Array.isArray(autoTagRows) ? autoTagRows : [];
+    const matchedSpecialist = resolvedTeam?.specialistRow || findSpecialistForPerson(specialistsRows, personContext);
+    let currentSpecialist = buildCurrentSpecialistState(matchedSpecialist, personContext, teamName, teamIdsByCode[teamName]);
+
+    if (currentSpecialist.id) {
+      try {
+        const [specialistTermsRows, specialistTagRows] = await Promise.all([
+          request(`smax_specialist_highlight_terms?select=group_id,match_type,term,regex_flags,sort_order,is_active&specialist_id=eq.${currentSpecialist.id}&is_active=eq.true&order=group_id.asc,sort_order.asc,id.asc`),
+          request(`smax_specialist_tag_rules?select=tag_label,keywords,sort_order,is_active&specialist_id=eq.${currentSpecialist.id}&is_active=eq.true&order=sort_order.asc,id.asc`)
+        ]);
+
+        if (Array.isArray(specialistTermsRows)) scopedTermsRows = specialistTermsRows;
+        if (Array.isArray(specialistTagRows)) scopedAutoTagRows = specialistTagRows;
+      } catch (e) {
+        if (!isMissingScopedRulesSchema(e)) throw e;
+      }
+    }
+
+    const highlightGroups = buildHighlightState(groupsRows, scopedTermsRows);
     const detratores = (detratoresRows || []).map(r => String(r.full_name || '').trim()).filter(Boolean);
 
     const autoTagRules = [];
-    if (Array.isArray(autoTagRows)) {
-      autoTagRows.forEach(row => {
+    if (Array.isArray(scopedAutoTagRows)) {
+      scopedAutoTagRows.forEach(row => {
         const rule = normalizeRule({
           tag: row.tag_label,
           palavras: Array.isArray(row.keywords)
@@ -535,6 +646,9 @@
       detratores,
       autoTagRules
     });
+
+    CONFIG.loggedPerson = Object.assign({}, EMPTY_PERSON_CONTEXT, personContext || {});
+    CONFIG.currentSpecialist = currentSpecialist;
 
     return true;
   }
@@ -644,6 +758,76 @@
     }
   }
 
+  async function saveLegacySharedHighlightTerms(termBody) {
+    await request('smax_highlight_terms?id=gte.0', { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
+    if (!Array.isArray(termBody) || !termBody.length) return;
+    await request('smax_highlight_terms?on_conflict=group_id,match_type,term,regex_flags', {
+      method: 'POST',
+      headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
+      body: termBody
+    });
+  }
+
+  async function saveLegacySharedAutoTags(tagBody) {
+    await request('smax_auto_tag_rules?id=gte.0', { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
+    if (!Array.isArray(tagBody) || !tagBody.length) return;
+    await request('smax_auto_tag_rules?on_conflict=tag_label', {
+      method: 'POST',
+      headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
+      body: tagBody
+    });
+  }
+
+  function resolveCurrentSpecialistForSave(activeTeamCode, specialistsRows) {
+    const seed = getCurrentSpecialistSeed();
+    const current = findSpecialistForPerson(specialistsRows, seed);
+    if (current) {
+      return buildCurrentSpecialistState(current, seed, activeTeamCode, current.team_id);
+    }
+
+    const fallbackByName = (Array.isArray(specialistsRows) ? specialistsRows : []).find(row => {
+      if (String(row?.team_id || '') !== String(Number(seed.teamId) || '')) return false;
+      const wanted = normalizeNameKey(seed.name || seed.personName);
+      const got = normalizeNameKey(row?.smax_person_name || row?.name);
+      return !!wanted && wanted === got;
+    }) || null;
+
+    return buildCurrentSpecialistState(fallbackByName, seed, activeTeamCode, fallbackByName?.team_id);
+  }
+
+  async function saveScopedRules(currentSpecialist, termBody, tagBody) {
+    if (!currentSpecialist?.id) return false;
+
+    await request(`smax_specialist_highlight_terms?specialist_id=eq.${currentSpecialist.id}`, {
+      method: 'DELETE',
+      headers: { Prefer: 'return=minimal' }
+    });
+
+    if (Array.isArray(termBody) && termBody.length) {
+      await request('smax_specialist_highlight_terms?on_conflict=specialist_id,group_id,match_type,term,regex_flags', {
+        method: 'POST',
+        headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
+        body: termBody.map(row => Object.assign({ specialist_id: currentSpecialist.id }, row))
+      });
+    }
+
+    await request(`smax_specialist_tag_rules?specialist_id=eq.${currentSpecialist.id}`, {
+      method: 'DELETE',
+      headers: { Prefer: 'return=minimal' }
+    });
+
+    if (Array.isArray(tagBody) && tagBody.length) {
+      await request('smax_specialist_tag_rules?on_conflict=specialist_id,tag_label', {
+        method: 'POST',
+        headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
+        body: tagBody.map(row => Object.assign({ specialist_id: currentSpecialist.id }, row))
+      });
+    }
+
+    CONFIG.currentSpecialist = currentSpecialist;
+    return true;
+  }
+
   async function saveAllToDb(snapshot) {
     if (!runtime.enabled) throw new Error('Supabase desabilitado');
     const payload = buildPayloadFromSnapshot(snapshot);
@@ -676,6 +860,8 @@
       const code = String(t.code || '').trim();
       if (code) teamIdByCode[code] = Number(t.id);
     });
+
+    let savedActiveTeamSpecialists = [];
 
     for (const code of teamCodes) {
       const teamId = teamIdByCode[code];
@@ -712,11 +898,15 @@
         sort_order: s.sort_order
       }));
 
-      const inserted = await request('smax_specialists?select=id,name,team_id', {
+      const inserted = await request('smax_specialists?select=id,team_id,name,smax_person_id,smax_location,smax_person_name', {
         method: 'POST',
         headers: { Prefer: 'return=representation' },
         body: specBody
       });
+
+      if (code === payload.teamName) {
+        savedActiveTeamSpecialists = Array.isArray(inserted) ? inserted.slice() : [];
+      }
 
       const specIdByName = {};
       (inserted || []).forEach(s => {
@@ -736,16 +926,15 @@
       await upsertFinalsRows(finalsBody);
     }
 
-    await request('smax_highlight_terms?id=gte.0', { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
-    await request('smax_highlight_groups?id=gte.0', { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
-
     const hlSource = isPlainObject(payload.highlightGroups) ? payload.highlightGroups : {};
     const defaultOrder = ['vermelho', 'rosa', 'amarelo', 'verde', 'azul'];
-    const hlKeys = uniq(defaultOrder.concat(Object.keys(hlSource)));
+    const hlKeys = uniq(defaultOrder.concat(Object.keys(hlSource))).filter(key => {
+      if (defaultOrder.includes(key)) return true;
+      return isPlainObject(hlSource[key]);
+    });
     const groupsBody = hlKeys
-      .filter(k => isPlainObject(hlSource[k]))
       .map((key, idx) => {
-        const g = hlSource[key];
+        const g = isPlainObject(hlSource[key]) ? hlSource[key] : {};
         return {
           group_key: key,
           label: key.charAt(0).toUpperCase() + key.slice(1).toLowerCase(),
@@ -757,9 +946,9 @@
 
     let groupsInserted = [];
     if (groupsBody.length) {
-      groupsInserted = await request('smax_highlight_groups?select=id,group_key', {
+      groupsInserted = await request('smax_highlight_groups?select=id,group_key&on_conflict=group_key', {
         method: 'POST',
-        headers: { Prefer: 'return=representation' },
+        headers: { Prefer: 'resolution=merge-duplicates,return=representation' },
         body: groupsBody
       });
     }
@@ -770,41 +959,7 @@
       if (key) groupIdByKey[key] = Number(g.id);
     });
 
-    const termBody = [];
-    hlKeys.forEach(key => {
-      const gid = groupIdByKey[key];
-      const g = hlSource[key];
-      if (!gid || !isPlainObject(g)) return;
-
-      const whole = Array.isArray(g.whole) ? g.whole : [];
-      const substr = Array.isArray(g.substr) ? g.substr : [];
-      const regex = Array.isArray(g.regex) ? g.regex : [];
-
-      whole.forEach((term, idx) => {
-        const t = String(term || '').trim();
-        if (!t) return;
-        termBody.push({ group_id: gid, match_type: 'whole', term: t, regex_flags: '', sort_order: idx + 1, is_active: true });
-      });
-      substr.forEach((term, idx) => {
-        const t = String(term || '').trim();
-        if (!t) return;
-        termBody.push({ group_id: gid, match_type: 'substr', term: t, regex_flags: '', sort_order: idx + 1, is_active: true });
-      });
-      regex.forEach((entry, idx) => {
-        const pattern = String(entry?.pattern || entry || '').trim();
-        if (!pattern) return;
-        const flags = String(entry?.flags || 'giu').trim() || 'giu';
-        termBody.push({ group_id: gid, match_type: 'regex', term: pattern, regex_flags: flags, sort_order: idx + 1, is_active: true });
-      });
-    });
-
-    if (termBody.length) {
-      await request('smax_highlight_terms?on_conflict=group_id,match_type,term,regex_flags', {
-        method: 'POST',
-        headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
-        body: termBody
-      });
-    }
+    const termBody = getConfiguredHighlightGroupRows(hlSource, groupIdByKey);
 
     await request('smax_detractors?id=gte.0', { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
     const detrBody = (Array.isArray(payload.detratores) ? payload.detratores : [])
@@ -822,26 +977,18 @@
       });
     }
 
+    const tagBody = getConfiguredTagRows(payload.autoTagRules);
     try {
-      await request('smax_auto_tag_rules?id=gte.0', { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
-      const tagBody = (Array.isArray(payload.autoTagRules) ? payload.autoTagRules : [])
-        .map((rule, idx) => normalizeRule(rule))
-        .filter(Boolean)
-        .map((rule, idx) => ({
-          tag_label: rule.tag,
-          keywords: rule.palavras,
-          sort_order: idx + 1,
-          is_active: true
-        }));
-      if (tagBody.length) {
-        await request('smax_auto_tag_rules?on_conflict=tag_label', {
-          method: 'POST',
-          headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
-          body: tagBody
-        });
+      const currentSpecialist = resolveCurrentSpecialistForSave(payload.teamName, savedActiveTeamSpecialists);
+      const scopedSaved = await saveScopedRules(currentSpecialist, termBody, tagBody);
+      if (!scopedSaved) {
+        await saveLegacySharedHighlightTerms(termBody);
+        await saveLegacySharedAutoTags(tagBody);
       }
     } catch (e) {
-      console.warn('[SMAX Supabase] Falha ao salvar regras de tags:', e);
+      if (!isMissingScopedRulesSchema(e)) throw e;
+      await saveLegacySharedHighlightTerms(termBody);
+      await saveLegacySharedAutoTags(tagBody);
     }
 
     const p = payload.prefs || {};
