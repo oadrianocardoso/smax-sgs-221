@@ -439,6 +439,23 @@
     };
   }
 
+  function getSpecialistRuleIdentity(row) {
+    const teamId = Number(row?.team_id);
+    if (!Number.isInteger(teamId) || teamId <= 0) return '';
+
+    const personId = Number(row?.smax_person_id);
+    if (Number.isInteger(personId) && personId > 0) {
+      return `${teamId}::ID::${personId}`;
+    }
+
+    const nameKey = normalizeNameKey(row?.smax_person_name || row?.name);
+    if (nameKey) {
+      return `${teamId}::NAME::${nameKey}`;
+    }
+
+    return '';
+  }
+
   function getCurrentSpecialistSeed() {
     const current = isPlainObject(CONFIG.currentSpecialist) ? CONFIG.currentSpecialist : {};
     const logged = isPlainObject(CONFIG.loggedPerson) ? CONFIG.loggedPerson : {};
@@ -538,6 +555,83 @@
       .filter(v => Number.isInteger(v) && v > 0);
     if (!safe.length) return '';
     return `in.(${safe.join(',')})`;
+  }
+
+  async function loadScopedRulesSnapshot(specialistsRows) {
+    const rows = Array.isArray(specialistsRows) ? specialistsRows : [];
+    const specialistIds = rows
+      .map(row => Number(row?.id))
+      .filter(id => Number.isInteger(id) && id > 0);
+
+    if (!specialistIds.length) return {};
+
+    const highlightRows = await request(
+      `smax_specialist_highlight_terms?select=specialist_id,group_id,match_type,term,regex_flags,sort_order,is_active&specialist_id=${buildInFilter(specialistIds)}&order=specialist_id.asc,group_id.asc,match_type.asc,sort_order.asc,id.asc`
+    );
+    const tagRows = await request(
+      `smax_specialist_tags?select=id,specialist_id,tag_label,sort_order,is_active&specialist_id=${buildInFilter(specialistIds)}&order=specialist_id.asc,sort_order.asc,id.asc`
+    );
+
+    const tagIds = (Array.isArray(tagRows) ? tagRows : [])
+      .map(row => Number(row?.id))
+      .filter(id => Number.isInteger(id) && id > 0);
+
+    const keywordRows = tagIds.length
+      ? await request(
+        `smax_specialist_tag_keywords?select=specialist_tag_id,keyword,sort_order,is_active&specialist_tag_id=${buildInFilter(tagIds)}&order=specialist_tag_id.asc,sort_order.asc,id.asc`
+      )
+      : [];
+
+    const highlightBySpecialist = {};
+    (Array.isArray(highlightRows) ? highlightRows : []).forEach(row => {
+      const specialistId = Number(row?.specialist_id);
+      if (!Number.isInteger(specialistId) || specialistId <= 0) return;
+      if (!Array.isArray(highlightBySpecialist[specialistId])) highlightBySpecialist[specialistId] = [];
+      highlightBySpecialist[specialistId].push({
+        group_id: Number(row?.group_id),
+        match_type: String(row?.match_type || '').trim(),
+        term: String(row?.term || '').trim(),
+        regex_flags: String(row?.regex_flags || '').trim(),
+        sort_order: Number(row?.sort_order || 0),
+        is_active: row?.is_active !== false
+      });
+    });
+
+    const tagRowsBySpecialist = {};
+    (Array.isArray(tagRows) ? tagRows : []).forEach(row => {
+      const specialistId = Number(row?.specialist_id);
+      if (!Number.isInteger(specialistId) || specialistId <= 0) return;
+      if (!Array.isArray(tagRowsBySpecialist[specialistId])) tagRowsBySpecialist[specialistId] = [];
+      tagRowsBySpecialist[specialistId].push(row);
+    });
+
+    const keywordRowsByTagId = {};
+    (Array.isArray(keywordRows) ? keywordRows : []).forEach(row => {
+      const tagId = Number(row?.specialist_tag_id);
+      if (!Number.isInteger(tagId) || tagId <= 0) return;
+      if (!Array.isArray(keywordRowsByTagId[tagId])) keywordRowsByTagId[tagId] = [];
+      keywordRowsByTagId[tagId].push(row);
+    });
+
+    const snapshot = {};
+    rows.forEach(row => {
+      const key = getSpecialistRuleIdentity(row);
+      const specialistId = Number(row?.id);
+      if (!key || !Number.isInteger(specialistId) || specialistId <= 0) return;
+
+      const scopedTagRows = Array.isArray(tagRowsBySpecialist[specialistId]) ? tagRowsBySpecialist[specialistId] : [];
+      const scopedKeywordRows = scopedTagRows.flatMap(tagRow => {
+        const tagId = Number(tagRow?.id);
+        return Array.isArray(keywordRowsByTagId[tagId]) ? keywordRowsByTagId[tagId] : [];
+      });
+
+      snapshot[key] = {
+        highlightTerms: Array.isArray(highlightBySpecialist[specialistId]) ? highlightBySpecialist[specialistId].map(cloneValue) : [],
+        autoTagRules: buildAutoTagRulesFromNormalizedRows(scopedTagRows, scopedKeywordRows)
+      };
+    });
+
+    return snapshot;
   }
 
   function applyLoadedState(payload) {
@@ -899,6 +993,29 @@
     return true;
   }
 
+  async function restoreScopedRulesForSpecialists(specialistsRows, snapshotByIdentity) {
+    const rows = Array.isArray(specialistsRows) ? specialistsRows : [];
+    const snapshot = isPlainObject(snapshotByIdentity) ? snapshotByIdentity : {};
+
+    for (const row of rows) {
+      const key = getSpecialistRuleIdentity(row);
+      const specialistId = Number(row?.id);
+      if (!key || !Number.isInteger(specialistId) || specialistId <= 0) continue;
+
+      const preserved = isPlainObject(snapshot[key]) ? snapshot[key] : null;
+      if (!preserved) continue;
+
+      await saveScopedHighlightTerms(
+        { id: specialistId },
+        Array.isArray(preserved.highlightTerms) ? preserved.highlightTerms.map(cloneValue) : []
+      );
+      await saveScopedAutoTagsNormalized(
+        { id: specialistId },
+        getConfiguredTagRows(preserved.autoTagRules)
+      );
+    }
+  }
+
   async function saveAllToDb(snapshot) {
     if (!runtime.enabled) throw new Error('Supabase desabilitado');
     const payload = buildPayloadFromSnapshot(snapshot);
@@ -931,6 +1048,16 @@
       const code = String(t.code || '').trim();
       if (code) teamIdByCode[code] = Number(t.id);
     });
+
+    const savedTeamIds = teamCodes
+      .map(code => Number(teamIdByCode[code]))
+      .filter(id => Number.isInteger(id) && id > 0);
+    const existingSpecialists = savedTeamIds.length
+      ? await request(
+        `smax_specialists?select=id,team_id,name,smax_person_id,smax_person_name&team_id=${buildInFilter(savedTeamIds)}&order=team_id.asc,id.asc`
+      )
+      : [];
+    const preservedScopedRules = await loadScopedRulesSnapshot(existingSpecialists);
 
     let savedSpecialists = [];
 
@@ -1047,6 +1174,8 @@
         body: detrBody
       });
     }
+
+    await restoreScopedRulesForSpecialists(savedSpecialists, preservedScopedRules);
 
     const tagBody = getConfiguredTagRows(payload.autoTagRules);
     const currentSpecialist = resolveCurrentSpecialistForSave(payload.teamName, savedSpecialists, teamIdByCode);
