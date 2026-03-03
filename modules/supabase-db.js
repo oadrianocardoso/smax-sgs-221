@@ -788,11 +788,12 @@
     }
   }
 
-  function resolveCurrentSpecialistForSave(activeTeamCode, specialistsRows) {
+  function resolveCurrentSpecialistForSave(activeTeamCode, specialistsRows, teamCodeById) {
     const seed = getCurrentSpecialistSeed();
     const current = findSpecialistForPerson(specialistsRows, seed);
     if (current) {
-      return buildCurrentSpecialistState(current, seed, activeTeamCode, current.team_id);
+      const currentTeamCode = String(teamCodeById?.[current.team_id] || seed.teamCode || activeTeamCode || '').trim();
+      return buildCurrentSpecialistState(current, seed, currentTeamCode, current.team_id);
     }
 
     const fallbackByName = (Array.isArray(specialistsRows) ? specialistsRows : []).find(row => {
@@ -802,7 +803,8 @@
       return !!wanted && wanted === got;
     }) || null;
 
-    return buildCurrentSpecialistState(fallbackByName, seed, activeTeamCode, fallbackByName?.team_id);
+    const fallbackTeamCode = String(teamCodeById?.[fallbackByName?.team_id] || seed.teamCode || activeTeamCode || '').trim();
+    return buildCurrentSpecialistState(fallbackByName, seed, fallbackTeamCode, fallbackByName?.team_id);
   }
 
   async function saveScopedHighlightTerms(currentSpecialist, termBody) {
@@ -930,7 +932,7 @@
       if (code) teamIdByCode[code] = Number(t.id);
     });
 
-    let savedActiveTeamSpecialists = [];
+    let savedSpecialists = [];
 
     for (const code of teamCodes) {
       const teamId = teamIdByCode[code];
@@ -973,8 +975,8 @@
         body: specBody
       });
 
-      if (code === payload.teamName) {
-        savedActiveTeamSpecialists = Array.isArray(inserted) ? inserted.slice() : [];
+      if (Array.isArray(inserted) && inserted.length) {
+        savedSpecialists = savedSpecialists.concat(inserted);
       }
 
       const specIdByName = {};
@@ -1047,7 +1049,7 @@
     }
 
     const tagBody = getConfiguredTagRows(payload.autoTagRules);
-    const currentSpecialist = resolveCurrentSpecialistForSave(payload.teamName, savedActiveTeamSpecialists);
+    const currentSpecialist = resolveCurrentSpecialistForSave(payload.teamName, savedSpecialists, teamIdByCode);
     if (!currentSpecialist?.id) {
       throw new Error('Especialista logado nao identificado. O script salva palavras destacadas e tags apenas no modelo por especialista.');
     }
