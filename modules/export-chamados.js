@@ -5,13 +5,13 @@
 
   const EMS_TENANT_ID = '213963628';
   const PAGE_SIZE = 250;
-  const DETAIL_BATCH_SIZE = 300;
   const LOG_PREFIX = '[SMAX EMS]';
 
-  const EMS_LAYOUT = [
+  const EMS_FIELDS = [
     'Id',
     'CreateTime',
     'CloseTime',
+    'LastUpdateTime',
     'StatusSCCDSMAX_c',
     'Status',
     'RequestedForPerson',
@@ -27,7 +27,9 @@
     'NumeroRejeicoes_c',
     'Comments',
     'PhaseId'
-  ].join(',');
+  ];
+
+  const EMS_LAYOUT = EMS_FIELDS.join(',');
 
   const EMS_ORDER = 'ExpertAssignee.Name asc,ExpertAssignee.Location asc,ExpertAssignee.IsVIP asc,ExpertAssignee.OrganizationalGroup asc,ExpertAssignee.Upn asc';
 
@@ -355,22 +357,6 @@
 
       const normalized = uniqueRaw.map(normalizeEntity);
 
-      const groupIdsSet = new Set();
-      normalized.forEach(e => {
-        const gid = String(e?.AssignedToGroup || e?.['AssignedToGroup.Id'] || '').trim();
-        if (gid) groupIdsSet.add(gid);
-      });
-      const groupIds = Array.from(groupIdsSet);
-      let groupMap = {};
-      if (groupIds.length) {
-        groupMap = await fetchPersonGroupsInBatches(origin, groupIds);
-      }
-
-      for (const e of normalized) {
-        const gid = String(e?.AssignedToGroup || e?.['AssignedToGroup.Id'] || '').trim();
-        e.GrupoResponsavel = gid && groupMap[gid] ? groupMap[gid] : '';
-      }
-
       const csv = buildCsv(normalized);
       downloadCsv(csv, 'smax_ems_requests.csv');
 
@@ -476,45 +462,6 @@
     return { entities: all, total: apiTotal || all.length };
   }
 
-  async function fetchPersonGroupsInBatches(origin, ids) {
-    const map = {};
-    const BATCH = DETAIL_BATCH_SIZE || 200;
-    for (let i = 0; i < ids.length; i += BATCH) {
-      const batch = ids.slice(i, i + BATCH);
-      const partial = await fetchPersonGroup(origin, batch);
-      Object.assign(map, partial);
-    }
-    return map;
-  }
-
-  async function fetchPersonGroup(origin, ids) {
-    if (!ids.length) return {};
-    const base = `${origin}/rest/${EMS_TENANT_ID}/ems/PersonGroup`;
-    const filterExpr = ids.map(id => `(Id='${id}')`).join(' or ');
-    const url = `${base}?filter=${encodeURIComponent(filterExpr)}&layout=Id,Name&meta=totalCount`;
-
-    const resp = await root.fetch(url, { credentials: 'include' });
-    const text = await resp.text();
-    if (!resp.ok) {
-      throw new Error(`HTTP ${resp.status} ao chamar PersonGroup: ${text}`);
-    }
-
-    let data = null;
-    try {
-      data = JSON.parse(text);
-    } catch (e) {
-      throw new Error('Falha ao parsear JSON de PersonGroup.');
-    }
-
-    const entities = data.entities || data.members || data.content || [];
-    const m = {};
-    for (const ent of entities) {
-      const p = ent.properties || {};
-      if (p.Id) m[p.Id] = p.Name || '';
-    }
-    return m;
-  }
-
   function normalizeEntity(ent) {
     const props = ent && ent.properties ? { ...ent.properties } : { ...(ent || {}) };
     const related = ent && ent.related_properties && typeof ent.related_properties === 'object'
@@ -527,40 +474,7 @@
       flattenToRow(relKey, related[relKey], row);
     });
 
-    row.RequestedForPersonName = String(
-      row.RequestedForPersonName ||
-      row['RequestedForPerson.Name'] ||
-      row.Name ||
-      ''
-    );
-    row.ExpertAssigneeName = String(
-      row.ExpertAssigneeName ||
-      row['ExpertAssignee.Name'] ||
-      ''
-    );
-    row.ExpertGroupName = String(
-      row.ExpertGroupName ||
-      row['ExpertGroup.Name'] ||
-      row.ExpertGroup ||
-      ''
-    );
-
-    if (row.Comments) {
-      try {
-        const parsed = JSON.parse(row.Comments);
-        const arr = parsed.Comment || [];
-        if (Array.isArray(arr) && arr.length > 0) {
-          row.AllCommentsBody = arr.map(c => c.CommentBody || '').join('<hr />');
-        }
-      } catch (e) {
-        console.warn(`${LOG_PREFIX} Erro ao parsear Comments JSON:`, e);
-      }
-    }
-
-    row.CreateTimeFmt = formatDate(Number(row.CreateTime));
-    row.CloseTimeFmt = formatDate(Number(row.CloseTime));
-
-    return row;
+    return projectExportFields(row);
   }
 
   function isPlainObject(value) {
@@ -607,50 +521,15 @@
   }
 
   function getCsvColumns(rows) {
-    const preferred = [
-    'Id',
-    'CreateTime',
-    'CloseTime',
-    'StatusSCCDSMAX_c',
-    'Status',
-    'RequestedForPerson',
-    'Description',
-    'Solution',
-    'AssignedToGroup',
-    'ExpertGroup',
-    'ExpertAssignee',
-    'AtendidoPor_c',
-    'GlobalId_c.Id',
-    'GlobalId_c',
-    'IsGlobal_c',
-    'NumeroRejeicoes_c',
-    'Comments',
-    'PhaseId'
-    ];
-
-    const all = new Set();
-    (rows || []).forEach(row => {
-      Object.keys(row || {}).forEach(key => all.add(key));
-    });
-
-    const tail = Array.from(all)
-      .filter(key => preferred.indexOf(key) === -1)
-      .sort((a, b) => a.localeCompare(b, 'pt-BR'));
-
-    return preferred.filter(key => all.has(key)).concat(tail);
+    return EMS_FIELDS.slice();
   }
 
-  function formatDate(ms) {
-    if (!ms || typeof ms !== 'number') return '';
-    const d = new Date(ms);
-    if (isNaN(d.getTime())) return '';
-    const pad = n => String(n).padStart(2, '0');
-    const dia = pad(d.getDate());
-    const mes = pad(d.getMonth() + 1);
-    const ano = d.getFullYear();
-    const hora = pad(d.getHours());
-    const min = pad(d.getMinutes());
-    return `${dia}/${mes}/${ano} ${hora}:${min}`;
+  function projectExportFields(row) {
+    const projected = {};
+    EMS_FIELDS.forEach(field => {
+      projected[field] = Object.prototype.hasOwnProperty.call(row, field) ? row[field] : '';
+    });
+    return projected;
   }
 
   function buildCsv(entities) {
@@ -715,4 +594,3 @@
   init();
 
 })(typeof unsafeWindow !== 'undefined' ? unsafeWindow : window);
-
