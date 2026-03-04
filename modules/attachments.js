@@ -5,8 +5,6 @@
   const AREA_BIND_ATTR = 'tmPreviewAreaBound';
   const IMAGE_EXT_RE = /\.(png|jpg|jpeg|gif|bmp|webp)$/i;
 
-  const URL_API = root.URL || (typeof URL !== 'undefined' ? URL : null);
-
   let cssInjected = false;
   let activePreview = null;
 
@@ -84,6 +82,17 @@
         border: 0;
         background: #fff;
       }
+      .tmPreviewFallback {
+        position: absolute;
+        right: 12px;
+        bottom: 12px;
+        padding: 6px 10px;
+        border-radius: 6px;
+        background: rgba(17, 17, 17, 0.9);
+        color: #fff;
+        font-size: 12px;
+        text-decoration: none;
+      }
     `);
   }
 
@@ -118,18 +127,11 @@
     }
   }
 
-  function revokeObjectUrl(url) {
-    if (!URL_API || !url) return;
-    try {
-      URL_API.revokeObjectURL(url);
-    } catch (_) {}
-  }
-
   function closePreviewModal() {
     if (!activePreview) return;
 
     const doc = root.document;
-    const { modal, objectUrl, onKeyDown } = activePreview;
+    const { modal, onKeyDown } = activePreview;
 
     try {
       doc.removeEventListener('keydown', onKeyDown, true);
@@ -139,11 +141,10 @@
       modal.remove();
     } catch (_) {}
 
-    revokeObjectUrl(objectUrl);
     activePreview = null;
   }
 
-  function openPreviewModal(objectUrl, previewType, fileName) {
+  function openPreviewModal(sourceUrl, previewType, fileName) {
     const doc = root.document;
     ensureCss();
 
@@ -181,19 +182,27 @@
     if (previewType === 'pdf') {
       const pdfFrame = doc.createElement('iframe');
       pdfFrame.className = 'tmPreviewPdf';
-      pdfFrame.src = objectUrl;
+      pdfFrame.src = sourceUrl;
       pdfFrame.setAttribute('title', fileName || 'PDF');
       body.appendChild(pdfFrame);
     } else {
       const img = doc.createElement('img');
       img.className = 'tmPreviewImg';
-      img.src = objectUrl;
+      img.src = sourceUrl;
       img.alt = fileName || 'Imagem anexada';
       body.appendChild(img);
     }
 
+    const fallbackLink = doc.createElement('a');
+    fallbackLink.className = 'tmPreviewFallback';
+    fallbackLink.href = sourceUrl;
+    fallbackLink.target = '_blank';
+    fallbackLink.rel = 'noopener noreferrer';
+    fallbackLink.textContent = 'Abrir em nova aba';
+
     dialog.appendChild(header);
     dialog.appendChild(body);
+    dialog.appendChild(fallbackLink);
     modal.appendChild(dialog);
     doc.body.appendChild(modal);
 
@@ -202,24 +211,7 @@
     };
     doc.addEventListener('keydown', onKeyDown, true);
 
-    activePreview = { modal, objectUrl, onKeyDown };
-  }
-
-  async function fetchAttachmentBlob(url) {
-    const fetchImpl = (root && typeof root.fetch === 'function')
-      ? root.fetch.bind(root)
-      : (typeof fetch === 'function' ? fetch : null);
-
-    if (!fetchImpl) throw new Error('fetch indisponivel');
-
-    const resp = await fetchImpl(url, {
-      method: 'GET',
-      credentials: 'include',
-      cache: 'no-store'
-    });
-
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    return resp.blob();
+    activePreview = { modal, onKeyDown };
   }
 
   async function handleAttachmentClick(e) {
@@ -246,28 +238,7 @@
     e.stopPropagation();
 
     try {
-      const blob = await fetchAttachmentBlob(url);
-      if (!URL_API || typeof URL_API.createObjectURL !== 'function') {
-        throw new Error('URL.createObjectURL indisponivel');
-      }
-
-      const objectUrl = URL_API.createObjectURL(blob);
-      const mime = (blob.type || '').toLowerCase();
-      const isPdf = byExtPdf || mime.includes('pdf');
-      const isImage = byExtImage || mime.startsWith('image/');
-
-      if (isPdf) {
-        openPreviewModal(objectUrl, 'pdf', fileName);
-        return;
-      }
-
-      if (isImage) {
-        openPreviewModal(objectUrl, 'image', fileName);
-        return;
-      }
-
-      revokeObjectUrl(objectUrl);
-      root.open(url, '_blank');
+      openPreviewModal(url, byExtPdf ? 'pdf' : 'image', fileName);
     } catch (err) {
       root.alert('Erro ao abrir anexo: ' + (err && err.message ? err.message : String(err)));
     }
