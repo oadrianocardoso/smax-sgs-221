@@ -2,7 +2,7 @@
   'use strict';
 
   const SMAX = root.SMAX = root.SMAX || {};
-  const AREA_BIND_ATTR = 'tmPreviewAreaBound';
+  const DOC_BIND_ATTR = 'tmPreviewDocBound';
   const IMAGE_EXT_RE = /\.(png|jpg|jpeg|gif|bmp|webp)$/i;
 
   let cssInjected = false;
@@ -127,6 +127,72 @@
     }
   }
 
+  function getImageUrl(img) {
+    const rawSrc = img.getAttribute('src') || img.getAttribute('ng-src') || img.currentSrc || '';
+    if (!rawSrc) return '';
+
+    const trimmed = String(rawSrc).trim();
+    if (!trimmed || trimmed.toLowerCase().startsWith('javascript:')) return '';
+
+    try {
+      return new root.URL(trimmed, root.location.href).href;
+    } catch (_) {
+      return trimmed;
+    }
+  }
+
+  function pickFileNameFromUrl(url) {
+    const clean = String(url || '').split('?')[0];
+    const parts = clean.split('/');
+    return (parts[parts.length - 1] || '').trim();
+  }
+
+  function getPreviewContext(e) {
+    const target = e.target;
+    if (!target || !target.closest) return null;
+
+    const link = target.closest('a');
+    const image = target.closest('img');
+
+    if (link) {
+      const url = getAttachmentUrl(link);
+      if (!url) return null;
+      if (!/\/frs\/file-list\/|\/file-list\//i.test(url)) return null;
+
+      const linkText = (link.textContent || '').trim();
+      const linkTitle = (link.getAttribute('title') || '').trim();
+      const inlineImgAlt = (link.querySelector('img') && link.querySelector('img').getAttribute('alt') || '').trim();
+      const fileName = linkText || linkTitle || inlineImgAlt || pickFileNameFromUrl(url);
+      const lowerName = fileName.toLowerCase();
+
+      if (lowerName.endsWith('.pdf')) {
+        return { previewType: 'pdf', url, fileName, link };
+      }
+
+      if (IMAGE_EXT_RE.test(lowerName)) {
+        return { previewType: 'image', url, fileName, link };
+      }
+
+      return null;
+    }
+
+    if (image) {
+      const url = getImageUrl(image);
+      if (!url) return null;
+      if (!/\/frs\/file-list\/|\/file-list\//i.test(url)) return null;
+
+      const alt = (image.getAttribute('alt') || '').trim();
+      const title = (image.getAttribute('title') || '').trim();
+      const fileName = alt || title || pickFileNameFromUrl(url) || 'imagem';
+      const lowerName = fileName.toLowerCase();
+      const previewType = lowerName.endsWith('.pdf') ? 'pdf' : 'image';
+
+      return { previewType, url, fileName, link: null };
+    }
+
+    return null;
+  }
+
   function closePreviewModal() {
     if (!activePreview) return;
 
@@ -215,30 +281,15 @@
   }
 
   async function handleAttachmentClick(e) {
-    const link = e.target && e.target.closest ? e.target.closest('a') : null;
-    if (!link) return;
+    const ctx = getPreviewContext(e);
+    if (!ctx) return;
 
-    const area = e.currentTarget && e.currentTarget.nodeType === 1
-      ? e.currentTarget
-      : root.document.querySelector('#attachmentsArea, div.pl-entity-page-component[data-aid="attachments"]');
-    if (!area || !area.contains(link)) return;
-
-    const url = getAttachmentUrl(link);
-    if (!url) return;
-
-    const fileName = ((link.textContent || '').trim() || url.split('?')[0].split('/').pop() || '').trim();
-    const lowerName = fileName.toLowerCase();
-    const byExtPdf = lowerName.endsWith('.pdf');
-    const byExtImage = IMAGE_EXT_RE.test(lowerName);
-
-    if (!byExtPdf && !byExtImage) return;
-
-    link.removeAttribute('download');
+    if (ctx.link) ctx.link.removeAttribute('download');
     e.preventDefault();
     e.stopPropagation();
 
     try {
-      openPreviewModal(url, byExtPdf ? 'pdf' : 'image', fileName);
+      openPreviewModal(ctx.url, ctx.previewType, ctx.fileName);
     } catch (err) {
       root.alert('Erro ao abrir anexo: ' + (err && err.message ? err.message : String(err)));
     }
@@ -246,14 +297,12 @@
 
   function wirePreviewLinks() {
     const doc = root.document;
-    const areas = doc.querySelectorAll('#attachmentsArea, div.pl-entity-page-component[data-aid="attachments"]');
-    if (!areas || !areas.length) return;
+    const bindNode = doc.documentElement;
+    if (!bindNode) return;
+    if (bindNode.dataset[DOC_BIND_ATTR] === '1') return;
 
-    areas.forEach((area) => {
-      if (!area || area.dataset[AREA_BIND_ATTR] === '1') return;
-      area.addEventListener('click', handleAttachmentClick, true);
-      area.dataset[AREA_BIND_ATTR] = '1';
-    });
+    doc.addEventListener('click', handleAttachmentClick, true);
+    bindNode.dataset[DOC_BIND_ATTR] = '1';
   }
 
   function apply() {
