@@ -2,11 +2,14 @@
   'use strict';
 
   const SMAX = root.SMAX = root.SMAX || {};
-  const DOC_BIND_ATTR = 'tmPreviewDocBound';
+  const LINK_BIND_ATTR = 'tmPreviewLinkBound';
+  const IMG_BIND_ATTR = 'tmPreviewImgBound';
   const IMAGE_EXT_RE = /\.(png|jpg|jpeg|gif|bmp|webp)$/i;
 
   let cssInjected = false;
   let activePreview = null;
+  let observerStarted = false;
+  let maintainScheduled = false;
 
   function ensureCss() {
     if (cssInjected) return;
@@ -111,10 +114,7 @@
     form.insertBefore(attachments, form.firstElementChild || null);
   }
 
-  function getAttachmentUrl(link) {
-    const hrefAttr = link.getAttribute('href');
-    const ngHrefAttr = link.getAttribute('ng-href');
-    const rawUrl = hrefAttr || ngHrefAttr || (link.hasAttribute('href') ? link.href : '');
+  function normalizeUrl(rawUrl) {
     if (!rawUrl) return '';
 
     const trimmed = String(rawUrl).trim();
@@ -127,18 +127,16 @@
     }
   }
 
+  function getAttachmentUrl(link) {
+    const hrefAttr = link.getAttribute('href');
+    const ngHrefAttr = link.getAttribute('ng-href');
+    const rawUrl = hrefAttr || ngHrefAttr || (link.hasAttribute('href') ? link.href : '');
+    return normalizeUrl(rawUrl);
+  }
+
   function getImageUrl(img) {
     const rawSrc = img.getAttribute('src') || img.getAttribute('ng-src') || img.currentSrc || '';
-    if (!rawSrc) return '';
-
-    const trimmed = String(rawSrc).trim();
-    if (!trimmed || trimmed.toLowerCase().startsWith('javascript:')) return '';
-
-    try {
-      return new root.URL(trimmed, root.location.href).href;
-    } catch (_) {
-      return trimmed;
-    }
+    return normalizeUrl(rawSrc);
   }
 
   function pickFileNameFromUrl(url) {
@@ -147,50 +145,16 @@
     return (parts[parts.length - 1] || '').trim();
   }
 
-  function getPreviewContext(e) {
-    const target = e.target;
-    if (!target || !target.closest) return null;
+  function detectPreviewType(fileName, url, fallbackType) {
+    const lowerName = String(fileName || '').toLowerCase();
+    if (lowerName.endsWith('.pdf')) return 'pdf';
+    if (IMAGE_EXT_RE.test(lowerName)) return 'image';
 
-    const link = target.closest('a');
-    const image = target.closest('img');
+    const byUrlName = pickFileNameFromUrl(url).toLowerCase();
+    if (byUrlName.endsWith('.pdf')) return 'pdf';
+    if (IMAGE_EXT_RE.test(byUrlName)) return 'image';
 
-    if (link) {
-      const url = getAttachmentUrl(link);
-      if (!url) return null;
-      if (!/\/frs\/file-list\/|\/file-list\//i.test(url)) return null;
-
-      const linkText = (link.textContent || '').trim();
-      const linkTitle = (link.getAttribute('title') || '').trim();
-      const inlineImgAlt = (link.querySelector('img') && link.querySelector('img').getAttribute('alt') || '').trim();
-      const fileName = linkText || linkTitle || inlineImgAlt || pickFileNameFromUrl(url);
-      const lowerName = fileName.toLowerCase();
-
-      if (lowerName.endsWith('.pdf')) {
-        return { previewType: 'pdf', url, fileName, link };
-      }
-
-      if (IMAGE_EXT_RE.test(lowerName)) {
-        return { previewType: 'image', url, fileName, link };
-      }
-
-      return null;
-    }
-
-    if (image) {
-      const url = getImageUrl(image);
-      if (!url) return null;
-      if (!/\/frs\/file-list\/|\/file-list\//i.test(url)) return null;
-
-      const alt = (image.getAttribute('alt') || '').trim();
-      const title = (image.getAttribute('title') || '').trim();
-      const fileName = alt || title || pickFileNameFromUrl(url) || 'imagem';
-      const lowerName = fileName.toLowerCase();
-      const previewType = lowerName.endsWith('.pdf') ? 'pdf' : 'image';
-
-      return { previewType, url, fileName, link: null };
-    }
-
-    return null;
+    return fallbackType || '';
   }
 
   function closePreviewModal() {
@@ -280,35 +244,119 @@
     activePreview = { modal, onKeyDown };
   }
 
-  async function handleAttachmentClick(e) {
-    const ctx = getPreviewContext(e);
-    if (!ctx) return;
+  function openPreviewIfSupported(url, fileName, fallbackType) {
+    const previewType = detectPreviewType(fileName, url, fallbackType);
+    if (!previewType) return false;
 
-    if (ctx.link) ctx.link.removeAttribute('download');
-    e.preventDefault();
-    e.stopPropagation();
-
-    try {
-      openPreviewModal(ctx.url, ctx.previewType, ctx.fileName);
-    } catch (err) {
-      root.alert('Erro ao abrir anexo: ' + (err && err.message ? err.message : String(err)));
-    }
+    openPreviewModal(url, previewType, fileName || pickFileNameFromUrl(url) || 'anexo');
+    return true;
   }
 
   function wirePreviewLinks() {
     const doc = root.document;
-    const bindNode = doc.documentElement;
-    if (!bindNode) return;
-    if (bindNode.dataset[DOC_BIND_ATTR] === '1') return;
+    const area = doc.querySelector('#attachmentsArea') || doc.querySelector('div.pl-entity-page-component[data-aid="attachments"]');
+    if (!area) return;
 
-    doc.addEventListener('click', handleAttachmentClick, true);
-    bindNode.dataset[DOC_BIND_ATTR] = '1';
+    const links = area.querySelectorAll('a[ng-href*="/rest/"], a[href*="/rest/"], a[ng-href*="/file-list/"], a[href*="/file-list/"]');
+
+    links.forEach((link) => {
+      if (!link || link.dataset[LINK_BIND_ATTR] === '1') return;
+      link.dataset[LINK_BIND_ATTR] = '1';
+
+      link.removeAttribute('download');
+
+      link.addEventListener('click', (e) => {
+        const url = getAttachmentUrl(link);
+        if (!url) return;
+        if (!/\/frs\/file-list\/|\/file-list\//i.test(url)) return;
+
+        const fileName = ((link.textContent || '').trim()
+          || (link.getAttribute('title') || '').trim()
+          || pickFileNameFromUrl(url));
+
+        if (!openPreviewIfSupported(url, fileName, '')) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+      }, true);
+    });
+  }
+
+  function wireInlineImages() {
+    const doc = root.document;
+    const images = doc.querySelectorAll('img[src*="/frs/file-list/"], img[src*="/file-list/"], img[ng-src*="/frs/file-list/"], img[ng-src*="/file-list/"]');
+
+    images.forEach((img) => {
+      if (!img || img.dataset[IMG_BIND_ATTR] === '1') return;
+      img.dataset[IMG_BIND_ATTR] = '1';
+      img.style.cursor = img.style.cursor || 'zoom-in';
+
+      img.addEventListener('click', (e) => {
+        const url = getImageUrl(img);
+        if (!url) return;
+        if (!/\/frs\/file-list\/|\/file-list\//i.test(url)) return;
+
+        const fileName = ((img.getAttribute('alt') || '').trim()
+          || (img.getAttribute('title') || '').trim()
+          || pickFileNameFromUrl(url)
+          || 'imagem');
+
+        if (!openPreviewIfSupported(url, fileName, 'image')) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+      }, true);
+    });
+  }
+
+  function maintain() {
+    maintainScheduled = false;
+    moveAttachmentsIntoForm();
+    wirePreviewLinks();
+    wireInlineImages();
+  }
+
+  function scheduleMaintain() {
+    if (maintainScheduled) return;
+    maintainScheduled = true;
+
+    const schedule = typeof root.requestAnimationFrame === 'function'
+      ? root.requestAnimationFrame.bind(root)
+      : (fn) => root.setTimeout(fn, 16);
+
+    schedule(maintain);
+  }
+
+  function startAttachmentObserver() {
+    if (observerStarted) return;
+    observerStarted = true;
+
+    const doc = root.document;
+
+    const start = () => {
+      if (!doc.body) {
+        root.setTimeout(start, 120);
+        return;
+      }
+
+      const obs = new MutationObserver(() => scheduleMaintain());
+      obs.observe(doc.body, { childList: true, subtree: true });
+
+      root.addEventListener('beforeunload', () => obs.disconnect(), { once: true });
+
+      // retries for late async renders that move attachments to the bottom
+      root.setTimeout(scheduleMaintain, 200);
+      root.setTimeout(scheduleMaintain, 700);
+      root.setTimeout(scheduleMaintain, 1600);
+    };
+
+    start();
   }
 
   function apply() {
-    moveAttachmentsIntoForm();
     ensureCss();
-    wirePreviewLinks();
+    maintain();
+    startAttachmentObserver();
   }
 
   SMAX.attachments = { apply };
