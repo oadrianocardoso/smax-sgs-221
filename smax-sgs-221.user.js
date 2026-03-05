@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      11.7
+// @version      11.8
 // @description  SMAX SGS 221 (modularizado)
 // @author       ADRIANO AUGUSTO CARDOSO E SANTOS
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -24,7 +24,7 @@
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/tags.js?v=11.1
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/comments.js?v=11.1
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/sections.js?v=11.1
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/attachments.js?v=11.7
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/attachments.js?v=11.8
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/detratores.js?v=11.1
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/botoes-resolucao.js?v=11.1
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/destaca-atendente.js?v=11.1

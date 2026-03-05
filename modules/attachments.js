@@ -5,6 +5,7 @@
   const LINK_BIND_ATTR = 'tmPreviewLinkBound';
   const IMG_BIND_ATTR = 'tmPreviewImgBound';
   const IMAGE_EXT_RE = /\.(png|jpg|jpeg|gif|bmp|webp)$/i;
+  const URL_API = root.URL || (typeof URL !== 'undefined' ? URL : null);
 
   let cssInjected = false;
   let activePreview = null;
@@ -161,7 +162,7 @@
     if (!activePreview) return;
 
     const doc = root.document;
-    const { modal, onKeyDown } = activePreview;
+    const { modal, onKeyDown, revokeUrl } = activePreview;
 
     try {
       doc.removeEventListener('keydown', onKeyDown, true);
@@ -171,10 +172,16 @@
       modal.remove();
     } catch (_) {}
 
+    if (revokeUrl && URL_API && typeof URL_API.revokeObjectURL === 'function') {
+      try {
+        URL_API.revokeObjectURL(revokeUrl);
+      } catch (_) {}
+    }
+
     activePreview = null;
   }
 
-  function openPreviewModal(sourceUrl, previewType, fileName) {
+  function openPreviewModal(sourceUrl, previewType, fileName, fallbackUrl) {
     const doc = root.document;
     ensureCss();
 
@@ -225,7 +232,7 @@
 
     const fallbackLink = doc.createElement('a');
     fallbackLink.className = 'tmPreviewFallback';
-    fallbackLink.href = sourceUrl;
+    fallbackLink.href = fallbackUrl || sourceUrl;
     fallbackLink.target = '_blank';
     fallbackLink.rel = 'noopener noreferrer';
     fallbackLink.textContent = 'Abrir em nova aba';
@@ -241,15 +248,89 @@
     };
     doc.addEventListener('keydown', onKeyDown, true);
 
-    activePreview = { modal, onKeyDown };
+    const revokeUrl = /^blob:/i.test(sourceUrl || '') ? sourceUrl : '';
+    activePreview = { modal, onKeyDown, revokeUrl };
   }
 
-  function openPreviewIfSupported(url, fileName, fallbackType) {
-    const previewType = detectPreviewType(fileName, url, fallbackType);
-    if (!previewType) return false;
+  async function fetchAttachmentBlob(url) {
+    const fetchImpl = (root && typeof root.fetch === 'function')
+      ? root.fetch.bind(root)
+      : (typeof fetch === 'function' ? fetch : null);
 
-    openPreviewModal(url, previewType, fileName || pickFileNameFromUrl(url) || 'anexo');
-    return true;
+    if (!fetchImpl) throw new Error('fetch indisponivel');
+
+    const resp = await fetchImpl(url, {
+      method: 'GET',
+      credentials: 'include',
+      cache: 'no-store'
+    });
+
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+
+    const contentType = ((resp.headers && resp.headers.get && resp.headers.get('content-type')) || '')
+      .split(';')[0]
+      .trim()
+      .toLowerCase();
+
+    const blob = await resp.blob();
+    return { blob, contentType };
+  }
+
+  function pickImageMime(fileName) {
+    const lower = String(fileName || '').toLowerCase();
+    if (lower.endsWith('.png')) return 'image/png';
+    if (lower.endsWith('.gif')) return 'image/gif';
+    if (lower.endsWith('.bmp')) return 'image/bmp';
+    if (lower.endsWith('.webp')) return 'image/webp';
+    return 'image/jpeg';
+  }
+
+  function coerceBlobType(blob, previewType, fileName, headerType) {
+    const currentType = (blob && blob.type ? blob.type : '').toLowerCase();
+    const normalizedHeader = String(headerType || '').toLowerCase();
+
+    let expectedType = '';
+    if (previewType === 'pdf') {
+      expectedType = 'application/pdf';
+    } else if (previewType === 'image') {
+      expectedType = pickImageMime(fileName);
+    }
+
+    const hasGenericType = !currentType || currentType === 'application/octet-stream';
+    const headerIsSpecific = normalizedHeader && normalizedHeader !== 'application/octet-stream';
+    const finalType = headerIsSpecific ? normalizedHeader : (hasGenericType ? expectedType : currentType);
+
+    if (!finalType || finalType === currentType) return blob;
+
+    try {
+      const BlobCtor = root.Blob || (typeof Blob !== 'undefined' ? Blob : null);
+      if (!BlobCtor) return blob;
+      return new BlobCtor([blob], { type: finalType });
+    } catch (_) {
+      return blob;
+    }
+  }
+
+  async function openPreviewIfSupported(url, fileName, fallbackType) {
+    const previewType = detectPreviewType(fileName, url, fallbackType);
+    if (!previewType || !url) return false;
+
+    const normalizedName = fileName || pickFileNameFromUrl(url) || 'anexo';
+
+    try {
+      const data = await fetchAttachmentBlob(url);
+      if (!URL_API || typeof URL_API.createObjectURL !== 'function') {
+        throw new Error('URL.createObjectURL indisponivel');
+      }
+
+      const typedBlob = coerceBlobType(data.blob, previewType, normalizedName, data.contentType);
+      const objectUrl = URL_API.createObjectURL(typedBlob);
+      openPreviewModal(objectUrl, previewType, normalizedName, url);
+      return true;
+    } catch (_) {
+      openPreviewModal(url, previewType, normalizedName, url);
+      return true;
+    }
   }
 
   function wirePreviewLinks() {
@@ -265,7 +346,7 @@
 
       link.removeAttribute('download');
 
-      link.addEventListener('click', (e) => {
+      link.addEventListener('click', async (e) => {
         const url = getAttachmentUrl(link);
         if (!url) return;
         if (!/\/frs\/file-list\/|\/file-list\//i.test(url)) return;
@@ -274,10 +355,11 @@
           || (link.getAttribute('title') || '').trim()
           || pickFileNameFromUrl(url));
 
-        if (!openPreviewIfSupported(url, fileName, '')) return;
+        if (!detectPreviewType(fileName, url, '')) return;
 
         e.preventDefault();
         e.stopPropagation();
+        await openPreviewIfSupported(url, fileName, '');
       }, true);
     });
   }
@@ -291,7 +373,7 @@
       img.dataset[IMG_BIND_ATTR] = '1';
       img.style.cursor = img.style.cursor || 'zoom-in';
 
-      img.addEventListener('click', (e) => {
+      img.addEventListener('click', async (e) => {
         const url = getImageUrl(img);
         if (!url) return;
         if (!/\/frs\/file-list\/|\/file-list\//i.test(url)) return;
@@ -301,10 +383,11 @@
           || pickFileNameFromUrl(url)
           || 'imagem');
 
-        if (!openPreviewIfSupported(url, fileName, 'image')) return;
+        if (!detectPreviewType(fileName, url, 'image')) return;
 
         e.preventDefault();
         e.stopPropagation();
+        await openPreviewIfSupported(url, fileName, 'image');
       }, true);
     });
   }
