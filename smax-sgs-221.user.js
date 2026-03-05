@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      12.0
+// @version      12.1
 // @description  SMAX SGS 221 (modularizado)
 // @author       ADRIANO AUGUSTO CARDOSO E SANTOS
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -30,7 +30,7 @@
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/destaca-atendente.js?v=11.1
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/passar-aquele-gel.js?v=11.1
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/dados-eproc.js?v=11.1
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/export-chamados.js?v=11.2
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/export-chamados.js?v=11.3
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/menu-config.js?v=11.1
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/orchestrator.js?v=11.1
 //

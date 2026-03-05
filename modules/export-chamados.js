@@ -8,7 +8,6 @@
   const LOG_PREFIX = '[SMAX EMS]';
 
   const EMS_FIELDS = [
-    'entity_type',
     'Id',
     'ProcessId',
     'CreateTime',
@@ -16,11 +15,17 @@
     'LastUpdateTime',
     'DataEnvioAceite_c',
     'NumberOfAttachments',
+    'DataUltimoAdjunto_c',
+    'SLT.SLATargetDate',
+    'SLT.OLATargetDate',
     'StatusSCCDSMAX_c',
     'Status',
+    'RELATION_LAYOUT.item',
     'RequestedByPerson',
     'RequestedByPerson.Title',
     'RequestedForPerson',
+    'RequestedForPerson.Avatar',
+    'RequestedForPerson.OrganizationalGroup',
     'RequestedForPerson.Upn',
     'RequestedForPerson.IsDeleted',
     'RequestedForPerson.IsVIP',
@@ -32,6 +37,7 @@
     'AssignedToGroup',
     'ExpertGroup',
     'ExpertAssignee',
+    'ExpertAssignee.OrganizationalGroup',
     'ExpertAssignee.Upn',
     'ExpertAssignee.IsDeleted',
     'ExpertAssignee.IsVIP',
@@ -548,7 +554,21 @@
   function projectExportFields(row) {
     const projected = {};
     EMS_FIELDS.forEach(field => {
-      projected[field] = Object.prototype.hasOwnProperty.call(row, field) ? row[field] : '';
+      let value = Object.prototype.hasOwnProperty.call(row, field) ? row[field] : '';
+
+      if ((value === '' || value === null || typeof value === 'undefined') && field === 'RequestedByPerson') {
+        value = row['RequestedByPerson.Title'] || '';
+      }
+
+      if ((value === '' || value === null || typeof value === 'undefined') && field === 'RequestedForPerson') {
+        value = row['RequestedForPerson.Name'] || row['RequestedForPerson.Upn'] || row['RequestedForPerson.Id'] || '';
+      }
+
+      if ((value === '' || value === null || typeof value === 'undefined') && field === 'ExpertAssignee') {
+        value = row['ExpertAssignee.Name'] || row['ExpertAssignee.Upn'] || row['ExpertAssignee.Id'] || '';
+      }
+
+      projected[field] = value;
     });
     return projected;
   }
