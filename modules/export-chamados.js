@@ -8,18 +8,37 @@
   const LOG_PREFIX = '[SMAX EMS]';
 
   const EMS_FIELDS = [
+    'entity_type',
     'Id',
+    'ProcessId',
     'CreateTime',
     'CloseTime',
     'LastUpdateTime',
+    'DataEnvioAceite_c',
+    'NumberOfAttachments',
     'StatusSCCDSMAX_c',
     'Status',
+    'RequestedByPerson',
+    'RequestedByPerson.Title',
     'RequestedForPerson',
+    'RequestedForPerson.Upn',
+    'RequestedForPerson.IsDeleted',
+    'RequestedForPerson.IsVIP',
+    'RequestedForPerson.Id',
+    'RequestedForPerson.Name',
+    'RequestedForPerson.Location',
     'Description',
     'Solution',
     'AssignedToGroup',
     'ExpertGroup',
     'ExpertAssignee',
+    'ExpertAssignee.Upn',
+    'ExpertAssignee.IsDeleted',
+    'ExpertAssignee.IsVIP',
+    'ExpertAssignee.Id',
+    'ExpertAssignee.Avatar',
+    'ExpertAssignee.Name',
+    'ExpertAssignee.Location',
     'AtendidoPor_c',
     'GlobalId_c.Id',
     'GlobalId_c',
@@ -468,6 +487,8 @@
       ? ent.related_properties
       : {};
     const row = {};
+
+    row.entity_type = (ent && (ent.entity_type || ent.entityType)) || '';
 
     flattenToRow('', props, row);
     Object.keys(related).forEach(relKey => {
