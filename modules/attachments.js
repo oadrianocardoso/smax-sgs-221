@@ -158,6 +158,42 @@
     return fallbackType || '';
   }
 
+  function detectTypeByMime(mime) {
+    const m = String(mime || '').toLowerCase();
+    if (!m) return '';
+    if (m.includes('pdf')) return 'pdf';
+    if (m.startsWith('image/')) return 'image';
+    return '';
+  }
+
+  async function detectTypeByMagic(blob) {
+    try {
+      if (!blob || typeof blob.arrayBuffer !== 'function') return '';
+      const buf = await blob.arrayBuffer();
+      const u8 = new Uint8Array(buf);
+      if (u8.length < 4) return '';
+
+      // PDF: 25 50 44 46 -> %PDF
+      if (u8[0] === 0x25 && u8[1] === 0x50 && u8[2] === 0x44 && u8[3] === 0x46) return 'pdf';
+      // PNG: 89 50 4E 47
+      if (u8[0] === 0x89 && u8[1] === 0x50 && u8[2] === 0x4E && u8[3] === 0x47) return 'image';
+      // JPG: FF D8 FF
+      if (u8[0] === 0xFF && u8[1] === 0xD8 && u8[2] === 0xFF) return 'image';
+      // GIF: 47 49 46 38
+      if (u8[0] === 0x47 && u8[1] === 0x49 && u8[2] === 0x46 && u8[3] === 0x38) return 'image';
+      // BMP: 42 4D
+      if (u8[0] === 0x42 && u8[1] === 0x4D) return 'image';
+      // WEBP: RIFF....WEBP
+      if (
+        u8.length > 11 &&
+        u8[0] === 0x52 && u8[1] === 0x49 && u8[2] === 0x46 && u8[3] === 0x46 &&
+        u8[8] === 0x57 && u8[9] === 0x45 && u8[10] === 0x42 && u8[11] === 0x50
+      ) return 'image';
+    } catch (_) {}
+
+    return '';
+  }
+
   function closePreviewModal() {
     if (!activePreview) return;
 
@@ -312,10 +348,10 @@
   }
 
   async function openPreviewIfSupported(url, fileName, fallbackType) {
-    const previewType = detectPreviewType(fileName, url, fallbackType);
-    if (!previewType || !url) return false;
+    if (!url) return false;
 
     const normalizedName = fileName || pickFileNameFromUrl(url) || 'anexo';
+    const byNameType = detectPreviewType(normalizedName, url, fallbackType);
 
     try {
       const data = await fetchAttachmentBlob(url);
@@ -323,12 +359,18 @@
         throw new Error('URL.createObjectURL indisponivel');
       }
 
+      const byMimeType = detectTypeByMime(data.contentType) || detectTypeByMime(data.blob && data.blob.type);
+      const byMagicType = await detectTypeByMagic(data.blob);
+      const previewType = byNameType || byMimeType || byMagicType || fallbackType || '';
+      if (!previewType) return false;
+
       const typedBlob = coerceBlobType(data.blob, previewType, normalizedName, data.contentType);
       const objectUrl = URL_API.createObjectURL(typedBlob);
       openPreviewModal(objectUrl, previewType, normalizedName, url);
       return true;
     } catch (_) {
-      openPreviewModal(url, previewType, normalizedName, url);
+      if (!byNameType && !fallbackType) return false;
+      openPreviewModal(url, byNameType || fallbackType, normalizedName, url);
       return true;
     }
   }
@@ -355,11 +397,11 @@
           || (link.getAttribute('title') || '').trim()
           || pickFileNameFromUrl(url));
 
-        if (!detectPreviewType(fileName, url, '')) return;
-
         e.preventDefault();
         e.stopPropagation();
-        await openPreviewIfSupported(url, fileName, '');
+
+        const shown = await openPreviewIfSupported(url, fileName, '');
+        if (!shown) root.open(url, '_blank');
       }, true);
     });
   }
@@ -383,11 +425,11 @@
           || pickFileNameFromUrl(url)
           || 'imagem');
 
-        if (!detectPreviewType(fileName, url, 'image')) return;
-
         e.preventDefault();
         e.stopPropagation();
-        await openPreviewIfSupported(url, fileName, 'image');
+
+        const shown = await openPreviewIfSupported(url, fileName, 'image');
+        if (!shown) root.open(url, '_blank');
       }, true);
     });
   }
