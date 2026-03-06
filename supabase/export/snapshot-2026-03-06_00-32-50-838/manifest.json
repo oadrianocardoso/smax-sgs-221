@@ -1,0 +1,140 @@
+{
+  "source": "https://hzjlgwuorhexkzcoxmay.supabase.co",
+  "startedAt": "2026-03-06T00:32:50.842Z",
+  "pageSize": 1000,
+  "tables": [
+    "smax_teams",
+    "smax_specialists",
+    "smax_specialist_finals",
+    "smax_specialist_highlight_terms",
+    "smax_specialist_tags",
+    "smax_specialist_tag_keywords",
+    "smax_highlight_groups",
+    "smax_detractors",
+    "smax_feature_prefs",
+    "smax_automatizadores",
+    "smax_highlight_terms",
+    "smax_auto_tag_rules",
+    "smax_specialist_tag_rules",
+    "smax_attendant_highlight_terms",
+    "smax_attendant_tag_rules",
+    "smax_attendants"
+  ],
+  "structure": {
+    "openapi": {
+      "status": 401,
+      "exported": false,
+      "error": {
+        "message": "Access to schema is forbidden",
+        "hint": "Accessing the schema via the Data API is only allowed using a secret API key."
+      }
+    },
+    "inferred": {
+      "exported": true,
+      "path": "structure.inferred.json"
+    }
+  },
+  "content": {
+    "smax_teams": {
+      "exists": true,
+      "exported": true,
+      "file": "content/smax_teams.json",
+      "rows": 2,
+      "reportedCount": 2
+    },
+    "smax_specialists": {
+      "exists": true,
+      "exported": true,
+      "file": "content/smax_specialists.json",
+      "rows": 21,
+      "reportedCount": 21
+    },
+    "smax_specialist_finals": {
+      "exists": true,
+      "exported": true,
+      "file": "content/smax_specialist_finals.json",
+      "rows": 200,
+      "reportedCount": 200
+    },
+    "smax_specialist_highlight_terms": {
+      "exists": true,
+      "exported": true,
+      "file": "content/smax_specialist_highlight_terms.json",
+      "rows": 1000,
+      "reportedCount": 1000
+    },
+    "smax_specialist_tags": {
+      "exists": true,
+      "exported": true,
+      "file": "content/smax_specialist_tags.json",
+      "rows": 210,
+      "reportedCount": 210
+    },
+    "smax_specialist_tag_keywords": {
+      "exists": true,
+      "exported": true,
+      "file": "content/smax_specialist_tag_keywords.json",
+      "rows": 714,
+      "reportedCount": 714
+    },
+    "smax_highlight_groups": {
+      "exists": true,
+      "exported": true,
+      "file": "content/smax_highlight_groups.json",
+      "rows": 5,
+      "reportedCount": 5
+    },
+    "smax_detractors": {
+      "exists": true,
+      "exported": true,
+      "file": "content/smax_detractors.json",
+      "rows": 52,
+      "reportedCount": 52
+    },
+    "smax_feature_prefs": {
+      "exists": true,
+      "exported": true,
+      "file": "content/smax_feature_prefs.json",
+      "rows": 1,
+      "reportedCount": 1
+    },
+    "smax_automatizadores": {
+      "exists": true,
+      "exported": true,
+      "file": "content/smax_automatizadores.json",
+      "rows": 516,
+      "reportedCount": 516
+    },
+    "smax_highlight_terms": {
+      "exists": false,
+      "exported": false,
+      "reason": "Tabela nao encontrada"
+    },
+    "smax_auto_tag_rules": {
+      "exists": false,
+      "exported": false,
+      "reason": "Tabela nao encontrada"
+    },
+    "smax_specialist_tag_rules": {
+      "exists": false,
+      "exported": false,
+      "reason": "Tabela nao encontrada"
+    },
+    "smax_attendant_highlight_terms": {
+      "exists": false,
+      "exported": false,
+      "reason": "Tabela nao encontrada"
+    },
+    "smax_attendant_tag_rules": {
+      "exists": false,
+      "exported": false,
+      "reason": "Tabela nao encontrada"
+    },
+    "smax_attendants": {
+      "exists": false,
+      "exported": false,
+      "reason": "Tabela nao encontrada"
+    }
+  },
+  "finishedAt": "2026-03-06T00:32:59.443Z"
+}

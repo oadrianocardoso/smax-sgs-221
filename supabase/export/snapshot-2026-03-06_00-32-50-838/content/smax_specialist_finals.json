@@ -1,0 +1,1402 @@
+[
+  {
+    "specialist_id": 1950,
+    "final": 0,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1950,
+    "final": 1,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1950,
+    "final": 2,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1950,
+    "final": 3,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1950,
+    "final": 4,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1950,
+    "final": 5,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1950,
+    "final": 6,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1951,
+    "final": 7,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1951,
+    "final": 8,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1951,
+    "final": 9,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1951,
+    "final": 10,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1951,
+    "final": 11,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1951,
+    "final": 12,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1951,
+    "final": 13,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1952,
+    "final": 14,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1952,
+    "final": 15,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1952,
+    "final": 16,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1952,
+    "final": 17,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1952,
+    "final": 18,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1952,
+    "final": 19,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1952,
+    "final": 20,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1953,
+    "final": 21,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1953,
+    "final": 22,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1953,
+    "final": 23,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1953,
+    "final": 24,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1953,
+    "final": 25,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1953,
+    "final": 26,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1953,
+    "final": 27,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1954,
+    "final": 28,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1954,
+    "final": 29,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1954,
+    "final": 30,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1954,
+    "final": 31,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1954,
+    "final": 32,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1954,
+    "final": 33,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1954,
+    "final": 34,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1955,
+    "final": 35,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1955,
+    "final": 36,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1955,
+    "final": 37,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1955,
+    "final": 38,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1955,
+    "final": 39,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1955,
+    "final": 40,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1955,
+    "final": 41,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1956,
+    "final": 42,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1956,
+    "final": 43,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1956,
+    "final": 44,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1956,
+    "final": 45,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1956,
+    "final": 46,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1956,
+    "final": 47,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1956,
+    "final": 48,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1957,
+    "final": 49,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1957,
+    "final": 50,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1957,
+    "final": 51,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1957,
+    "final": 52,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1957,
+    "final": 53,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1957,
+    "final": 54,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1957,
+    "final": 55,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1957,
+    "final": 56,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1958,
+    "final": 57,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1958,
+    "final": 58,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1958,
+    "final": 59,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1958,
+    "final": 60,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1958,
+    "final": 61,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1958,
+    "final": 62,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1958,
+    "final": 63,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1958,
+    "final": 64,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1959,
+    "final": 65,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1959,
+    "final": 66,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1959,
+    "final": 67,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1959,
+    "final": 68,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1959,
+    "final": 69,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1959,
+    "final": 70,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1959,
+    "final": 71,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1960,
+    "final": 72,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1960,
+    "final": 73,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1960,
+    "final": 74,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1960,
+    "final": 75,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1960,
+    "final": 76,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1960,
+    "final": 77,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1960,
+    "final": 78,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1961,
+    "final": 79,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1961,
+    "final": 80,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1961,
+    "final": 81,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1961,
+    "final": 82,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1961,
+    "final": 83,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1961,
+    "final": 84,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1961,
+    "final": 85,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1962,
+    "final": 86,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1962,
+    "final": 87,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1962,
+    "final": 88,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1962,
+    "final": 89,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1962,
+    "final": 90,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1962,
+    "final": 91,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1962,
+    "final": 92,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1963,
+    "final": 93,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1963,
+    "final": 94,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1963,
+    "final": 95,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1963,
+    "final": 96,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1963,
+    "final": 97,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1963,
+    "final": 98,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1963,
+    "final": 99,
+    "created_at": "2026-03-05T23:45:55.43541+00:00",
+    "team_id": 1,
+    "teams": "SGS 2.2.1"
+  },
+  {
+    "specialist_id": 1964,
+    "final": 0,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1964,
+    "final": 1,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1964,
+    "final": 2,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1964,
+    "final": 3,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1964,
+    "final": 4,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1964,
+    "final": 5,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1964,
+    "final": 6,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1964,
+    "final": 7,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1964,
+    "final": 8,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1964,
+    "final": 9,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1964,
+    "final": 10,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1964,
+    "final": 11,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1964,
+    "final": 12,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1964,
+    "final": 13,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1964,
+    "final": 14,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1965,
+    "final": 60,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1965,
+    "final": 61,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1965,
+    "final": 62,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1965,
+    "final": 63,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1965,
+    "final": 64,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1965,
+    "final": 65,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1965,
+    "final": 66,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1965,
+    "final": 67,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1965,
+    "final": 68,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1965,
+    "final": 69,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1966,
+    "final": 15,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1966,
+    "final": 16,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1966,
+    "final": 17,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1966,
+    "final": 18,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1966,
+    "final": 19,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1966,
+    "final": 20,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1966,
+    "final": 21,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1966,
+    "final": 22,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1966,
+    "final": 23,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1966,
+    "final": 24,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1966,
+    "final": 25,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1966,
+    "final": 26,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1966,
+    "final": 27,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1966,
+    "final": 28,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1966,
+    "final": 29,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1967,
+    "final": 30,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1967,
+    "final": 31,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1967,
+    "final": 32,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1967,
+    "final": 33,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1967,
+    "final": 34,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1967,
+    "final": 35,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1967,
+    "final": 36,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1967,
+    "final": 37,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1967,
+    "final": 38,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1967,
+    "final": 39,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1967,
+    "final": 40,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1967,
+    "final": 41,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1967,
+    "final": 42,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1967,
+    "final": 43,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1967,
+    "final": 44,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1968,
+    "final": 70,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1968,
+    "final": 71,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1968,
+    "final": 72,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1968,
+    "final": 73,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1968,
+    "final": 74,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1968,
+    "final": 75,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1968,
+    "final": 76,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1968,
+    "final": 77,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1968,
+    "final": 78,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1968,
+    "final": 79,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1968,
+    "final": 80,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1968,
+    "final": 81,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1968,
+    "final": 82,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1968,
+    "final": 83,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1968,
+    "final": 84,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1969,
+    "final": 85,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1969,
+    "final": 86,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1969,
+    "final": 87,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1969,
+    "final": 88,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1969,
+    "final": 89,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1969,
+    "final": 90,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1969,
+    "final": 91,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1969,
+    "final": 92,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1969,
+    "final": 93,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1969,
+    "final": 94,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1969,
+    "final": 95,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1969,
+    "final": 96,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1969,
+    "final": 97,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1969,
+    "final": 98,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1969,
+    "final": 99,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1970,
+    "final": 45,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1970,
+    "final": 46,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1970,
+    "final": 47,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1970,
+    "final": 48,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1970,
+    "final": 49,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1970,
+    "final": 50,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1970,
+    "final": 51,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1970,
+    "final": 52,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1970,
+    "final": 53,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1970,
+    "final": 54,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1970,
+    "final": 55,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1970,
+    "final": 56,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1970,
+    "final": 57,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1970,
+    "final": 58,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  },
+  {
+    "specialist_id": 1970,
+    "final": 59,
+    "created_at": "2026-03-05T23:45:56.608879+00:00",
+    "team_id": 2,
+    "teams": "SGS 2.2.2"
+  }
+]

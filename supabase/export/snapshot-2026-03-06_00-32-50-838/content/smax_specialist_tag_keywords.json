@@ -1,0 +1,6428 @@
+[
+  {
+    "id": 4939,
+    "specialist_tag_id": 1387,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4940,
+    "specialist_tag_id": 1387,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4941,
+    "specialist_tag_id": 1387,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4942,
+    "specialist_tag_id": 1388,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4943,
+    "specialist_tag_id": 1388,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4944,
+    "specialist_tag_id": 1388,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4945,
+    "specialist_tag_id": 1388,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4946,
+    "specialist_tag_id": 1389,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4947,
+    "specialist_tag_id": 1389,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4948,
+    "specialist_tag_id": 1389,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4949,
+    "specialist_tag_id": 1389,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4950,
+    "specialist_tag_id": 1390,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4951,
+    "specialist_tag_id": 1390,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4952,
+    "specialist_tag_id": 1391,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4953,
+    "specialist_tag_id": 1391,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4954,
+    "specialist_tag_id": 1391,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4955,
+    "specialist_tag_id": 1391,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4956,
+    "specialist_tag_id": 1391,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4957,
+    "specialist_tag_id": 1391,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4958,
+    "specialist_tag_id": 1391,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4959,
+    "specialist_tag_id": 1391,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4960,
+    "specialist_tag_id": 1392,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4961,
+    "specialist_tag_id": 1392,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4962,
+    "specialist_tag_id": 1392,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4963,
+    "specialist_tag_id": 1392,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4964,
+    "specialist_tag_id": 1392,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4965,
+    "specialist_tag_id": 1393,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4966,
+    "specialist_tag_id": 1393,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4967,
+    "specialist_tag_id": 1394,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4968,
+    "specialist_tag_id": 1395,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4969,
+    "specialist_tag_id": 1395,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4970,
+    "specialist_tag_id": 1396,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4971,
+    "specialist_tag_id": 1396,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4972,
+    "specialist_tag_id": 1396,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:07.022649+00:00",
+    "updated_at": "2026-03-05T23:46:07.022649+00:00"
+  },
+  {
+    "id": 4973,
+    "specialist_tag_id": 1397,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4974,
+    "specialist_tag_id": 1397,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4975,
+    "specialist_tag_id": 1397,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4976,
+    "specialist_tag_id": 1398,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4977,
+    "specialist_tag_id": 1398,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4978,
+    "specialist_tag_id": 1398,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4979,
+    "specialist_tag_id": 1398,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4980,
+    "specialist_tag_id": 1399,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4981,
+    "specialist_tag_id": 1399,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4982,
+    "specialist_tag_id": 1399,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4983,
+    "specialist_tag_id": 1399,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4984,
+    "specialist_tag_id": 1400,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4985,
+    "specialist_tag_id": 1400,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4986,
+    "specialist_tag_id": 1401,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4987,
+    "specialist_tag_id": 1401,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4988,
+    "specialist_tag_id": 1401,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4989,
+    "specialist_tag_id": 1401,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4990,
+    "specialist_tag_id": 1401,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4991,
+    "specialist_tag_id": 1401,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4992,
+    "specialist_tag_id": 1401,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4993,
+    "specialist_tag_id": 1401,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4994,
+    "specialist_tag_id": 1402,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4995,
+    "specialist_tag_id": 1402,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4996,
+    "specialist_tag_id": 1402,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4997,
+    "specialist_tag_id": 1402,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4998,
+    "specialist_tag_id": 1402,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 4999,
+    "specialist_tag_id": 1403,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 5000,
+    "specialist_tag_id": 1403,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 5001,
+    "specialist_tag_id": 1404,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 5002,
+    "specialist_tag_id": 1405,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 5003,
+    "specialist_tag_id": 1405,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 5004,
+    "specialist_tag_id": 1406,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 5005,
+    "specialist_tag_id": 1406,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 5006,
+    "specialist_tag_id": 1406,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:09.424747+00:00",
+    "updated_at": "2026-03-05T23:46:09.424747+00:00"
+  },
+  {
+    "id": 5007,
+    "specialist_tag_id": 1407,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5008,
+    "specialist_tag_id": 1407,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5009,
+    "specialist_tag_id": 1407,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5010,
+    "specialist_tag_id": 1408,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5011,
+    "specialist_tag_id": 1408,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5012,
+    "specialist_tag_id": 1408,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5013,
+    "specialist_tag_id": 1408,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5014,
+    "specialist_tag_id": 1409,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5015,
+    "specialist_tag_id": 1409,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5016,
+    "specialist_tag_id": 1409,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5017,
+    "specialist_tag_id": 1409,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5018,
+    "specialist_tag_id": 1410,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5019,
+    "specialist_tag_id": 1410,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5020,
+    "specialist_tag_id": 1411,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5021,
+    "specialist_tag_id": 1411,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5022,
+    "specialist_tag_id": 1411,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5023,
+    "specialist_tag_id": 1411,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5024,
+    "specialist_tag_id": 1411,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5025,
+    "specialist_tag_id": 1411,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5026,
+    "specialist_tag_id": 1411,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5027,
+    "specialist_tag_id": 1411,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5028,
+    "specialist_tag_id": 1412,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5029,
+    "specialist_tag_id": 1412,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5030,
+    "specialist_tag_id": 1412,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5031,
+    "specialist_tag_id": 1412,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5032,
+    "specialist_tag_id": 1412,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5033,
+    "specialist_tag_id": 1413,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5034,
+    "specialist_tag_id": 1413,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5035,
+    "specialist_tag_id": 1414,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5036,
+    "specialist_tag_id": 1415,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5037,
+    "specialist_tag_id": 1415,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5038,
+    "specialist_tag_id": 1416,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5039,
+    "specialist_tag_id": 1416,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5040,
+    "specialist_tag_id": 1416,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:11.659534+00:00",
+    "updated_at": "2026-03-05T23:46:11.659534+00:00"
+  },
+  {
+    "id": 5041,
+    "specialist_tag_id": 1417,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5042,
+    "specialist_tag_id": 1417,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5043,
+    "specialist_tag_id": 1417,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5044,
+    "specialist_tag_id": 1418,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5045,
+    "specialist_tag_id": 1418,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5046,
+    "specialist_tag_id": 1418,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5047,
+    "specialist_tag_id": 1418,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5048,
+    "specialist_tag_id": 1419,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5049,
+    "specialist_tag_id": 1419,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5050,
+    "specialist_tag_id": 1419,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5051,
+    "specialist_tag_id": 1419,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5052,
+    "specialist_tag_id": 1420,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5053,
+    "specialist_tag_id": 1420,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5054,
+    "specialist_tag_id": 1421,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5055,
+    "specialist_tag_id": 1421,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5056,
+    "specialist_tag_id": 1421,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5057,
+    "specialist_tag_id": 1421,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5058,
+    "specialist_tag_id": 1421,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5059,
+    "specialist_tag_id": 1421,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5060,
+    "specialist_tag_id": 1421,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5061,
+    "specialist_tag_id": 1421,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5062,
+    "specialist_tag_id": 1422,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5063,
+    "specialist_tag_id": 1422,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5064,
+    "specialist_tag_id": 1422,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5065,
+    "specialist_tag_id": 1422,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5066,
+    "specialist_tag_id": 1422,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5067,
+    "specialist_tag_id": 1423,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5068,
+    "specialist_tag_id": 1423,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5069,
+    "specialist_tag_id": 1424,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5070,
+    "specialist_tag_id": 1425,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5071,
+    "specialist_tag_id": 1425,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5072,
+    "specialist_tag_id": 1426,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5073,
+    "specialist_tag_id": 1426,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5074,
+    "specialist_tag_id": 1426,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:13.877412+00:00",
+    "updated_at": "2026-03-05T23:46:13.877412+00:00"
+  },
+  {
+    "id": 5075,
+    "specialist_tag_id": 1427,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5076,
+    "specialist_tag_id": 1427,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5077,
+    "specialist_tag_id": 1427,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5078,
+    "specialist_tag_id": 1428,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5079,
+    "specialist_tag_id": 1428,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5080,
+    "specialist_tag_id": 1428,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5081,
+    "specialist_tag_id": 1428,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5082,
+    "specialist_tag_id": 1429,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5083,
+    "specialist_tag_id": 1429,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5084,
+    "specialist_tag_id": 1429,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5085,
+    "specialist_tag_id": 1429,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5086,
+    "specialist_tag_id": 1430,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5087,
+    "specialist_tag_id": 1430,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5088,
+    "specialist_tag_id": 1431,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5089,
+    "specialist_tag_id": 1431,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5090,
+    "specialist_tag_id": 1431,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5091,
+    "specialist_tag_id": 1431,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5092,
+    "specialist_tag_id": 1431,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5093,
+    "specialist_tag_id": 1431,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5094,
+    "specialist_tag_id": 1431,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5095,
+    "specialist_tag_id": 1431,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5096,
+    "specialist_tag_id": 1432,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5097,
+    "specialist_tag_id": 1432,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5098,
+    "specialist_tag_id": 1432,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5099,
+    "specialist_tag_id": 1432,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5100,
+    "specialist_tag_id": 1432,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5101,
+    "specialist_tag_id": 1433,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5102,
+    "specialist_tag_id": 1433,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5103,
+    "specialist_tag_id": 1434,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5104,
+    "specialist_tag_id": 1435,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5105,
+    "specialist_tag_id": 1435,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5106,
+    "specialist_tag_id": 1436,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5107,
+    "specialist_tag_id": 1436,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5108,
+    "specialist_tag_id": 1436,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:16.092872+00:00",
+    "updated_at": "2026-03-05T23:46:16.092872+00:00"
+  },
+  {
+    "id": 5109,
+    "specialist_tag_id": 1437,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5110,
+    "specialist_tag_id": 1437,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5111,
+    "specialist_tag_id": 1437,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5112,
+    "specialist_tag_id": 1438,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5113,
+    "specialist_tag_id": 1438,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5114,
+    "specialist_tag_id": 1438,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5115,
+    "specialist_tag_id": 1438,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5116,
+    "specialist_tag_id": 1439,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5117,
+    "specialist_tag_id": 1439,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5118,
+    "specialist_tag_id": 1439,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5119,
+    "specialist_tag_id": 1439,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5120,
+    "specialist_tag_id": 1440,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5121,
+    "specialist_tag_id": 1440,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5122,
+    "specialist_tag_id": 1441,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5123,
+    "specialist_tag_id": 1441,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5124,
+    "specialist_tag_id": 1441,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5125,
+    "specialist_tag_id": 1441,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5126,
+    "specialist_tag_id": 1441,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5127,
+    "specialist_tag_id": 1441,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5128,
+    "specialist_tag_id": 1441,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5129,
+    "specialist_tag_id": 1441,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5130,
+    "specialist_tag_id": 1442,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5131,
+    "specialist_tag_id": 1442,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5132,
+    "specialist_tag_id": 1442,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5133,
+    "specialist_tag_id": 1442,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5134,
+    "specialist_tag_id": 1442,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5135,
+    "specialist_tag_id": 1443,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5136,
+    "specialist_tag_id": 1443,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5137,
+    "specialist_tag_id": 1444,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5138,
+    "specialist_tag_id": 1445,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5139,
+    "specialist_tag_id": 1445,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5140,
+    "specialist_tag_id": 1446,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5141,
+    "specialist_tag_id": 1446,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5142,
+    "specialist_tag_id": 1446,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:18.318836+00:00",
+    "updated_at": "2026-03-05T23:46:18.318836+00:00"
+  },
+  {
+    "id": 5143,
+    "specialist_tag_id": 1447,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5144,
+    "specialist_tag_id": 1447,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5145,
+    "specialist_tag_id": 1447,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5146,
+    "specialist_tag_id": 1448,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5147,
+    "specialist_tag_id": 1448,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5148,
+    "specialist_tag_id": 1448,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5149,
+    "specialist_tag_id": 1448,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5150,
+    "specialist_tag_id": 1449,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5151,
+    "specialist_tag_id": 1449,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5152,
+    "specialist_tag_id": 1449,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5153,
+    "specialist_tag_id": 1449,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5154,
+    "specialist_tag_id": 1450,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5155,
+    "specialist_tag_id": 1450,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5156,
+    "specialist_tag_id": 1451,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5157,
+    "specialist_tag_id": 1451,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5158,
+    "specialist_tag_id": 1451,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5159,
+    "specialist_tag_id": 1451,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5160,
+    "specialist_tag_id": 1451,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5161,
+    "specialist_tag_id": 1451,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5162,
+    "specialist_tag_id": 1451,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5163,
+    "specialist_tag_id": 1451,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5164,
+    "specialist_tag_id": 1452,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5165,
+    "specialist_tag_id": 1452,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5166,
+    "specialist_tag_id": 1452,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5167,
+    "specialist_tag_id": 1452,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5168,
+    "specialist_tag_id": 1452,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5169,
+    "specialist_tag_id": 1453,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5170,
+    "specialist_tag_id": 1453,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5171,
+    "specialist_tag_id": 1454,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5172,
+    "specialist_tag_id": 1455,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5173,
+    "specialist_tag_id": 1455,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5174,
+    "specialist_tag_id": 1456,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5175,
+    "specialist_tag_id": 1456,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5176,
+    "specialist_tag_id": 1456,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:21.441495+00:00",
+    "updated_at": "2026-03-05T23:46:21.441495+00:00"
+  },
+  {
+    "id": 5177,
+    "specialist_tag_id": 1457,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5178,
+    "specialist_tag_id": 1457,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5179,
+    "specialist_tag_id": 1457,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5180,
+    "specialist_tag_id": 1458,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5181,
+    "specialist_tag_id": 1458,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5182,
+    "specialist_tag_id": 1458,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5183,
+    "specialist_tag_id": 1458,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5184,
+    "specialist_tag_id": 1459,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5185,
+    "specialist_tag_id": 1459,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5186,
+    "specialist_tag_id": 1459,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5187,
+    "specialist_tag_id": 1459,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5188,
+    "specialist_tag_id": 1460,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5189,
+    "specialist_tag_id": 1460,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5190,
+    "specialist_tag_id": 1461,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5191,
+    "specialist_tag_id": 1461,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5192,
+    "specialist_tag_id": 1461,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5193,
+    "specialist_tag_id": 1461,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5194,
+    "specialist_tag_id": 1461,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5195,
+    "specialist_tag_id": 1461,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5196,
+    "specialist_tag_id": 1461,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5197,
+    "specialist_tag_id": 1461,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5198,
+    "specialist_tag_id": 1462,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5199,
+    "specialist_tag_id": 1462,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5200,
+    "specialist_tag_id": 1462,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5201,
+    "specialist_tag_id": 1462,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5202,
+    "specialist_tag_id": 1462,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5203,
+    "specialist_tag_id": 1463,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5204,
+    "specialist_tag_id": 1463,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5205,
+    "specialist_tag_id": 1464,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5206,
+    "specialist_tag_id": 1465,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5207,
+    "specialist_tag_id": 1465,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5208,
+    "specialist_tag_id": 1466,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5209,
+    "specialist_tag_id": 1466,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5210,
+    "specialist_tag_id": 1466,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:27.427178+00:00",
+    "updated_at": "2026-03-05T23:46:27.427178+00:00"
+  },
+  {
+    "id": 5211,
+    "specialist_tag_id": 1467,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5212,
+    "specialist_tag_id": 1467,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5213,
+    "specialist_tag_id": 1467,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5214,
+    "specialist_tag_id": 1468,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5215,
+    "specialist_tag_id": 1468,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5216,
+    "specialist_tag_id": 1468,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5217,
+    "specialist_tag_id": 1468,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5218,
+    "specialist_tag_id": 1469,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5219,
+    "specialist_tag_id": 1469,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5220,
+    "specialist_tag_id": 1469,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5221,
+    "specialist_tag_id": 1469,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5222,
+    "specialist_tag_id": 1470,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5223,
+    "specialist_tag_id": 1470,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5224,
+    "specialist_tag_id": 1471,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5225,
+    "specialist_tag_id": 1471,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5226,
+    "specialist_tag_id": 1471,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5227,
+    "specialist_tag_id": 1471,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5228,
+    "specialist_tag_id": 1471,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5229,
+    "specialist_tag_id": 1471,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5230,
+    "specialist_tag_id": 1471,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5231,
+    "specialist_tag_id": 1471,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5232,
+    "specialist_tag_id": 1472,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5233,
+    "specialist_tag_id": 1472,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5234,
+    "specialist_tag_id": 1472,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5235,
+    "specialist_tag_id": 1472,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5236,
+    "specialist_tag_id": 1472,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5237,
+    "specialist_tag_id": 1473,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5238,
+    "specialist_tag_id": 1473,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5239,
+    "specialist_tag_id": 1474,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5240,
+    "specialist_tag_id": 1475,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5241,
+    "specialist_tag_id": 1475,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5242,
+    "specialist_tag_id": 1476,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5243,
+    "specialist_tag_id": 1476,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5244,
+    "specialist_tag_id": 1476,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:33.436186+00:00",
+    "updated_at": "2026-03-05T23:46:33.436186+00:00"
+  },
+  {
+    "id": 5245,
+    "specialist_tag_id": 1477,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5246,
+    "specialist_tag_id": 1477,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5247,
+    "specialist_tag_id": 1477,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5248,
+    "specialist_tag_id": 1478,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5249,
+    "specialist_tag_id": 1478,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5250,
+    "specialist_tag_id": 1478,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5251,
+    "specialist_tag_id": 1478,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5252,
+    "specialist_tag_id": 1479,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5253,
+    "specialist_tag_id": 1479,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5254,
+    "specialist_tag_id": 1479,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5255,
+    "specialist_tag_id": 1479,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5256,
+    "specialist_tag_id": 1480,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5257,
+    "specialist_tag_id": 1480,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5258,
+    "specialist_tag_id": 1481,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5259,
+    "specialist_tag_id": 1481,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5260,
+    "specialist_tag_id": 1481,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5261,
+    "specialist_tag_id": 1481,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5262,
+    "specialist_tag_id": 1481,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5263,
+    "specialist_tag_id": 1481,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5264,
+    "specialist_tag_id": 1481,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5265,
+    "specialist_tag_id": 1481,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5266,
+    "specialist_tag_id": 1482,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5267,
+    "specialist_tag_id": 1482,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5268,
+    "specialist_tag_id": 1482,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5269,
+    "specialist_tag_id": 1482,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5270,
+    "specialist_tag_id": 1482,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5271,
+    "specialist_tag_id": 1483,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5272,
+    "specialist_tag_id": 1483,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5273,
+    "specialist_tag_id": 1484,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5274,
+    "specialist_tag_id": 1485,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5275,
+    "specialist_tag_id": 1485,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5276,
+    "specialist_tag_id": 1486,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5277,
+    "specialist_tag_id": 1486,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5278,
+    "specialist_tag_id": 1486,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:39.432196+00:00",
+    "updated_at": "2026-03-05T23:46:39.432196+00:00"
+  },
+  {
+    "id": 5279,
+    "specialist_tag_id": 1487,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5280,
+    "specialist_tag_id": 1487,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5281,
+    "specialist_tag_id": 1487,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5282,
+    "specialist_tag_id": 1488,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5283,
+    "specialist_tag_id": 1488,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5284,
+    "specialist_tag_id": 1488,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5285,
+    "specialist_tag_id": 1488,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5286,
+    "specialist_tag_id": 1489,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5287,
+    "specialist_tag_id": 1489,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5288,
+    "specialist_tag_id": 1489,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5289,
+    "specialist_tag_id": 1489,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5290,
+    "specialist_tag_id": 1490,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5291,
+    "specialist_tag_id": 1490,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5292,
+    "specialist_tag_id": 1491,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5293,
+    "specialist_tag_id": 1491,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5294,
+    "specialist_tag_id": 1491,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5295,
+    "specialist_tag_id": 1491,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5296,
+    "specialist_tag_id": 1491,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5297,
+    "specialist_tag_id": 1491,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5298,
+    "specialist_tag_id": 1491,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5299,
+    "specialist_tag_id": 1491,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5300,
+    "specialist_tag_id": 1492,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5301,
+    "specialist_tag_id": 1492,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5302,
+    "specialist_tag_id": 1492,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5303,
+    "specialist_tag_id": 1492,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5304,
+    "specialist_tag_id": 1492,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5305,
+    "specialist_tag_id": 1493,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5306,
+    "specialist_tag_id": 1493,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5307,
+    "specialist_tag_id": 1494,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5308,
+    "specialist_tag_id": 1495,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5309,
+    "specialist_tag_id": 1495,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5310,
+    "specialist_tag_id": 1496,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5311,
+    "specialist_tag_id": 1496,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5312,
+    "specialist_tag_id": 1496,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:45.474017+00:00",
+    "updated_at": "2026-03-05T23:46:45.474017+00:00"
+  },
+  {
+    "id": 5313,
+    "specialist_tag_id": 1497,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5314,
+    "specialist_tag_id": 1497,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5315,
+    "specialist_tag_id": 1497,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5316,
+    "specialist_tag_id": 1498,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5317,
+    "specialist_tag_id": 1498,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5318,
+    "specialist_tag_id": 1498,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5319,
+    "specialist_tag_id": 1498,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5320,
+    "specialist_tag_id": 1499,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5321,
+    "specialist_tag_id": 1499,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5322,
+    "specialist_tag_id": 1499,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5323,
+    "specialist_tag_id": 1499,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5324,
+    "specialist_tag_id": 1500,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5325,
+    "specialist_tag_id": 1500,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5326,
+    "specialist_tag_id": 1501,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5327,
+    "specialist_tag_id": 1501,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5328,
+    "specialist_tag_id": 1501,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5329,
+    "specialist_tag_id": 1501,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5330,
+    "specialist_tag_id": 1501,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5331,
+    "specialist_tag_id": 1501,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5332,
+    "specialist_tag_id": 1501,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5333,
+    "specialist_tag_id": 1501,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5334,
+    "specialist_tag_id": 1502,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5335,
+    "specialist_tag_id": 1502,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5336,
+    "specialist_tag_id": 1502,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5337,
+    "specialist_tag_id": 1502,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5338,
+    "specialist_tag_id": 1502,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5339,
+    "specialist_tag_id": 1503,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5340,
+    "specialist_tag_id": 1503,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5341,
+    "specialist_tag_id": 1504,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5342,
+    "specialist_tag_id": 1505,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5343,
+    "specialist_tag_id": 1505,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5344,
+    "specialist_tag_id": 1506,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5345,
+    "specialist_tag_id": 1506,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5346,
+    "specialist_tag_id": 1506,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:51.421463+00:00",
+    "updated_at": "2026-03-05T23:46:51.421463+00:00"
+  },
+  {
+    "id": 5347,
+    "specialist_tag_id": 1507,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5348,
+    "specialist_tag_id": 1507,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5349,
+    "specialist_tag_id": 1507,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5350,
+    "specialist_tag_id": 1508,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5351,
+    "specialist_tag_id": 1508,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5352,
+    "specialist_tag_id": 1508,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5353,
+    "specialist_tag_id": 1508,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5354,
+    "specialist_tag_id": 1509,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5355,
+    "specialist_tag_id": 1509,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5356,
+    "specialist_tag_id": 1509,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5357,
+    "specialist_tag_id": 1509,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5358,
+    "specialist_tag_id": 1510,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5359,
+    "specialist_tag_id": 1510,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5360,
+    "specialist_tag_id": 1511,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5361,
+    "specialist_tag_id": 1511,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5362,
+    "specialist_tag_id": 1511,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5363,
+    "specialist_tag_id": 1511,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5364,
+    "specialist_tag_id": 1511,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5365,
+    "specialist_tag_id": 1511,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5366,
+    "specialist_tag_id": 1511,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5367,
+    "specialist_tag_id": 1511,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5368,
+    "specialist_tag_id": 1512,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5369,
+    "specialist_tag_id": 1512,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5370,
+    "specialist_tag_id": 1512,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5371,
+    "specialist_tag_id": 1512,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5372,
+    "specialist_tag_id": 1512,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5373,
+    "specialist_tag_id": 1513,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5374,
+    "specialist_tag_id": 1513,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5375,
+    "specialist_tag_id": 1514,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5376,
+    "specialist_tag_id": 1515,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5377,
+    "specialist_tag_id": 1515,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5378,
+    "specialist_tag_id": 1516,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5379,
+    "specialist_tag_id": 1516,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5380,
+    "specialist_tag_id": 1516,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:57.431817+00:00",
+    "updated_at": "2026-03-05T23:46:57.431817+00:00"
+  },
+  {
+    "id": 5381,
+    "specialist_tag_id": 1517,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5382,
+    "specialist_tag_id": 1517,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5383,
+    "specialist_tag_id": 1517,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5384,
+    "specialist_tag_id": 1518,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5385,
+    "specialist_tag_id": 1518,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5386,
+    "specialist_tag_id": 1518,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5387,
+    "specialist_tag_id": 1518,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5388,
+    "specialist_tag_id": 1519,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5389,
+    "specialist_tag_id": 1519,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5390,
+    "specialist_tag_id": 1519,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5391,
+    "specialist_tag_id": 1519,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5392,
+    "specialist_tag_id": 1520,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5393,
+    "specialist_tag_id": 1520,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5394,
+    "specialist_tag_id": 1521,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5395,
+    "specialist_tag_id": 1521,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5396,
+    "specialist_tag_id": 1521,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5397,
+    "specialist_tag_id": 1521,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5398,
+    "specialist_tag_id": 1521,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5399,
+    "specialist_tag_id": 1521,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5400,
+    "specialist_tag_id": 1521,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5401,
+    "specialist_tag_id": 1521,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5402,
+    "specialist_tag_id": 1522,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5403,
+    "specialist_tag_id": 1522,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5404,
+    "specialist_tag_id": 1522,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5405,
+    "specialist_tag_id": 1522,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5406,
+    "specialist_tag_id": 1522,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5407,
+    "specialist_tag_id": 1523,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5408,
+    "specialist_tag_id": 1523,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5409,
+    "specialist_tag_id": 1524,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5410,
+    "specialist_tag_id": 1525,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5411,
+    "specialist_tag_id": 1525,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5412,
+    "specialist_tag_id": 1526,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5413,
+    "specialist_tag_id": 1526,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5414,
+    "specialist_tag_id": 1526,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:03.432217+00:00",
+    "updated_at": "2026-03-05T23:47:03.432217+00:00"
+  },
+  {
+    "id": 5415,
+    "specialist_tag_id": 1527,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5416,
+    "specialist_tag_id": 1527,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5417,
+    "specialist_tag_id": 1527,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5418,
+    "specialist_tag_id": 1528,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5419,
+    "specialist_tag_id": 1528,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5420,
+    "specialist_tag_id": 1528,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5421,
+    "specialist_tag_id": 1528,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5422,
+    "specialist_tag_id": 1529,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5423,
+    "specialist_tag_id": 1529,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5424,
+    "specialist_tag_id": 1529,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5425,
+    "specialist_tag_id": 1529,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5426,
+    "specialist_tag_id": 1530,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5427,
+    "specialist_tag_id": 1530,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5428,
+    "specialist_tag_id": 1531,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5429,
+    "specialist_tag_id": 1531,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5430,
+    "specialist_tag_id": 1531,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5431,
+    "specialist_tag_id": 1531,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5432,
+    "specialist_tag_id": 1531,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5433,
+    "specialist_tag_id": 1531,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5434,
+    "specialist_tag_id": 1531,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5435,
+    "specialist_tag_id": 1531,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5436,
+    "specialist_tag_id": 1532,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5437,
+    "specialist_tag_id": 1532,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5438,
+    "specialist_tag_id": 1532,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5439,
+    "specialist_tag_id": 1532,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5440,
+    "specialist_tag_id": 1532,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5441,
+    "specialist_tag_id": 1533,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5442,
+    "specialist_tag_id": 1533,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5443,
+    "specialist_tag_id": 1534,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5444,
+    "specialist_tag_id": 1535,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5445,
+    "specialist_tag_id": 1535,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5446,
+    "specialist_tag_id": 1536,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5447,
+    "specialist_tag_id": 1536,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5448,
+    "specialist_tag_id": 1536,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:08.428559+00:00",
+    "updated_at": "2026-03-05T23:47:08.428559+00:00"
+  },
+  {
+    "id": 5449,
+    "specialist_tag_id": 1537,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5450,
+    "specialist_tag_id": 1537,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5451,
+    "specialist_tag_id": 1537,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5452,
+    "specialist_tag_id": 1538,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5453,
+    "specialist_tag_id": 1538,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5454,
+    "specialist_tag_id": 1538,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5455,
+    "specialist_tag_id": 1538,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5456,
+    "specialist_tag_id": 1539,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5457,
+    "specialist_tag_id": 1539,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5458,
+    "specialist_tag_id": 1539,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5459,
+    "specialist_tag_id": 1539,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5460,
+    "specialist_tag_id": 1540,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5461,
+    "specialist_tag_id": 1540,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5462,
+    "specialist_tag_id": 1541,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5463,
+    "specialist_tag_id": 1541,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5464,
+    "specialist_tag_id": 1541,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5465,
+    "specialist_tag_id": 1541,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5466,
+    "specialist_tag_id": 1541,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5467,
+    "specialist_tag_id": 1541,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5468,
+    "specialist_tag_id": 1541,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5469,
+    "specialist_tag_id": 1541,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5470,
+    "specialist_tag_id": 1542,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5471,
+    "specialist_tag_id": 1542,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5472,
+    "specialist_tag_id": 1542,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5473,
+    "specialist_tag_id": 1542,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5474,
+    "specialist_tag_id": 1542,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5475,
+    "specialist_tag_id": 1543,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5476,
+    "specialist_tag_id": 1543,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5477,
+    "specialist_tag_id": 1544,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5478,
+    "specialist_tag_id": 1545,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5479,
+    "specialist_tag_id": 1545,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5480,
+    "specialist_tag_id": 1546,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5481,
+    "specialist_tag_id": 1546,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5482,
+    "specialist_tag_id": 1546,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:12.941235+00:00",
+    "updated_at": "2026-03-05T23:47:12.941235+00:00"
+  },
+  {
+    "id": 5483,
+    "specialist_tag_id": 1547,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5484,
+    "specialist_tag_id": 1547,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5485,
+    "specialist_tag_id": 1547,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5486,
+    "specialist_tag_id": 1548,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5487,
+    "specialist_tag_id": 1548,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5488,
+    "specialist_tag_id": 1548,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5489,
+    "specialist_tag_id": 1548,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5490,
+    "specialist_tag_id": 1549,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5491,
+    "specialist_tag_id": 1549,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5492,
+    "specialist_tag_id": 1549,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5493,
+    "specialist_tag_id": 1549,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5494,
+    "specialist_tag_id": 1550,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5495,
+    "specialist_tag_id": 1550,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5496,
+    "specialist_tag_id": 1551,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5497,
+    "specialist_tag_id": 1551,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5498,
+    "specialist_tag_id": 1551,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5499,
+    "specialist_tag_id": 1551,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5500,
+    "specialist_tag_id": 1551,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5501,
+    "specialist_tag_id": 1551,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5502,
+    "specialist_tag_id": 1551,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5503,
+    "specialist_tag_id": 1551,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5504,
+    "specialist_tag_id": 1552,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5505,
+    "specialist_tag_id": 1552,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5506,
+    "specialist_tag_id": 1552,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5507,
+    "specialist_tag_id": 1552,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5508,
+    "specialist_tag_id": 1552,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5509,
+    "specialist_tag_id": 1553,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5510,
+    "specialist_tag_id": 1553,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5511,
+    "specialist_tag_id": 1554,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5512,
+    "specialist_tag_id": 1555,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5513,
+    "specialist_tag_id": 1555,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5514,
+    "specialist_tag_id": 1556,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5515,
+    "specialist_tag_id": 1556,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5516,
+    "specialist_tag_id": 1556,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:16.438006+00:00",
+    "updated_at": "2026-03-05T23:47:16.438006+00:00"
+  },
+  {
+    "id": 5517,
+    "specialist_tag_id": 1557,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5518,
+    "specialist_tag_id": 1557,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5519,
+    "specialist_tag_id": 1557,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5520,
+    "specialist_tag_id": 1558,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5521,
+    "specialist_tag_id": 1558,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5522,
+    "specialist_tag_id": 1558,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5523,
+    "specialist_tag_id": 1558,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5524,
+    "specialist_tag_id": 1559,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5525,
+    "specialist_tag_id": 1559,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5526,
+    "specialist_tag_id": 1559,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5527,
+    "specialist_tag_id": 1559,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5528,
+    "specialist_tag_id": 1560,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5529,
+    "specialist_tag_id": 1560,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5530,
+    "specialist_tag_id": 1561,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5531,
+    "specialist_tag_id": 1561,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5532,
+    "specialist_tag_id": 1561,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5533,
+    "specialist_tag_id": 1561,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5534,
+    "specialist_tag_id": 1561,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5535,
+    "specialist_tag_id": 1561,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5536,
+    "specialist_tag_id": 1561,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5537,
+    "specialist_tag_id": 1561,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5538,
+    "specialist_tag_id": 1562,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5539,
+    "specialist_tag_id": 1562,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5540,
+    "specialist_tag_id": 1562,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5541,
+    "specialist_tag_id": 1562,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5542,
+    "specialist_tag_id": 1562,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5543,
+    "specialist_tag_id": 1563,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5544,
+    "specialist_tag_id": 1563,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5545,
+    "specialist_tag_id": 1564,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5546,
+    "specialist_tag_id": 1565,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5547,
+    "specialist_tag_id": 1565,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5548,
+    "specialist_tag_id": 1566,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5549,
+    "specialist_tag_id": 1566,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5550,
+    "specialist_tag_id": 1566,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:21.445721+00:00",
+    "updated_at": "2026-03-05T23:47:21.445721+00:00"
+  },
+  {
+    "id": 5551,
+    "specialist_tag_id": 1567,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5552,
+    "specialist_tag_id": 1567,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5553,
+    "specialist_tag_id": 1568,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5554,
+    "specialist_tag_id": 1568,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5555,
+    "specialist_tag_id": 1568,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5556,
+    "specialist_tag_id": 1568,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5557,
+    "specialist_tag_id": 1569,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5558,
+    "specialist_tag_id": 1569,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5559,
+    "specialist_tag_id": 1570,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5560,
+    "specialist_tag_id": 1570,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5561,
+    "specialist_tag_id": 1570,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5562,
+    "specialist_tag_id": 1571,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5563,
+    "specialist_tag_id": 1571,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5564,
+    "specialist_tag_id": 1572,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5565,
+    "specialist_tag_id": 1572,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5566,
+    "specialist_tag_id": 1572,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5567,
+    "specialist_tag_id": 1572,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5568,
+    "specialist_tag_id": 1573,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5569,
+    "specialist_tag_id": 1573,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5570,
+    "specialist_tag_id": 1573,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5571,
+    "specialist_tag_id": 1574,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5572,
+    "specialist_tag_id": 1575,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5573,
+    "specialist_tag_id": 1575,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5574,
+    "specialist_tag_id": 1575,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5575,
+    "specialist_tag_id": 1575,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5576,
+    "specialist_tag_id": 1575,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5577,
+    "specialist_tag_id": 1575,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5578,
+    "specialist_tag_id": 1575,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5579,
+    "specialist_tag_id": 1575,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5580,
+    "specialist_tag_id": 1576,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5581,
+    "specialist_tag_id": 1576,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5582,
+    "specialist_tag_id": 1576,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5583,
+    "specialist_tag_id": 1576,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 5584,
+    "specialist_tag_id": 1576,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:47:28.430776+00:00",
+    "updated_at": "2026-03-05T23:47:28.430776+00:00"
+  },
+  {
+    "id": 4871,
+    "specialist_tag_id": 1367,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4872,
+    "specialist_tag_id": 1367,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4873,
+    "specialist_tag_id": 1367,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4874,
+    "specialist_tag_id": 1368,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4875,
+    "specialist_tag_id": 1368,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4876,
+    "specialist_tag_id": 1368,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4877,
+    "specialist_tag_id": 1368,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4878,
+    "specialist_tag_id": 1369,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4879,
+    "specialist_tag_id": 1369,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4880,
+    "specialist_tag_id": 1369,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4881,
+    "specialist_tag_id": 1369,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4882,
+    "specialist_tag_id": 1370,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4883,
+    "specialist_tag_id": 1370,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4884,
+    "specialist_tag_id": 1371,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4885,
+    "specialist_tag_id": 1371,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4886,
+    "specialist_tag_id": 1371,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4887,
+    "specialist_tag_id": 1371,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4888,
+    "specialist_tag_id": 1371,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4889,
+    "specialist_tag_id": 1371,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4890,
+    "specialist_tag_id": 1371,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4891,
+    "specialist_tag_id": 1371,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4892,
+    "specialist_tag_id": 1372,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4893,
+    "specialist_tag_id": 1372,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4894,
+    "specialist_tag_id": 1372,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4895,
+    "specialist_tag_id": 1372,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4896,
+    "specialist_tag_id": 1372,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4897,
+    "specialist_tag_id": 1373,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4898,
+    "specialist_tag_id": 1373,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4899,
+    "specialist_tag_id": 1374,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4900,
+    "specialist_tag_id": 1375,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4901,
+    "specialist_tag_id": 1375,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4902,
+    "specialist_tag_id": 1376,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4903,
+    "specialist_tag_id": 1376,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4904,
+    "specialist_tag_id": 1376,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:02.29709+00:00",
+    "updated_at": "2026-03-05T23:46:02.29709+00:00"
+  },
+  {
+    "id": 4905,
+    "specialist_tag_id": 1377,
+    "keyword": "mandado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4906,
+    "specialist_tag_id": 1377,
+    "keyword": "oficial de justi?a",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4907,
+    "specialist_tag_id": 1377,
+    "keyword": "central de mandos",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4908,
+    "specialist_tag_id": 1378,
+    "keyword": "custas",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4909,
+    "specialist_tag_id": 1378,
+    "keyword": "taxa",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4910,
+    "specialist_tag_id": 1378,
+    "keyword": "dilig?ncia",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4911,
+    "specialist_tag_id": 1378,
+    "keyword": "dilig?ncias",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4912,
+    "specialist_tag_id": 1379,
+    "keyword": "atp",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4913,
+    "specialist_tag_id": 1379,
+    "keyword": "automatiza??o",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4914,
+    "specialist_tag_id": 1379,
+    "keyword": "automa??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4915,
+    "specialist_tag_id": 1379,
+    "keyword": "regra",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4916,
+    "specialist_tag_id": 1380,
+    "keyword": "cadastrar",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4917,
+    "specialist_tag_id": 1380,
+    "keyword": "cadastro",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4918,
+    "specialist_tag_id": 1381,
+    "keyword": "acesso",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4919,
+    "specialist_tag_id": 1381,
+    "keyword": "login",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4920,
+    "specialist_tag_id": 1381,
+    "keyword": "acessar",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4921,
+    "specialist_tag_id": 1381,
+    "keyword": "fatores",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4922,
+    "specialist_tag_id": 1381,
+    "keyword": "autenticador",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4923,
+    "specialist_tag_id": 1381,
+    "keyword": "autentica??o",
+    "sort_order": 6,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4924,
+    "specialist_tag_id": 1381,
+    "keyword": "authenticator",
+    "sort_order": 7,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4925,
+    "specialist_tag_id": 1381,
+    "keyword": "senha",
+    "sort_order": 8,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4926,
+    "specialist_tag_id": 1382,
+    "keyword": "Migrado",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4927,
+    "specialist_tag_id": 1382,
+    "keyword": "Migrados",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4928,
+    "specialist_tag_id": 1382,
+    "keyword": "Migra??o",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4929,
+    "specialist_tag_id": 1382,
+    "keyword": "Migrador",
+    "sort_order": 4,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4930,
+    "specialist_tag_id": 1382,
+    "keyword": "migrar",
+    "sort_order": 5,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4931,
+    "specialist_tag_id": 1383,
+    "keyword": "Carta",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4932,
+    "specialist_tag_id": 1383,
+    "keyword": "Cartas",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4933,
+    "specialist_tag_id": 1384,
+    "keyword": "DJEN",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4934,
+    "specialist_tag_id": 1385,
+    "keyword": "Renajud",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4935,
+    "specialist_tag_id": 1385,
+    "keyword": "Sisbajud",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4936,
+    "specialist_tag_id": 1386,
+    "keyword": "Distribui??o",
+    "sort_order": 1,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4937,
+    "specialist_tag_id": 1386,
+    "keyword": "Redistribuir",
+    "sort_order": 2,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  },
+  {
+    "id": 4938,
+    "specialist_tag_id": 1386,
+    "keyword": "Remeter",
+    "sort_order": 3,
+    "is_active": true,
+    "created_at": "2026-03-05T23:46:04.580686+00:00",
+    "updated_at": "2026-03-05T23:46:04.580686+00:00"
+  }
+]

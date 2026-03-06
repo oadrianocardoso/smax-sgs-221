@@ -1,0 +1,3614 @@
+[
+  {
+    "id": 401,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 315445,
+    "nome": "FRANCISCO DE ASSIS DA SILVA CAVALCANTE",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE ARUJÁ"
+  },
+  {
+    "id": 402,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377811,
+    "nome": "FRANCISCO MONTEIRO MACHADO DE CARVALHO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE GENERAL SALGADO"
+  },
+  {
+    "id": 403,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 364774,
+    "nome": "FRANCISCO RAFAEL ZANIBONI",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE JOSÉ BONIFÁCIO"
+  },
+  {
+    "id": 404,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 372841,
+    "nome": "GABRIEL GUERRERO ROCHA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE ILHABELA"
+  },
+  {
+    "id": 405,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 381093,
+    "nome": "GABRIEL TEIXEIRA PRADO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE SALTO DE PIRAPORA 2º OFÍCIO JUDICIAL DA COMARCA DE FERRAZ DE"
+  },
+  {
+    "id": 406,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 370744,
+    "nome": "GABRIELA BRAGA ALVES VASCONCELOS",
+    "lotacao": ""
+  },
+  {
+    "id": 407,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 369720,
+    "nome": "GABRIELA SOARES DILLY",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 4ª VARAS CÍVEIS EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE SÃO JOSÉ DOS CAMPOS"
+  },
+  {
+    "id": 408,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 373373,
+    "nome": "GABRIELA YASMIN VICENTIN CARDOSO FERRO",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE JOSÉ BONIFÁCIO"
+  },
+  {
+    "id": 409,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 307155,
+    "nome": "GILBERTO SINTONI JUNIOR",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE SANTA"
+  },
+  {
+    "id": 410,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 361577,
+    "nome": "RITA DO PASSA QUATRO GIOVANNA TOLOTO",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE OURINHOS"
+  },
+  {
+    "id": 411,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 361022,
+    "nome": "GISELE APARECIDA ALVES DA SILVA -",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 16ª A 20ª VARAS EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS DA UPJ"
+  },
+  {
+    "id": 412,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 373285,
+    "nome": "CÍVEIS DA COMARCA DA CAPITAL GISELE DA SILVA BOVOLATO",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE RANCHARIA"
+  },
+  {
+    "id": 413,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377517,
+    "nome": "GISLAINE DE CASSIA LOPES",
+    "lotacao": "3º OFÍCIO JUDICIAL DA COMARCA DE RIBEIRÃO PIRES"
+  },
+  {
+    "id": 414,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 379392,
+    "nome": "GIULIANO SPANAVELI PUGLIESI",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DO FORO REGIONAL IV - LAPA"
+  },
+  {
+    "id": 415,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 362842,
+    "nome": "GUILHERME BARBOSA ZANIN JUAREZ",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 416,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 370087,
+    "nome": "GUILHERME BEVILAQUA PEDREIRA DE",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE MOCOCA"
+  },
+  {
+    "id": 417,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 372902,
+    "nome": "FREITAS MEDEIROS GUILHERME CHAGAS MARTINS",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE ALTINÓPOLIS"
+  },
+  {
+    "id": 418,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 366218,
+    "nome": "GUILHERME GUEDES YONEMOTO",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE GUAÍRA"
+  },
+  {
+    "id": 419,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 369741,
+    "nome": "GUSTAVO MASSAMI NISHIMURA",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE BURITAMA"
+  },
+  {
+    "id": 420,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 372733,
+    "nome": "GUSTAVO MITSUNORI AOYAGI",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE TREMEMBÉ"
+  },
+  {
+    "id": 421,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377549,
+    "nome": "GUSTAVO ROBERTO GRECCO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE BORBOREMA"
+  },
+  {
+    "id": 422,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 380253,
+    "nome": "HADADE CARDOSO",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE FRANCA"
+  },
+  {
+    "id": 423,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 375265,
+    "nome": "HELLEN FERNANDES FRAGA MEIRA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE AMPARO"
+  },
+  {
+    "id": 424,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 357849,
+    "nome": "HELOISA CHERUBINI ROSSETO RIBEIRO",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE VARGEM GRANDE DO SUL"
+  },
+  {
+    "id": 425,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 380784,
+    "nome": "HELTON KEIJI HIGUTO KATO",
+    "lotacao": "GABINETE DA VARA DO JUIZADO ESPECIAL CÍVEL DA COMARCA"
+  },
+  {
+    "id": 426,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 97236,
+    "nome": "DE TUPÃ HENRIQUE MACHADO LUIZ",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE SANTA CRUZ DO RIO PARDO"
+  },
+  {
+    "id": 427,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 376682,
+    "nome": "HENRIQUE MARTON COSTA",
+    "lotacao": "3º OFÍCIO JUDICIAL DA COMARCA DE SANTA FÉ DO SUL"
+  },
+  {
+    "id": 428,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 373294,
+    "nome": "HIGOR DOS SANTOS LEITE",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE BURITAMA"
+  },
+  {
+    "id": 429,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 367470,
+    "nome": "IGOR HENRIQUE STERNIERI",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE TANABI"
+  },
+  {
+    "id": 430,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 373130,
+    "nome": "ISABELA FARIA SANTOS MONTEIRO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE CUNHA"
+  },
+  {
+    "id": 431,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 370319,
+    "nome": "IVANDO ANTONIO DA SILVA NETTO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE CARDOSO"
+  },
+  {
+    "id": 432,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 375762,
+    "nome": "IVO COSTA DA SILVA",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 6ª A 9ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DO FORO REGIONAL I - SANTANA"
+  },
+  {
+    "id": 433,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 374952,
+    "nome": "JACKELINE GOMES",
+    "lotacao": "OFÍCIO DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA"
+  },
+  {
+    "id": 434,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 361438,
+    "nome": "DE BARUERI JACKSON ALCÂNTARA SANTANA -",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 31ª A 35ª VARAS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ"
+  },
+  {
+    "id": 435,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 356335,
+    "nome": "CÍVEIS DA COMARCA DA CAPITAL JAQUELINE DA SILVA DOS SANTOS 108-P-20251118222128-96",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE POMPÉIA A autenticidade deste documento pode ser conferida através do endereço eletrônico do TJSP, informando o código de autenticidade"
+  },
+  {
+    "id": 436,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 363233,
+    "nome": "JEAN CARLOS DA COSTA CRUZ",
+    "lotacao": "GABINETE DA 1ª VARA CÍVEL DA COMARCA DE BARUERI"
+  },
+  {
+    "id": 437,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 367937,
+    "nome": "JEAN CARLOS DOS SANTOS",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE GUAÍRA"
+  },
+  {
+    "id": 438,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 374534,
+    "nome": "JEFERSSON BATISTA EVANGELISTA",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 5ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE SUZANO"
+  },
+  {
+    "id": 439,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 370418,
+    "nome": "JESSICA FERNANDA RAMOS",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE CATANDUVA"
+  },
+  {
+    "id": 440,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 380640,
+    "nome": "JESSICA SOARES DE SOUZA",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE VOTORANTIM"
+  },
+  {
+    "id": 441,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 355223,
+    "nome": "JOAO APARECIDO DE OLIVEIRA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE PARIQUERA-AÇU"
+  },
+  {
+    "id": 442,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 359371,
+    "nome": "JOÃO CARLOS BIO TOSCHI",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE PALMEIRA D’OESTE"
+  },
+  {
+    "id": 443,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 354142,
+    "nome": "JOAO EDSON DE AGUIAR",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE BROTAS"
+  },
+  {
+    "id": 444,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 374929,
+    "nome": "JOAO EDUARDO ROCHA SILVA",
+    "lotacao": "9º OFÍCIO CÍVEL DA COMARCA DE SÃO BERNARDO DO CAMPO"
+  },
+  {
+    "id": 445,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377918,
+    "nome": "JOAO FABIO DA COSTA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE LARANJAL PAULISTA"
+  },
+  {
+    "id": 446,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 371613,
+    "nome": "JOAO GUILHERME PEREIRA GOMES",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE CERQUILHO"
+  },
+  {
+    "id": 447,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 374969,
+    "nome": "JOAO GUILHERME RUFINO DE SOUZA",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE SANTA ISABEL"
+  },
+  {
+    "id": 448,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 362084,
+    "nome": "JOAO LUCAS DOS SANTOS",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE ASSIS"
+  },
+  {
+    "id": 449,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 371456,
+    "nome": "JOAO PAULO CAETANO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE SOROCABA"
+  },
+  {
+    "id": 450,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 361623,
+    "nome": "JOAO PAULO GASPAR DA SILVA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE VARGEM GRANDE"
+  },
+  {
+    "id": 451,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 372554,
+    "nome": "DO SUL JOAO PAULO MESQUITA MOREIRA SUL",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE VARGEM GRANDE DO"
+  },
+  {
+    "id": 452,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 375081,
+    "nome": "JOAO PEDRO SANTOS FRARI",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 4ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE BRAGANÇA PAULISTA"
+  },
+  {
+    "id": 453,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377397,
+    "nome": "JOAO VICTOR PIAUI DE ALMEIDA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE MARACAÍ"
+  },
+  {
+    "id": 454,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 367428,
+    "nome": "JOHN LEINI FUNO",
+    "lotacao": "5º OFÍCIO CÍVEL DA COMARCA DE SÃO BERNARDO DO CAMPO"
+  },
+  {
+    "id": 455,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 373538,
+    "nome": "JOHN RAGNOBERTO ANGELIM NOVAIS",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE PEDREGULHO"
+  },
+  {
+    "id": 456,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377693,
+    "nome": "JONATAS DOS SANTOS SILVA",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE GUARIBA"
+  },
+  {
+    "id": 457,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 367362,
+    "nome": "JONATAS GEORGE DE SOUZA CHINELATO",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE IBITINGA"
+  },
+  {
+    "id": 458,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 375948,
+    "nome": "JONATHAN CAIRUZ DA SILVA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE IBATÉ"
+  },
+  {
+    "id": 459,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 374453,
+    "nome": "JONATHAN INACIO DE SOUZA",
+    "lotacao": "7º OFÍCIO CÍVEL DA COMARCA DE SÃO BERNARDO DO CAMPO"
+  },
+  {
+    "id": 460,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377861,
+    "nome": "JORGE CARVALHO MARTINS",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE ITAPEVA"
+  },
+  {
+    "id": 461,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 376458,
+    "nome": "JOSE CARLOS DE ALMEIDA JUNIOR",
+    "lotacao": "EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 3ª VARAS CÍVEIS E VARA DA FAMÍLIA E DAS SUCESSÕES DA COMARCA DE HORTOLÂNDIA"
+  },
+  {
+    "id": 462,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 373645,
+    "nome": "JOSE FILIPE SUZUKI LEAL ROQUE",
+    "lotacao": "3º OFÍCIO CÍVEL DA COMARCA DE BOTUCATU"
+  },
+  {
+    "id": 463,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 368505,
+    "nome": "JOSE GERALDO CORREA JUNIOR",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 5ª A 7ª VARAS CÍVEIS EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE BAURU"
+  },
+  {
+    "id": 464,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 363279,
+    "nome": "JOSE LUIZ MECHIA FERNANDES",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE CRAVINHOS"
+  },
+  {
+    "id": 465,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 364091,
+    "nome": "JOSE LUIZ SILVESTRINI JUNIOR",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE OURINHOS"
+  },
+  {
+    "id": 466,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 380255,
+    "nome": "JOSE MARCOS QUINTILIANO",
+    "lotacao": "5º OFÍCIO CÍVEL DA COMARCA DE FRANCA"
+  },
+  {
+    "id": 467,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 318517,
+    "nome": "JOSE MARCOS TORREZAN",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE AMERICANA"
+  },
+  {
+    "id": 468,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 368121,
+    "nome": "JOSE MAURICIO CASARIN NETO",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE VÁRZEA PAULISTA"
+  },
+  {
+    "id": 469,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377377,
+    "nome": "JOSE PAULO SEMEDO BUSNARDO",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE OLÍMPIA"
+  },
+  {
+    "id": 470,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 368974,
+    "nome": "378058 COMARCA DA CAPITAL JULIANA AGENOR DE SOUZA DA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE ANGATUBA EQUIPE DE ATENDIMENTO AO PÚBLICO E MOVIMENTAÇÃO JUCELINE DURIGAM FERREIRA ADMINISTRATIVA DA UPJ - UNIDADE DE PROCESSAMENTO PESSANHA JUDICIAL - 1ª A 5ª VARAS CÍVEIS DO FORO CENTRAL"
+  },
+  {
+    "id": 471,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377830,
+    "nome": "JULIANA DE CASTRO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE PINHALZINHO"
+  },
+  {
+    "id": 472,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 375595,
+    "nome": "JULIANA GOMES DA SILVA",
+    "lotacao": "OFÍCIO DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA"
+  },
+  {
+    "id": 473,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 819545,
+    "nome": "DE SÃO VICENTE JULIANA MAGALHAES TERRA SILVA",
+    "lotacao": "OFÍCIO DO JUIZADO ESPECIAL CÍVEL DO FORO REGIONAL VIII - TATUAPÉ"
+  },
+  {
+    "id": 474,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 376725,
+    "nome": "JULIANA VIEIRA RODRIGUES",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE PORANGABA"
+  },
+  {
+    "id": 475,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 364739,
+    "nome": "JULIANE MARINELLI DE CARVALHO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE ESTRELA D’ OESTE"
+  },
+  {
+    "id": 476,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 379256,
+    "nome": "JULIANO PEREIRA REIS",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE SÃO JOAQUIM DA BARRA"
+  },
+  {
+    "id": 477,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 370696,
+    "nome": "JULIO CESAR KAMEYAMA DA SILVA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE SANTA ISABEL OLIVEIRA"
+  },
+  {
+    "id": 478,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 354203,
+    "nome": "JULIO KENJI YAMAMOTO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE LINS"
+  },
+  {
+    "id": 479,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 369125,
+    "nome": "JUNIOR MORASCO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE ITIRAPINA"
+  },
+  {
+    "id": 480,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 817531,
+    "nome": "KARIN KAMOTO",
+    "lotacao": "6º OFÍCIO CÍVEL DA COMARCA DE SÃO CAETANO DO SUL A autenticidade deste documento pode ser conferida através do endereço eletrônico do TJSP, informando o código de autenticidade 108-P-20251118222128-97"
+  },
+  {
+    "id": 481,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377539,
+    "nome": "KARINE VIVIANI BAPTISTA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE PORTO FERREIRA KELLY APARECIDA BARBOSA KINOSHITA OFÍCIO DO JUIZADO ESPECIAL CÍVEL DA COMARCA DE SÃO 354480"
+  },
+  {
+    "id": 482,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 370128,
+    "nome": "DE HOLANDA JOSÉ DOS CAMPOS KELLY DAYANE COUTO BERTELLI",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE SÃO JOSÉ DO RIO PARDO"
+  },
+  {
+    "id": 483,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 379504,
+    "nome": "KELLY FERREIRA DE FREITAS",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE PAULÍNIA"
+  },
+  {
+    "id": 484,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377714,
+    "nome": "KELLY MENEZES ALVES DE ARAUJO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE QUELUZ"
+  },
+  {
+    "id": 485,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 375644,
+    "nome": "LAIS VASCONCELOS SILVA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE MAIRINQUE"
+  },
+  {
+    "id": 486,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 378522,
+    "nome": "LARISSA DOS SANTOS OLIVEIRA MERLIM",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE COSMÓPOLIS"
+  },
+  {
+    "id": 487,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 380936,
+    "nome": "LARISSA FERREIRA FUMERO",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 4ª VARAS CÍVEIS EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS DA UPJ - DO FORO REGIONAL IX - VILA PRUDENTE"
+  },
+  {
+    "id": 488,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 361848,
+    "nome": "LARISSA LORENA DIAS MENEZES",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE SÃO CAETANO DO SUL"
+  },
+  {
+    "id": 489,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 375956,
+    "nome": "LARISSA MUNIZ GONCALVES MARTINELLI",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE ORLÂNDIA"
+  },
+  {
+    "id": 490,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 367955,
+    "nome": "LAYSA ALVES PEREIRA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE CERQUEIRA CESAR"
+  },
+  {
+    "id": 491,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377924,
+    "nome": "LEANDRO APARECIDO AVANSI",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE LINS"
+  },
+  {
+    "id": 492,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 369578,
+    "nome": "LEANDRO CORREA",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE SÃO SEBASTIÃO"
+  },
+  {
+    "id": 493,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 371590,
+    "nome": "LEANDRO DOS ANJOS SACRAMENTO",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE FRANCISCO MORATO"
+  },
+  {
+    "id": 494,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 378326,
+    "nome": "LEANDRO MORAES SANTOS",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE GETULINA"
+  },
+  {
+    "id": 495,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 372846,
+    "nome": "LEANDRO TELLES DE SOUZA",
+    "lotacao": "6º OFÍCIO CÍVEL DA COMARCA DE SÃO BERNARDO DO CAMPO"
+  },
+  {
+    "id": 496,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 356574,
+    "nome": "LEONARDO CANDIDO DA SILVA PROCESSAMENTO JUDICIAL - 21ª A 25ª VARAS CÍVEIS DA",
+    "lotacao": "EQUIPE DE ATENDIMENTO DA UPJ - UNIDADE DE COMARCA DA CAPITAL"
+  },
+  {
+    "id": 497,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 818471,
+    "nome": "LEONARDO GALLENI DE OLIVEIRA",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE OLÍMPIA"
+  },
+  {
+    "id": 498,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 374200,
+    "nome": "LEONARDO GUTIERRES RAMOS",
+    "lotacao": "6º OFÍCIO CÍVEL DA COMARCA DE ARARAQUARA"
+  },
+  {
+    "id": 499,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 381618,
+    "nome": "LEONARDO JOSE CAETANO SILVA DE ARAUJO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE CACHOEIRA PAULISTA"
+  },
+  {
+    "id": 500,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 366196,
+    "nome": "LEONARDO MORETTE",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE NUPORANGA"
+  },
+  {
+    "id": 501,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 355012,
+    "nome": "LEONARDO RIO LIMA DE PAULA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE VALINHOS"
+  },
+  {
+    "id": 502,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 373269,
+    "nome": "LETÍCIA BRIGIOTTI DE SOUZA",
+    "lotacao": "GABINETE DO JUIZ DE 1ª INSTÂNCIA - DRA. JULIANA SILVA FREITAS"
+  },
+  {
+    "id": 503,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 130610,
+    "nome": "LETICIA COHEN CABRAL",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE UBATUBA"
+  },
+  {
+    "id": 504,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 367947,
+    "nome": "LETICIA MARTINS FERREIRA DE SOUZA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE TANABI"
+  },
+  {
+    "id": 505,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 380621,
+    "nome": "LETICIA RAINERI CORACINI",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE AGUDOS"
+  },
+  {
+    "id": 506,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 366503,
+    "nome": "LIVIA MALTO DE OLIVEIRA",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE NOVA ODESSA"
+  },
+  {
+    "id": 507,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 375057,
+    "nome": "LUAN DIAS EMILIANO DA SILVA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE JUNDIAÍ"
+  },
+  {
+    "id": 508,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377709,
+    "nome": "LUANE ISIS MARCELINO DA CRUZ",
+    "lotacao": "OFÍCIO DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA"
+  },
+  {
+    "id": 509,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377400,
+    "nome": "DE GUARATINGUETÁ LUCAS BARCELLOS MARQUES",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE BRODOWSKI"
+  },
+  {
+    "id": 510,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 376097,
+    "nome": "LUCAS CAMARGO GANDRA TAVARES",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE ITATIBA"
+  },
+  {
+    "id": 511,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377575,
+    "nome": "LUCAS DE ABREU SILVEIRA",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 4ª VARAS CÍVEIS EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE BARRETOS"
+  },
+  {
+    "id": 512,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 378995,
+    "nome": "LUCAS HENRIQUE DA SILVA",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE FRANCA"
+  },
+  {
+    "id": 513,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 378368,
+    "nome": "LUCAS PRUDENCIANO DE GODOY",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE GUARAREMA"
+  },
+  {
+    "id": 514,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 367756,
+    "nome": "LUCAS RODRIGUES CARRER",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE PIRAJUÍ"
+  },
+  {
+    "id": 515,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 370721,
+    "nome": "LUCCAS DE MEDEIROS GLORIA",
+    "lotacao": "EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS DA UPJ - UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 3ª VARAS CÍVEIS E VARA DA FAMÍLIA E DAS SUCESSÕES DA COMARCA DE TABOÃO DA SERRA"
+  },
+  {
+    "id": 516,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 365925,
+    "nome": "LUCIANA DA SILVA VIOLIN",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE PONTAL"
+  },
+  {
+    "id": 517,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 357418,
+    "nome": "LUCIANA LEITE TEIXEIRA VALENTE",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE SOCORRO"
+  },
+  {
+    "id": 518,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 353707,
+    "nome": "LUCIANO GUIMARAES",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE CASA BRANCA LUIS FERNANDO NOVAES JUNQUEIRA GABINETE DA VARA DO JUIZADO ESPECIAL CÍVEL E CRIMINAL 363956"
+  },
+  {
+    "id": 519,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 368261,
+    "nome": "FRANCO DA COMARCA DE OLÍMPIA LUIZ AUGUSTO RODRIGUEZ MARTINS PINHAL",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE ESPÍRITO SANTO DO"
+  },
+  {
+    "id": 520,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 355963,
+    "nome": "LUIZ CARLOS DE SA",
+    "lotacao": "3º OFÍCIO JUDICIAL DA COMARCA DE ADAMANTINA"
+  },
+  {
+    "id": 521,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 368502,
+    "nome": "LUIZ FELIPE SILVA DE OLIVEIRA",
+    "lotacao": "3º OFÍCIO CÍVEL DA COMARCA DE BIRIGUI A autenticidade deste documento pode ser conferida através do endereço eletrônico do TJSP, informando o código de autenticidade 108-P-20251118222128-98"
+  },
+  {
+    "id": 522,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 362079,
+    "nome": "LUIZ FERNANDO CORREA PINTO -",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 9ª A 12ª VARAS EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS DA UPJ"
+  },
+  {
+    "id": 523,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 374382,
+    "nome": "CÍVEIS DA COMARCA DE SANTOS LUIZ GUSTAVO FERREIRA DA SILVA PIRES",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE RIBEIRÃO"
+  },
+  {
+    "id": 524,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 380881,
+    "nome": "LUIZ HENRIQUE GARCIA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE LORENA"
+  },
+  {
+    "id": 525,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 378796,
+    "nome": "MADSON MARCIO KRIEGER JUNIOR DE PROCESSAMENTO JUDICIAL - 1ª A 3ª VARAS DO",
+    "lotacao": "JUIZADO EQUIPE DE PROCESSAMENTO DIGITAL DA UPJ - UNIDADE"
+  },
+  {
+    "id": 526,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 364846,
+    "nome": "ESPECIAL CÍVEL DA COMARCA DE CAMPINAS MAGDA REGINA GOMES ALVES",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE MATÃO"
+  },
+  {
+    "id": 527,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 819848,
+    "nome": "MAIQUE DEL BUSSO",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE BERTIOGA"
+  },
+  {
+    "id": 528,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 356708,
+    "nome": "MARA GERMANO SILVA RIBEIRO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE PRAIA GRANDE"
+  },
+  {
+    "id": 529,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 376021,
+    "nome": "MARCELO FABIANO MANGINI MARTINES",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE BIRIGUI"
+  },
+  {
+    "id": 530,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 357659,
+    "nome": "MARCELO GUSTAVO JOCK",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE PRESIDENTE VENCESLAU"
+  },
+  {
+    "id": 531,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 368356,
+    "nome": "MARCELO LAERCIO DE MELO PERLES",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE SANTA CRUZ DAS PALMEIRAS 2º OFÍCIO DO JUIZADO ESPECIAL CÍVEL DO FORO REGIONAL"
+  },
+  {
+    "id": 532,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 805174,
+    "nome": "MARCELO RICARDO LEMES REBOCHO",
+    "lotacao": ""
+  },
+  {
+    "id": 533,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 353233,
+    "nome": "I - SANTANA MARCELO SAMPAIO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE DIADEMA"
+  },
+  {
+    "id": 534,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 813383,
+    "nome": "MARCELO SILVIO CAMARGO NEVES",
+    "lotacao": "4º OFÍCIO CÍVEL DA COMARCA DE SÃO CARLOS"
+  },
+  {
+    "id": 535,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 378566,
+    "nome": "MARCELO VINICIUS TEMPONI SOLER",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 3ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE FERNANDÓPOLIS"
+  },
+  {
+    "id": 536,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 374944,
+    "nome": "MARCELO YUKIO IKEBARA",
+    "lotacao": "4º OFÍCIO CÍVEL DA COMARCA DE BARUERI"
+  },
+  {
+    "id": 537,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 364665,
+    "nome": "MARCIO DARE",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE MACATUBA"
+  },
+  {
+    "id": 538,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 371399,
+    "nome": "MARCIO RENATO PESSOA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE CORDEIRÓPOLIS"
+  },
+  {
+    "id": 539,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 360057,
+    "nome": "MARCIO VALERIO NOGUEIRA",
+    "lotacao": "OFÍCIO CÍVEL DA COMARCA DE BATATAIS"
+  },
+  {
+    "id": 540,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 353709,
+    "nome": "MARCO ANTONIO SCATOLIN",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE SANTA"
+  },
+  {
+    "id": 541,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 354271,
+    "nome": "CRUZ DAS PALMEIRAS MARCOS ALESSANDRO MURAYAMA PAULISTA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE LENÇÓIS"
+  },
+  {
+    "id": 542,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 372590,
+    "nome": "MARCOS ALEXANDRE AMANCIO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE PEDREIRA"
+  },
+  {
+    "id": 543,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 370712,
+    "nome": "MARCOS ALMEIDA DE CAMPOS",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE GUARULHOS"
+  },
+  {
+    "id": 544,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 370964,
+    "nome": "MARCOS DE MORAES PEREIRA JUNIOR",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE SOCORRO"
+  },
+  {
+    "id": 545,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 371432,
+    "nome": "MARCOS FERNANDO ROCHA DE JESUS",
+    "lotacao": "OFÍCIO DO JUIZADO ESPECIAL CÍVEL DO FORO REGIONAL VI - PENHA DE FRANÇA MARCOS ROBERTO GONCALVES JUIZADO ESPECIAL CÍVEL DA COMARCA DE SANTA ROSA DO 362078"
+  },
+  {
+    "id": 546,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 818837,
+    "nome": "HONORIO VITERBO MARCOS ROBERTO MARCATTO BRASILIENSE",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE AMÉRICO"
+  },
+  {
+    "id": 547,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 374809,
+    "nome": "MARIA CLARA OLIVEIRA ROSA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE ORLÂNDIA"
+  },
+  {
+    "id": 548,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 372836,
+    "nome": "MARIA LAURA DA SILVA FRANCA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE SÃO BENTO DO SAPUCAÍ"
+  },
+  {
+    "id": 549,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 809827,
+    "nome": "MARIA RENATA RODRIGUES DE SOUZA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE SANTA BRANCA"
+  },
+  {
+    "id": 550,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 371657,
+    "nome": "MARIANA BARBOSA GONCALVES SOARES",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE SALESÓPOLIS"
+  },
+  {
+    "id": 551,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 368913,
+    "nome": "MARIANA CARLOS DE OLIVEIRA",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 4ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE BAURU"
+  },
+  {
+    "id": 552,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 371122,
+    "nome": "MARIANA MARQUES PORTUGAL",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL - CENTRAL I"
+  },
+  {
+    "id": 553,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 370962,
+    "nome": "MARIANA SAGAWA DE MORAIS",
+    "lotacao": "UPJ - UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 3ª VARAS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS CÍVEL DA DA COMARCA DE PAULÍNIA"
+  },
+  {
+    "id": 554,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 379650,
+    "nome": "MARINA FERRACIOLI MELETI -",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 36ª A 40ª VARAS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ CÍVEIS DO FORO CENTRAL DA COMARCA DA CAPITAL"
+  },
+  {
+    "id": 555,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 818777,
+    "nome": "MARINA LUIZA DA SILVA MORAES",
+    "lotacao": "3º OFÍCIO CÍVEL DA COMARCA DE BARUERI"
+  },
+  {
+    "id": 556,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 371588,
+    "nome": "MARIO ANTONIO NOGUEIRA FILHO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE CAIEIRAS"
+  },
+  {
+    "id": 557,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 365933,
+    "nome": "MARISA MILHORANCA",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE CÂNDIDO MOTA"
+  },
+  {
+    "id": 558,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 375533,
+    "nome": "MARIVALDO CASTRO SILVA JUNIOR PROCESSAMENTO JUDICIAL DO COLÉGIO RECURSAL DOS",
+    "lotacao": "EQUIPE DE ENTRADA E DISTRIBUIÇÃO DA UPJ - UNIDADE DE JUIZADOS ESPECIAIS DO ESTADO DE SÃO PAULO"
+  },
+  {
+    "id": 559,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 318162,
+    "nome": "MARTA GOTO MIADA AKASHI",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE PIRAPOZINHO"
+  },
+  {
+    "id": 560,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 379754,
+    "nome": "MATHEUS ALVES PEREIRA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE SÃO LUIZ DO PARAITINGA"
+  },
+  {
+    "id": 561,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 381311,
+    "nome": "MATHEUS DE JESUS DA SILVEIRA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE MIRASSOL"
+  },
+  {
+    "id": 562,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 368520,
+    "nome": "MATHEUS DINIZ GARCIA GOMES",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE SÃO ROQUE"
+  },
+  {
+    "id": 563,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 372958,
+    "nome": "MAURO DE SOUZA RAMOS JUNIOR",
+    "lotacao": "3º OFÍCIO CÍVEL DA COMARCA DE ARARAQUARA"
+  },
+  {
+    "id": 564,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 374585,
+    "nome": "MAX KLAUS GUGLIELMELLI",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE JANDIRA"
+  },
+  {
+    "id": 565,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 815172,
+    "nome": "MILENA CRISTINA REZENDE",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE ATIBAIA A autenticidade deste documento pode ser conferida através do endereço eletrônico do TJSP, informando o código de autenticidade 108-P-20251118222128-99"
+  },
+  {
+    "id": 170,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 374531,
+    "nome": "FABIO MITSUO SHIRAICHI VASCONCELOS",
+    "lotacao": ""
+  },
+  {
+    "id": 566,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 362228,
+    "nome": "MIRELLA CAVASSA INNOCENTI",
+    "lotacao": "EQUIPE DE ATENDIMENTO AO PÚBLICO E MOVIMENTAÇÃO ADMINISTRATIVA DA UPJ - UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 3ª VARAS CÍVEIS DO FORO REGIONAL XV - BUTANTÃ"
+  },
+  {
+    "id": 567,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 358829,
+    "nome": "MIRIAN APARECIDA ROMERO",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE IBIÚNA"
+  },
+  {
+    "id": 568,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 319461,
+    "nome": "MOACIR MARQUES JUNIOR",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE SÃO CARLOS"
+  },
+  {
+    "id": 569,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 810651,
+    "nome": "MOACYR PEDRO DE MELO",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE GARÇA"
+  },
+  {
+    "id": 570,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 380878,
+    "nome": "MOISES TRINDADE DA LUZ GASPAR",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE CACHOEIRA PAULISTA MURILLO DE ARRUDA CAMPOS OFÍCIO JUDICIAL DA COMARCA DE SANTA RITA DO PASSA 372527"
+  },
+  {
+    "id": 571,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 368826,
+    "nome": "TREVISANI QUATRO MURILO BRANQUINHO DE ANDRADE PINTOR",
+    "lotacao": "4º OFÍCIO CÍVEL DA COMARCA DE FRANCA"
+  },
+  {
+    "id": 572,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377570,
+    "nome": "MURILO MOREIRA DA SILVA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE JAGUARIÚNA"
+  },
+  {
+    "id": 573,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 817360,
+    "nome": "MYRTES APPARECIDA SOUZA SILVA GASPARINI",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE PALMITAL"
+  },
+  {
+    "id": 574,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 364275,
+    "nome": "NADIA CRISTINA PETERS BARREIROS",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE PIEDADE"
+  },
+  {
+    "id": 575,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 353444,
+    "nome": "NALVA BONORA DE FARIAS",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE POMPÉIA"
+  },
+  {
+    "id": 576,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 365512,
+    "nome": "NARENE LUIZA COSTA MENEZES",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 4ª A 6ª VARAS CÍVEIS EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE JUNDIAÍ"
+  },
+  {
+    "id": 577,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 371649,
+    "nome": "NATALIA VEIGA VALIM",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE CARAPICUÍBA"
+  },
+  {
+    "id": 578,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 379471,
+    "nome": "NATAN VILANOVA RODRIGUES",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE FERRAZ"
+  },
+  {
+    "id": 579,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 367732,
+    "nome": "DE VASCONCELOS NATHACIA AKEMI MOTOKI",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE BASTOS"
+  },
+  {
+    "id": 580,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 350037,
+    "nome": "NEURIVALDO LUIS QUADROS",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE CAPIVARI"
+  },
+  {
+    "id": 581,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 358156,
+    "nome": "NIVALDO AMANCIO DOS SANTOS FILHO",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE SÃO SEBASTIÃO"
+  },
+  {
+    "id": 582,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 368748,
+    "nome": "NIVALDO JOSE COELHO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE CABREÚVA"
+  },
+  {
+    "id": 583,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 355678,
+    "nome": "PATRICIA BENEVIDES RODRIGUES",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE SÃO CAETANO DO SUL"
+  },
+  {
+    "id": 584,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 351311,
+    "nome": "PATRICIA MARIA ROSA DINIZ DE OLIVEIRA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE GUARUJÁ"
+  },
+  {
+    "id": 585,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 380565,
+    "nome": "PATRICIA YUMI MACHIDA UENO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE ITAÍ"
+  },
+  {
+    "id": 586,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 356289,
+    "nome": "PATRICK RODOLFO LEAL",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE GUARARAPES"
+  },
+  {
+    "id": 587,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377794,
+    "nome": "PAULA CRISTINA MANSUR",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE BERTIOGA"
+  },
+  {
+    "id": 588,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 820035,
+    "nome": "PAULO COELHO",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 4ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DO FORO REGIONAL IV - LAPA"
+  },
+  {
+    "id": 589,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 354846,
+    "nome": "PAULO EDSON FLORENTINO FERNANDES",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE SÃO JOSÉ DO RIO PARDO"
+  },
+  {
+    "id": 590,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 820143,
+    "nome": "PAULO EDUARDO CHIVA DE LIMA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DO FORO REGIONAL II - SANTO AMARO"
+  },
+  {
+    "id": 591,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 363308,
+    "nome": "PAULO FRUTUOSO MACHADO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE IPAUÇU"
+  },
+  {
+    "id": 592,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 380999,
+    "nome": "PAULO HENRIQUE FARIA DE OLIVEIRA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE VALPARAÍSO"
+  },
+  {
+    "id": 593,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 367385,
+    "nome": "PAULO ROBERTO MOITINHO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE BRAGANÇA PAULISTA"
+  },
+  {
+    "id": 1,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 819285,
+    "nome": "PEDRO AUGUSTO SOLER CARVALHO",
+    "lotacao": "4º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 2,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 357483,
+    "nome": "PRISCILA CUSTÓDIO DOS SANTOS",
+    "lotacao": "4º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 3,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 365244,
+    "nome": "PRISCILA PAIXAO DOS SANTOS SILVA",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 4,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 369510,
+    "nome": "RAFAELA REGINA SEVERINO CHCRAPETZ",
+    "lotacao": "4º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 5,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 379987,
+    "nome": "RENAN HIDEKI KAWATA SONODA",
+    "lotacao": "3º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 6,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 367702,
+    "nome": "RENATO ANTONIO PAGANI",
+    "lotacao": "GABINETE DO JUIZ DE 1ª INSTÂNCIA - DRA. LIVIA MARTINS"
+  },
+  {
+    "id": 7,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 357358,
+    "nome": "TRINDADE PRADO RODRIGO CEZAR POMBAL CARVALHAL",
+    "lotacao": "4º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 8,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 359212,
+    "nome": "RODRIGO DE MELO MARTINS",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 9,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 809733,
+    "nome": "ROSIMEIRE FERREIRA DUARTE",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 10,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 356604,
+    "nome": "RUBENS ABELINO DANTAS PEREIRA",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 11,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 373105,
+    "nome": "SABRINA CHACON PRATA",
+    "lotacao": "4º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 12,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 306370,
+    "nome": "SERGIO RONALDO SALES VEIGA",
+    "lotacao": "4º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 13,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 319606,
+    "nome": "SILVANA CRISTINA CARDOSO DE OLIVEIRA",
+    "lotacao": "3º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 14,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 312458,
+    "nome": "SILVIO MASSAYUKI MARUI",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 15,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 811394,
+    "nome": "SOLANGE MARQUES",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 16,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 364454,
+    "nome": "SUSICLER ZANUTO",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 17,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 380838,
+    "nome": "VAGNER CRISPIM DA SILVA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 18,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 809067,
+    "nome": "VALDIR BERNARDINO DOS PASSOS",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 19,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 373442,
+    "nome": "VIVIAN PEREIRA BORGES",
+    "lotacao": "3º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 20,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 357590,
+    "nome": "WALTER MÉDUS FILHO",
+    "lotacao": "4º OFÍCIO JUDICIAL DA COMARCA DE PENÁPOLIS"
+  },
+  {
+    "id": 21,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 379770,
+    "nome": "ADRIELLY GEORGIA GOZZO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE MOCOCA"
+  },
+  {
+    "id": 22,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 308655,
+    "nome": "AGEMIRO FERNANDO TARDELLI",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE PILAR"
+  },
+  {
+    "id": 23,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 359499,
+    "nome": "DO SUL AGNALDO CESAR DUARTE BRASILIENSE",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE AMÉRICO"
+  },
+  {
+    "id": 24,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 95813,
+    "nome": "AGNALDO DE MELLO SANTOS",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE AVARÉ"
+  },
+  {
+    "id": 25,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 373563,
+    "nome": "ALAN FERREIRA CHIOQUETTI",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE TATUÍ"
+  },
+  {
+    "id": 26,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 358096,
+    "nome": "ALESSANDRA REGINA FORNASARO ADMINISTRATIVA DA",
+    "lotacao": "UPJ - UNIDADE DE PROCESSAMENTO EQUIPE DE ATENDIMENTO AO PÚBLICO E MOVIMENTAÇÃO JUDICIAL - 9ª A 12ª VARAS CÍVEIS DA COMARCA DE CAMPINAS"
+  },
+  {
+    "id": 27,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 375197,
+    "nome": "ALESSANDRO ROBERTO DE SOUZA",
+    "lotacao": "3º OFÍCIO CÍVEL DA COMARCA DE LEME"
+  },
+  {
+    "id": 28,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 368713,
+    "nome": "ALEX DO NASCIMENTO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE NOVA ODESSA"
+  },
+  {
+    "id": 29,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 363417,
+    "nome": "ALEX RENAN DIAS DOS SANTOS",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE HORTOLÂNDIA"
+  },
+  {
+    "id": 30,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 815061,
+    "nome": "ALEXANDRE ANTONIO LARA SEABRA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE GARÇA"
+  },
+  {
+    "id": 31,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 808650,
+    "nome": "ALEXANDRE CRUZ",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE ITAPIRA"
+  },
+  {
+    "id": 32,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 358998,
+    "nome": "ALEXANDRE ROGERIO MEDEIROS BATISTA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE PIRACAIA"
+  },
+  {
+    "id": 33,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 365982,
+    "nome": "ALEXANDRE SASSO DE SOUSA",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE BOTUCATU"
+  },
+  {
+    "id": 34,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 367154,
+    "nome": "ALEXANDRO PEIXOTO BANDEIRA",
+    "lotacao": "OFÍCIO CÍVEL DA COMARCA DE SANTANA DE PARNAÍBA"
+  },
+  {
+    "id": 35,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 369854,
+    "nome": "ALINE DANIELE FREITAS",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE FLÓRIDA PAULISTA"
+  },
+  {
+    "id": 36,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 364119,
+    "nome": "ALINE LIE KUNIYOSHI",
+    "lotacao": "GABINETE DO JUIZ DE 1ª INSTÂNCIA - DRA. ANA PAULA ORTEGA MARSON"
+  },
+  {
+    "id": 37,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 366018,
+    "nome": "ALINE LUIZA DA SILVA BAKER",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE PRESIDENTE BERNARDES"
+  },
+  {
+    "id": 38,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 370933,
+    "nome": "ALINI LAZARO RUY MATIELLO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE ESPÍRITO SANTO DO PINHAL"
+  },
+  {
+    "id": 39,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 380010,
+    "nome": "ALISON ANDREUS GAMA",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE TUPI PAULISTA"
+  },
+  {
+    "id": 40,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 376013,
+    "nome": "ALLAN NUNES FERIOTTO",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE TREMEMBÉ"
+  },
+  {
+    "id": 41,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 375195,
+    "nome": "AMANDA GABRIELLE DE BRITO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE LEME"
+  },
+  {
+    "id": 42,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 377551,
+    "nome": "AMANDA IAGAME",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL DA COMARCA DE IACANGA"
+  },
+  {
+    "id": 43,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 377775,
+    "nome": "AMANDA MARI EUGENIO DA COSTA",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE VIRADOURO"
+  },
+  {
+    "id": 44,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 361880,
+    "nome": "ANA CARLA DOS ANJOS OLIVEIRA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE MOGI"
+  },
+  {
+    "id": 45,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 380563,
+    "nome": "DAS CRUZES ANA CAROLINA MODOTTI MANZANO",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE ASSIS"
+  },
+  {
+    "id": 46,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 375165,
+    "nome": "ANA CAROLINA TEODORO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE BROTAS"
+  },
+  {
+    "id": 47,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 364145,
+    "nome": "ANA CLAUDIA DE ALMEIDA MASSOCA",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE VOTORANTIM"
+  },
+  {
+    "id": 48,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 373323,
+    "nome": "ANA LAURA FALEIROS MACEDO DE 355747",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE SERTÃOZINHO FIGUEIREDO ANA LUISA MAGALHAES BARBOSA GABINETE DO JUIZ DE 1ª INSTÂNCIA - DRA. RAFAELA D"
+  },
+  {
+    "id": 49,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 316649,
+    "nome": "MOSCARDINI ASSUMPÇÃO CARDOSO GLIOCHE ANA MARIA DA SILVA SUL",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE PILAR DO"
+  },
+  {
+    "id": 50,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 365769,
+    "nome": "ANA PAULA ALVES TAKATA DE OLIVEIRA",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE MOGI DAS CRUZES"
+  },
+  {
+    "id": 51,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 816839,
+    "nome": "ANA PAULA FURINI ALVES BITENCOURT",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE TAMBAÚ"
+  },
+  {
+    "id": 52,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 366640,
+    "nome": "ANA PAULA PINHO GONZAGA",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE SÃO BERNARDO DO CAMPO"
+  },
+  {
+    "id": 53,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 375839,
+    "nome": "ANA PAULA SOUZA SANTANA",
+    "lotacao": "GABINETE DO JUIZ DE 1ª INSTÂNCIA - DRA. RENATA BARROS"
+  },
+  {
+    "id": 54,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 817900,
+    "nome": "SOUTO MAIOR BAIÃO ANDERSON RICARDO MARTINS PINHAL",
+    "lotacao": "GABINETE DA 2ª VARA DA COMARCA DE ESPÍRITO SANTO DO"
+  },
+  {
+    "id": 55,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 381763,
+    "nome": "ANDRE ALAN RIBEIRO",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE AVARÉ"
+  },
+  {
+    "id": 56,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 367432,
+    "nome": "ANDRE DIAS VALENTE MACHADO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE ARTUR NOGUEIRA"
+  },
+  {
+    "id": 57,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 373533,
+    "nome": "ANDRE LUIS ADATI",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE JAÚ"
+  },
+  {
+    "id": 58,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 365175,
+    "nome": "ANDRE LUIS FERREIRA LIMA ADMINISTRATIVA DA",
+    "lotacao": "UPJ - UNIDADE DE PROCESSAMENTO EQUIPE DE ATENDIMENTO AO PÚBLICO E MOVIMENTAÇÃO JUDICIAL - 1ª A 4ª VARAS CÍVEIS DA COMARCA DE CAMPINAS"
+  },
+  {
+    "id": 59,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 373312,
+    "nome": "ANDRE LUIS GOMES JARDIM",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE ITARARÉ"
+  },
+  {
+    "id": 60,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 367425,
+    "nome": "ANDREIA AMORIM VILANOVA SANTOS",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE MAIRINQUE"
+  },
+  {
+    "id": 61,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 812713,
+    "nome": "ANDREIA MAGALHAES PAIS PINHEIRO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE VOTORANTIM"
+  },
+  {
+    "id": 62,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 371673,
+    "nome": "ANDREY RODERICK SALES",
+    "lotacao": "3º OFÍCIO JUDICIAL DA COMARCA DE ITAPECERICA DA SERRA"
+  },
+  {
+    "id": 63,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 365609,
+    "nome": "ANGELA KAWAKAMI",
+    "lotacao": "4º OFÍCIO CÍVEL DA COMARCA DE MOGI DAS CRUZES"
+  },
+  {
+    "id": 64,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 811379,
+    "nome": "ANGELA MARIA PEREIRA RAMOS",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE TAQUARITUBA A autenticidade deste documento pode ser conferida através do endereço eletrônico do TJSP, informando o código de autenticidade 108-P-20251118222128-92"
+  },
+  {
+    "id": 65,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 377878,
+    "nome": "ANGELICA LUBASKI GARDENAL",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE MIRANTE DO PARANAPANEMA"
+  },
+  {
+    "id": 66,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 374577,
+    "nome": "ANTONIO CICERO DE SOUSA LIMA",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE MAIRIPORÃ"
+  },
+  {
+    "id": 67,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 372404,
+    "nome": "ANTONIO FRANCISCO RODRIGUES",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE SÃO JOÃO DA BOA VISTA CREMASCO"
+  },
+  {
+    "id": 68,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 374025,
+    "nome": "ANTONIO PEREIRA DA SILVA FILHO",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 5ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE MAUÁ"
+  },
+  {
+    "id": 69,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 808538,
+    "nome": "ANTONIO SHALOM SEABRA DA CRUZ",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE GARÇA"
+  },
+  {
+    "id": 70,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 378657,
+    "nome": "ANTONIONE CAMELO DE ARAUJO",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 5ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DO FORO REGIONAL XI - PINHEIROS APARECIDA DONIZETTI VILLAS BÔAS GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA 360330"
+  },
+  {
+    "id": 71,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 368844,
+    "nome": "SCAPIM COMARCA DE TAMBAÚ ARILMA REIS DE OLIVEIRA NISHIE",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 5ª A 9ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE SÃO JOSÉ DOS CAMPOS"
+  },
+  {
+    "id": 72,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 363425,
+    "nome": "ATILIO BRANCALHAO NETO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE MONTE MOR"
+  },
+  {
+    "id": 73,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 362748,
+    "nome": "BIANCA CRISTINA CORREA",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE PORTO FERREIRA"
+  },
+  {
+    "id": 74,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 367378,
+    "nome": "BIANCA LACERDA CAVALCANTE MAYOR",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE NUPORANGA"
+  },
+  {
+    "id": 75,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 377988,
+    "nome": "BRUNA CRISTINA DO PRADO GRACIA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE ITAQUAQUECETUBA"
+  },
+  {
+    "id": 76,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 373009,
+    "nome": "BRUNO FERREIRA DA SILVA",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 5ª A 8ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE RIBEIRÃO PRETO"
+  },
+  {
+    "id": 77,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 372880,
+    "nome": "BRUNO HENRIQUE RODRIGUES OLIVEIRA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE FLÓRIDA PAULISTA"
+  },
+  {
+    "id": 78,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 378559,
+    "nome": "BRUNO MENEGUINI PILOTO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE IPUÃ"
+  },
+  {
+    "id": 79,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 380882,
+    "nome": "CAIO SOUZA GOMES",
+    "lotacao": "OFÍCIO DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA"
+  },
+  {
+    "id": 80,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 361610,
+    "nome": "DE CRUZEIRO CAMILA PAGANOTTI MARTINS",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE CAMPO LIMPO PAULISTA QUAGLIATO"
+  },
+  {
+    "id": 81,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 372161,
+    "nome": "CARLOS ANTONIO PAIXAO BONFIM",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE COSMÓPOLIS"
+  },
+  {
+    "id": 82,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 355168,
+    "nome": "CARLOS EDUARDO GIMENES DE MATOS",
+    "lotacao": "3º OFÍCIO CÍVEL DA COMARCA DE FRANCA"
+  },
+  {
+    "id": 83,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 376643,
+    "nome": "CARLOS FELIPE BARRETO MONTEIRO DA PAIXAO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE NAZARÉ PAULISTA"
+  },
+  {
+    "id": 84,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 381240,
+    "nome": "CARLOS FELIPE MARIM CARVALHO",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE TAQUARITINGA"
+  },
+  {
+    "id": 85,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 377571,
+    "nome": "CARMEN MANIAS LOZANO",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE AMPARO"
+  },
+  {
+    "id": 86,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 377920,
+    "nome": "CAROLINA APARECIDA DE ALMEIDA",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE TIETÊ"
+  },
+  {
+    "id": 145,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 368048,
+    "nome": "ELIANA NAOMI YAMASHITA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE IBIÚNA"
+  },
+  {
+    "id": 87,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 375676,
+    "nome": "CAROLINA DA CONCEICAO BEZERRA DE",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 5ª A 8ª E 15ª VARAS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - SOUZA CÍVEIS DO FORO REGIONAL II - SANTO AMARO"
+  },
+  {
+    "id": 88,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 358974,
+    "nome": "CASSIA REGINA DIAS NASCIMENTO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE MONTE"
+  },
+  {
+    "id": 89,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 373101,
+    "nome": "AZUL PAULISTA CASSIO CARMONA SVERSUT",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE BOTUCATU"
+  },
+  {
+    "id": 90,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 351936,
+    "nome": "CÁTIA KUMERLEBE",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE SERRA NEGRA"
+  },
+  {
+    "id": 91,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 380889,
+    "nome": "CAUE NAKAMURA CARDOSO",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL DA COMARCA DE SANTANA DE PARNAÍBA"
+  },
+  {
+    "id": 92,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 368923,
+    "nome": "CESAR AUGUSTO VIEIRA GIOVANI",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE IPAUÇU"
+  },
+  {
+    "id": 93,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 381823,
+    "nome": "CESAR RODOLFO XAVIER BUENO",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE PANORAMA"
+  },
+  {
+    "id": 94,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 361026,
+    "nome": "CHANTAL CARDOSO CEKIERA E SOUSA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE CARAGUATATUBA"
+  },
+  {
+    "id": 95,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 366354,
+    "nome": "CILAINE MARTINS DE AZEVEDO",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE REGISTRO"
+  },
+  {
+    "id": 96,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 368103,
+    "nome": "CISCELE OMETTO BIANCO FÁVARO",
+    "lotacao": "4º OFÍCIO CÍVEL DA COMARCA DE JAÚ"
+  },
+  {
+    "id": 97,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 817892,
+    "nome": "CLARISSA FRAGEL MADEIRA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE SÃO SEBASTIÃO"
+  },
+  {
+    "id": 98,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 352877,
+    "nome": "CLAUDIA BEANI POIANI FABRI",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 7ª VARAS CÍVEIS EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS DA UPJ - DO FORO REGIONAL XII - NOSSA SENHORA DO Ó"
+  },
+  {
+    "id": 99,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 816583,
+    "nome": "CLAUDIA CHICERI FONTANA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE CACONDE"
+  },
+  {
+    "id": 100,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 364873,
+    "nome": "CLAUDIA RUSSI",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE JAÚ"
+  },
+  {
+    "id": 101,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 357469,
+    "nome": "CLAUDIO ALVES DA SILVA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE JANDIRA"
+  },
+  {
+    "id": 102,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 370032,
+    "nome": "CLAUDIO MARCOS MEYER JUNIOR",
+    "lotacao": "3º OFÍCIO JUDICIAL DA COMARCA DE ITAPEVA"
+  },
+  {
+    "id": 103,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 372411,
+    "nome": "CLAYTON DE CASTRO QUEIROZ",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE CAPÃO BONITO"
+  },
+  {
+    "id": 104,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 818742,
+    "nome": "CLEIDE COSTA MENDO",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE BARUERI A autenticidade deste documento pode ser conferida através do endereço eletrônico do TJSP, informando o código de autenticidade 108-P-20251118222128-93"
+  },
+  {
+    "id": 105,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 819869,
+    "nome": "CRISTIANE BORBA DE OLIVEIRA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE GUARÁ"
+  },
+  {
+    "id": 106,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 351518,
+    "nome": "CRISTIANE DE FATIMA SALMAZO LEMES",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE ITATIBA"
+  },
+  {
+    "id": 107,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 369820,
+    "nome": "CRISTIANE GONCALVES MACHADO",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE BOTUCATU"
+  },
+  {
+    "id": 108,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 352414,
+    "nome": "CRISTIANE NEVES GONCALVES PERONI",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE PATROCÍNIO PAULISTA"
+  },
+  {
+    "id": 109,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 373494,
+    "nome": "DAIANE SANTOS DOURADO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE CABREÚVA"
+  },
+  {
+    "id": 110,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 377940,
+    "nome": "DANDARA BORGES RODRIGUES",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE SANTA FÉ DO SUL"
+  },
+  {
+    "id": 111,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 377405,
+    "nome": "DANIEL CAMARGO PEREIRA",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE ITAPEVA"
+  },
+  {
+    "id": 112,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 357478,
+    "nome": "DANIEL FRANCOY",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE BRODOWSKI"
+  },
+  {
+    "id": 113,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 363910,
+    "nome": "DANIEL MORINE MARTINS DA SILVA",
+    "lotacao": "OFÍCIO DO JUIZADO ESPECIAL CÍVEL DA COMARCA DE SANTOS"
+  },
+  {
+    "id": 114,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 369388,
+    "nome": "DANIELA FATIMA DE SOUZA",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE SÃO JOÃO DA BOA VISTA"
+  },
+  {
+    "id": 115,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 369445,
+    "nome": "DANIELA KAZUE SACOMOTO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE PROMISSÃO"
+  },
+  {
+    "id": 116,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 372651,
+    "nome": "DANILLO AUGUSTO ELIAS DA SILVA",
+    "lotacao": "3º OFÍCIO CÍVEL DA COMARCA DE SÃO CARLOS"
+  },
+  {
+    "id": 117,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 377692,
+    "nome": "DANILO CASEMIRO MARTINS",
+    "lotacao": "4º OFÍCIO JUDICIAL DA COMARCA DE TAQUARITINGA"
+  },
+  {
+    "id": 118,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 373625,
+    "nome": "DANILO FERREIRA DA SILVA",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE ASSIS"
+  },
+  {
+    "id": 119,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 372741,
+    "nome": "DAYANE CONCEICAO DA SILVA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE ITABERÁ"
+  },
+  {
+    "id": 120,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 359737,
+    "nome": "DEBORA MICHELLE OLIVEIRA GARCIA",
+    "lotacao": "OFÍCIO DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA"
+  },
+  {
+    "id": 121,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 373604,
+    "nome": "DE BATATAIS DEBORA SOUZA DA ROCHA LIOULT",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE PARAIBUNA"
+  },
+  {
+    "id": 122,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 361528,
+    "nome": "DENIS DE ASSIS MINJONI",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE MAIRINQUE"
+  },
+  {
+    "id": 123,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 359252,
+    "nome": "DENIS TIAGO COZZI VENDITTO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE JABOTICABAL"
+  },
+  {
+    "id": 124,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 818743,
+    "nome": "DEUZELENY MORAES LIMA",
+    "lotacao": "5º OFÍCIO CÍVEL DA COMARCA DE BARUERI"
+  },
+  {
+    "id": 125,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 377207,
+    "nome": "DIANA CARVALHO BATISTA DA SILVA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE MATÃO"
+  },
+  {
+    "id": 126,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 363993,
+    "nome": "DIOGO HENRIQUE DA SILVA",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE LORENA"
+  },
+  {
+    "id": 127,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 369811,
+    "nome": "DIOGO RODRIGUES PETRAGLIA MARCONDES",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE AGUDOS"
+  },
+  {
+    "id": 128,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 357293,
+    "nome": "DJAIR FERREIRA DA SILVA",
+    "lotacao": "OFÍCIO DO JUIZADO ESPECIAL CÍVEL DO FORO REGIONAL XV - BUTANTÃ"
+  },
+  {
+    "id": 129,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 372988,
+    "nome": "DOUGLAS DE SOUZA SANTANA",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE TUPI PAULISTA"
+  },
+  {
+    "id": 130,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 365022,
+    "nome": "DOUGLAS REZENDE DE FREITAS",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE MARACAÍ"
+  },
+  {
+    "id": 131,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 817932,
+    "nome": "EDERSON FERNANDES DA SILVA",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE AMÉRICO BRASILIENSE"
+  },
+  {
+    "id": 132,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 353698,
+    "nome": "EDISON SILVA JUNIOR",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE PANORAMA"
+  },
+  {
+    "id": 133,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 817070,
+    "nome": "EDNA NODA",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE SÃO BERNARDO DO CAMPO"
+  },
+  {
+    "id": 134,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 354455,
+    "nome": "EDNEIA ALVES AMOROSO DEMARQUE",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE JUNQUEIRÓPOLIS"
+  },
+  {
+    "id": 135,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 363486,
+    "nome": "EDNILTON GOMES LEMES",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE IBITINGA"
+  },
+  {
+    "id": 136,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 362375,
+    "nome": "EDSON LUIZ PARO JUNIOR",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE SÃO"
+  },
+  {
+    "id": 137,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 364718,
+    "nome": "JOAQUIM DA BARRA EDUARDO CARNELLO JATOBA",
+    "lotacao": "OFÍCIO DO JUIZADO ESPECIAL CÍVEL DA COMARCA DE MARÍLIA"
+  },
+  {
+    "id": 138,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 369367,
+    "nome": "EDUARDO FILIPPI DE SOUZA SILVA",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 5ª A 8ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE CAMPINAS"
+  },
+  {
+    "id": 139,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 369697,
+    "nome": "EDUARDO JORENTE LOURENCINI",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE MOCOCA"
+  },
+  {
+    "id": 140,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 367830,
+    "nome": "EDUARDO RIBEIRO CIPRIANO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE PORANGABA"
+  },
+  {
+    "id": 141,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 354416,
+    "nome": "ELAINE CRISTINA FAUSTINO STEFFEN",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE MONTE MOR"
+  },
+  {
+    "id": 142,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 365074,
+    "nome": "ELAINE CRISTINA SANTOS DE OLIVEIRA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE SALTO"
+  },
+  {
+    "id": 143,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 378294,
+    "nome": "ELDER FERREIRA PRADO -",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 9ª A 12ª VARAS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ"
+  },
+  {
+    "id": 144,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 803550,
+    "nome": "CÍVEIS DA COMARCA DE RIBEIRÃO PRETO ELENI VERA COSTA DE JESUS PEDROSO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE PIEDADE"
+  },
+  {
+    "id": 146,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 818411,
+    "nome": "ELIANE LUZ DA SILVA",
+    "lotacao": "3º OFÍCIO CÍVEL DA COMARCA DE SÃO BERNARDO DO CAMPO"
+  },
+  {
+    "id": 147,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 375288,
+    "nome": "ELIAS CESAR DOS SANTOS SOUZA",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE ITÁPOLIS"
+  },
+  {
+    "id": 148,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 379005,
+    "nome": "ELIDIANE KELLE DA SILVA FERREIRA",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE LEME"
+  },
+  {
+    "id": 149,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 359862,
+    "nome": "ELIENAI DA CONCEICAO CARVALHO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE SUZANO"
+  },
+  {
+    "id": 150,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 367114,
+    "nome": "ELISANGELA MORAIS MACHADO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE ARTUR NOGUEIRA A autenticidade deste documento pode ser conferida através do endereço eletrônico do TJSP, informando o código de autenticidade 108-P-20251118222128-94"
+  },
+  {
+    "id": 151,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 380647,
+    "nome": "ELISEU SANTOS DA SILVA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE CAPÃO BONITO"
+  },
+  {
+    "id": 152,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 374373,
+    "nome": "ELIZABETH SILVA MEDINA",
+    "lotacao": "3º OFÍCIO CÍVEL DA COMARCA DE SÃO CAETANO DO SUL"
+  },
+  {
+    "id": 153,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 358414,
+    "nome": "ELZA KIYOMI SHINKODA VIEIRA",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE MOGI DAS CRUZES"
+  },
+  {
+    "id": 154,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 817460,
+    "nome": "EMILIA MIYOKO KOGA",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE OURINHOS"
+  },
+  {
+    "id": 155,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 377702,
+    "nome": "EMMELINE BEATRIZ GOMES DO AMARAL",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE CAMPOS DO JORDÃO"
+  },
+  {
+    "id": 156,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 817774,
+    "nome": "ENDRIUS ESTEVAN RODRIGUES DE JESUS",
+    "lotacao": "3º OFÍCIO CÍVEL DA COMARCA DE LINS"
+  },
+  {
+    "id": 157,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 376448,
+    "nome": "ENRICO CERIONI SPIROPULOS GONCALVES",
+    "lotacao": "3º OFÍCIO CÍVEL DA COMARCA DE SERTÃOZINHO"
+  },
+  {
+    "id": 158,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 379430,
+    "nome": "ERIC FIRMINO PRATES",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DO FORO REGIONAL V - SÃO MIGUEL PAULISTA"
+  },
+  {
+    "id": 159,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 371832,
+    "nome": "ERICK GOMES SAMPAIO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE SANTO ANDRÉ"
+  },
+  {
+    "id": 160,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 367899,
+    "nome": "ERIKA FERNANDA CARVALHO SALGADO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE TREMEMBÉ"
+  },
+  {
+    "id": 161,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 374414,
+    "nome": "EVANDRO TERUO NISHIMARU NEVES",
+    "lotacao": "3º OFÍCIO CÍVEL DA COMARCA DE MOGI DAS CRUZES"
+  },
+  {
+    "id": 162,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 375408,
+    "nome": "EVERTON CARVALHO DA SILVA",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 4ª VARAS CÍVEIS EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE GUARULHOS"
+  },
+  {
+    "id": 163,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 377710,
+    "nome": "EVERTON RODRIGUES DA SILVA",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE LORENA"
+  },
+  {
+    "id": 164,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 376986,
+    "nome": "EVERTON RODRIGUES DOS SANTOS",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE ANGATUBA"
+  },
+  {
+    "id": 165,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 377574,
+    "nome": "EZEQUIAS ALTINO RIBEIRO",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE GUAÍRA"
+  },
+  {
+    "id": 166,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 375389,
+    "nome": "FABIANA DA ROCHA OLIVEIRA",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 3ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE ARARAS"
+  },
+  {
+    "id": 167,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 363112,
+    "nome": "FABIANO HENRIQUE DA SILVA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE JALES"
+  },
+  {
+    "id": 168,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 370981,
+    "nome": "FABIANO JORGE VIEIRA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE ITAPEVA"
+  },
+  {
+    "id": 169,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 318926,
+    "nome": "FABIANO MAZZIOTTI JOSE",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE PIRAJU 3º OFÍCIO JUDICIAL DA COMARCA DE FERRAZ DE"
+  },
+  {
+    "id": 171,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 373079,
+    "nome": "FABIO ROBERTO KNOPF",
+    "lotacao": "UPJ - UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 3ª VARAS EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS CÍVEL DA DA COMARCA DE BOITUVA"
+  },
+  {
+    "id": 172,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 362763,
+    "nome": "FABIOLA SUZANA TSALIKIS FELIZARDO",
+    "lotacao": "OFÍCIO DO JUIZADO ESPECIAL CÍVEL DO FORO REGIONAL IX - VILA PRUDENTE"
+  },
+  {
+    "id": 173,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 363590,
+    "nome": "FABRICIO CALDEIRA GESTEIRA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE NAZARÉ PAULISTA"
+  },
+  {
+    "id": 174,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 373019,
+    "nome": "FABRICIO RODRIGUES MARTINS",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE EMBU DAS ARTES"
+  },
+  {
+    "id": 175,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 370057,
+    "nome": "FELIPE CAPETO LARA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE APARECIDA"
+  },
+  {
+    "id": 176,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 368850,
+    "nome": "FELIPE DE CASTRO FRANQUEIRA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE IACANGA"
+  },
+  {
+    "id": 177,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 368100,
+    "nome": "FELIPE DE MORAES NUNES",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE IBIÚNA"
+  },
+  {
+    "id": 178,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 367348,
+    "nome": "FELIPE DE PAIVA ULIAN",
+    "lotacao": "3º OFÍCIO JUDICIAL DA COMARCA DE MONTE ALTO"
+  },
+  {
+    "id": 179,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 374791,
+    "nome": "FELIPE DOMINGOS DE CARVALHO SOUZA -",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 11ª A 15ª VARAS EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS DA UPJ CÍVEIS DO FORO CENTRAL DA COMARCA DA CAPITAL"
+  },
+  {
+    "id": 180,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 378977,
+    "nome": "FELIPE FRANCISCO MARTINS DOS",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 4ª E 16ª VARAS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - SANTOS CÍVEIS DO FORO REGIONAL II - SANTO AMARO"
+  },
+  {
+    "id": 181,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 372536,
+    "nome": "FELIPE MARIANO CARDOSO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE FRANCO DA ROCHA"
+  },
+  {
+    "id": 182,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 377900,
+    "nome": "FELIPE SIMONIS SEBA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE CARDOSO"
+  },
+  {
+    "id": 183,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 373614,
+    "nome": "FELIPHE MANOEL CUNHA DOS SANTOS",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE BOITUVA"
+  },
+  {
+    "id": 184,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 367974,
+    "nome": "FERNANDA BIACCO AMADEU",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE CASA BRANCA"
+  },
+  {
+    "id": 185,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 373182,
+    "nome": "FERNANDA MARCIA DE OLIVEIRA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE MONTE APRAZÍVEL BACHINI"
+  },
+  {
+    "id": 186,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 368475,
+    "nome": "FERNANDA REGINA CARANI",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE ITATINGA"
+  },
+  {
+    "id": 187,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 378257,
+    "nome": "FERNANDO ALVES YANES",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE AURIFLAMA"
+  },
+  {
+    "id": 188,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 353902,
+    "nome": "FERNANDO CARVALHO",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE SÃO JOAQUIM DA BARRA"
+  },
+  {
+    "id": 189,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 817955,
+    "nome": "FERNANDO EDUARDO RAMOS CARDOSO THOMAZI",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE SERRA NEGRA"
+  },
+  {
+    "id": 190,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 378013,
+    "nome": "FERNANDO FRANCISCO DOS SANTOS",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE OSVALDO CRUZ"
+  },
+  {
+    "id": 191,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 363182,
+    "nome": "FERNANDO GLADSTON PACHECO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE ITU A autenticidade deste documento pode ser conferida através do endereço eletrônico do TJSP, informando o código de autenticidade 108-P-20251118222128-95"
+  },
+  {
+    "id": 192,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 367087,
+    "nome": "FERNANDO MATIAS DE OLIVEIRA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE PRESIDENTE EPITÁCIO"
+  },
+  {
+    "id": 193,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 362378,
+    "nome": "FERNANDO PEREIRA DE SANTANA",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE FRANCO DA ROCHA"
+  },
+  {
+    "id": 194,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 350164,
+    "nome": "FERNANDO RODRIGUES LIMA JUNIOR",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE URÂNIA"
+  },
+  {
+    "id": 195,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 363048,
+    "nome": "FERNANDO TEISHO TOKUHARA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE DUARTINA"
+  },
+  {
+    "id": 196,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 312919,
+    "nome": "FILOMENO DE SOUZA CRUZ LEONE",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE CÂNDIDO MOTA"
+  },
+  {
+    "id": 197,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 369376,
+    "nome": "FLAVIA BORTOLIN TONDATO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE RIO CLARO"
+  },
+  {
+    "id": 198,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 370770,
+    "nome": "FLAVIO AKIRA DAKUZAKU",
+    "lotacao": "6º OFÍCIO CÍVEL DA COMARCA DE BARUERI"
+  },
+  {
+    "id": 199,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 376083,
+    "nome": "FRANCINE UCHOAS DE JESUS GREGORIO",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE CRUZEIRO"
+  },
+  {
+    "id": 200,
+    "created_at": "2026-02-24T21:24:03.660878+00:00",
+    "matricula": 363484,
+    "nome": "FRANCIS ALBERTO CAMPOS",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE GÁLIA"
+  },
+  {
+    "id": 594,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 313910,
+    "nome": "PAULO VALENTINO PRADO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE MACATUBA"
+  },
+  {
+    "id": 595,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 369303,
+    "nome": "PEDRO EDUARDO SCATENA JUNIOR",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE LOUVEIRA"
+  },
+  {
+    "id": 596,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 360995,
+    "nome": "PEDRO GUILHERME CARDOSO",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE ITAPIRA"
+  },
+  {
+    "id": 597,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 377383,
+    "nome": "PIMENTEL FELIX PEDRO IAGO DURAN FRANCO",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE TANABI"
+  },
+  {
+    "id": 598,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 372935,
+    "nome": "PEDRO PAULO DA SILVA GALBIATTI",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE RANCHARIA"
+  },
+  {
+    "id": 599,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 354434,
+    "nome": "PETERSON PLINTA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE ITARARÉ"
+  },
+  {
+    "id": 600,
+    "created_at": "2026-02-24T21:32:03.538417+00:00",
+    "matricula": 374117,
+    "nome": "PHILIPE VIANA DA SILVA",
+    "lotacao": "GABINETE DA VARA DO JUIZADO ESPECIAL CÍVEL E CRIMINAL"
+  },
+  {
+    "id": 601,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 359605,
+    "nome": "DA COMARCA DE ITAPECERICA DA SERRA 380435 BALESTREIRO DE SANTA FÉ DO SUL PRISCILA FATIMA DE ABREU",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE SÃO ROQUE PIETRA GALAN DE OLIVEIRA OFÍCIO DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA"
+  },
+  {
+    "id": 602,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 809921,
+    "nome": "PRISCILA GARCEZ ANTONIUK",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE IBATÉ"
+  },
+  {
+    "id": 603,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 380367,
+    "nome": "PRISCILA MARA DO NASCIMENTO DINIZ",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE ESTRELA D’OESTE"
+  },
+  {
+    "id": 604,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 375907,
+    "nome": "RAFAEL ALMEIDA CALLEGARI",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 3ª VARAS CÍVEIS EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE JUNDIAÍ"
+  },
+  {
+    "id": 605,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 365524,
+    "nome": "RAFAEL ELIAS BICUDO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE CAJURU A autenticidade deste documento pode ser conferida através do endereço eletrônico do TJSP, informando o código de autenticidade 108-P-20251118222128-100"
+  },
+  {
+    "id": 606,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 369998,
+    "nome": "RAFAEL LUIS STRAPASSON",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 5ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE SOROCABA"
+  },
+  {
+    "id": 607,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 380609,
+    "nome": "RAFAEL MARTINS COLOMBO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE MACAUBAL"
+  },
+  {
+    "id": 608,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 369446,
+    "nome": "RAFAELA ALVES DE SOUZA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE CAFELÂNDIA"
+  },
+  {
+    "id": 609,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 381279,
+    "nome": "RAFAELLA AFONSO MARCELINO ANTONIO",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE ITAPECERICA DA SERRA"
+  },
+  {
+    "id": 610,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 361963,
+    "nome": "RAMON DOS SANTOS GUIMARAES",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE INDAIATUBA"
+  },
+  {
+    "id": 611,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 374663,
+    "nome": "RAPHAEL DE SOUZA ROCHA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DO FORO REGIONAL XI - PINHEIROS"
+  },
+  {
+    "id": 612,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 360797,
+    "nome": "RAQUEL CAROLINA FONSECA SUDANO",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE MONTE ALTO BARROSO"
+  },
+  {
+    "id": 613,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 318919,
+    "nome": "RAQUEL LIMA DE MATOS",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE ITUVERAVA"
+  },
+  {
+    "id": 614,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 367209,
+    "nome": "REGIANE MARTINS CASSEMILIANO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE RIBEIRÃO PIRES"
+  },
+  {
+    "id": 615,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 362339,
+    "nome": "REGIS TOLEDO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE MOGI MIRIM"
+  },
+  {
+    "id": 616,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 363929,
+    "nome": "RENAN GODOY CEREZER",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE CAPIVARI"
+  },
+  {
+    "id": 617,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 374622,
+    "nome": "RENAN HENRIQUE FURQUIM",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE TABOÃO"
+  },
+  {
+    "id": 618,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 371863,
+    "nome": "DA SERRA RENAN LOPES MASCARENHAS",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE ITATIBA"
+  },
+  {
+    "id": 619,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 370728,
+    "nome": "RENATA CESAR SOARES",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 3ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE ITAPEVI"
+  },
+  {
+    "id": 620,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 375007,
+    "nome": "RENATA DE MOURA MIGUEL SILVA",
+    "lotacao": "GABINETE DA 3ª VARA DA COMARCA DE EMBU DAS ARTES"
+  },
+  {
+    "id": 621,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 381091,
+    "nome": "RENATA LAURITO GARCIA -",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 6ª A 10ª VARAS EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS DA UPJ"
+  },
+  {
+    "id": 622,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 363609,
+    "nome": "CÍVEIS DA COMARCA DE SÃO JOSÉ DO RIO PRETO RENATO DE OLIVEIRA",
+    "lotacao": "EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 5ª VARAS CÍVEIS E VARA DA FAMÍLIA E DAS SUCESSÕES DA COMARCA DE INDAIATUBA"
+  },
+  {
+    "id": 623,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 369000,
+    "nome": "RENATO DEO FENORIO",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE BASTOS"
+  },
+  {
+    "id": 624,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 377760,
+    "nome": "RENATO FRANCIOSI LUCHETTI",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE MOGI GUAÇU"
+  },
+  {
+    "id": 625,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 365972,
+    "nome": "RENATO ISSAMU MIYAMOTO",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE TUPI PAULISTA"
+  },
+  {
+    "id": 626,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 363458,
+    "nome": "RENATO MORIMOTO BENZONI",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE SÃO SIMÃO"
+  },
+  {
+    "id": 627,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 360122,
+    "nome": "RICARDO DE SOUZA MAIOLINI BRISOLLA",
+    "lotacao": "3º OFÍCIO JUDICIAL DA COMARCA DE PRESIDENTE VENCESLAU"
+  },
+  {
+    "id": 628,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 363231,
+    "nome": "RICARDO GOUVEA STUANI",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE FRANCO DA ROCHA"
+  },
+  {
+    "id": 629,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 368047,
+    "nome": "RICARDO TAKASHI NIKUMA",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE MATÃO"
+  },
+  {
+    "id": 630,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 306905,
+    "nome": "RINALDO DA COSTA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE TAQUARITINGA"
+  },
+  {
+    "id": 631,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 355529,
+    "nome": "ROBERTO CARLOS DA SILVA",
+    "lotacao": "OFÍCIO DO JUIZADO ESPECIAL CÍVEL DA COMARCA DE ARAÇATUBA"
+  },
+  {
+    "id": 632,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 372819,
+    "nome": "ROBINSON DOUGLAS TARDIVO DE MORAIS",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE BIRIGUI"
+  },
+  {
+    "id": 633,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 373137,
+    "nome": "RODRIGO BAPTISTA LIPI",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE FERNANDÓPOLIS"
+  },
+  {
+    "id": 634,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 378268,
+    "nome": "RODRIGO DE CARVALHO BEZERRA",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE PROMISSÃO RODRIGO DO NASCIMENTO GABINETE DO JUIZ DE 1ª INSTÂNCIA - DR. CARLOS ALEXANDRE 818814 SAKAYEMURA BÖTTCHER"
+  },
+  {
+    "id": 635,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 368253,
+    "nome": "RODRIGO LISBOA RAMOS",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE PORTO FELIZ"
+  },
+  {
+    "id": 636,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 363154,
+    "nome": "RODRIGO MORAES DE OLIVEIRA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE SÃO PEDRO"
+  },
+  {
+    "id": 637,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 375631,
+    "nome": "RODRIGO RAMOS MEDEIROS",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 5ª A 8ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE GUARULHOS"
+  },
+  {
+    "id": 638,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 818744,
+    "nome": "ROGERIO CAETANO PINHEIRO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE CAMPO LIMPO PAULISTA"
+  },
+  {
+    "id": 639,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 353184,
+    "nome": "ROGERIO GUARNIERI TRETTEL",
+    "lotacao": "GABINETE DO JUIZ DE 1ª INSTÂNCIA - DRA. BEATRIZ SYLVIA"
+  },
+  {
+    "id": 640,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 817640,
+    "nome": "STRAUBE DE ALMEIDA PRADO ROGERIO PEREIRA DOS SANTOS",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE SANTA FÉ DO SUL"
+  },
+  {
+    "id": 641,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 363921,
+    "nome": "ROGERIO THOME DE SOUZA ROSSI -",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 6ª A 10ª VARAS EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS DA UPJ"
+  },
+  {
+    "id": 642,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 363017,
+    "nome": "CÍVEIS DA COMARCA DE SOROCABA ROGERIO VENANCIO DE OLIVEIRA VASCONCELOS",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE FERRAZ DE"
+  },
+  {
+    "id": 643,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 372698,
+    "nome": "RONALDO ADRIANO GONCALVES",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE FARTURA"
+  },
+  {
+    "id": 644,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 372697,
+    "nome": "ROSANA DE MACEDO",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE ITAÍ"
+  },
+  {
+    "id": 645,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 355487,
+    "nome": "ROSANA FERREIRA PINTO MENDES",
+    "lotacao": "1º JUIZADO ESPECIAL CÍVEL DO FORO REGIONAL I - SANTANA"
+  },
+  {
+    "id": 646,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 807559,
+    "nome": "ROSANGELA GONÇALVES ANTUNES PEREIRA",
+    "lotacao": "4º OFÍCIO JUDICIAL DA COMARCA DE ITAPECERICA DA SERRA"
+  },
+  {
+    "id": 647,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 813600,
+    "nome": "ROSILENE ALVES HURTADO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE PERUÍBE"
+  },
+  {
+    "id": 648,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 358893,
+    "nome": "ROZENILDO RODRIGUES PEDROSO",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 3ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - E VARA DA FAMÍLIA E DAS SUCESSÕES DA COMARCA DE COTIA"
+  },
+  {
+    "id": 649,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 373128,
+    "nome": "RUBENS DIAS DE CAMARGO FERRAZ",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE APARECIDA"
+  },
+  {
+    "id": 650,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 816082,
+    "nome": "RUBIA DE SOUZA OLIVEIRA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE MAIRIPORÃ"
+  },
+  {
+    "id": 651,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 351124,
+    "nome": "RUTH CARVALHO KURTOVIC DE LIMA",
+    "lotacao": "OFÍCIO DO JUIZADO ESPECIAL CÍVEL DA COMARCA DE FRANCA"
+  },
+  {
+    "id": 652,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 377651,
+    "nome": "SADAO OGAVA RIBEIRO DE FREITAS",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE GUARÁ"
+  },
+  {
+    "id": 653,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 816226,
+    "nome": "SAMANTHA APARECIDA ROCHA ITIKAWA",
+    "lotacao": "4º OFÍCIO CÍVEL DA COMARCA DE SÃO CAETANO DO SUL OGATA"
+  },
+  {
+    "id": 654,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 373564,
+    "nome": "SAMUEL SANTOS DE SA CONCEICAO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE COTIA"
+  },
+  {
+    "id": 655,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 110144,
+    "nome": "SANDRA MARTINS COSTA SILVEIRA",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE CRUZEIRO"
+  },
+  {
+    "id": 656,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 362746,
+    "nome": "SERGIO GOMES OLIVEIRA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE FRANCISCO MORATO"
+  },
+  {
+    "id": 657,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 807825,
+    "nome": "SIDNEI DALLA MARTA FERNANDES",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 5ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE PRAIA GRANDE"
+  },
+  {
+    "id": 658,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 365595,
+    "nome": "SILMARA FERREIRA NOBIS",
+    "lotacao": "2º OFÍCIO CÍVEL DA COMARCA DE POÁ"
+  },
+  {
+    "id": 659,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 363570,
+    "nome": "SILMARA MAYORAL VAQUEIRO DE FARIA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE SANTA BARBARA D’OESTE"
+  },
+  {
+    "id": 660,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 818305,
+    "nome": "SILVANA GARCIA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE NOVA ODESSA"
+  },
+  {
+    "id": 661,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 817048,
+    "nome": "SILVANA HELENA BELLINI DE SOUZA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE CAPIVARI"
+  },
+  {
+    "id": 662,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 362045,
+    "nome": "SIMONE CARINA FRANCO DE LIMA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE ITUVERAVA"
+  },
+  {
+    "id": 663,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 364708,
+    "nome": "SIMONE DE CARVALHO",
+    "lotacao": "EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 4ª VARAS CÍVEIS E VARA DA FAMÍLIA E DAS SUCESSÕES DA COMARCA DE SUMARÉ"
+  },
+  {
+    "id": 664,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 377904,
+    "nome": "SIMONE FERNANDES BRIZOLA DELANI",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE ITAPORANGA"
+  },
+  {
+    "id": 665,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 359306,
+    "nome": "SIMONE MISSACO SATO",
+    "lotacao": "4º OFÍCIO CÍVEL DA COMARCA DE SÃO BERNARDO DO CAMPO"
+  },
+  {
+    "id": 666,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 378005,
+    "nome": "SINUHE CAVALLERI PEREIRA",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 3ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE PINDAMONHANGABA"
+  },
+  {
+    "id": 667,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 359474,
+    "nome": "SISSI SIQUEIRA AYOUB MORO",
+    "lotacao": "OFÍCIO DO JUIZADO ESPECIAL CÍVEL DA COMARCA DE SÃO"
+  },
+  {
+    "id": 668,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 317657,
+    "nome": "JOSÉ DO RIO PRETO SOLANGE CRISTINA VAZZOLER MOTA",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE ILHABELA"
+  },
+  {
+    "id": 669,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 374535,
+    "nome": "SUELI EVANGELISTA DE SOUZA",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE POÁ"
+  },
+  {
+    "id": 670,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 368072,
+    "nome": "TACIANE MARIA COTRIN VALLIERI",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE AURIFLAMA"
+  },
+  {
+    "id": 671,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 369123,
+    "nome": "TAINARA ZONDERICO VILLA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE PRESIDENTE VENCESLAU"
+  },
+  {
+    "id": 672,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 372704,
+    "nome": "TAIRINE BATISTUTI SEGATELLI",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE IEPÊ"
+  },
+  {
+    "id": 673,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 379196,
+    "nome": "TAIS OLIVEIRA CAMPOS",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 3ª VARAS CÍVEIS EQUIPE DE CUMPRIMENTO DE PROCESSOS DIGITAIS DA UPJ - DO FORO REGIONAL X - IPIRANGA"
+  },
+  {
+    "id": 674,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 372901,
+    "nome": "TAISA ROSA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE MORRO AGUDO"
+  },
+  {
+    "id": 675,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 361222,
+    "nome": "TAKESHI SUMI",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE PIRACAIA"
+  },
+  {
+    "id": 676,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 377923,
+    "nome": "TAMIRIS HONORIO LEMOS DOS SANTOS",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE LINS"
+  },
+  {
+    "id": 677,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 375077,
+    "nome": "TANIA MENDES MACIEL",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE JARINU"
+  },
+  {
+    "id": 678,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 369767,
+    "nome": "TARCISIO APARECIDO NININ",
+    "lotacao": "1º OFÍCIO CÍVEL DA COMARCA DE SERTÃOZINHO"
+  },
+  {
+    "id": 679,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 375179,
+    "nome": "TAYAN AOYAMA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE LIMEIRA"
+  },
+  {
+    "id": 680,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 373126,
+    "nome": "THALYNE DA SILVA BASTOS CANDIA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE CAÇAPAVA THAMIRES CAROLINE ALVES MENDES GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA 365025"
+  },
+  {
+    "id": 681,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 355541,
+    "nome": "ROCHA COMARCA DE PARIQUERA-AÇU THAYRA SALANDIN DAL POZZO",
+    "lotacao": "GABINETE DA 2ª VARA DA COMARCA DE TIETÊ"
+  },
+  {
+    "id": 682,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 377471,
+    "nome": "THIAGO AUGUSTO SERPA NEVES",
+    "lotacao": "3º OFÍCIO CÍVEL DA COMARCA DE JACAREÍ"
+  },
+  {
+    "id": 683,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 358213,
+    "nome": "THIAGO BARBOSA CARDOSO",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 1ª A 3ª VARAS CÍVEIS EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS DA UPJ - DA COMARCA DE ITAQUAQUECETUBA"
+  },
+  {
+    "id": 684,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 367455,
+    "nome": "THOMAS NOGUEIRA TOZZI",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE PALMITAL"
+  },
+  {
+    "id": 685,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 368024,
+    "nome": "TIAGO ALBUNIO DA SILVA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE SÃO PEDRO"
+  },
+  {
+    "id": 686,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 368869,
+    "nome": "TIAGO AMORIM BRESSIANINI",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL DA COMARCA DE CRAVINHOS A autenticidade deste documento pode ser conferida através do endereço eletrônico do TJSP, informando o código de autenticidade 108-P-20251118222128-102"
+  },
+  {
+    "id": 687,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 364772,
+    "nome": "TIAGO CARIDI CORREA",
+    "lotacao": "OFÍCIO DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA"
+  },
+  {
+    "id": 688,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 812413,
+    "nome": "DE IBITINGA UBIRATAN SOUZA CRUZ",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE JACAREÍ"
+  },
+  {
+    "id": 689,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 363309,
+    "nome": "VAGNER TADEU RUELLI",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE PIRACAIA"
+  },
+  {
+    "id": 690,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 359906,
+    "nome": "VALÉRIA DA SILVA PEREIRA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE ITUVERAVA"
+  },
+  {
+    "id": 691,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 377993,
+    "nome": "VALERIA PECANHA RODRIGUES",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE GUARARAPES"
+  },
+  {
+    "id": 692,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 319144,
+    "nome": "VALNEI LUCIANO OIAN",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE SÃO MIGUEL ARCANJO"
+  },
+  {
+    "id": 693,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 375064,
+    "nome": "VANDERLEI BICALHO DA SILVA",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE CAMPO LIMPO PAULISTA"
+  },
+  {
+    "id": 694,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 361565,
+    "nome": "VANESSA CRISTINA IRIE TANAKA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL DA COMARCA DE SANTO ANASTÁCIO"
+  },
+  {
+    "id": 695,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 364456,
+    "nome": "VANESSA VIEIRA DE MELO",
+    "lotacao": "GABINETE DO JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE ITAJOBI"
+  },
+  {
+    "id": 696,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 98760,
+    "nome": "VERA LUCIA APARECIDA CARNEIRO GUTIERREZ",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE URÂNIA"
+  },
+  {
+    "id": 697,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 357840,
+    "nome": "VERA LUCIA DA SILVA",
+    "lotacao": "1º OFÍCIO JUDICIAL DA COMARCA DE VÁRZEA PAULISTA"
+  },
+  {
+    "id": 698,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 380617,
+    "nome": "VINICIOS DE ALMEIDA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE CAFELÂNDIA"
+  },
+  {
+    "id": 699,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 380525,
+    "nome": "VINICIUS FERNANDO GOMES ROCHA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE GETULINA"
+  },
+  {
+    "id": 700,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 358558,
+    "nome": "VINICIUS QUESSADA RODRIGUES",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE NOVO HORIZONTE"
+  },
+  {
+    "id": 701,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 351884,
+    "nome": "VIRGINIA ELAINE RIBEIRO NASCIMENTO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE BERTIOGA"
+  },
+  {
+    "id": 702,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 369109,
+    "nome": "VITOR GABRIEL MARTINS",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE CONCHAL"
+  },
+  {
+    "id": 703,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 370720,
+    "nome": "VITOR GARCIA DE SOUZA",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE ITAPECERICA DA SERRA"
+  },
+  {
+    "id": 704,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 379757,
+    "nome": "VITORIA FERNANDA AMARAL PEREIRA LOPES",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE PIEDADE"
+  },
+  {
+    "id": 705,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 367411,
+    "nome": "VIVIANE CRISTINA RICCI NICOLA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE PITANGUEIRAS"
+  },
+  {
+    "id": 706,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 361599,
+    "nome": "VIVIANE EMIE YAMASHITA",
+    "lotacao": "OFÍCIO DO JUIZADO ESPECIAL CÍVEL DA COMARCA DE BAURU"
+  },
+  {
+    "id": 707,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 350402,
+    "nome": "VLAUDINEI FERNANDO VON ZUBEN",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE VINHEDO"
+  },
+  {
+    "id": 708,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 817906,
+    "nome": "WALTHERSON PARIZZE LOURENCO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE AVARÉ"
+  },
+  {
+    "id": 709,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 373570,
+    "nome": "WEBER LUAN CALIJURI PINHEIRO",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE TAQUARITINGA"
+  },
+  {
+    "id": 710,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 362229,
+    "nome": "WENDEL FARIAS PEDRO DE PROCESSAMENTO JUDICIAL - 1ª A 5ª VARAS CÍVEIS DA",
+    "lotacao": "EQUIPE DE ATENDIMENTO AO PÚBLICO DA UPJ - UNIDADE"
+  },
+  {
+    "id": 711,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 377411,
+    "nome": "COMARCA DE SANTO ANDRÉ WESLLEN COSME DE SOUZA",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE ITAPEVI"
+  },
+  {
+    "id": 712,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 377562,
+    "nome": "WILLIAM BERALDI OLIVEIRA DOS SANTOS",
+    "lotacao": "2º OFÍCIO JUDICIAL DA COMARCA DE NOVO HORIZONTE"
+  },
+  {
+    "id": 713,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 375989,
+    "nome": "WILLIAM HABARO ISHIZAWA",
+    "lotacao": "OFÍCIO JUDICIAL DA COMARCA DE POTIRENDABA"
+  },
+  {
+    "id": 714,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 368245,
+    "nome": "WILLIAN SANTOS -",
+    "lotacao": "UNIDADE DE PROCESSAMENTO JUDICIAL - 9ª A 12ª VARAS EQUIPE DE MOVIMENTAÇÃO DE PROCESSOS DIGITAIS DA UPJ"
+  },
+  {
+    "id": 715,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 380993,
+    "nome": "CÍVEIS DA COMARCA DE GUARULHOS WLADEMIR WILLIAM PACHECO",
+    "lotacao": "8º OFÍCIO CÍVEL DA COMARCA DE SÃO BERNARDO DO CAMPO"
+  },
+  {
+    "id": 716,
+    "created_at": "2026-02-24T21:33:47.278819+00:00",
+    "matricula": 96984,
+    "nome": "ZELZA CHAGAS DA LUZ",
+    "lotacao": "JUIZADO ESPECIAL CÍVEL E CRIMINAL DA COMARCA DE MONGAGUÁ"
+  }
+]
