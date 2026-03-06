@@ -9,6 +9,7 @@
   const URL_API = root.URL || (typeof URL !== 'undefined' ? URL : null);
   const INIT_DATA_PATH_RE = /\/rest\/213963628\/entity-page\/initializationDataByLayout\/Request\//i;
   const INIT_DATA_LAYOUT_TOKEN = 'layout=FORM_LAYOUT.withoutResolution,FORM_LAYOUT.onlyResolution';
+  const ATTACHMENT_PATH_RE = /\/frs\/(?:file-list|image-list)\//i;
 
   let cssInjected = false;
   let activePreview = null;
@@ -279,6 +280,41 @@
     return attachmentMetaById[id] || null;
   }
 
+  function replaceAttachmentPath(url, fromSegment, toSegment) {
+    const raw = String(url || '');
+    if (!raw) return '';
+    return raw.replace(new RegExp(`\\/frs\\/${fromSegment}\\/`, 'i'), `/frs/${toSegment}/`);
+  }
+
+  function buildAttachmentFetchCandidates(url) {
+    const list = [];
+    const pushUnique = (value) => {
+      const v = String(value || '').trim();
+      if (!v) return;
+      if (list.indexOf(v) !== -1) return;
+      list.push(v);
+    };
+
+    const normalized = normalizeUrl(url);
+    const hasImageList = /\/frs\/image-list\//i.test(normalized);
+    const hasFileList = /\/frs\/file-list\//i.test(normalized);
+
+    if (hasImageList) {
+      // Prefer file-list first because image-list often returns 500 for download fetch.
+      pushUnique(replaceAttachmentPath(normalized, 'image-list', 'file-list'));
+      pushUnique(normalized);
+      return list;
+    }
+
+    pushUnique(normalized);
+
+    if (hasFileList) {
+      pushUnique(replaceAttachmentPath(normalized, 'file-list', 'image-list'));
+    }
+
+    return list;
+  }
+
   function detectPreviewType(fileName, url, fallbackType) {
     const lowerName = String(fileName || '').toLowerCase();
     if (lowerName.endsWith('.pdf')) return 'pdf';
@@ -428,21 +464,36 @@
 
     if (!fetchImpl) throw new Error('fetch indisponivel');
 
-    const resp = await fetchImpl(url, {
-      method: 'GET',
-      credentials: 'include',
-      cache: 'no-store'
-    });
+    const candidates = buildAttachmentFetchCandidates(url);
+    let lastError = '';
 
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    for (let i = 0; i < candidates.length; i++) {
+      const candidateUrl = candidates[i];
+      try {
+        const resp = await fetchImpl(candidateUrl, {
+          method: 'GET',
+          credentials: 'include',
+          cache: 'no-store'
+        });
 
-    const contentType = ((resp.headers && resp.headers.get && resp.headers.get('content-type')) || '')
-      .split(';')[0]
-      .trim()
-      .toLowerCase();
+        if (!resp.ok) {
+          lastError = `HTTP ${resp.status} (${candidateUrl})`;
+          continue;
+        }
 
-    const blob = await resp.blob();
-    return { blob, contentType };
+        const contentType = ((resp.headers && resp.headers.get && resp.headers.get('content-type')) || '')
+          .split(';')[0]
+          .trim()
+          .toLowerCase();
+
+        const blob = await resp.blob();
+        return { blob, contentType, sourceUrl: candidateUrl };
+      } catch (err) {
+        lastError = `${String(err)} (${candidateUrl})`;
+      }
+    }
+
+    throw new Error(lastError || 'Falha ao baixar anexo');
   }
 
   function pickImageMime(fileName) {
@@ -513,7 +564,7 @@
     const area = doc.querySelector('#attachmentsArea') || doc.querySelector('div.pl-entity-page-component[data-aid="attachments"]');
     if (!area) return;
 
-    const links = area.querySelectorAll('a[ng-href*="/rest/"][href*="/file-list/"], a[href*="/rest/"][href*="/file-list/"], a[ng-href*="/file-list/"], a[href*="/file-list/"]');
+    const links = area.querySelectorAll('a[ng-href*="/rest/"][href*="/file-list/"], a[ng-href*="/rest/"][href*="/image-list/"], a[href*="/rest/"][href*="/file-list/"], a[href*="/rest/"][href*="/image-list/"], a[ng-href*="/file-list/"], a[ng-href*="/image-list/"], a[href*="/file-list/"], a[href*="/image-list/"]');
 
     links.forEach((link) => {
       if (!link || link.dataset[LINK_BIND_ATTR] === '1') return;
@@ -524,7 +575,7 @@
       link.addEventListener('click', async (e) => {
         const url = getAttachmentUrl(link);
         if (!url) return;
-        if (!/\/frs\/file-list\/|\/file-list\//i.test(url)) return;
+        if (!ATTACHMENT_PATH_RE.test(url)) return;
 
         const meta = getAttachmentMetaByUrl(url);
         const fileName = (String(meta && meta.fileName || '').trim()
@@ -570,7 +621,7 @@
 
   function wireInlineImages() {
     const doc = root.document;
-    const images = doc.querySelectorAll('img[src*="/frs/file-list/"], img[src*="/file-list/"], img[ng-src*="/frs/file-list/"], img[ng-src*="/file-list/"]');
+    const images = doc.querySelectorAll('img[src*="/frs/file-list/"], img[src*="/frs/image-list/"], img[src*="/file-list/"], img[src*="/image-list/"], img[ng-src*="/frs/file-list/"], img[ng-src*="/frs/image-list/"], img[ng-src*="/file-list/"], img[ng-src*="/image-list/"]');
 
     images.forEach((img) => {
       if (!img || img.dataset[IMG_BIND_ATTR] === '1') return;
@@ -580,7 +631,7 @@
       img.addEventListener('click', async (e) => {
         const url = getImageUrl(img);
         if (!url) return;
-        if (!/\/frs\/file-list\/|\/file-list\//i.test(url)) return;
+        if (!ATTACHMENT_PATH_RE.test(url)) return;
 
         const meta = getAttachmentMetaByUrl(url);
         const fileName = (String(meta && meta.fileName || '').trim()
