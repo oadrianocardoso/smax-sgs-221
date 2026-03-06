@@ -380,7 +380,7 @@
     const area = doc.querySelector('#attachmentsArea') || doc.querySelector('div.pl-entity-page-component[data-aid="attachments"]');
     if (!area) return;
 
-    const links = area.querySelectorAll('a[ng-href*="/rest/"], a[href*="/rest/"], a[ng-href*="/file-list/"], a[href*="/file-list/"]');
+    const links = area.querySelectorAll('a[ng-href*="/rest/"][href*="/file-list/"], a[href*="/rest/"][href*="/file-list/"], a[ng-href*="/file-list/"], a[href*="/file-list/"]');
 
     links.forEach((link) => {
       if (!link || link.dataset[LINK_BIND_ATTR] === '1') return;
@@ -396,12 +396,38 @@
         const fileName = ((link.textContent || '').trim()
           || (link.getAttribute('title') || '').trim()
           || pickFileNameFromUrl(url));
+        const lowerName = String(fileName || '').toLowerCase();
+        const isPdf = lowerName.endsWith('.pdf');
+        const isImage = IMAGE_EXT_RE.test(lowerName);
 
         e.preventDefault();
         e.stopPropagation();
 
-        const shown = await openPreviewIfSupported(url, fileName, '');
-        if (!shown) root.open(url, '_blank');
+        try {
+          if (isPdf) {
+            const data = await fetchAttachmentBlob(url);
+            if (!URL_API || typeof URL_API.createObjectURL !== 'function') throw new Error('URL.createObjectURL indisponivel');
+            const blobUrl = URL_API.createObjectURL(coerceBlobType(data.blob, 'pdf', fileName, data.contentType));
+            root.open(blobUrl, '_blank');
+            root.setTimeout(() => {
+              try { URL_API.revokeObjectURL(blobUrl); } catch (_) {}
+            }, 60 * 1000);
+            return;
+          }
+
+          if (isImage) {
+            const data = await fetchAttachmentBlob(url);
+            if (!URL_API || typeof URL_API.createObjectURL !== 'function') throw new Error('URL.createObjectURL indisponivel');
+            const blobUrl = URL_API.createObjectURL(coerceBlobType(data.blob, 'image', fileName, data.contentType));
+            openPreviewModal(blobUrl, 'image', fileName || 'Imagem anexada', url);
+            return;
+          }
+
+          const shown = await openPreviewIfSupported(url, fileName, '');
+          if (!shown) root.open(url, '_blank');
+        } catch (err) {
+          root.alert('Erro ao abrir anexo: ' + err);
+        }
       }, true);
     });
   }
