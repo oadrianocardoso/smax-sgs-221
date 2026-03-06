@@ -4,8 +4,9 @@
   const SMAX = root.SMAX = root.SMAX || {};
   const CONFIG = SMAX.config || {};
 
-  const DEFAULT_SUPABASE_URL = 'https://hzjlgwuorhexkzcoxmay.supabase.co';
-  const DEFAULT_PUBLISHABLE_KEY = 'sb_publishable_edgxgG6UACiJClDmH5eoiQ_h4D-i4wG';
+  const DEFAULT_SUPABASE_URL = 'http://187.77.232.228:5433';
+  const DEFAULT_PUBLISHABLE_KEY = '';
+  const DEFAULT_REST_BASE_PATH = '/rest/v1';
   const DEFAULT_TEAM_CODE = 'SGS 2.2.1';
   const PERSON_ME_PATH = '/rest/213963628/personalization/person/me';
   const PERSON_CONTEXT_CACHE_TTL_MS = 5 * 60 * 1000;
@@ -158,21 +159,69 @@
     const cfg = isPlainObject(CONFIG.supabase) ? CONFIG.supabase : {};
     const storedUrl = root.localStorage && root.localStorage.getItem('smax_supabase_url');
     const storedKey = root.localStorage && root.localStorage.getItem('smax_supabase_key');
+    const storedRestBasePath = root.localStorage && root.localStorage.getItem('smax_supabase_rest_path');
+    const storedDbUser = root.localStorage && root.localStorage.getItem('smax_db_user');
+    const storedDbPassword = root.localStorage && root.localStorage.getItem('smax_db_password');
 
     const url = String(storedUrl || cfg.url || DEFAULT_SUPABASE_URL || '').trim();
     const key = String(storedKey || cfg.publishableKey || cfg.anonKey || DEFAULT_PUBLISHABLE_KEY || '').trim();
+    const restBasePath = normalizeRestBasePath(storedRestBasePath || cfg.restBasePath || cfg.restPath || DEFAULT_REST_BASE_PATH);
+    const basicAuth = makeBasicAuthHeader(
+      String(storedDbUser || cfg.dbUser || '').trim(),
+      String(storedDbPassword || cfg.dbPassword || '').trim()
+    );
     const disabled = cfg.enabled === false;
 
     CONFIG.supabase = CONFIG.supabase || {};
     CONFIG.supabase.url = url;
     CONFIG.supabase.publishableKey = key;
-    CONFIG.supabase.enabled = !disabled && !!url && !!key;
+    CONFIG.supabase.restBasePath = restBasePath;
+    CONFIG.supabase.enabled = !disabled && !!url;
+
+    if (looksLikeRawPostgresHttpUrl(url)) {
+      console.warn('[SMAX Supabase] URL aponta para porta PostgreSQL (5432/5433). Este script precisa de endpoint HTTP (PostgREST/Supabase).');
+    }
 
     return {
       url,
       key,
+      basicAuth,
+      restBasePath,
       enabled: CONFIG.supabase.enabled
     };
+  }
+
+  function normalizeRestBasePath(value) {
+    const raw = String(typeof value === 'undefined' ? DEFAULT_REST_BASE_PATH : (value || '')).trim();
+    if (!raw || raw === '/') return '';
+    return `/${raw.replace(/^\/+/, '').replace(/\/+$/, '')}`;
+  }
+
+  function makeBasicAuthHeader(username, password) {
+    const user = String(username || '').trim();
+    const pass = String(password || '');
+    if (!user && !pass) return '';
+    const token = `${user}:${pass}`;
+    try {
+      return `Basic ${btoa(token)}`;
+    } catch (e) {
+      try {
+        return `Basic ${btoa(unescape(encodeURIComponent(token)))}`;
+      } catch {
+        return '';
+      }
+    }
+  }
+
+  function looksLikeRawPostgresHttpUrl(rawUrl) {
+    try {
+      const parsed = new URL(String(rawUrl || ''));
+      const port = String(parsed.port || '').trim();
+      const path = String(parsed.pathname || '').trim();
+      return (port === '5432' || port === '5433') && (!path || path === '/');
+    } catch {
+      return false;
+    }
   }
 
   const runtime = readSupabaseRuntime();
@@ -230,11 +279,17 @@
     if (!runtime.enabled) throw new Error('Supabase desabilitado');
 
     const method = opts.method || 'GET';
-    const url = `${runtime.url.replace(/\/+$/, '')}/rest/v1/${path.replace(/^\/+/, '')}`;
-    const headers = Object.assign({
-      apikey: runtime.key,
-      Authorization: `Bearer ${runtime.key}`
-    }, opts.headers || {});
+    const baseUrl = runtime.url.replace(/\/+$/, '');
+    const resourcePath = String(path || '').replace(/^\/+/, '');
+    const url = `${baseUrl}${runtime.restBasePath}/${resourcePath}`;
+    const headers = Object.assign({}, opts.headers || {});
+
+    if (runtime.key) {
+      if (!headers.apikey) headers.apikey = runtime.key;
+      if (!headers.Authorization) headers.Authorization = `Bearer ${runtime.key}`;
+    } else if (runtime.basicAuth && !headers.Authorization) {
+      headers.Authorization = runtime.basicAuth;
+    }
 
     let body;
     if (typeof opts.body !== 'undefined') {

@@ -10,7 +10,7 @@
 // @grant        GM_addStyle
 // @grant        GM_xmlhttpRequest
 // @grant        unsafeWindow
-// @connect      hzjlgwuorhexkzcoxmay.supabase.co
+// @connect      187.77.232.228
 //
 // @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/config.js
 // @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/supabase-db.js

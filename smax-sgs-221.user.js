@@ -10,7 +10,7 @@
 // @grant        GM_addStyle
 // @grant        GM_xmlhttpRequest
 // @grant        unsafeWindow
-// @connect      hzjlgwuorhexkzcoxmay.supabase.co
+// @connect      187.77.232.228
 // @downloadURL  https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/smax-sgs-221.user.js
 // @updateURL    https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/smax-sgs-221.user.js
 // @homepageURL  https://github.com/oadrianocardoso/smax-sgs-221
