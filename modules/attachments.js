@@ -124,7 +124,9 @@
   function normalizeUrl(rawUrl) {
     if (!rawUrl) return '';
 
-    const trimmed = String(rawUrl).trim();
+    const trimmed = String(rawUrl)
+      .replace(/&amp;/gi, '&')
+      .trim();
     if (!trimmed || trimmed.toLowerCase().startsWith('javascript:')) return '';
 
     try {
@@ -135,14 +137,20 @@
   }
 
   function getAttachmentUrl(link) {
+    const hrefProp = link && link.href ? link.href : '';
     const hrefAttr = link.getAttribute('href');
     const ngHrefAttr = link.getAttribute('ng-href');
-    const rawUrl = hrefAttr || ngHrefAttr || (link.hasAttribute('href') ? link.href : '');
+    const rawUrl = hrefProp || hrefAttr || ngHrefAttr || '';
     return normalizeUrl(rawUrl);
   }
 
   function getImageUrl(img) {
-    const rawSrc = img.getAttribute('src') || img.getAttribute('ng-src') || img.currentSrc || '';
+    const rawSrc = img.currentSrc
+      || img.src
+      || img.getAttribute('data-cke-saved-src')
+      || img.getAttribute('src')
+      || img.getAttribute('ng-src')
+      || '';
     return normalizeUrl(rawSrc);
   }
 
@@ -621,7 +629,11 @@
 
   function wireInlineImages() {
     const doc = root.document;
-    const images = doc.querySelectorAll('img[src*="/frs/file-list/"], img[src*="/frs/image-list/"], img[src*="/file-list/"], img[src*="/image-list/"], img[ng-src*="/frs/file-list/"], img[ng-src*="/frs/image-list/"], img[ng-src*="/file-list/"], img[ng-src*="/image-list/"]');
+    const images = doc.querySelectorAll(
+      'img[src*="/frs/file-list/"], img[src*="/frs/image-list/"], img[src*="/file-list/"], img[src*="/image-list/"], ' +
+      'img[ng-src*="/frs/file-list/"], img[ng-src*="/frs/image-list/"], img[ng-src*="/file-list/"], img[ng-src*="/image-list/"], ' +
+      'img[data-cke-saved-src*="/frs/file-list/"], img[data-cke-saved-src*="/frs/image-list/"], img[data-cke-saved-src*="/file-list/"], img[data-cke-saved-src*="/image-list/"]'
+    );
 
     images.forEach((img) => {
       if (!img || img.dataset[IMG_BIND_ATTR] === '1') return;
