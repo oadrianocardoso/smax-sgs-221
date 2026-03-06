@@ -162,15 +162,43 @@
         if (!editor || typeof editor.getData !== 'function') return;
         var html = editor.getData() || '';
 
-        // <p> sem style recebe margin-bottom
         try {
-          html = html.replace(/<p(?![^>]*\bstyle=)([^>]*)>/gi, '<p style="margin-bottom: 1em;"$1>');
-        } catch (e1) {}
+          // Ajuste robusto: preserva styles existentes e garante margem/borda.
+          var parser = new root.DOMParser();
+          var parsed = parser.parseFromString('<div id="tm-gel-root">' + html + '</div>', 'text/html');
+          var wrapper = parsed && parsed.getElementById('tm-gel-root');
 
-        // <img> sem style recebe borda
-        try {
-          html = html.replace(/<img(?![^>]*\bstyle=)([^>]*?)\/?\>/gi, '<img style="border: 3px solid #000;"$1>');
-        } catch (e2) {}
+          if (wrapper) {
+            var pNodes = wrapper.querySelectorAll('p');
+            var i;
+            for (i = 0; i < pNodes.length; i++) {
+              var p = pNodes[i];
+              if (!p || !p.style) continue;
+              if (!p.style.marginBottom) {
+                p.style.marginBottom = '1em';
+              }
+            }
+
+            var imgNodes = wrapper.querySelectorAll('img');
+            for (i = 0; i < imgNodes.length; i++) {
+              var img = imgNodes[i];
+              if (!img || !img.style) continue;
+              if (!img.style.border) {
+                img.style.border = '3px solid #000';
+              }
+            }
+
+            html = wrapper.innerHTML;
+          }
+        } catch (e0) {
+          // fallback em regex para ambientes sem parser
+          try {
+            html = html.replace(/<p(?![^>]*\bstyle=)([^>]*)>/gi, '<p style="margin-bottom: 1em;"$1>');
+          } catch (e1) {}
+          try {
+            html = html.replace(/<img(?![^>]*\bstyle=)([^>]*)>/gi, '<img style="border: 3px solid #000;"$1>');
+          } catch (e2) {}
+        }
 
         if (typeof editor.setData === 'function') {
           editor.setData(html);
