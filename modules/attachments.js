@@ -5,12 +5,17 @@
   const LINK_BIND_ATTR = 'tmPreviewLinkBound';
   const IMG_BIND_ATTR = 'tmPreviewImgBound';
   const IMAGE_EXT_RE = /\.(png|jpg|jpeg|gif|bmp|webp)$/i;
+  const UUID_RE = /[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/ig;
   const URL_API = root.URL || (typeof URL !== 'undefined' ? URL : null);
+  const INIT_DATA_PATH_RE = /\/rest\/213963628\/entity-page\/initializationDataByLayout\/Request\//i;
+  const INIT_DATA_LAYOUT_TOKEN = 'layout=FORM_LAYOUT.withoutResolution,FORM_LAYOUT.onlyResolution';
 
   let cssInjected = false;
   let activePreview = null;
   let observerStarted = false;
   let maintainScheduled = false;
+  let networkHooked = false;
+  let attachmentMetaById = {};
 
   function ensureCss() {
     if (cssInjected) return;
@@ -144,6 +149,134 @@
     const clean = String(url || '').split('?')[0];
     const parts = clean.split('/');
     return (parts[parts.length - 1] || '').trim();
+  }
+
+  function isInitDataUrl(url) {
+    const raw = String(url || '');
+    return INIT_DATA_PATH_RE.test(raw) && raw.indexOf(INIT_DATA_LAYOUT_TOKEN) !== -1;
+  }
+
+  function normalizeAttachmentMeta(raw) {
+    const src = raw && typeof raw === 'object' ? raw : {};
+    const id = String(src.id || '').trim().toLowerCase();
+    if (!id) return null;
+
+    const fileName = String(src.file_name || src.name || '').trim();
+    const fileExtension = String(src.file_extension || '').trim().toLowerCase();
+    const mimeType = String(src.mime_type || '').trim().toLowerCase();
+    const isHidden = src.IsHidden === true;
+
+    return { id, fileName, fileExtension, mimeType, isHidden };
+  }
+
+  function extractAttachmentMetaMap(payload) {
+    const map = {};
+    const data = payload && typeof payload === 'object' ? payload : {};
+    const props = data.EntityData && data.EntityData.properties && typeof data.EntityData.properties === 'object'
+      ? data.EntityData.properties
+      : {};
+    const raw = props.RequestAttachments;
+    if (!raw) return map;
+
+    let parsed = raw;
+    if (typeof parsed === 'string') {
+      try {
+        parsed = JSON.parse(parsed);
+      } catch (_) {
+        return map;
+      }
+    }
+
+    const rows = Array.isArray(parsed && parsed.complexTypeProperties)
+      ? parsed.complexTypeProperties
+      : [];
+
+    rows.forEach((entry) => {
+      const normalized = normalizeAttachmentMeta(entry && entry.properties);
+      if (!normalized) return;
+      map[normalized.id] = normalized;
+    });
+
+    return map;
+  }
+
+  function updateAttachmentMetaFromText(txt) {
+    if (!txt) return;
+    try {
+      const payload = JSON.parse(txt);
+      const nextMap = extractAttachmentMetaMap(payload);
+      if (!nextMap || !Object.keys(nextMap).length) return;
+      attachmentMetaById = Object.assign({}, attachmentMetaById, nextMap);
+    } catch (_) {}
+  }
+
+  function hookInitDataNetworkOnce() {
+    if (networkHooked) return;
+    networkHooked = true;
+
+    try {
+      const origXhrOpen = XMLHttpRequest.prototype.open;
+      const origXhrSend = XMLHttpRequest.prototype.send;
+
+      XMLHttpRequest.prototype.open = function patchedOpen(method, url) {
+        this._tmxInitDataUrl = String(url || '');
+        return origXhrOpen.apply(this, arguments);
+      };
+
+      XMLHttpRequest.prototype.send = function patchedSend() {
+        try {
+          if (isInitDataUrl(this._tmxInitDataUrl)) {
+            this.addEventListener('load', () => {
+              try {
+                if (this.status === 200 && this.responseText) {
+                  updateAttachmentMetaFromText(this.responseText);
+                }
+              } catch (_) {}
+            });
+          }
+        } catch (_) {}
+
+        return origXhrSend.apply(this, arguments);
+      };
+    } catch (_) {}
+
+    try {
+      if (typeof root.fetch === 'function') {
+        const origFetch = root.fetch.bind(root);
+        root.fetch = function patchedFetch(input, init) {
+          let url = '';
+          try {
+            url = (typeof input === 'string')
+              ? input
+              : (input && input.url ? input.url : '');
+          } catch (_) {}
+
+          return origFetch(input, init).then((resp) => {
+            try {
+              if (resp && resp.ok && isInitDataUrl(url)) {
+                resp.clone().text().then(updateAttachmentMetaFromText).catch(() => {});
+              }
+            } catch (_) {}
+            return resp;
+          });
+        };
+      }
+    } catch (_) {}
+  }
+
+  function extractAttachmentIdFromUrl(url) {
+    const raw = String(url || '');
+    if (!raw) return '';
+
+    const matches = raw.match(UUID_RE);
+    if (!matches || !matches.length) return '';
+    return String(matches[0] || '').trim().toLowerCase();
+  }
+
+  function getAttachmentMetaByUrl(url) {
+    const id = extractAttachmentIdFromUrl(url);
+    if (!id) return null;
+    return attachmentMetaById[id] || null;
   }
 
   function detectPreviewType(fileName, url, fallbackType) {
@@ -393,12 +526,15 @@
         if (!url) return;
         if (!/\/frs\/file-list\/|\/file-list\//i.test(url)) return;
 
-        const fileName = ((link.textContent || '').trim()
+        const meta = getAttachmentMetaByUrl(url);
+        const fileName = (String(meta && meta.fileName || '').trim()
+          || (link.textContent || '').trim()
           || (link.getAttribute('title') || '').trim()
           || pickFileNameFromUrl(url));
         const lowerName = String(fileName || '').toLowerCase();
-        const isPdf = lowerName.endsWith('.pdf');
-        const isImage = IMAGE_EXT_RE.test(lowerName);
+        const metaType = detectTypeByMime(meta && meta.mimeType);
+        const isPdf = lowerName.endsWith('.pdf') || metaType === 'pdf' || String(meta && meta.fileExtension || '') === 'pdf';
+        const isImage = IMAGE_EXT_RE.test(lowerName) || metaType === 'image';
 
         e.preventDefault();
         e.stopPropagation();
@@ -446,7 +582,9 @@
         if (!url) return;
         if (!/\/frs\/file-list\/|\/file-list\//i.test(url)) return;
 
-        const fileName = ((img.getAttribute('alt') || '').trim()
+        const meta = getAttachmentMetaByUrl(url);
+        const fileName = (String(meta && meta.fileName || '').trim()
+          || (img.getAttribute('alt') || '').trim()
           || (img.getAttribute('title') || '').trim()
           || pickFileNameFromUrl(url)
           || 'imagem');
@@ -506,6 +644,7 @@
 
   function apply() {
     ensureCss();
+    hookInitDataNetworkOnce();
     maintain();
     startAttachmentObserver();
   }
