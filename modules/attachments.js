@@ -8,7 +8,6 @@
   const UUID_RE = /[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/ig;
   const URL_API = root.URL || (typeof URL !== 'undefined' ? URL : null);
   const INIT_DATA_PATH_RE = /\/rest\/213963628\/entity-page\/initializationDataByLayout\/Request\//i;
-  const INIT_DATA_LAYOUT_TOKEN = 'layout=FORM_LAYOUT.withoutResolution,FORM_LAYOUT.onlyResolution';
   const ATTACHMENT_PATH_RE = /\/frs\/(?:file-list|image-list)\//i;
 
   let cssInjected = false;
@@ -162,7 +161,14 @@
 
   function isInitDataUrl(url) {
     const raw = String(url || '');
-    return INIT_DATA_PATH_RE.test(raw) && raw.indexOf(INIT_DATA_LAYOUT_TOKEN) !== -1;
+    if (!INIT_DATA_PATH_RE.test(raw)) return false;
+
+    const normalized = raw
+      .replace(/%2c/gi, ',')
+      .replace(/%2f/gi, '/')
+      .replace(/%3d/gi, '=');
+
+    return /layout=FORM_LAYOUT\.withoutResolution,FORM_LAYOUT\.onlyResolution/i.test(normalized);
   }
 
   function normalizeAttachmentMeta(raw) {
@@ -286,6 +292,30 @@
     const id = extractAttachmentIdFromUrl(url);
     if (!id) return null;
     return attachmentMetaById[id] || null;
+  }
+
+  function hasDraftModeTrue(url) {
+    const raw = String(url || '');
+    if (!raw) return false;
+    return /(?:\?|&)draftMode=true(?:&|$)/i.test(raw);
+  }
+
+  function isLikelyCkEditorInlineImage(img, url) {
+    if (!img || typeof img.closest !== 'function') return false;
+    const cls = String(img.className || '').toLowerCase();
+
+    if (
+      cls.includes('cke_widget_element')
+      || img.hasAttribute('data-cke-widget-upcasted')
+      || img.hasAttribute('data-cke-saved-src')
+      || String(img.getAttribute('data-widget') || '').toLowerCase() === 'image'
+      || !!img.closest('.cke, .cke_editable, .cke_widget_wrapper, .note-editor')
+      || hasDraftModeTrue(url)
+    ) {
+      return true;
+    }
+
+    return false;
   }
 
   function replaceAttachmentPath(url, fromSegment, toSegment) {
@@ -584,8 +614,10 @@
         const url = getAttachmentUrl(link);
         if (!url) return;
         if (!ATTACHMENT_PATH_RE.test(url)) return;
+        if (hasDraftModeTrue(url)) return;
 
         const meta = getAttachmentMetaByUrl(url);
+        if (meta && meta.isHidden) return;
         const fileName = (String(meta && meta.fileName || '').trim()
           || (link.textContent || '').trim()
           || (link.getAttribute('title') || '').trim()
@@ -629,7 +661,10 @@
 
   function wireInlineImages() {
     const doc = root.document;
-    const images = doc.querySelectorAll(
+    const area = doc.querySelector('#attachmentsArea') || doc.querySelector('div.pl-entity-page-component[data-aid="attachments"]');
+    if (!area) return;
+
+    const images = area.querySelectorAll(
       'img[src*="/frs/file-list/"], img[src*="/frs/image-list/"], img[src*="/file-list/"], img[src*="/image-list/"], ' +
       'img[ng-src*="/frs/file-list/"], img[ng-src*="/frs/image-list/"], img[ng-src*="/file-list/"], img[ng-src*="/image-list/"], ' +
       'img[data-cke-saved-src*="/frs/file-list/"], img[data-cke-saved-src*="/frs/image-list/"], img[data-cke-saved-src*="/file-list/"], img[data-cke-saved-src*="/image-list/"]'
@@ -644,8 +679,10 @@
         const url = getImageUrl(img);
         if (!url) return;
         if (!ATTACHMENT_PATH_RE.test(url)) return;
+        if (isLikelyCkEditorInlineImage(img, url)) return;
 
         const meta = getAttachmentMetaByUrl(url);
+        if (meta && meta.isHidden) return;
         const fileName = (String(meta && meta.fileName || '').trim()
           || (img.getAttribute('alt') || '').trim()
           || (img.getAttribute('title') || '').trim()
