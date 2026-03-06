@@ -4,9 +4,10 @@
   const SMAX = root.SMAX = root.SMAX || {};
   const CONFIG = SMAX.config || {};
 
-  const DEFAULT_SUPABASE_URL = 'http://187.77.232.228:5433';
+  const DEFAULT_SUPABASE_URL = 'http://187.77.232.228:3002';
   const DEFAULT_PUBLISHABLE_KEY = '';
-  const DEFAULT_REST_BASE_PATH = '/rest/v1';
+  const DEFAULT_REST_BASE_PATH = '';
+  const DEFAULT_POSTGREST_PORT = '3002';
   const LEGACY_SUPABASE_URLS = Object.freeze([
     'https://hzjlgwuorhexkzcoxmay.supabase.co',
     'https://hzjlgwuorhexkzcoxmay.supabase.co/'
@@ -172,6 +173,7 @@
 
     const hasExplicitCfgUrl = !!String(cfg.url || '').trim();
     const hasExplicitCfgKey = !!String(cfg.publishableKey || cfg.anonKey || '').trim();
+    const hasExplicitCfgRestPath = !!String(cfg.restBasePath || cfg.restPath || '').trim();
     let storedUrl = String(storedUrlRaw || '').trim();
     let storedKey = String(storedKeyRaw || '').trim();
 
@@ -183,6 +185,22 @@
         // ignore storage errors
       }
       console.warn('[SMAX Supabase] URL antiga detectada em localStorage e removida.');
+    }
+
+    if (!hasExplicitCfgUrl && looksLikeRawPostgresHttpUrl(storedUrl)) {
+      const migratedUrl = suggestPostgrestUrlFromRawPgUrl(storedUrl);
+      if (migratedUrl) {
+        storedUrl = migratedUrl;
+        try {
+          if (root.localStorage) {
+            root.localStorage.setItem('smax_supabase_url', migratedUrl);
+            root.localStorage.setItem('smax_supabase_rest_path', '');
+          }
+        } catch (e) {
+          // ignore storage errors
+        }
+        console.warn(`[SMAX Supabase] URL PostgreSQL detectada em localStorage. Migrado automaticamente para ${migratedUrl}`);
+      }
     }
 
     if (!hasExplicitCfgKey && isLegacySupabaseKey(storedKey)) {
@@ -197,7 +215,18 @@
 
     const url = String(storedUrl || cfg.url || DEFAULT_SUPABASE_URL || '').trim();
     const key = String(storedKey || cfg.publishableKey || cfg.anonKey || DEFAULT_PUBLISHABLE_KEY || '').trim();
-    const restBasePath = normalizeRestBasePath(storedRestBasePath || cfg.restBasePath || cfg.restPath || DEFAULT_REST_BASE_PATH);
+    let restPathSeed = storedRestBasePath || cfg.restBasePath || cfg.restPath || DEFAULT_REST_BASE_PATH;
+    const normalizedStoredRestPath = normalizeRestBasePath(storedRestBasePath || '');
+    if (!hasExplicitCfgRestPath && isDirectPostgrestPortUrl(url) && normalizedStoredRestPath === '/rest/v1') {
+      restPathSeed = '';
+      try {
+        root.localStorage && root.localStorage.setItem('smax_supabase_rest_path', '');
+      } catch (e) {
+        // ignore storage errors
+      }
+      console.warn('[SMAX Supabase] rest path legado (/rest/v1) detectado para PostgREST direto. Ajustado automaticamente para "/".');
+    }
+    const restBasePath = normalizeRestBasePath(restPathSeed);
     const basicAuth = makeBasicAuthHeader(
       String(storedDbUser || cfg.dbUser || '').trim(),
       String(storedDbPassword || cfg.dbPassword || '').trim()
@@ -263,6 +292,30 @@
       const port = String(parsed.port || '').trim();
       const path = String(parsed.pathname || '').trim();
       return (port === '5432' || port === '5433') && (!path || path === '/');
+    } catch {
+      return false;
+    }
+  }
+
+  function suggestPostgrestUrlFromRawPgUrl(rawUrl) {
+    try {
+      const parsed = new URL(String(rawUrl || ''));
+      if (!looksLikeRawPostgresHttpUrl(rawUrl)) return '';
+      const protocol = parsed.protocol === 'https:' ? 'https:' : 'http:';
+      const hostname = String(parsed.hostname || '').trim();
+      if (!hostname) return '';
+      return `${protocol}//${hostname}:${DEFAULT_POSTGREST_PORT}`;
+    } catch {
+      return '';
+    }
+  }
+
+  function isDirectPostgrestPortUrl(rawUrl) {
+    try {
+      const parsed = new URL(String(rawUrl || ''));
+      const port = String(parsed.port || '').trim();
+      const path = String(parsed.pathname || '').trim();
+      return port === DEFAULT_POSTGREST_PORT && (!path || path === '/');
     } catch {
       return false;
     }
