@@ -7,6 +7,13 @@
   const DEFAULT_SUPABASE_URL = 'http://187.77.232.228:5433';
   const DEFAULT_PUBLISHABLE_KEY = '';
   const DEFAULT_REST_BASE_PATH = '/rest/v1';
+  const LEGACY_SUPABASE_URLS = Object.freeze([
+    'https://hzjlgwuorhexkzcoxmay.supabase.co',
+    'https://hzjlgwuorhexkzcoxmay.supabase.co/'
+  ]);
+  const LEGACY_SUPABASE_KEYS = Object.freeze([
+    'sb_publishable_edgxgG6UACiJClDmH5eoiQ_h4D-i4wG'
+  ]);
   const DEFAULT_TEAM_CODE = 'SGS 2.2.1';
   const PERSON_ME_PATH = '/rest/213963628/personalization/person/me';
   const PERSON_CONTEXT_CACHE_TTL_MS = 5 * 60 * 1000;
@@ -157,11 +164,36 @@
 
   function readSupabaseRuntime() {
     const cfg = isPlainObject(CONFIG.supabase) ? CONFIG.supabase : {};
-    const storedUrl = root.localStorage && root.localStorage.getItem('smax_supabase_url');
-    const storedKey = root.localStorage && root.localStorage.getItem('smax_supabase_key');
+    const storedUrlRaw = root.localStorage && root.localStorage.getItem('smax_supabase_url');
+    const storedKeyRaw = root.localStorage && root.localStorage.getItem('smax_supabase_key');
     const storedRestBasePath = root.localStorage && root.localStorage.getItem('smax_supabase_rest_path');
     const storedDbUser = root.localStorage && root.localStorage.getItem('smax_db_user');
     const storedDbPassword = root.localStorage && root.localStorage.getItem('smax_db_password');
+
+    const hasExplicitCfgUrl = !!String(cfg.url || '').trim();
+    const hasExplicitCfgKey = !!String(cfg.publishableKey || cfg.anonKey || '').trim();
+    let storedUrl = String(storedUrlRaw || '').trim();
+    let storedKey = String(storedKeyRaw || '').trim();
+
+    if (!hasExplicitCfgUrl && isLegacySupabaseUrl(storedUrl)) {
+      storedUrl = '';
+      try {
+        root.localStorage && root.localStorage.removeItem('smax_supabase_url');
+      } catch (e) {
+        // ignore storage errors
+      }
+      console.warn('[SMAX Supabase] URL antiga detectada em localStorage e removida.');
+    }
+
+    if (!hasExplicitCfgKey && isLegacySupabaseKey(storedKey)) {
+      storedKey = '';
+      try {
+        root.localStorage && root.localStorage.removeItem('smax_supabase_key');
+      } catch (e) {
+        // ignore storage errors
+      }
+      console.warn('[SMAX Supabase] Chave antiga detectada em localStorage e removida.');
+    }
 
     const url = String(storedUrl || cfg.url || DEFAULT_SUPABASE_URL || '').trim();
     const key = String(storedKey || cfg.publishableKey || cfg.anonKey || DEFAULT_PUBLISHABLE_KEY || '').trim();
@@ -195,6 +227,18 @@
     const raw = String(typeof value === 'undefined' ? DEFAULT_REST_BASE_PATH : (value || '')).trim();
     if (!raw || raw === '/') return '';
     return `/${raw.replace(/^\/+/, '').replace(/\/+$/, '')}`;
+  }
+
+  function isLegacySupabaseUrl(value) {
+    const normalized = String(value || '').trim().replace(/\/+$/, '/');
+    if (!normalized) return false;
+    return LEGACY_SUPABASE_URLS.some(entry => normalized === entry);
+  }
+
+  function isLegacySupabaseKey(value) {
+    const normalized = String(value || '').trim();
+    if (!normalized) return false;
+    return LEGACY_SUPABASE_KEYS.includes(normalized);
   }
 
   function makeBasicAuthHeader(username, password) {
