@@ -4,7 +4,6 @@
   const SMAX = root.SMAX = root.SMAX || {};
   const PANEL_ID = 'smax-discussion-advisor';
   const STYLE_ID = 'smax-discussion-advisor-style';
-  const COLLAPSE_KEY = 'smax-sgs-221:discussion-advisor:collapsed';
   const SETTINGS_KEY = 'smax-sgs-221:openai-settings:v1';
   const CACHE_PREFIX = 'smax-sgs-221:openai-analysis:';
   const TAB_SELECTOR = '[data-aid="tab-panel-content-discussions"]';
@@ -25,6 +24,7 @@
   let observer = null;
   let scheduled = false;
   let runtimeSettings = null;
+  let panelCollapsed = true;
 
   function normalizeText(value) {
     return String(value || '')
@@ -676,18 +676,18 @@
     style.id = STYLE_ID;
     style.textContent = `
       #${PANEL_ID} {
-        --sda-primary: #075ea8;
-        --sda-primary-dark: #064b85;
-        --sda-border: #d5dee8;
-        --sda-text: #243447;
-        --sda-muted: #617184;
+        --sda-primary: #0073e7;
+        --sda-primary-dark: #0065cc;
+        --sda-border: #d6dce2;
+        --sda-text: #333;
+        --sda-muted: #666;
         box-sizing: border-box;
-        margin: 22px 0 20px 58px;
+        margin: 18px 0 18px 58px;
         border: 1px solid var(--sda-border);
-        border-radius: 8px;
+        border-radius: 2px;
         background: #fff;
         color: var(--sda-text);
-        box-shadow: 0 3px 14px rgba(25, 52, 77, .09);
+        box-shadow: none;
         overflow: hidden;
         font-family: Arial, Helvetica, sans-serif;
       }
@@ -696,62 +696,65 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 14px;
-        padding: 15px 18px;
-        border-bottom: 1px solid #dbe5ef;
-        background: linear-gradient(135deg, #edf6ff 0%, #f8fbfe 70%);
+        gap: 12px;
+        min-height: 49px;
+        padding: 9px 12px;
+        border-bottom: 1px solid var(--sda-border);
+        background: #f5f6f7;
       }
-      #${PANEL_ID} .sda-heading { display: flex; align-items: center; gap: 11px; min-width: 0; }
+      #${PANEL_ID}.is-collapsed .sda-header { border-bottom: 0; }
+      #${PANEL_ID} .sda-heading { display: flex; align-items: center; gap: 9px; min-width: 0; }
       #${PANEL_ID} .sda-icon {
-        display: grid; place-items: center; flex: 0 0 34px; height: 34px;
-        border-radius: 7px; background: var(--sda-primary); color: #fff;
-        font-size: 18px; font-weight: 700;
+        display: grid; place-items: center; flex: 0 0 28px; height: 28px;
+        border-radius: 2px; background: var(--sda-primary); color: #fff;
+        font-size: 10px; font-weight: 700; letter-spacing: .2px;
       }
-      #${PANEL_ID} h3 { margin: 0 0 2px; color: #18334e; font-size: 17px; font-weight: 700; }
-      #${PANEL_ID} .sda-subtitle { color: var(--sda-muted); font-size: 12px; }
-      #${PANEL_ID} .sda-header-actions { display: flex; gap: 7px; flex: 0 0 auto; }
+      #${PANEL_ID} h3 { margin: 0 0 1px; color: #333; font-size: 14px; font-weight: 600; }
+      #${PANEL_ID} .sda-subtitle { color: var(--sda-muted); font-size: 11px; }
+      #${PANEL_ID} .sda-header-actions { display: flex; gap: 6px; flex: 0 0 auto; }
       #${PANEL_ID} button {
-        min-height: 31px; padding: 6px 11px; border: 1px solid #aebdca; border-radius: 4px;
-        background: #fff; color: #28445f; cursor: pointer; font-size: 12px; line-height: 1.2;
+        min-height: 29px; padding: 5px 10px; border: 1px solid #b8bec5; border-radius: 2px;
+        background: #fff; color: #333; cursor: pointer; font-size: 12px; line-height: 1.2;
       }
-      #${PANEL_ID} button:hover { border-color: #6f8da8; background: #f4f8fb; }
+      #${PANEL_ID} button:hover { border-color: #8d959d; background: #f5f6f7; }
       #${PANEL_ID} button:focus, #${PANEL_ID} textarea:focus { outline: 2px solid #5ba4e5; outline-offset: 1px; }
       #${PANEL_ID} button[disabled] { cursor: not-allowed; opacity: .58; }
       #${PANEL_ID} button.sda-primary { border-color: var(--sda-primary); background: var(--sda-primary); color: #fff; }
       #${PANEL_ID} button.sda-primary:hover { border-color: var(--sda-primary-dark); background: var(--sda-primary-dark); }
-      #${PANEL_ID} .sda-content { padding: 17px 18px 15px; }
+      #${PANEL_ID} .sda-content { padding: 13px 12px 12px; }
       #${PANEL_ID}.is-collapsed .sda-content { display: none; }
-      #${PANEL_ID} .sda-badges { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 15px; }
+      #${PANEL_ID} .sda-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 11px; }
       #${PANEL_ID} .sda-badge {
-        display: inline-flex; align-items: center; min-height: 25px; padding: 4px 9px;
-        border-radius: 999px; background: #edf2f7; color: #43566a; font-size: 11px; font-weight: 700;
+        display: inline-flex; align-items: center; min-height: 23px; padding: 3px 8px;
+        border: 1px solid #d6dce2; border-radius: 2px; background: #f5f6f7; color: #4d555d; font-size: 11px; font-weight: 600;
       }
       #${PANEL_ID} .sda-badge.purple { background: #f1eafe; color: #6941a5; }
       #${PANEL_ID} .sda-badge.amber { background: #fff3d8; color: #8a5b00; }
       #${PANEL_ID} .sda-badge.blue { background: #e4f1fd; color: #075b9e; }
       #${PANEL_ID} .sda-badge.green { background: #e3f5e8; color: #276a3c; }
       #${PANEL_ID} .sda-badge.gray { background: #eef1f4; color: #526273; }
-      #${PANEL_ID} .sda-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: 13px; }
-      #${PANEL_ID} .sda-card { border: 1px solid #e0e7ee; border-radius: 6px; background: #fbfcfd; padding: 14px 15px; }
-      #${PANEL_ID} .sda-card h4 { margin: 0 0 10px; color: #26445f; font-size: 13px; font-weight: 700; }
+      #${PANEL_ID} .sda-grid { display: flex; flex-direction: column; border: 1px solid var(--sda-border); background: #fff; }
+      #${PANEL_ID} .sda-grid > .sda-card { border: 0; border-bottom: 1px solid #e3e6e9; border-radius: 0; background: #fff; padding: 11px 13px; }
+      #${PANEL_ID} .sda-grid > .sda-card:last-child { border-bottom: 0; }
+      #${PANEL_ID} .sda-card h4 { margin: 0 0 8px; color: #3a4148; font-size: 12px; font-weight: 600; }
       #${PANEL_ID} .sda-card ul { margin: 0; padding-left: 19px; }
-      #${PANEL_ID} .sda-card li { margin: 0 0 7px; color: #3c4e60; font-size: 12.5px; line-height: 1.45; }
+      #${PANEL_ID} .sda-card li { margin: 0 0 5px; color: #444; font-size: 12px; line-height: 1.45; }
       #${PANEL_ID} .sda-card li:last-child { margin-bottom: 0; }
-      #${PANEL_ID} .sda-empty { margin: 0; color: var(--sda-muted); font-size: 12.5px; line-height: 1.45; }
-      #${PANEL_ID} .sda-opinion-card { margin-top: 13px; border-left: 4px solid var(--sda-primary); background: #f7fbff; }
+      #${PANEL_ID} .sda-empty { margin: 0; color: var(--sda-muted); font-size: 12px; line-height: 1.45; }
+      #${PANEL_ID} .sda-opinion-card { margin-top: 11px; padding: 12px 13px; border: 1px solid #cbd8e5; border-left: 3px solid var(--sda-primary); border-radius: 0 2px 2px 0; background: #f7fafd; }
       #${PANEL_ID} .sda-opinion-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 9px; }
       #${PANEL_ID} .sda-opinion-head h4 { margin: 0; }
       #${PANEL_ID} .sda-actions { display: flex; flex-wrap: wrap; gap: 7px; }
       #${PANEL_ID} textarea {
         display: block; width: 100%; min-height: 145px; resize: vertical; padding: 11px 12px;
-        border: 1px solid #bdcad6; border-radius: 5px; background: #fff; color: #263b4f;
+        border: 1px solid #b8bec5; border-radius: 2px; background: #fff; color: #333;
         font: 13px/1.55 Arial, Helvetica, sans-serif;
       }
       #${PANEL_ID} .sda-note { margin: 9px 0 0; color: #718093; font-size: 11px; }
       #${PANEL_ID} .sda-feedback { min-height: 14px; margin-top: 7px; color: #24703d; font-size: 11px; font-weight: 700; }
       #${PANEL_ID} .sda-ai-config {
-        margin-bottom: 15px; padding: 14px 15px; border: 1px solid #b9d5ee; border-radius: 6px;
-        background: #f2f8fe;
+        margin-bottom: 11px; padding: 12px 13px; border: 1px solid #cbd8e5; border-radius: 2px;
+        background: #f7fafd;
       }
       #${PANEL_ID} .sda-ai-config[hidden], #${PANEL_ID} .sda-loading[hidden], #${PANEL_ID} .sda-error[hidden] { display: none; }
       #${PANEL_ID} .sda-ai-config h4 { margin: 0 0 5px; color: #204a70; font-size: 13px; }
@@ -761,20 +764,19 @@
       #${PANEL_ID} .sda-config-grid { display: grid; grid-template-columns: minmax(240px, 1fr) minmax(260px, 1fr); gap: 11px; }
       #${PANEL_ID} .sda-field { display: flex; flex-direction: column; gap: 5px; color: #304b64; font-size: 11.5px; font-weight: 700; }
       #${PANEL_ID} .sda-field input, #${PANEL_ID} .sda-field select {
-        width: 100%; height: 34px; padding: 6px 9px; border: 1px solid #afbfce; border-radius: 4px;
+        width: 100%; height: 34px; padding: 6px 9px; border: 1px solid #afbfce; border-radius: 2px;
         background: #fff; color: #24384b; font: 12px Arial, Helvetica, sans-serif;
       }
       #${PANEL_ID} .sda-config-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 11px; }
       #${PANEL_ID} .sda-remember { display: inline-flex; align-items: center; gap: 7px; color: #475f74; font-size: 11.5px; font-weight: 400; }
       #${PANEL_ID} .sda-remember input { width: 16px; height: 16px; margin: 0; }
       #${PANEL_ID} .sda-config-actions { display: flex; flex-wrap: wrap; gap: 7px; }
-      #${PANEL_ID} .sda-loading { display: flex; align-items: center; gap: 9px; margin-bottom: 13px; padding: 10px 12px; border-radius: 5px; background: #edf6ff; color: #285b87; font-size: 12px; font-weight: 700; }
+      #${PANEL_ID} .sda-loading { display: flex; align-items: center; gap: 9px; margin-bottom: 11px; padding: 10px 12px; border-radius: 2px; background: #edf6ff; color: #285b87; font-size: 12px; font-weight: 700; }
       #${PANEL_ID} .sda-spinner { width: 16px; height: 16px; border: 2px solid #b4d4f0; border-top-color: var(--sda-primary); border-radius: 50%; animation: sda-spin .8s linear infinite; }
-      #${PANEL_ID} .sda-error { margin-bottom: 13px; padding: 10px 12px; border: 1px solid #e6b7b7; border-radius: 5px; background: #fff1f1; color: #8d2929; font-size: 12px; line-height: 1.4; }
+      #${PANEL_ID} .sda-error { margin-bottom: 11px; padding: 10px 12px; border: 1px solid #e6b7b7; border-radius: 2px; background: #fff1f1; color: #8d2929; font-size: 12px; line-height: 1.4; }
       @keyframes sda-spin { to { transform: rotate(360deg); } }
       @media (max-width: 900px) {
         #${PANEL_ID} { margin-left: 0; }
-        #${PANEL_ID} .sda-grid { grid-template-columns: 1fr; }
         #${PANEL_ID} .sda-config-grid { grid-template-columns: 1fr; }
         #${PANEL_ID} .sda-header { align-items: flex-start; }
         #${PANEL_ID} .sda-header-actions { flex-direction: column; }
@@ -789,11 +791,11 @@
   }
 
   function isCollapsed() {
-    try { return root.localStorage?.getItem(COLLAPSE_KEY) === '1'; } catch (e) { return false; }
+    return panelCollapsed;
   }
 
   function setCollapsed(value) {
-    try { root.localStorage?.setItem(COLLAPSE_KEY, value ? '1' : '0'); } catch (e) { /* ignore */ }
+    panelCollapsed = !!value;
   }
 
   function resultMarkup(analysisResult) {
@@ -806,15 +808,15 @@
       </div>
       <div class="sda-grid">
         <div class="sda-card">
-          <h4>Resumo executivo</h4>
+          <h4>Resumo</h4>
           ${listHtml(analysisResult.summary, 'A IA não retornou um resumo para os comentários disponíveis.')}
         </div>
         <div class="sda-card">
-          <h4>Riscos e impactos</h4>
+          <h4>Riscos</h4>
           ${listHtml(analysisResult.risks, 'Nenhum risco material foi identificado pela IA.')}
         </div>
-        <div class="sda-card" style="grid-column: 1 / -1;">
-          <h4>Pontos pendentes para decisão</h4>
+        <div class="sda-card">
+          <h4>Pontos pendentes de decisão</h4>
           ${listHtml(analysisResult.pending, 'A IA não identificou pendências explícitas no histórico.')}
         </div>
       </div>
@@ -896,7 +898,7 @@
     panel.innerHTML = `
       <div class="sda-header">
         <div class="sda-heading">
-          <div class="sda-icon" aria-hidden="true">✓</div>
+          <div class="sda-icon" aria-hidden="true">IA</div>
           <div>
             <h3>Análise gerencial da discussão</h3>
             <div class="sda-subtitle">Resumo e parecer com inteligência artificial</div>
