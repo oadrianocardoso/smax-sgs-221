@@ -81,6 +81,13 @@
     return Array.from(new Set(arr));
   }
 
+  function toPositiveIntegerOrNull(value) {
+    if (value === null || typeof value === 'undefined') return null;
+    if (typeof value === 'string' && !value.trim()) return null;
+    const number = Number(value);
+    return Number.isInteger(number) && number > 0 ? number : null;
+  }
+
   function normalizeRule(rule) {
     const tag = String(rule?.tag || '').trim();
     if (!tag) return null;
@@ -452,12 +459,13 @@
       teams[code].nameAliases[name] = String(s.nickname || '').trim();
       teams[code].nameColors[name] = { bg, fg };
       if (s.is_absent) teams[code].ausentes.push(name);
-      const personId = Number(s.smax_person_id);
+      const personId = toPositiveIntegerOrNull(s.smax_person_id);
       const personLocation = String(s.smax_location || '').trim();
       const personName = String(s.smax_person_name || s.name || '').trim();
-      if (Number.isInteger(personId) || personLocation || personName) {
+      if (toPositiveIntegerOrNull(sid) || personId || personLocation || personName) {
         teams[code].personMeta[name] = {
-          id: Number.isInteger(personId) ? personId : null,
+          id: personId,
+          specialistId: toPositiveIntegerOrNull(sid),
           location: personLocation,
           name: personName
         };
@@ -953,20 +961,22 @@
       .map((name, idx) => {
         const c = isPlainObject(colors[name]) ? colors[name] : {};
         const meta = isPlainObject(personMeta[name]) ? personMeta[name] : {};
-        const personId = Number(meta.id ?? meta.personId);
+        const personId = toPositiveIntegerOrNull(meta.id ?? meta.personId);
+        const specialistId = toPositiveIntegerOrNull(meta.specialistId ?? meta.dbId);
         const bg = normalizeHex(c.bg, '#E2E8F0');
         const fg = normalizeHex(c.fg, inferFg(bg));
         const finals = Array.isArray(groups[name])
           ? uniq(groups[name].map(n => Number(n)).filter(n => Number.isInteger(n) && n >= 0 && n <= 99)).sort((a, b) => a - b)
           : [];
         return {
+          id: specialistId,
           name,
           nickname: String(aliases[name] || '').trim(),
           bg_color: bg,
           fg_color: fg,
           is_absent: ausSet.has(name),
           sort_order: idx + 1,
-          smax_person_id: Number.isInteger(personId) ? personId : null,
+          smax_person_id: personId,
           smax_location: String(meta.location || '').trim(),
           smax_person_name: String(meta.name || '').trim(),
           finals
@@ -1168,6 +1178,129 @@
     }
   }
 
+  function buildSpecialistWriteBody(teamId, specialist) {
+    return {
+      team_id: teamId,
+      name: String(specialist?.name || '').trim().toUpperCase(),
+      nickname: String(specialist?.nickname || '').trim(),
+      bg_color: normalizeHex(specialist?.bg_color, '#E2E8F0'),
+      fg_color: normalizeHex(specialist?.fg_color, '#111111'),
+      is_absent: !!specialist?.is_absent,
+      smax_person_id: toPositiveIntegerOrNull(specialist?.smax_person_id),
+      smax_location: String(specialist?.smax_location || '').trim(),
+      smax_person_name: String(specialist?.smax_person_name || '').trim(),
+      sort_order: Number.isInteger(Number(specialist?.sort_order)) ? Number(specialist.sort_order) : 0
+    };
+  }
+
+  function matchExistingSpecialist(specialist, existingRows, claimedIds) {
+    const rows = Array.isArray(existingRows) ? existingRows : [];
+    const requestedId = toPositiveIntegerOrNull(specialist?.id);
+    const personId = toPositiveIntegerOrNull(specialist?.smax_person_id);
+    const name = normalizeNameKey(specialist?.name);
+    const available = row => {
+      const id = toPositiveIntegerOrNull(row?.id);
+      return id && !claimedIds.has(id);
+    };
+
+    let match = requestedId
+      ? rows.find(row => available(row) && toPositiveIntegerOrNull(row?.id) === requestedId)
+      : null;
+
+    if (!match && personId) {
+      match = rows.find(row => available(row) && toPositiveIntegerOrNull(row?.smax_person_id) === personId) || null;
+    }
+
+    if (!match && name) {
+      match = rows.find(row => available(row) && normalizeNameKey(row?.name) === name) || null;
+    }
+
+    return match || null;
+  }
+
+  async function syncSpecialistsForTeam(teamId, specialists, existingRows) {
+    const current = Array.isArray(specialists) ? specialists : [];
+    const existing = (Array.isArray(existingRows) ? existingRows : [])
+      .filter(row => Number(row?.team_id) === Number(teamId));
+    const claimedIds = new Set();
+
+    const assignments = current.map(specialist => {
+      const existingRow = matchExistingSpecialist(specialist, existing, claimedIds);
+      const existingId = toPositiveIntegerOrNull(existingRow?.id);
+      if (existingId) claimedIds.add(existingId);
+      return { specialist, existingRow };
+    });
+
+    const removedIds = existing
+      .map(row => toPositiveIntegerOrNull(row?.id))
+      .filter(id => id && !claimedIds.has(id));
+
+    if (removedIds.length) {
+      await request(`smax_specialists?team_id=eq.${teamId}&id=${buildInFilter(removedIds)}`, {
+        method: 'DELETE',
+        headers: { Prefer: 'return=minimal' }
+      });
+    }
+
+    const savedRows = [];
+    for (const assignment of assignments) {
+      const body = buildSpecialistWriteBody(teamId, assignment.specialist);
+      const existingId = toPositiveIntegerOrNull(assignment.existingRow?.id);
+      let returned;
+
+      if (existingId) {
+        returned = await request(
+          `smax_specialists?id=eq.${existingId}&team_id=eq.${teamId}&select=id,team_id,name,smax_person_id,smax_location,smax_person_name`,
+          {
+            method: 'PATCH',
+            headers: { Prefer: 'return=representation' },
+            body
+          }
+        );
+      } else {
+        returned = await request(
+          'smax_specialists?select=id,team_id,name,smax_person_id,smax_location,smax_person_name',
+          {
+            method: 'POST',
+            headers: { Prefer: 'return=representation' },
+            body: [body]
+          }
+        );
+      }
+
+      const row = Array.isArray(returned) && returned[0]
+        ? returned[0]
+        : Object.assign({ id: existingId }, body);
+      const savedId = toPositiveIntegerOrNull(row?.id);
+      if (!savedId) throw new Error(`Nao foi possivel confirmar o ID do especialista ${body.name}.`);
+      savedRows.push(Object.assign({}, body, row, { id: savedId }));
+    }
+
+    return savedRows;
+  }
+
+  async function replaceFinalsForTeam(teamId, specialistIds, finalsBody) {
+    try {
+      await request(`smax_specialist_finals?team_id=eq.${teamId}`, {
+        method: 'DELETE',
+        headers: { Prefer: 'return=minimal' }
+      });
+    } catch (e) {
+      const ids = (Array.isArray(specialistIds) ? specialistIds : [])
+        .map(toPositiveIntegerOrNull)
+        .filter(Boolean);
+      const msg = String(e?.message || '');
+      const legacySchema = msg.includes('team_id') || msg.includes('PGRST');
+      if (!legacySchema || !ids.length) throw e;
+      await request(`smax_specialist_finals?specialist_id=${buildInFilter(ids)}`, {
+        method: 'DELETE',
+        headers: { Prefer: 'return=minimal' }
+      });
+    }
+
+    await upsertFinalsRows(finalsBody);
+  }
+
   async function saveAllToDb(snapshot) {
     if (!runtime.enabled) throw new Error('Supabase desabilitado');
     const payload = buildPayloadFromSnapshot(snapshot);
@@ -1209,7 +1342,6 @@
         `smax_specialists?select=id,team_id,name,smax_person_id,smax_person_name&team_id=${buildInFilter(savedTeamIds)}&order=team_id.asc,id.asc`
       )
       : [];
-    const preservedScopedRules = await loadScopedRulesSnapshot(existingSpecialists);
 
     let savedSpecialists = [];
 
@@ -1228,38 +1360,13 @@
         throw new Error(`Finais duplicados na equipe ${code}. Cada final deve pertencer a um unico especialista na equipe. Conflitos: ${details}`);
       }
 
-      await request(`smax_specialists?team_id=eq.${teamId}`, {
-        method: 'DELETE',
-        headers: { Prefer: 'return=minimal' }
-      });
-
-      if (!specialists.length) continue;
-
-      const specBody = specialists.map(s => ({
-        team_id: teamId,
-        name: s.name,
-        nickname: s.nickname,
-        bg_color: s.bg_color,
-        fg_color: s.fg_color,
-        is_absent: !!s.is_absent,
-        smax_person_id: Number.isInteger(Number(s.smax_person_id)) ? Number(s.smax_person_id) : null,
-        smax_location: String(s.smax_location || '').trim(),
-        smax_person_name: String(s.smax_person_name || '').trim(),
-        sort_order: s.sort_order
-      }));
-
-      const inserted = await request('smax_specialists?select=id,team_id,name,smax_person_id,smax_location,smax_person_name', {
-        method: 'POST',
-        headers: { Prefer: 'return=representation' },
-        body: specBody
-      });
-
-      if (Array.isArray(inserted) && inserted.length) {
-        savedSpecialists = savedSpecialists.concat(inserted);
-      }
+      const teamExistingRows = (Array.isArray(existingSpecialists) ? existingSpecialists : [])
+        .filter(row => Number(row?.team_id) === Number(teamId));
+      const syncedRows = await syncSpecialistsForTeam(teamId, specialists, teamExistingRows);
+      savedSpecialists = savedSpecialists.concat(syncedRows);
 
       const specIdByName = {};
-      (inserted || []).forEach(s => {
+      syncedRows.forEach(s => {
         const name = String(s.name || '').trim().toUpperCase();
         if (name) specIdByName[name] = Number(s.id);
       });
@@ -1273,7 +1380,11 @@
         });
       });
 
-      await upsertFinalsRows(finalsBody);
+      await replaceFinalsForTeam(
+        teamId,
+        syncedRows.map(row => row.id),
+        finalsBody
+      );
     }
 
     const hlSource = isPlainObject(payload.highlightGroups) ? payload.highlightGroups : {};
@@ -1326,8 +1437,6 @@
         body: detrBody
       });
     }
-
-    await restoreScopedRulesForSpecialists(savedSpecialists, preservedScopedRules);
 
     const tagBody = getConfiguredTagRows(payload.autoTagRules);
     const currentSpecialist = resolveCurrentSpecialistForSave(payload.teamName, savedSpecialists, teamIdByCode);

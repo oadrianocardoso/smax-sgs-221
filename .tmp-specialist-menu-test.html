@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><title>pending</title></head>
+<body>
+<script>
+  const baseSnapshot = {
+    prefs: {
+      highlightsOn: true,
+      nameBadgesOn: true,
+      magistradoOn: true,
+      collapseOn: true,
+      enlargeCommentsOn: true,
+      autoTagsOn: true
+    },
+    teamName: 'SGS 2.2.1',
+    teamGroupIds: {},
+    teams: {
+      'SGS 2.2.1': {
+        nameGroups: { ALICE: [1] },
+        nameAliases: { ALICE: '' },
+        nameColors: { ALICE: { bg: '#FFFFFF', fg: '#111111' } },
+        ausentes: [],
+        personMeta: { ALICE: { specialistId: 10, id: null, location: '', name: 'Alice' } }
+      },
+      'SGS 2.2.2': { nameGroups: {}, nameAliases: {}, nameColors: {}, ausentes: [], personMeta: {} }
+    },
+    highlightGroups: {},
+    detratores: [],
+    autoTagRules: []
+  };
+  window.savedPayload = null;
+  window.SMAX = {
+    config: Object.assign({}, baseSnapshot, {
+      snapshot: function () { return JSON.parse(JSON.stringify(baseSnapshot)); },
+      update: function (payload) { window.savedPayload = payload; }
+    })
+  };
+</script>
+<script src="modules/menu-config.js"></script>
+<script>
+  (async function () {
+    try {
+      await new Promise(function (resolve) { setTimeout(resolve, 50); });
+      await window.SMAX.menuConfig.openOverlay();
+      await new Promise(function (resolve) { setTimeout(resolve, 100); });
+      const personInput = document.querySelector('.smax-specialist-row .smax-person-id');
+      const dbIdInput = document.querySelector('.smax-specialist-row .smax-specialist-db-id');
+      document.getElementById('smax-save').click();
+      await new Promise(function (resolve) { setTimeout(resolve, 100); });
+      const savedMeta = window.savedPayload && window.savedPayload.teams['SGS 2.2.1'].personMeta.ALICE;
+      const result = {
+        blankPersonIdRendered: !!personInput && personInput.value === '',
+        specialistIdRendered: !!dbIdInput && dbIdInput.value === '10',
+        blankPersonIdSavedAsNull: !!savedMeta && savedMeta.id === null,
+        specialistIdPreservedInPayload: !!savedMeta && savedMeta.specialistId === 10
+      };
+      document.title = Object.values(result).every(Boolean) ? 'PASS' : 'FAIL';
+      const output = document.createElement('pre');
+      output.id = 'test-result';
+      output.textContent = JSON.stringify({ result, savedMeta });
+      document.body.appendChild(output);
+    } catch (error) {
+      document.title = 'ERROR';
+      const output = document.createElement('pre');
+      output.id = 'test-result';
+      output.textContent = String(error && error.stack || error);
+      document.body.appendChild(output);
+    }
+  })();
+</script>
+</body>
+</html>

@@ -84,6 +84,13 @@
     return Array.from(new Set(arr));
   }
 
+  function toPositiveIntegerOrNull(value) {
+    if (value === null || typeof value === 'undefined') return null;
+    if (typeof value === 'string' && !value.trim()) return null;
+    const number = Number(value);
+    return Number.isInteger(number) && number > 0 ? number : null;
+  }
+
   function parseLines(value) {
     return uniq(
       String(value || '')
@@ -267,9 +274,11 @@
       const key = String(name || '').trim().toUpperCase();
       if (!key) return;
       const m = isPlainObject(srcMeta[name]) ? srcMeta[name] : {};
-      const personId = Number(m.id ?? m.personId);
+      const personId = toPositiveIntegerOrNull(m.id ?? m.personId);
+      const specialistId = toPositiveIntegerOrNull(m.specialistId ?? m.dbId);
       personMeta[key] = {
-        id: Number.isInteger(personId) ? personId : null,
+        id: personId,
+        specialistId,
         location: String(m.location || '').trim(),
         name: String(m.name || '').trim()
       };
@@ -364,7 +373,8 @@
     return names.map(name => {
       const c = isPlainObject(colors[name]) ? colors[name] : {};
       const m = isPlainObject(personMeta[name]) ? personMeta[name] : {};
-      const personId = Number(m.id ?? m.personId);
+      const personId = toPositiveIntegerOrNull(m.id ?? m.personId);
+      const specialistId = toPositiveIntegerOrNull(m.specialistId ?? m.dbId);
       const range = getFinalRange(groups[name]);
       return {
         name,
@@ -374,7 +384,8 @@
         bg: normalizeHex(c.bg, '#E2E8F0'),
         fg: normalizeHex(c.fg, inferFg(c.bg)),
         ausente: ausentes.has(name),
-        personId: Number.isInteger(personId) ? personId : null,
+        specialistId,
+        personId,
         personLocation: String(m.location || '').trim(),
         personName: String(m.name || '').trim()
       };
@@ -1089,18 +1100,20 @@
       const bg = normalizeHex(row.querySelector('.smax-bg')?.value, '#E2E8F0');
       const fg = normalizeHex(row.querySelector('.smax-fg')?.value, inferFg(bg));
       const ausente = !!row.querySelector('.smax-ausente')?.checked;
+      const specialistId = toPositiveIntegerOrNull(row.querySelector('.smax-specialist-db-id')?.value);
       const personIdRaw = row.querySelector('.smax-person-id')?.value || '';
       const personLocation = String(row.querySelector('.smax-person-location')?.value || '').trim();
       const personName = String(row.querySelector('.smax-person-name')?.value || '').trim();
-      const personId = Number(personIdRaw);
+      const personId = toPositiveIntegerOrNull(personIdRaw);
 
       nameGroups[name] = finals;
       nameAliases[name] = alias;
       nameColors[name] = { bg, fg };
       if (ausente) ausentes.push(name);
-      if (Number.isInteger(personId) || personLocation || personName) {
+      if (specialistId || personId || personLocation || personName) {
         personMeta[name] = {
-          id: Number.isInteger(personId) ? personId : null,
+          id: personId,
+          specialistId,
           location: personLocation,
           name: personName
         };
@@ -1197,7 +1210,7 @@
     const select = doc.getElementById('smax-person-select');
     if (!host || !select || !panelState) return;
 
-    const personId = Number(select.value);
+    const personId = toPositiveIntegerOrNull(select.value);
     const currentTeam = normalizeTeamName(panelState.teamName);
     const groupId = getSelectedTeamGroupId() || getTeamGroupId(currentTeam);
     const cacheKey = `${currentTeam}:${groupId || 'none'}`;
@@ -1207,9 +1220,9 @@
 
     const existingRows = Array.from(doc.querySelectorAll('.smax-specialist-row'));
     const alreadyExists = existingRows.some(row => {
-      const rowPersonId = Number(row.querySelector('.smax-person-id')?.value || '');
+      const rowPersonId = toPositiveIntegerOrNull(row.querySelector('.smax-person-id')?.value);
       const rowName = String(row.querySelector('.smax-name')?.value || '').trim().toUpperCase();
-      return (Number.isInteger(rowPersonId) && rowPersonId === person.id) || rowName === person.name.trim().toUpperCase();
+      return (rowPersonId !== null && rowPersonId === person.id) || rowName === person.name.trim().toUpperCase();
     });
     if (alreadyExists) {
       root.alert('Este especialista ja esta na lista da equipe selecionada.');
@@ -1224,6 +1237,7 @@
       bg: '#E2E8F0',
       fg: '#111111',
       ausente: false,
+      specialistId: null,
       personId: person.id,
       personLocation: person.location || '',
       personName: person.name
@@ -1261,6 +1275,7 @@
       bg: '#E2E8F0',
       fg: '#111111',
       ausente: false,
+      specialistId: null,
       personId: null,
       personLocation: '',
       personName: ''
@@ -1278,7 +1293,8 @@
       <input type="color" class="smax-bg" value="${normalizeHex(data.bg, '#E2E8F0')}">
       <input type="color" class="smax-fg" value="${normalizeHex(data.fg, '#111111')}">
       <label class="smax-absent-wrap"><input type="checkbox" class="smax-ausente" ${data.ausente ? 'checked' : ''}> <span>Ausente</span></label>
-      <input type="hidden" class="smax-person-id" value="${Number.isInteger(Number(data.personId)) ? Number(data.personId) : ''}">
+      <input type="hidden" class="smax-specialist-db-id" value="${toPositiveIntegerOrNull(data.specialistId) || ''}">
+      <input type="hidden" class="smax-person-id" value="${toPositiveIntegerOrNull(data.personId) || ''}">
       <input type="hidden" class="smax-person-location" value="${escapeHtml(data.personLocation || '')}">
       <input type="hidden" class="smax-person-name" value="${escapeHtml(data.personName || '')}">
       <button type="button" class="smax-row-del" title="Remover">x</button>
