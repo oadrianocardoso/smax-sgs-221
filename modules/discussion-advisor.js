@@ -446,9 +446,9 @@
     });
 
     const full = blocks.join('\n\n---\n\n');
-    const maxChars = 90000;
+    const maxChars = 60000;
     if (full.length <= maxChars) return full;
-    return `${full.slice(0, 18000)}\n\n--- TRECHO INTERMEDIÁRIO OMITIDO POR LIMITE ---\n\n${full.slice(-(maxChars - 18100))}`;
+    return `${full.slice(0, 12000)}\n\n--- TRECHO INTERMEDIÁRIO OMITIDO POR LIMITE ---\n\n${full.slice(-(maxChars - 12100))}`;
   }
 
   function buildResponseSchema() {
@@ -483,7 +483,7 @@
       model,
       store: false,
       reasoning: { effort: 'low' },
-      max_output_tokens: 2400,
+      max_output_tokens: 1400,
       input: [
         {
           role: 'system',
@@ -533,13 +533,15 @@
         responseType: 'json',
         onload: response => {
           let payload = response.response;
-          if (!payload && response.responseText) {
+          if (typeof payload === 'string') {
+            try { payload = JSON.parse(payload); } catch (e) { payload = null; }
+          }
+          if ((!payload || typeof payload !== 'object') && response.responseText) {
             try { payload = JSON.parse(response.responseText); } catch (e) { payload = null; }
           }
 
           if (response.status < 200 || response.status >= 300) {
-            const apiMessage = cleanText(payload?.error?.message || '');
-            reject(new Error(apiMessage || `A API da OpenAI retornou HTTP ${response.status}.`));
+            reject(buildApiError(response, payload));
             return;
           }
 
@@ -572,6 +574,49 @@
         onabort: () => reject(new Error('A geração foi cancelada.'))
       });
     });
+  }
+
+  function responseHeader(response, name) {
+    const raw = String(response?.responseHeaders || '');
+    const match = raw.match(new RegExp(`^${name}:\\s*(.+)$`, 'im'));
+    return cleanText(match?.[1] || '');
+  }
+
+  function buildApiError(response, payload) {
+    const status = Number(response?.status || 0);
+    const apiError = payload?.error || {};
+    const apiMessage = cleanText(apiError.message || '');
+    const code = cleanText(apiError.code || apiError.type || '');
+    const combined = normalizeText(`${code} ${apiMessage}`);
+
+    if (status === 429) {
+      if (includesAny(combined, [
+        'insufficient_quota', 'billing quota', 'billing hard limit', 'exceeded your current quota',
+        'credit balance', 'sem saldo', 'quota excedida'
+      ])) {
+        return new Error('A conta da API está sem saldo ou atingiu o limite mensal. A assinatura do ChatGPT não inclui créditos da API. Verifique o faturamento da API Platform e adicione saldo antes de tentar novamente.');
+      }
+
+      const retryAfter = responseHeader(response, 'retry-after');
+      if (includesAny(combined, ['rate_limit', 'rate limit', 'too many requests', 'tokens per min', 'requests per min'])) {
+        const wait = retryAfter ? ` Aguarde aproximadamente ${retryAfter} segundo(s).` : ' Aguarde alguns instantes.';
+        return new Error(`O limite temporário de requisições ou tokens da API foi atingido.${wait} Depois, clique em “Gerar com IA” novamente.`);
+      }
+
+      return new Error(`A OpenAI recusou a chamada por limite de uso ou de faturamento (HTTP 429). ${apiMessage || 'Verifique o saldo e os limites da API Platform.'}`);
+    }
+
+    if (status === 401) {
+      return new Error('A chave da API foi rejeitada pela OpenAI. Remova a chave configurada e informe uma chave válida da API Platform.');
+    }
+    if (status === 403) {
+      return new Error(apiMessage || 'A chave não possui permissão para usar este modelo ou projeto da OpenAI.');
+    }
+    if (status === 404 && includesAny(combined, ['model', 'modelo'])) {
+      return new Error('O modelo selecionado não está disponível para esta chave. Abra “Configurar IA” e escolha outro modelo.');
+    }
+
+    return new Error(apiMessage || `A API da OpenAI retornou HTTP ${status || 'desconhecido'}.`);
   }
 
   function toneForClassification(label) {
@@ -711,6 +756,8 @@
       #${PANEL_ID} .sda-ai-config[hidden], #${PANEL_ID} .sda-loading[hidden], #${PANEL_ID} .sda-error[hidden] { display: none; }
       #${PANEL_ID} .sda-ai-config h4 { margin: 0 0 5px; color: #204a70; font-size: 13px; }
       #${PANEL_ID} .sda-ai-config p { margin: 0 0 11px; color: #597084; font-size: 11.5px; line-height: 1.45; }
+      #${PANEL_ID} .sda-config-links { display: flex; flex-wrap: wrap; gap: 12px; margin: -3px 0 11px; font-size: 11.5px; }
+      #${PANEL_ID} .sda-config-links a { color: #075ea8; text-decoration: underline; }
       #${PANEL_ID} .sda-config-grid { display: grid; grid-template-columns: minmax(240px, 1fr) minmax(260px, 1fr); gap: 11px; }
       #${PANEL_ID} .sda-field { display: flex; flex-direction: column; gap: 5px; color: #304b64; font-size: 11.5px; font-weight: 700; }
       #${PANEL_ID} .sda-field input, #${PANEL_ID} .sda-field select {
@@ -864,7 +911,11 @@
       <div class="sda-content">
         <div class="sda-ai-config" data-sda-config hidden>
           <h4>Conexão com a OpenAI</h4>
-          <p>Use uma chave da API da OpenAI (normalmente iniciada por <strong>sk-</strong>). O texto visível da discussão será enviado à OpenAI. A chave será usada diretamente pelo Tampermonkey e não será salva no código nem no Supabase.</p>
+          <p>Use uma chave da API da OpenAI (normalmente iniciada por <strong>sk-</strong>). O texto visível da discussão será enviado à OpenAI. A chave será usada diretamente pelo Tampermonkey e não será salva no código nem no Supabase. A assinatura do ChatGPT e o faturamento da API são separados.</p>
+          <div class="sda-config-links">
+            <a href="https://platform.openai.com/settings/organization/billing/overview" target="_blank" rel="noopener noreferrer">Ver saldo/faturamento da API</a>
+            <a href="https://platform.openai.com/settings/organization/limits" target="_blank" rel="noopener noreferrer">Ver limites da API</a>
+          </div>
           <div class="sda-config-grid">
             <label class="sda-field">
               Chave da API
