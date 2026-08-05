@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221 (LOCAL)
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      10.7-local
+// @version      10.9-local
 // @description  SMAX SGS 221 (modularizado - arquivos locais)
 // @author       ADRIANO AUGUSTO CARDOSO E SANTOS
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -9,8 +9,12 @@
 // @run-at       document-start
 // @grant        GM_addStyle
 // @grant        GM_xmlhttpRequest
+// @grant        GM_getValue
+// @grant        GM_setValue
+// @grant        GM_deleteValue
 // @grant        unsafeWindow
 // @connect      187.77.232.228
+// @connect      api.openai.com
 //
 // @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/config.js
 // @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/supabase-db.js
@@ -19,6 +23,7 @@
 // @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/magistrado.js
 // @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/tags.js
 // @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/comments.js
+// @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/discussion-advisor.js
 // @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/sections.js
 // @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/attachments.js
 // @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/detratores.js

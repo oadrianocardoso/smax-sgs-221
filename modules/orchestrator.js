@@ -33,6 +33,7 @@
     try {
       SMAX.css        && SMAX.css.init        && SMAX.css.init();
       SMAX.comments   && SMAX.comments.init   && SMAX.comments.init();
+      SMAX.discussionAdvisor && SMAX.discussionAdvisor.init && SMAX.discussionAdvisor.init();
       SMAX.sections   && SMAX.sections.init   && SMAX.sections.init();
       SMAX.detratores && SMAX.detratores.init && SMAX.detratores.init();
       SMAX.exportChamados && SMAX.exportChamados.init && SMAX.exportChamados.init();
