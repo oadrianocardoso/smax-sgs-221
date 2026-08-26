@@ -25,6 +25,7 @@
   let scheduled = false;
   let runtimeSettings = null;
   let panelCollapsed = true;
+  const panelRuns = new WeakMap();
 
   function normalizeText(value) {
     return String(value || '')
@@ -134,6 +135,81 @@
     });
 
     return messages;
+  }
+
+  function prepareApiMessages(messages) {
+    const seen = new Set();
+    return (Array.isArray(messages) ? messages : [])
+      .filter(message => !message?.isSystem)
+      .map((message, index) => {
+        const text = cleanText(message?.text || '');
+        const normalized = normalizeText(text);
+        if (!text || !normalized || seen.has(normalized)) return null;
+        seen.add(normalized);
+        return Object.assign({}, message, {
+          id: cleanText(message?.id || `${index}:${text.length}`),
+          text,
+          normalized,
+          author: cleanText(message?.author || 'Manifestação sem identificação'),
+          when: cleanText(message?.when || ''),
+          privacy: cleanText(message?.privacy || 'Público'),
+          purpose: cleanText(message?.purpose || ''),
+          noise: isAdministrativeNoise(text),
+          index
+        });
+      })
+      .filter(Boolean);
+  }
+
+  async function loadDiscussionMessages(tab) {
+    const api = SMAX.discussionApi;
+    if (api?.fetchMessages) {
+      try {
+        const result = await api.fetchMessages({ context: tab });
+        const currentRequestId = api.getCurrentRequestId?.(tab);
+        if (currentRequestId && currentRequestId !== result.requestId) {
+          const error = new Error('A solicitação aberta mudou durante a consulta das discussões.');
+          error.code = 'SMAX_STALE_REQUEST';
+          throw error;
+        }
+        const apiMessages = prepareApiMessages(result.messages);
+        if (!apiMessages.length) {
+          const fallback = extractMessages(tab);
+          if (fallback.length) {
+            return {
+              messages: fallback,
+              requestId: result.requestId,
+              source: 'dom',
+              warning: 'A API do SMAX não retornou manifestações humanas; a tela foi usada como contingência.'
+            };
+          }
+        }
+        return {
+          messages: apiMessages,
+          requestId: result.requestId,
+          source: 'api',
+          warning: ''
+        };
+      } catch (error) {
+        if (error?.code === 'SMAX_STALE_REQUEST') throw error;
+        const fallback = extractMessages(tab);
+        if (!fallback.length) throw error;
+        return {
+          messages: fallback,
+          requestId: api.getCurrentRequestId?.(tab) || '',
+          source: 'dom',
+          warning: cleanText(error?.message || 'A API do SMAX não pôde ser consultada.')
+        };
+      }
+    }
+
+    const fallback = extractMessages(tab);
+    return {
+      messages: fallback,
+      requestId: '',
+      source: 'dom',
+      warning: 'O módulo da API de discussões não foi carregado.'
+    };
   }
 
   function splitSentences(text) {
@@ -829,18 +905,26 @@
           </div>
         </div>
         <textarea data-sda-opinion aria-label="Parecer gerencial sugerido" ${analysisResult.opinion ? '' : 'disabled'}>${escapeHtml(analysisResult.opinion)}</textarea>
-        <p class="sda-note">Conteúdo gerado por IA a partir das discussões visíveis. Revise o parecer antes de registrá-lo.</p>
+        <p class="sda-note">Conteúdo gerado por IA a partir da discussão do chamado. Revise o parecer antes de registrá-lo.</p>
         <div class="sda-feedback" aria-live="polite"></div>
       </div>
     `;
   }
 
-  function renderAnalysis(panel, analysisResult, model) {
+  function renderAnalysis(panel, analysisResult, model, source) {
     const host = panel.querySelector('[data-sda-result]');
     if (!host) return;
     host.innerHTML = resultMarkup(analysisResult);
     const subtitle = panel.querySelector('.sda-subtitle');
-    if (subtitle) subtitle.textContent = `Resumo e parecer gerados com ${model || 'OpenAI'}`;
+    const sourceLabel = source === 'api' ? 'dados obtidos pela API do SMAX' : 'dados obtidos da tela (contingência)';
+    if (subtitle) subtitle.textContent = `Resumo e parecer gerados com ${model || 'OpenAI'} — ${sourceLabel}`;
+    const note = panel.querySelector('.sda-note');
+    if (note) {
+      note.textContent = source === 'api'
+        ? 'Conteúdo gerado por IA com base nas discussões obtidas pela API do SMAX. Revise o parecer antes de registrá-lo.'
+        : 'A API do SMAX não estava disponível; foram usadas as discussões visíveis. Revise o parecer antes de registrá-lo.';
+    }
+    panel.setAttribute('data-smax-discussion-source', source || 'dom');
     panel.setAttribute('data-sda-generated-by-ai', '1');
   }
 
@@ -913,7 +997,7 @@
       <div class="sda-content">
         <div class="sda-ai-config" data-sda-config hidden>
           <h4>Conexão com a OpenAI</h4>
-          <p>Use uma chave da API da OpenAI (normalmente iniciada por <strong>sk-</strong>). O texto visível da discussão será enviado à OpenAI. A chave será usada diretamente pelo Tampermonkey e não será salva no código nem no Supabase. A assinatura do ChatGPT e o faturamento da API são separados.</p>
+          <p>Use uma chave da API da OpenAI (normalmente iniciada por <strong>sk-</strong>). O conteúdo da discussão obtido do SMAX será enviado à OpenAI. A chave será usada diretamente pelo Tampermonkey e não será salva no código nem no Supabase. A assinatura do ChatGPT e o faturamento da API são separados.</p>
           <div class="sda-config-links">
             <a href="https://platform.openai.com/settings/organization/billing/overview" target="_blank" rel="noopener noreferrer">Ver saldo/faturamento da API</a>
             <a href="https://platform.openai.com/settings/organization/limits" target="_blank" rel="noopener noreferrer">Ver limites da API</a>
@@ -1011,6 +1095,9 @@
   }
 
   async function generateAiAnalysis(panel, tab, force) {
+    const runId = (panelRuns.get(panel) || 0) + 1;
+    panelRuns.set(panel, runId);
+    const isCurrentRun = () => panel.isConnected && panelRuns.get(panel) === runId;
     const settings = readSettings();
     if (!settings.apiKey) {
       showConfig(panel, true);
@@ -1018,46 +1105,57 @@
       return;
     }
 
-    const messages = extractMessages(tab);
-    if (!messages.length) {
-      showError(panel, 'Nenhuma manifestação humana foi encontrada para análise.');
-      return;
-    }
-
-    const currentFingerprint = fingerprint(messages);
-    panel.setAttribute('data-smax-discussion-fingerprint', currentFingerprint);
     populateConfig(panel, settings);
     showError(panel, '');
-
-    if (!force) {
-      const cached = readCachedAnalysis(settings.model, currentFingerprint);
-      if (cached) {
-        renderAnalysis(panel, cached, settings.model);
-        return;
-      }
-    }
-
-    setLoading(panel, true, `Analisando ${messages.length} manifestação(ões) com ${settings.model}…`);
+    setLoading(panel, true, 'Carregando discussões pela API do SMAX…');
     try {
+      const loaded = await loadDiscussionMessages(tab);
+      if (!isCurrentRun()) return;
+
+      const messages = loaded.messages;
+      if (!messages.length) {
+        throw new Error('Nenhuma manifestação humana foi encontrada para análise.');
+      }
+
+      if (loaded.requestId) panel.setAttribute('data-smax-request-id', loaded.requestId);
+      const currentFingerprint = fingerprint(messages);
+      panel.setAttribute('data-smax-discussion-fingerprint', currentFingerprint);
+
+      if (!force) {
+        const cached = readCachedAnalysis(settings.model, currentFingerprint);
+        if (cached) {
+          renderAnalysis(panel, cached, settings.model, loaded.source);
+          if (loaded.warning) setFeedback(panel, `Contingência: ${loaded.warning}`, true);
+          return;
+        }
+      }
+
+      setLoading(panel, true, `Analisando ${messages.length} manifestação(ões) com ${settings.model}…`);
       const raw = await requestOpenAi(settings.apiKey, settings.model, messages);
-      if (!panel.isConnected) return;
+      if (!isCurrentRun()) return;
       const result = normalizeAiResult(raw, messages);
       if (!result.summary.length || !result.opinion) {
         throw new Error('A IA retornou uma análise sem resumo ou parecer.');
       }
       saveCachedAnalysis(settings.model, currentFingerprint, result);
-      renderAnalysis(panel, result, settings.model);
+      renderAnalysis(panel, result, settings.model, loaded.source);
       showConfig(panel, false);
-      setFeedback(panel, 'Análise gerada com sucesso pela OpenAI.');
+      setFeedback(
+        panel,
+        loaded.warning
+          ? `Análise gerada usando a tela como contingência: ${loaded.warning}`
+          : 'Análise gerada com sucesso pela OpenAI a partir da API do SMAX.',
+        !!loaded.warning
+      );
     } catch (e) {
-      if (!panel.isConnected) return;
+      if (!isCurrentRun() || e?.code === 'SMAX_STALE_REQUEST') return;
       const message = cleanText(e?.message || 'Não foi possível gerar a análise com IA.');
       showError(panel, message);
       if (includesAny(message, ['api key', 'chave', 'authentication', '401', 'unauthorized'])) {
         showConfig(panel, true);
       }
     } finally {
-      if (panel.isConnected) setLoading(panel, false);
+      if (isCurrentRun()) setLoading(panel, false);
     }
   }
 
@@ -1120,7 +1218,12 @@
         showConfig(panel, true);
         showError(panel, 'A chave foi removida. Informe outra chave para gerar uma nova análise.');
         const messages = extractMessages(tab);
-        renderAnalysis(panel, waitingResult(messages), 'OpenAI');
+        renderAnalysis(
+          panel,
+          waitingResult(messages),
+          'OpenAI',
+          panel.getAttribute('data-smax-discussion-source') || 'dom'
+        );
         const subtitle = panel.querySelector('.sda-subtitle');
         if (subtitle) subtitle.textContent = 'Resumo e parecer com inteligência artificial';
         panel.removeAttribute('data-sda-generated-by-ai');
@@ -1163,14 +1266,20 @@
     if (!commentItems) return;
 
     const messages = extractMessages(tab);
-    if (!messages.length) return;
-
     const currentFingerprint = fingerprint(messages);
+    const requestId = SMAX.discussionApi?.getCurrentRequestId?.(tab) || '';
     const existing = tab.querySelector(`#${PANEL_ID}`);
-    if (!force && existing?.getAttribute('data-smax-discussion-fingerprint') === currentFingerprint) return;
+    if (
+      !force
+      && existing
+      && existing.getAttribute('data-smax-dom-fingerprint') === currentFingerprint
+      && existing.getAttribute('data-smax-request-id') === requestId
+    ) return;
 
     const result = waitingResult(messages);
     const panel = createPanel(tab, result, currentFingerprint);
+    panel.setAttribute('data-smax-dom-fingerprint', currentFingerprint);
+    panel.setAttribute('data-smax-request-id', requestId);
     if (existing) existing.replaceWith(panel);
     else commentItems.insertAdjacentElement('afterend', panel);
     initializePanel(panel, tab);

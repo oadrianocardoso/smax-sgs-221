@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221 (LOCAL)
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      10.11-local
+// @version      10.13-local
 // @description  SMAX SGS 221 (modularizado - arquivos locais)
 // @author       ADRIANO AUGUSTO CARDOSO E SANTOS
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -23,6 +23,7 @@
 // @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/magistrado.js
 // @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/tags.js
 // @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/comments.js
+// @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/discussion-api.js
 // @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/discussion-advisor.js
 // @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/sections.js
 // @require      file:///C:/Users/Adriano/Desktop/PROJETOS/smax-sgs-221/modules/attachments.js
