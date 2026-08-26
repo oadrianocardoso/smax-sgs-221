@@ -82,59 +82,11 @@
     }, 0);
   }
 
-  function isSystemItem(item, text) {
-    if (item.querySelector('.commentContent.System, .systemCommentTextBody, .submittedBy.auto-system')) return true;
-    const normalized = normalizeText(text);
-    return SYSTEM_MESSAGES.some(message => normalized === message);
-  }
-
   function isAdministrativeNoise(text) {
     const normalized = normalizeText(text);
     if (normalized.length < 25) return true;
     return /^(encaminhado|reencaminhado|criado bug|ciente do presente|prezados.{0,15}$)/i.test(normalized)
       || SYSTEM_MESSAGES.some(message => normalized === message);
-  }
-
-  function extractMessages(tab) {
-    const messages = [];
-    const seen = new Set();
-
-    tab.querySelectorAll('.comment-items .comment-item').forEach((item, index) => {
-      const body = item.querySelector('.commentTextBody .content');
-      if (!body) return;
-
-      const text = cleanText(body.innerText || body.textContent || '');
-      if (!text || isSystemItem(item, text)) return;
-
-      const normalized = normalizeText(text);
-      if (!normalized || seen.has(normalized)) return;
-      seen.add(normalized);
-
-      const author = cleanText(item.querySelector('.submitterName')?.textContent || 'Manifestação sem identificação');
-      const timeEl = item.querySelector('.commentFooter [pl-time-ago], .commentFooter [aria-label]');
-      const when = cleanText(
-        timeEl?.getAttribute('aria-label')
-        || timeEl?.getAttribute('data-original-title')
-        || timeEl?.textContent
-        || ''
-      );
-      const headerText = cleanText(item.querySelector('.commentHeader')?.textContent || '');
-      const purpose = cleanText(item.querySelector('.ess-badge-text')?.textContent || '');
-
-      messages.push({
-        id: item.getAttribute('data-comment-id') || `${index}:${text.length}`,
-        text,
-        normalized,
-        author,
-        when,
-        privacy: includesAny(headerText, ['interno']) ? 'Interno' : 'Público',
-        purpose,
-        noise: isAdministrativeNoise(text),
-        index
-      });
-    });
-
-    return messages;
   }
 
   function prepareApiMessages(messages) {
@@ -163,52 +115,21 @@
 
   async function loadDiscussionMessages(tab) {
     const api = SMAX.discussionApi;
-    if (api?.fetchMessages) {
-      try {
-        const result = await api.fetchMessages({ context: tab });
-        const currentRequestId = api.getCurrentRequestId?.(tab);
-        if (currentRequestId && currentRequestId !== result.requestId) {
-          const error = new Error('A solicitação aberta mudou durante a consulta das discussões.');
-          error.code = 'SMAX_STALE_REQUEST';
-          throw error;
-        }
-        const apiMessages = prepareApiMessages(result.messages);
-        if (!apiMessages.length) {
-          const fallback = extractMessages(tab);
-          if (fallback.length) {
-            return {
-              messages: fallback,
-              requestId: result.requestId,
-              source: 'dom',
-              warning: 'A API do SMAX não retornou manifestações humanas; a tela foi usada como contingência.'
-            };
-          }
-        }
-        return {
-          messages: apiMessages,
-          requestId: result.requestId,
-          source: 'api',
-          warning: ''
-        };
-      } catch (error) {
-        if (error?.code === 'SMAX_STALE_REQUEST') throw error;
-        const fallback = extractMessages(tab);
-        if (!fallback.length) throw error;
-        return {
-          messages: fallback,
-          requestId: api.getCurrentRequestId?.(tab) || '',
-          source: 'dom',
-          warning: cleanText(error?.message || 'A API do SMAX não pôde ser consultada.')
-        };
-      }
+    if (!api?.fetchMessages) {
+      throw new Error('O módulo da API de discussões não foi carregado.');
     }
 
-    const fallback = extractMessages(tab);
+    const result = await api.fetchMessages({ context: tab });
+    const currentRequestId = api.getCurrentRequestId?.(tab);
+    if (currentRequestId && currentRequestId !== result.requestId) {
+      const error = new Error('A solicitação aberta mudou durante a consulta das discussões.');
+      error.code = 'SMAX_STALE_REQUEST';
+      throw error;
+    }
+
     return {
-      messages: fallback,
-      requestId: '',
-      source: 'dom',
-      warning: 'O módulo da API de discussões não foi carregado.'
+      messages: prepareApiMessages(result.messages),
+      requestId: result.requestId
     };
   }
 
@@ -911,20 +832,15 @@
     `;
   }
 
-  function renderAnalysis(panel, analysisResult, model, source) {
+  function renderAnalysis(panel, analysisResult, model) {
     const host = panel.querySelector('[data-sda-result]');
     if (!host) return;
     host.innerHTML = resultMarkup(analysisResult);
     const subtitle = panel.querySelector('.sda-subtitle');
-    const sourceLabel = source === 'api' ? 'dados obtidos pela API do SMAX' : 'dados obtidos da tela (contingência)';
-    if (subtitle) subtitle.textContent = `Resumo e parecer gerados com ${model || 'OpenAI'} — ${sourceLabel}`;
+    if (subtitle) subtitle.textContent = `Resumo e parecer gerados com ${model || 'OpenAI'} — dados obtidos pela API do SMAX`;
     const note = panel.querySelector('.sda-note');
-    if (note) {
-      note.textContent = source === 'api'
-        ? 'Conteúdo gerado por IA com base nas discussões obtidas pela API do SMAX. Revise o parecer antes de registrá-lo.'
-        : 'A API do SMAX não estava disponível; foram usadas as discussões visíveis. Revise o parecer antes de registrá-lo.';
-    }
-    panel.setAttribute('data-smax-discussion-source', source || 'dom');
+    if (note) note.textContent = 'Conteúdo gerado por IA com base nas discussões obtidas pela API do SMAX. Revise o parecer antes de registrá-lo.';
+    panel.setAttribute('data-smax-discussion-source', 'api');
     panel.setAttribute('data-sda-generated-by-ai', '1');
   }
 
@@ -1124,8 +1040,7 @@
       if (!force) {
         const cached = readCachedAnalysis(settings.model, currentFingerprint);
         if (cached) {
-          renderAnalysis(panel, cached, settings.model, loaded.source);
-          if (loaded.warning) setFeedback(panel, `Contingência: ${loaded.warning}`, true);
+          renderAnalysis(panel, cached, settings.model);
           return;
         }
       }
@@ -1138,15 +1053,9 @@
         throw new Error('A IA retornou uma análise sem resumo ou parecer.');
       }
       saveCachedAnalysis(settings.model, currentFingerprint, result);
-      renderAnalysis(panel, result, settings.model, loaded.source);
+      renderAnalysis(panel, result, settings.model);
       showConfig(panel, false);
-      setFeedback(
-        panel,
-        loaded.warning
-          ? `Análise gerada usando a tela como contingência: ${loaded.warning}`
-          : 'Análise gerada com sucesso pela OpenAI a partir da API do SMAX.',
-        !!loaded.warning
-      );
+      setFeedback(panel, 'Análise gerada com sucesso pela OpenAI a partir da API do SMAX.');
     } catch (e) {
       if (!isCurrentRun() || e?.code === 'SMAX_STALE_REQUEST') return;
       const message = cleanText(e?.message || 'Não foi possível gerar a análise com IA.');
@@ -1217,13 +1126,7 @@
         populateConfig(panel, readSettings());
         showConfig(panel, true);
         showError(panel, 'A chave foi removida. Informe outra chave para gerar uma nova análise.');
-        const messages = extractMessages(tab);
-        renderAnalysis(
-          panel,
-          waitingResult(messages),
-          'OpenAI',
-          panel.getAttribute('data-smax-discussion-source') || 'dom'
-        );
+        renderAnalysis(panel, waitingResult([]), 'OpenAI');
         const subtitle = panel.querySelector('.sda-subtitle');
         if (subtitle) subtitle.textContent = 'Resumo e parecer com inteligência artificial';
         panel.removeAttribute('data-sda-generated-by-ai');
@@ -1265,20 +1168,16 @@
     const commentItems = tab.querySelector('.comment-items');
     if (!commentItems) return;
 
-    const messages = extractMessages(tab);
-    const currentFingerprint = fingerprint(messages);
     const requestId = SMAX.discussionApi?.getCurrentRequestId?.(tab) || '';
     const existing = tab.querySelector(`#${PANEL_ID}`);
     if (
       !force
       && existing
-      && existing.getAttribute('data-smax-dom-fingerprint') === currentFingerprint
       && existing.getAttribute('data-smax-request-id') === requestId
     ) return;
 
-    const result = waitingResult(messages);
-    const panel = createPanel(tab, result, currentFingerprint);
-    panel.setAttribute('data-smax-dom-fingerprint', currentFingerprint);
+    const result = waitingResult([]);
+    const panel = createPanel(tab, result, requestId ? `request:${requestId}` : 'request:unknown');
     panel.setAttribute('data-smax-request-id', requestId);
     if (existing) existing.replaceWith(panel);
     else commentItems.insertAdjacentElement('afterend', panel);
@@ -1328,8 +1227,7 @@
   SMAX.discussionAdvisor = {
     init,
     apply,
-    analyze,
-    extractMessages
+    analyze
   };
 
 })(typeof unsafeWindow !== 'undefined' ? unsafeWindow : window);

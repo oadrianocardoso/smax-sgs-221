@@ -8,7 +8,7 @@ Conjunto modular de melhorias para o SMAX, distribuído como userscript para Tam
 
 ### Painel gerencial com inteligência artificial
 
-Na aba de discussões do chamado, o sistema inclui um painel recolhível que consulta as manifestações pela API do SMAX e produz uma análise utilizando a API da OpenAI. Se a consulta ao SMAX falhar, o conteúdo visível é utilizado como contingência.
+Na aba de discussões do chamado, o sistema inclui um painel recolhível que consulta as manifestações exclusivamente pela API do SMAX e produz uma análise utilizando a API da OpenAI. Se a consulta ao SMAX falhar, nenhuma análise é enviada à OpenAI.
 
 O resultado é organizado em linhas com:
 
@@ -185,7 +185,7 @@ A assinatura do ChatGPT não inclui, por si só, créditos para uso da API. A co
 
 - A chave da OpenAI não deve ser adicionada ao código-fonte ou enviada ao Git.
 - Quando a opção de lembrar a chave é selecionada, ela é armazenada pelo Tampermonkey no navegador.
-- O conteúdo das discussões obtido pela API do SMAX é enviado à OpenAI para produzir a análise; a leitura da tela é usada somente como contingência.
+- Somente o conteúdo das discussões obtido pela API do SMAX é enviado à OpenAI para produzir a análise.
 - As chamadas de análise utilizam `store: false`.
 - O conteúdo gerado por IA deve ser revisado antes de ser registrado no chamado.
 - Dados internos, credenciais e endereços de infraestrutura não devem ser publicados em repositórios públicos sem revisão prévia.
