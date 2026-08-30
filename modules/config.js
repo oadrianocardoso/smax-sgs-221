@@ -11,7 +11,9 @@
       magistradoOn:      true,
       collapseOn:        true,
       enlargeCommentsOn: true,
-      autoTagsOn:        true
+      autoTagsOn:        true,
+      followersAlertOn:  true,
+      zenModeOn:         true
     }
   };
 

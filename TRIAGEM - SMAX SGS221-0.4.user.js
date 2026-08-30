@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TRIAGEM - SMAX SGS221
 // @namespace    https://github.com/DanielMacCruz/SGS221-Triagem
-// @version      0.5
+// @version      0.6
 // @description  Interface enhancements for triagem workflow
 // @author       YOU
 // @match        https://suporte.tjsp.jus.br/saw/Requests*
@@ -1251,9 +1251,18 @@
       if (!prefs.collapseOn) return;
       const SECTION_SELECTOR = '#form-section-5, [data-aid="section-catalog-offering"]';
       const REMOVABLE_SELECTOR = '#form-section-1, #form-section-7, #form-section-8';
-      const IDS_TO_REMOVE = ['form-section-1', 'form-section-7', 'form-section-8'];
+      const COLLAPSED_ATTR = 'data-smax-catalog-visually-collapsed';
+      const HIDDEN_ATTR = 'data-smax-section-visually-hidden';
       const userInteracted = new Set();
-      const retryTimers = new WeakMap();
+
+      const style = document.createElement('style');
+      style.id = 'smax-triage-safe-sections-style';
+      style.textContent = `
+        [${COLLAPSED_ATTR}="1"] .pl-entity-page-component-content { display:none !important; }
+        [${COLLAPSED_ATTR}="1"] .pl-entity-page-component-header [pl-bidi-collapse-arrow] { transform:rotate(-90deg); }
+        [${HIDDEN_ATTR}="1"] { display:none !important; }
+      `;
+      if (!document.getElementById(style.id)) (document.head || document.documentElement).appendChild(style);
 
       const requestId = () => (
         document.querySelector('[data-aid="entity-page-header-id"]')?.textContent?.trim()
@@ -1263,100 +1272,59 @@
 
       const sectionKey = () => `${requestId()}:catalog-offering`;
 
-      const getSectionScope = (section) => {
-        try {
-          const angular = pageWindow.angular;
-          if (!angular?.element) return null;
-          const wrapped = angular.element(section);
-          return wrapped.scope?.() || wrapped.inheritedData?.('$scope') || null;
-        } catch {
-          return null;
+      const isManagedSection = (section) => {
+        return !!section && (
+          section.matches?.(SECTION_SELECTOR)
+          || !!section.querySelector?.(SECTION_SELECTOR)
+        );
+      };
+
+      const collapseVisually = (section) => {
+        if (!section || userInteracted.has(sectionKey())) {
+          section?.removeAttribute?.(COLLAPSED_ATTR);
+          return;
         }
+        const header = section.querySelector('.pl-entity-page-component-header[role="button"]');
+        const content = section.querySelector('.pl-entity-page-component-content');
+        if (!header || !content) return;
+        if (header.getAttribute('aria-expanded') === 'false' || content.classList.contains('ng-hide')) return;
+        section.setAttribute(COLLAPSED_ATTR, '1');
       };
 
-      const collapseUsingAngularState = (section) => {
-        if (!section || userInteracted.has(sectionKey())) return true;
-        const scope = getSectionScope(section);
-        const sectionState = scope?.section;
-        if (!scope || !sectionState) return false;
-
-        const collapse = () => {
-          if (userInteracted.has(sectionKey())) return;
-          if (sectionState.isOpen !== false && typeof scope.toggleSectionState === 'function') {
-            scope.toggleSectionState(sectionState, scope.$index);
-          }
-          sectionState.isOpen = false;
-          const savedState = scope.sectionsState && sectionState.name
-            ? scope.sectionsState[sectionState.name]
-            : null;
-          if (savedState && typeof savedState === 'object') savedState.isOpen = false;
-          section.setAttribute('data-smax-section-collapsed', '1');
-        };
-
-        try {
-          if (scope.$root?.$$phase) collapse();
-          else if (typeof scope.$evalAsync === 'function') scope.$evalAsync(collapse);
-          else collapse();
-          return true;
-        } catch (error) {
-          console.warn('[SMAX TRIAGEM] Falha ao recolher seção pelo estado do Angular:', error);
-          return false;
-        }
-      };
-
-      const scheduleCollapse = (section) => {
-        if (!section?.isConnected || retryTimers.has(section)) return;
-        let attempt = 0;
-        const delays = [80, 180, 400, 800];
-
-        const retry = () => {
-          if (!section.isConnected || userInteracted.has(sectionKey())) {
-            retryTimers.delete(section);
-            return;
-          }
-          if (collapseUsingAngularState(section) || attempt >= delays.length) {
-            retryTimers.delete(section);
-            return;
-          }
-          const timer = setTimeout(retry, delays[attempt]);
-          attempt += 1;
-          retryTimers.set(section, timer);
-        };
-
-        retry();
-      };
-
-      const removeSections = () => {
-        IDS_TO_REMOVE.forEach((id) => {
-          const el = document.getElementById(id);
-          if (el && el.parentNode) el.remove();
+      const hideSections = () => {
+        document.querySelectorAll(REMOVABLE_SELECTOR).forEach(section => {
+          section.setAttribute(HIDDEN_ATTR, '1');
         });
       };
 
       const applyAll = () => {
-        document.querySelectorAll(SECTION_SELECTOR).forEach(scheduleCollapse);
-        removeSections();
+        document.querySelectorAll(SECTION_SELECTOR).forEach(collapseVisually);
+        hideSections();
       };
 
-      document.addEventListener('click', (event) => {
-        if (!event.isTrusted) return;
+      const expandVisualSection = (event) => {
         const header = event.target.closest('.pl-entity-page-component-header[role="button"]');
         if (!header) return;
         const section = header.closest('#form-section-5, [data-aid="section-catalog-offering"]');
-        if (section) {
-          userInteracted.add(sectionKey());
-          section.setAttribute('data-smax-section-user-interacted', '1');
-        }
+        if (!isManagedSection(section)) return;
+        userInteracted.add(sectionKey());
+        if (section.getAttribute(COLLAPSED_ATTR) !== '1') return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        section.removeAttribute(COLLAPSED_ATTR);
+      };
+
+      document.addEventListener('click', (event) => {
+        if (event.isTrusted) expandVisualSection(event);
+      }, { capture: true });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.isTrusted && (event.key === 'Enter' || event.key === ' ')) expandVisualSection(event);
       }, { capture: true });
 
       const schedule = Utils.debounce(applyAll, 100);
       const obs = new MutationObserver((mutations) => {
         const relevant = mutations.some((mutation) => {
-          const target = mutation.target?.nodeType === 1
-            ? mutation.target
-            : mutation.target?.parentElement;
-          if (target?.closest?.('#smax-discussion-advisor')) return false;
-          if (target?.closest?.(SECTION_SELECTOR)) return true;
           return Array.from(mutation.addedNodes || []).some((node) => (
             node.nodeType === 1
             && !node.matches?.('#smax-discussion-advisor')

@@ -784,7 +784,9 @@
       magistradoOn: typeof prefsRow.magistrado_on === 'boolean' ? prefsRow.magistrado_on : !!currentPrefs.magistradoOn,
       collapseOn: typeof prefsRow.collapse_on === 'boolean' ? prefsRow.collapse_on : !!currentPrefs.collapseOn,
       enlargeCommentsOn: typeof prefsRow.enlarge_comments_on === 'boolean' ? prefsRow.enlarge_comments_on : !!currentPrefs.enlargeCommentsOn,
-      autoTagsOn: typeof prefsRow.auto_tags_on === 'boolean' ? prefsRow.auto_tags_on : !!currentPrefs.autoTagsOn
+      autoTagsOn: typeof prefsRow.auto_tags_on === 'boolean' ? prefsRow.auto_tags_on : !!currentPrefs.autoTagsOn,
+      followersAlertOn: currentPrefs.followersAlertOn !== false,
+      zenModeOn: currentPrefs.zenModeOn !== false
     };
 
     const teamState = buildTeamState(teamsRows, specialistsRows, finalsRows);
@@ -1348,6 +1350,12 @@
         auto_tags_on: !!p.autoTagsOn
       }]
     });
+
+    // Estas opções ainda não possuem colunas na tabela central. Mantê-las no
+    // armazenamento local evita uma migração obrigatória do banco.
+    CONFIG.prefs.followersAlertOn = p.followersAlertOn !== false;
+    CONFIG.prefs.zenModeOn = p.zenModeOn !== false;
+    if (typeof CONFIG.save === 'function') CONFIG.save();
 
     await loadFromDb();
     return true;

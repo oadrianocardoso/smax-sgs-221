@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      16
+// @version      18
 // @description  SMAX SGS 221 (modularizado)
 // @author       ADRIANO AUGUSTO CARDOSO E SANTOS
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -20,25 +20,27 @@
 // @homepageURL  https://github.com/oadrianocardoso/smax-sgs-221
 // @supportURL   https://github.com/oadrianocardoso/smax-sgs-221/issues
 //
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/config.js?v=15
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/supabase-db.js?v=15
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/config.js?v=17
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/supabase-db.js?v=17
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/css.js?v=15
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/highlights.js?v=15
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/magistrado.js?v=15
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/tags.js?v=15
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/comments.js?v=15
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/discussion-api.js?v=15
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/followers-alert.js?v=17
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/discussion-advisor.js?v=16
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/sections.js?v=15
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/sections.js?v=18
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/zen-mode.js?v=17
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/attachments.js?v=15
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/detratores.js?v=15
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/botoes-resolucao.js?v=15
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/botoes-resolucao.js?v=18
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/destaca-atendente.js?v=15
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/passar-aquele-gel.js?v=15
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/dados-eproc.js?v=15
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/export-chamados.js?v=15
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/menu-config.js?v=15
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/orchestrator.js?v=15
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/menu-config.js?v=17
+// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/orchestrator.js?v=17
 //
 // ==/UserScript==
 

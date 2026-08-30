@@ -10,7 +10,9 @@
     { key: 'magistradoOn', label: 'Destaque de magistrado' },
     { key: 'collapseOn', label: 'Recolher seções automáticas' },
     { key: 'enlargeCommentsOn', label: 'Comentários com altura automática' },
-    { key: 'autoTagsOn', label: 'Tags automáticas na descrição' }
+    { key: 'autoTagsOn', label: 'Tags automáticas na descrição' },
+    { key: 'followersAlertOn', label: 'Alertas de seguidores (neste navegador)' },
+    { key: 'zenModeOn', label: 'Modo Zen (neste navegador)' }
   ];
 
   const PREF_SECTION_BY_KEY = {
@@ -1813,6 +1815,8 @@
         SMAX.highlights?.apply?.();
         SMAX.tags?.apply?.();
         SMAX.detratores?.refresh?.();
+        SMAX.followersAlert?.apply?.();
+        SMAX.zenMode?.apply?.();
       } catch (e) {
         console.warn('[SMAX menu] Falha ao reaplicar modulos apos salvar:', e);
       }

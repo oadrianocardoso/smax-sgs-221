@@ -39,13 +39,7 @@
   const CLS_MENU      = 'tmx-lifecycle-menu';
   const CLS_MENU_ITEM = 'tmx-lifecycle-menu-item';
 
-  const ATTR_BOUND = 'data-tmx-bound';
-
   /* ================= HELPERS ================= */
-
-  function removeIds(root) {
-    root.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
-  }
 
   function clickLikeUser(el) {
     if (!el || el.disabled) return;
@@ -77,44 +71,50 @@
 
   function ensureEntityPickerClone(wrap) {
     let existing = wrap.querySelector('.' + CLS_PICKER);
-    if (existing) return existing;
-
     let src = document.querySelector(ORIG_ENTITY_PICKER_SELECTOR);
     if (!src) return null;
 
-    let clone = src.cloneNode(true);
-    clone.classList.add(CLS_PICKER);
-    removeIds(clone);
+    if (!existing) {
+      existing = document.createElement('div');
+      existing.className = CLS_PICKER;
+      existing.setAttribute('aria-label', 'Responsável selecionado');
+      wrap.appendChild(existing);
+    }
 
-    clone.style.pointerEvents = 'none';
-    clone.style.opacity = '0.95';
-
-    wrap.appendChild(clone);
-    return clone;
+    const selected = src.querySelector('.select2-chosen, .entity-picker-selected-item, [data-aid="selected-item"]');
+    const input = src.querySelector('input');
+    const label = (selected?.textContent || input?.value || src.textContent || '').replace(/\s+/g, ' ').trim();
+    const nextText = label || 'Sem responsável';
+    if (existing.textContent !== nextText) existing.textContent = nextText;
+    existing.title = nextText;
+    return existing;
   }
 
   /* ================= SAVE BUTTONS ================= */
 
   function ensureButtonClone(wrap, selector, cls) {
     let existing = wrap.querySelector('.' + cls);
-    if (existing) return existing;
-
     let src = document.querySelector(selector);
     if (!src) return null;
 
-    let clone = src.cloneNode(true);
-    clone.classList.add(cls);
-    removeIds(clone);
-    clone.style.display = 'inline-flex';
+    if (!existing) {
+      existing = document.createElement('button');
+      existing.type = 'button';
+      existing.className = 'btn ' + cls;
+      existing.style.display = 'inline-flex';
+      existing.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        clickLikeUser(document.querySelector(selector));
+      }, true);
+      wrap.appendChild(existing);
+    }
 
-    clone.addEventListener('click', e => {
-      e.preventDefault();
-      e.stopPropagation();
-      clickLikeUser(document.querySelector(selector));
-    }, true);
-
-    wrap.appendChild(clone);
-    return clone;
+    const label = (src.textContent || src.getAttribute('aria-label') || src.title || '').replace(/\s+/g, ' ').trim();
+    if (existing.textContent !== label) existing.textContent = label;
+    existing.title = src.title || src.getAttribute('aria-label') || label;
+    existing.disabled = !!src.disabled || src.classList.contains('disabled');
+    return existing;
   }
 
   /* ================= LIFECYCLE MENU ================= */
@@ -142,25 +142,26 @@
 
   function ensureLifecycleClone(wrap) {
     let existing = wrap.querySelector('.' + CLS_LC);
-    if (existing) return existing;
-
     let src = getLifecycleBox();
     if (!src) return null;
 
-    let clone = src.cloneNode(true);
-    clone.classList.add(CLS_LC);
-    removeIds(clone);
+    if (!existing) {
+      existing = document.createElement('button');
+      existing.type = 'button';
+      existing.className = 'btn ' + CLS_LC;
+      existing.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        showLifecycleMenu(existing);
+      }, true);
+      wrap.appendChild(existing);
+    }
 
-    clone.querySelectorAll('ul.dropdown-menu').forEach(ul => ul.remove());
-
-    clone.addEventListener('click', e => {
-      e.preventDefault();
-      e.stopPropagation();
-      showLifecycleMenu(clone);
-    }, true);
-
-    wrap.appendChild(clone);
-    return clone;
+    const active = src.querySelector('[aria-current="true"], .active, .selected, button:not([data-aid="dropdown-toggle"])');
+    const label = (active?.textContent || 'Alterar fase').replace(/\s+/g, ' ').trim();
+    if (existing.textContent !== label) existing.textContent = label;
+    existing.title = 'Alterar fase do ciclo de vida';
+    return existing;
   }
 
   function showLifecycleMenu(anchor) {
@@ -176,9 +177,10 @@
       let item = document.createElement('div');
       item.className = CLS_MENU_ITEM;
       item.textContent = opt.label;
-      item.onclick = () => clickLikeUser(
-        getLifecycleBox().querySelector('[target-phase-id="' + opt.phaseId + '"]')
-      );
+      item.onclick = () => {
+        menu.style.display = 'none';
+        clickLikeUser(getLifecycleBox()?.querySelector('[target-phase-id="' + opt.phaseId + '"]'));
+      };
       menu.appendChild(item);
     });
 
@@ -207,7 +209,16 @@
       white-space: nowrap;
     }
 
-    .${CLS_PICKER} { max-width: 320px; }
+    .${CLS_PICKER} {
+      max-width: 320px;
+      padding: 6px 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #f5f5f5;
+      color: #333;
+    }
 
     .${CLS_MENU} {
       position: absolute;

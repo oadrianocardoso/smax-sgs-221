@@ -1,10 +1,9 @@
 (function (root) {
   'use strict';
 
-  const SMAX   = root.SMAX = root.SMAX || {};
+  const SMAX = root.SMAX = root.SMAX || {};
   const CONFIG = SMAX.config || {};
-  const prefs  = CONFIG.prefs || {};
-  const utils  = SMAX.utils || {};
+  const utils = SMAX.utils || {};
   const { debounce } = utils;
 
   const OFERTA_SELECTOR = '[aria-label*="Oferta de catálogo"], [data-aid="section-catalog-offering"]';
@@ -17,14 +16,36 @@
     '[aria-label*="Informações SCCD"]'
   ].join(', ');
 
+  const STYLE_ID = 'smax-sections-safe-style';
+  const COLLAPSED_ATTR = 'data-smax-catalog-visually-collapsed';
+  const HIDDEN_ATTR = 'data-smax-section-visually-hidden';
+
   let observer = null;
   let initialized = false;
   const userInteracted = new Set();
-  const retryTimers = new WeakMap();
+
+  function ensureStyles() {
+    if (root.document.getElementById(STYLE_ID)) return;
+    const style = root.document.createElement('style');
+    style.id = STYLE_ID;
+    style.textContent = `
+      [${COLLAPSED_ATTR}="1"] .pl-entity-page-component-content {
+        display: none !important;
+      }
+      [${COLLAPSED_ATTR}="1"] .pl-entity-page-component-header [pl-bidi-collapse-arrow] {
+        transform: rotate(-90deg);
+      }
+      [${HIDDEN_ATTR}="1"] {
+        display: none !important;
+      }
+    `;
+    (root.document.head || root.document.documentElement).appendChild(style);
+  }
 
   function requestIdFor(sectionEl) {
     return SMAX.discussionApi?.getCurrentRequestId?.(sectionEl)
       || root.document.querySelector('[data-aid="entity-page-header-id"]')?.textContent?.trim()
+      || root.document.querySelector('[data-aid="minimized-header-entity-page-header-id"]')?.textContent?.trim()
       || 'request';
   }
 
@@ -32,96 +53,63 @@
     return `${requestIdFor(sectionEl)}:catalog-offering`;
   }
 
-  function sectionScope(sectionEl) {
-    try {
-      const angular = root.angular;
-      if (!angular?.element) return null;
-      const wrapped = angular.element(sectionEl);
-      return wrapped.scope?.() || wrapped.inheritedData?.('$scope') || null;
-    } catch (e) {
-      return null;
-    }
+  function sectionFor(node) {
+    return node?.closest?.('.form-section, .pl-entity-page-component') || node || null;
   }
 
-  function collapseUsingAngularState(sectionEl) {
-    if (!sectionEl || userInteracted.has(sectionKey(sectionEl))) return true;
-
-    const scope = sectionScope(sectionEl);
-    const section = scope?.section;
-    if (!scope || !section) return false;
-
-    const collapse = () => {
-      if (userInteracted.has(sectionKey(sectionEl))) return;
-      if (section.isOpen !== false && typeof scope.toggleSectionState === 'function') {
-        scope.toggleSectionState(section, scope.$index);
-      }
-      section.isOpen = false;
-      const state = scope.sectionsState && section.name
-        ? scope.sectionsState[section.name]
-        : null;
-      if (state && typeof state === 'object') state.isOpen = false;
-      sectionEl.setAttribute('data-smax-section-collapsed', '1');
-    };
-
-    try {
-      if (scope.$root?.$$phase) collapse();
-      else if (typeof scope.$evalAsync === 'function') scope.$evalAsync(collapse);
-      else collapse();
-      return true;
-    } catch (error) {
-      console.warn('[SMAX Sections] Não foi possível recolher a seção pelo estado do Angular:', error);
-      return false;
-    }
+  function isOfferingSection(sectionEl) {
+    return !!sectionEl && (
+      sectionEl.matches?.(OFERTA_SELECTOR)
+      || !!sectionEl.querySelector?.(OFERTA_SELECTOR)
+    );
   }
 
-  function scheduleStateRetry(sectionEl) {
-    if (!sectionEl?.isConnected || retryTimers.has(sectionEl)) return;
-    let attempt = 0;
-    const delays = [80, 180, 400, 800];
+  function markOfferingCollapsed(sectionEl) {
+    if (!sectionEl || userInteracted.has(sectionKey(sectionEl))) {
+      sectionEl?.removeAttribute?.(COLLAPSED_ATTR);
+      return;
+    }
 
-    const retry = () => {
-      if (!sectionEl.isConnected || userInteracted.has(sectionKey(sectionEl))) {
-        retryTimers.delete(sectionEl);
-        return;
-      }
-      if (collapseUsingAngularState(sectionEl) || attempt >= delays.length) {
-        retryTimers.delete(sectionEl);
-        return;
-      }
-      const timer = root.setTimeout(retry, delays[attempt]);
-      attempt += 1;
-      retryTimers.set(sectionEl, timer);
-    };
+    const header = sectionEl.querySelector?.('.pl-entity-page-component-header[role="button"]');
+    const content = sectionEl.querySelector?.('.pl-entity-page-component-content');
+    if (!header || !content) return;
 
-    retry();
+    // Se o SMAX já recolheu a seção, não criamos um segundo estado visual.
+    if (header.getAttribute('aria-expanded') === 'false' || content.classList.contains('ng-hide')) return;
+    sectionEl.setAttribute(COLLAPSED_ATTR, '1');
   }
 
   function collapseOfertaCatalogo() {
     root.document.querySelectorAll(OFERTA_SELECTOR).forEach(node => {
-      const sectionEl = node.closest('.form-section, .pl-entity-page-component') || node;
-      scheduleStateRetry(sectionEl);
+      markOfferingCollapsed(sectionFor(node));
     });
   }
 
-  function removeConfiguredSections() {
+  function hideConfiguredSections() {
     root.document.querySelectorAll(REMOVABLE_SELECTOR).forEach(node => {
-      const wrapper = node.closest('.form-section, .pl-entity-page-component') || node;
-      if (wrapper?.parentNode) wrapper.parentNode.removeChild(wrapper);
+      sectionFor(node)?.setAttribute?.(HIDDEN_ATTR, '1');
     });
   }
 
   function applyAll() {
+    ensureStyles();
     collapseOfertaCatalogo();
-    removeConfiguredSections();
+    hideConfiguredSections();
+  }
+
+  function expandVisualSection(event, sectionEl) {
+    userInteracted.add(sectionKey(sectionEl));
+
+    if (sectionEl.getAttribute(COLLAPSED_ATTR) !== '1') return;
+
+    // O estado nativo continua aberto. Cancelar somente esta primeira ativação
+    // revela o conteúdo sem acionar Angular, Select2 ou qualquer outro componente.
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    sectionEl.removeAttribute(COLLAPSED_ATTR);
   }
 
   function mutationTouchesManagedSection(mutation) {
-    const target = mutation.target?.nodeType === 1
-      ? mutation.target
-      : mutation.target?.parentElement;
-    if (target?.closest?.('#smax-discussion-advisor')) return false;
-    if (target?.closest?.(OFERTA_SELECTOR)) return true;
-
     return Array.from(mutation.addedNodes || []).some(node => {
       if (node.nodeType !== 1) return false;
       if (node.matches?.('#smax-discussion-advisor') || node.closest?.('#smax-discussion-advisor')) return false;
@@ -133,18 +121,26 @@
   }
 
   function init() {
-    if (initialized || !prefs.collapseOn) return;
+    if (initialized || !CONFIG.prefs?.collapseOn) return;
     initialized = true;
 
     const doc = root.document;
+    ensureStyles();
+
     doc.addEventListener('click', event => {
       if (!event.isTrusted) return;
       const header = event.target.closest?.('.pl-entity-page-component-header[role="button"]');
       if (!header) return;
-      const sectionEl = header.closest('.form-section, .pl-entity-page-component');
-      if (!sectionEl?.matches?.(OFERTA_SELECTOR) && !sectionEl?.querySelector?.(OFERTA_SELECTOR)) return;
-      userInteracted.add(sectionKey(sectionEl));
-      sectionEl.setAttribute('data-smax-section-user-interacted', '1');
+      const sectionEl = sectionFor(header);
+      if (isOfferingSection(sectionEl)) expandVisualSection(event, sectionEl);
+    }, { capture: true });
+
+    doc.addEventListener('keydown', event => {
+      if (!event.isTrusted || (event.key !== 'Enter' && event.key !== ' ')) return;
+      const header = event.target.closest?.('.pl-entity-page-component-header[role="button"]');
+      if (!header) return;
+      const sectionEl = sectionFor(header);
+      if (isOfferingSection(sectionEl)) expandVisualSection(event, sectionEl);
     }, { capture: true });
 
     const schedule = debounce ? debounce(applyAll, 100) : applyAll;

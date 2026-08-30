@@ -13,6 +13,8 @@
         SMAX.magistrado && SMAX.magistrado.apply && SMAX.magistrado.apply();
         SMAX.tags       && SMAX.tags.apply       && SMAX.tags.apply();
         SMAX.attachments&& SMAX.attachments.apply&& SMAX.attachments.apply();
+        SMAX.followersAlert && SMAX.followersAlert.apply && SMAX.followersAlert.apply();
+        SMAX.zenMode && SMAX.zenMode.apply && SMAX.zenMode.apply();
       } catch (e) {
         console.error('[SMAX Orchestrator] Erro em runAll:', e);
       }
@@ -36,6 +38,8 @@
       SMAX.discussionAdvisor && SMAX.discussionAdvisor.init && SMAX.discussionAdvisor.init();
       SMAX.sections   && SMAX.sections.init   && SMAX.sections.init();
       SMAX.detratores && SMAX.detratores.init && SMAX.detratores.init();
+      SMAX.followersAlert && SMAX.followersAlert.init && SMAX.followersAlert.init();
+      SMAX.zenMode && SMAX.zenMode.init && SMAX.zenMode.init();
       SMAX.exportChamados && SMAX.exportChamados.init && SMAX.exportChamados.init();
     } catch (e) {
       console.error('[SMAX Orchestrator] Erro ao inicializar módulos one-shot:', e);

@@ -74,6 +74,14 @@ O módulo de dados eProc também pode identificar e apresentar as classificaçõ
 - `DETRATOR`;
 - `AUTOMATIZADOR`.
 
+### Alertas de seguidores
+
+Nos detalhes do chamado, o sistema consulta pela API do SMAX os usuários que estão acompanhando a solicitação. Quando houver seguidores, um indicador é apresentado na barra de ações e permite visualizar os respectivos nomes.
+
+### Modo Zen
+
+O Modo Zen reduz o ruído visual do formulário ocultando campos técnicos, abas e seções que não fazem parte do fluxo habitual de análise. O recurso atua somente por CSS e não dispara cliques nos componentes nativos do SMAX.
+
 ### Dados eProc no chamado
 
 Quando essas informações estão presentes na resposta interna do SMAX, um bloco adicional é incluído no formulário contendo:
@@ -143,7 +151,7 @@ O botão flutuante de engrenagem abre uma interface central para administrar os 
 
 | Área | Recursos disponíveis |
 | --- | --- |
-| Geral | Ativar ou desativar destaques, especialistas, magistrados, recolhimento de seções, expansão de comentários e tags automáticas |
+| Geral | Ativar ou desativar destaques, especialistas, magistrados, recolhimento de seções, expansão de comentários, tags automáticas, alertas de seguidores e Modo Zen |
 | Especialistas | Equipes, nomes, apelidos, faixas de finais, cores e ausências |
 | Palavras destacadas | Termos exatos e parciais separados por grupos de cores |
 | Tags | Regras de tags e respectivas palavras-chave |
@@ -202,6 +210,7 @@ A assinatura do ChatGPT não inclui, por si só, créditos para uso da API. A co
     ├── menu-config.js            # Painel administrativo
     ├── orchestrator.js           # Inicialização e reaplicação dos módulos
     ├── discussion-api.js         # Consulta e normalização das discussões pela API do SMAX
+    ├── followers-alert.js        # Alertas de usuários que seguem o chamado
     ├── discussion-advisor.js     # Análise gerencial com OpenAI
     ├── highlights.js             # Destaque de termos no grid
     ├── destaca-atendente.js      # Identificação visual de responsáveis
@@ -212,6 +221,7 @@ A assinatura do ChatGPT não inclui, por si só, créditos para uso da API. A co
     ├── attachments.js            # Organização e visualização de anexos
     ├── comments.js               # Expansão da área de comentários
     ├── sections.js               # Organização das seções do formulário
+    ├── zen-mode.js               # Ocultação visual de campos e abas não utilizados
     ├── botoes-resolucao.js       # Atalhos para resolução do chamado
     ├── passar-aquele-gel.js      # Ferramentas adicionais do CKEditor
     ├── export-chamados.js        # Exportação EMS para CSV
