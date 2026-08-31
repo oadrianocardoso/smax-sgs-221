@@ -23,7 +23,6 @@
 
   let observer = null;
   let scheduled = false;
-  let filterProtectionBound = false;
   let runtimeSettings = null;
   let panelCollapsed = true;
   const panelRuns = new WeakMap();
@@ -1196,46 +1195,8 @@
     root.setTimeout(apply, 120);
   }
 
-  function initDiscussionFilterProtection() {
-    if (filterProtectionBound) return;
-    filterProtectionBound = true;
-
-    const filterSelector = '.discussion-tab-filtering-div';
-    let userIntentUntil = 0;
-    const isFilterTarget = target => target?.closest?.(filterSelector);
-    const registerUserIntent = event => {
-      if (!event.isTrusted) return;
-      if (isFilterTarget(event.target) || event.key === 'Tab') {
-        userIntentUntil = Date.now() + 1200;
-      }
-    };
-
-    root.document.addEventListener('pointerdown', registerUserIntent, true);
-    root.document.addEventListener('keydown', registerUserIntent, true);
-
-    ['mousedown', 'mouseup', 'click'].forEach(eventType => {
-      root.document.addEventListener(eventType, event => {
-        if (!isFilterTarget(event.target) || event.isTrusted) return;
-        event.preventDefault();
-        event.stopImmediatePropagation();
-      }, true);
-    });
-
-    root.document.addEventListener('focusin', event => {
-      if (!isFilterTarget(event.target) || Date.now() <= userIntentUntil) return;
-      const clearUnexpectedFocus = () => {
-        if (Date.now() > userIntentUntil && event.target === root.document.activeElement) {
-          event.target.blur?.();
-        }
-      };
-      if (typeof root.queueMicrotask === 'function') root.queueMicrotask(clearUnexpectedFocus);
-      else root.setTimeout(clearUnexpectedFocus, 0);
-    }, true);
-  }
-
   function init() {
     if (observer) return;
-    initDiscussionFilterProtection();
     ensureCss();
     apply();
 

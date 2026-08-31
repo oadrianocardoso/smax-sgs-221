@@ -106,19 +106,14 @@
     `);
   }
 
-  function moveAttachmentsIntoForm() {
+  function keepAttachmentsVisible() {
     const doc = root.document;
     const attachments = doc.querySelector('div.pl-entity-page-component[data-aid="attachments"]');
-    const form = doc.querySelector('ng-form[name="form"]');
-    if (!attachments || !form) return;
+    if (!attachments) return;
 
+    // Nunca reparentear componentes Angular. Essa operação reinicializa o
+    // controle de foco do formulário e pode abrir Select2 sem ação do usuário.
     attachments.style.display = '';
-
-    if (attachments.parentNode === form && form.firstElementChild === attachments) {
-      return;
-    }
-
-    form.insertBefore(attachments, form.firstElementChild || null);
   }
 
   function normalizeUrl(rawUrl) {
@@ -663,7 +658,7 @@
 
   function maintain() {
     maintainScheduled = false;
-    moveAttachmentsIntoForm();
+    keepAttachmentsVisible();
     wirePreviewLinks();
     wireInlineImages();
   }

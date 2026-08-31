@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         ARIA
-// @version      3.7
+// @version      3.8
 // @description  Assistente de Resolução Integradas e Automações - SGS 2.3.2
 // @author       FELIPY WILLIAM FERREIRA
 // @updateURL    https://gist.github.com/felipywf/dff2f20be7fc0d366889ad5922b3e2c8/raw/aria.user.js
@@ -44,7 +44,6 @@
             enableUserHighlight: true,
             enableRadarRevisar: true,
             enableEscalarAlert: true,
-            enableAutoExpandShowMore: true,
             enableAutoHeightComments: true,
             enableVipBadge: true,
             enableDuplicityRadar: true,
@@ -97,7 +96,6 @@
 
     let rejeitadosDetectados = new Set();
     let prontosDetectados = new Set();
-    let sccdProcessedForTicket = null;
     let currentEditIndex = -1;
     let isManagerDisc = false;
 
@@ -305,47 +303,6 @@
             element.dispatchEvent(event);
         });
     };
-
-    // O Select2 do filtro de discussões é um componente nativo sensível a
-    // cliques/focos artificiais. Automações da página não devem abri-lo;
-    // interações reais do usuário continuam passando normalmente.
-    function initDiscussionFilterProtection() {
-        if (window.smaxDiscussionFilterProtectionBound) return;
-        window.smaxDiscussionFilterProtectionBound = true;
-
-        const FILTER_SELECTOR = '.discussion-tab-filtering-div';
-        let userIntentUntil = 0;
-
-        const isFilterTarget = (target) => target?.closest?.(FILTER_SELECTOR);
-        const registerUserIntent = (event) => {
-            if (!event.isTrusted) return;
-            if (isFilterTarget(event.target) || event.key === 'Tab') {
-                userIntentUntil = Date.now() + 1200;
-            }
-        };
-
-        document.addEventListener('pointerdown', registerUserIntent, true);
-        document.addEventListener('keydown', registerUserIntent, true);
-
-        ['mousedown', 'mouseup', 'click'].forEach((eventType) => {
-            document.addEventListener(eventType, (event) => {
-                if (!isFilterTarget(event.target) || event.isTrusted) return;
-                event.preventDefault();
-                event.stopImmediatePropagation();
-            }, true);
-        });
-
-        document.addEventListener('focusin', (event) => {
-            if (!isFilterTarget(event.target) || Date.now() <= userIntentUntil) return;
-            // Um focus() sem gesto do usuário é suficiente para o Select2
-            // abrir. Retirar esse foco não altera o valor selecionado.
-            queueMicrotask(() => {
-                if (Date.now() > userIntentUntil && event.target === document.activeElement) {
-                    event.target.blur?.();
-                }
-            });
-        }, true);
-    }
 
     // =========================================================================
     // ROTINAS DE INTERFACE E ALERTAS
@@ -780,25 +737,13 @@
         }
     }
 
-    function moveAttachmentsIntoForm() {
+    function keepAttachmentsVisible() {
         const attachments = document.querySelector('div.pl-entity-page-component[data-aid="attachments"]');
-        const form = document.querySelector('ng-form[name="form"]');
-        if (!attachments || !form) return;
+        if (!attachments) return;
 
+        // O componente pertence ao Angular do SMAX. Reparentear esse nó faz o
+        // gerenciador pl-set-editor-focus reavaliar os Select2 da discussão.
         attachments.style.display = '';
-
-        // 1. Move a aba de anexos para o topo do formulário
-        if (attachments.parentNode !== form || form.firstElementChild !== attachments) {
-            form.insertBefore(attachments, form.firstElementChild);
-        }
-
-        // 2. AUTO-EXPANDIR: Verifica se a aba está fechada (aria-expanded="false") e clica para abrir
-        const headerContainer = attachments.querySelector('.pl-entity-page-component-header[aria-expanded="false"]');
-        if (headerContainer) {
-            // Busca o wrapper interno clicável (do HTML que você me mandou) ou clica no próprio container
-            const clickableArea = headerContainer.querySelector('.pl-entity-page-component-header-inner-wrapper') || headerContainer;
-            simulateClick(clickableArea);
-        }
     }
 
     function applyAttachmentsFix() {
@@ -835,31 +780,6 @@
         try { const response = await fetch(url); const blob = await response.blob(); novaAba.location.href = URL.createObjectURL(new Blob([blob], { type: 'application/pdf' })); }
         catch (err) { novaAba.close(); window.open(url, '_blank'); }
         finally { linkElement.textContent = originalText; linkElement.style.pointerEvents = 'auto'; }
-    }
-
-    function autoExpandShowMore() {
-        if (!CONFIG.features.enableAutoExpandShowMore) return;
-        document.querySelectorAll('a[data-aid="show-more"]').forEach(btn => {
-            if (btn.offsetHeight > 0 && btn.getAttribute('aria-label') === 'Mostrar mais' && btn.dataset.smaxClicked !== '1') {
-                btn.dataset.smaxClicked = '1'; simulateClick(btn); setTimeout(() => { if(btn) btn.dataset.smaxClicked = '0'; }, 2000);
-            }
-        });
-    }
-
-    function autoCollapseSccd() {
-        const match = window.location.href.match(/\/saw\/Request\/(\d+)/);
-        if (!match) { sccdProcessedForTicket = null; return; }
-        const currentTicketId = match[1];
-        if (sccdProcessedForTicket === currentTicketId) return;
-
-        const headers = document.querySelectorAll('.pl-entity-page-component-header-text');
-        for (let h of headers) {
-            if (h.textContent.includes('Informações SCCD')) {
-                const headerContainer = h.closest('[aria-expanded]') || h.closest('.pl-entity-page-component-header');
-                if (headerContainer && headerContainer.getAttribute('aria-expanded') === 'true') simulateClick(headerContainer);
-                sccdProcessedForTicket = currentTicketId; break;
-            }
-        }
     }
 
     // =========================================================================
@@ -1993,28 +1913,25 @@
 
     function initContextualDiscussionBank() {
         if (!CONFIG.features.enableContextualBancoDiscussao) {
-            document.getElementById('btn-contextual-discussion-bank')?.remove();
+            document.getElementById('smax-discussion-bank-host')?.remove();
             return;
         }
 
-        const container = document.querySelector('pl-entity-comment-tab');
-        if (!container || document.getElementById('smax-discussion-bank-bar')) return;
+        const tab = document.querySelector('[data-aid="tab-panel-content-discussions"]');
+        if (!tab) return;
 
-        const editorContent = container.querySelector('.currentUserComment .editor-content');
-        const commentEditorArea = container.querySelector('.currentUserComment');
-
-        // Aguarde o editor existir; não use o filtro Select2 como âncora.
-        if (!editorContent && !commentEditorArea) return;
-
-        const bar = buildBankBar('smax-discussion-bank', 'Discussões:', true);
-
-        if (editorContent) {
-            editorContent.insertBefore(bar, editorContent.firstChild);
-        } else if (commentEditorArea) {
-            bar.style.marginLeft = '55px';
-            bar.style.width = 'calc(100% - 55px)';
-            commentEditorArea.parentNode.insertBefore(bar, commentEditorArea);
+        const tabHost = tab.closest('[pl-tab]') || tab;
+        let host = document.getElementById('smax-discussion-bank-host');
+        if (!host) {
+            host = document.createElement('div');
+            host.id = 'smax-discussion-bank-host';
+            host.style.cssText = 'margin: 10px 0 12px 55px; width: calc(100% - 55px);';
+            tabHost.insertAdjacentElement('afterend', host);
         }
+
+        let bar = document.getElementById('smax-discussion-bank-bar');
+        if (!bar) bar = buildBankBar('smax-discussion-bank', 'Discussões:', true);
+        if (bar.parentElement !== host) host.appendChild(bar);
     }
 
     function openManager(isDisc) {
@@ -2192,7 +2109,6 @@
             { id: 'enableHeaderGlobais', label: '🌍 Botão Globais no Cabeçalho' },
 
             { id: 'enableEscalarAlert', label: '⚠️ Alerta Escalar' },
-            { id: 'enableAutoExpandShowMore', label: '↕️ Auto-clique em "Mostrar mais"' },
             { id: 'enableAutoHeightComments', label: '📜 Expandir Rolagem de Comentários' },
             { id: 'enableVipBadge', label: '👑 Selo VIP (Defensoria Pública)' },
             { id: 'enableDuplicityRadar', label: '🔍 Botão Histórico do Solicitante' },
@@ -6709,9 +6625,9 @@
         .catch(() => undefined);
 
     const dynamicDomTasks = [
-        moveAttachmentsIntoForm, applyAttachmentsFix, initHeaderTools,
+        keepAttachmentsVisible, applyAttachmentsFix, initHeaderTools,
         applyAutoHeightComments, checkEscalarAlert, checkFollowerAlert,
-        autoExpandShowMore, checkDefPubVIP, autoCollapseSccd,
+        checkDefPubVIP,
         initDuplicityRadar, applyZenMode, updatePrivateNotebook,
         initContextualSolutionBank, initContextualDiscussionBank,
         initContextualAssignButton, initContextualOfertaButton,
@@ -6728,6 +6644,23 @@
         });
     }
 
+    function mutationNeedsDynamicSync(records) {
+        const SELECT2_SELECTOR = '.select2-container, .select2-drop, #select2-drop';
+        const OWNED_SELECTOR = [
+            '[id^="smax-"]', '[id^="aria-"]', '[id^="btn-contextual-"]',
+            '#header-tools-li', '.tmPreviewModal'
+        ].join(',');
+
+        return records.some((record) => {
+            const target = record.target?.nodeType === 1 ? record.target : record.target?.parentElement;
+            if (target?.closest?.(SELECT2_SELECTOR)) return false;
+
+            const added = Array.from(record.addedNodes || []).filter(node => node.nodeType === 1);
+            if (!added.length) return false;
+            return added.some(node => !node.matches?.(OWNED_SELECTOR));
+        });
+    }
+
     async function refreshInterface() {
         if (refreshInProgress) return;
         refreshInProgress = true;
@@ -6735,7 +6668,6 @@
         try {
             CONFIG.features = loadSettings().features;
             autoDetectLoggedUser();
-            syncDynamicDom();
             await Promise.all([runTask(scanGridForRevisar), runTask(autoCheckDuplicity)]);
         } finally {
             refreshInProgress = false;
@@ -6744,15 +6676,17 @@
 
     function initOrchestrator() {
         CONFIG.features = loadSettings().features;
-        initDiscussionFilterProtection();
         initDarkModeEngine();
         initFlagUsersSkull();
         initAttachmentsPreview();
 
-        // O SMAX recria componentes com frequência; agrupar mutações evita reprocessamento por nó.
-        new MutationObserver(debounce(syncDynamicDom, 150))
+        const scheduleDynamicSync = debounce(syncDynamicDom, 150);
+        new MutationObserver((records) => {
+            if (mutationNeedsDynamicSync(records)) scheduleDynamicSync();
+        })
             .observe(document.body, { childList: true, subtree: true });
 
+        syncDynamicDom();
         refreshInterface();
         setInterval(refreshInterface, 1500);
     }

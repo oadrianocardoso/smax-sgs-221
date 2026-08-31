@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221 (LOCAL)
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      10.17-local
+// @version      10.18-local
 // @description  SMAX SGS 221 (modularizado - arquivos locais)
 // @author       ADRIANO AUGUSTO CARDOSO E SANTOS
 // @match        https://suporte.tjsp.jus.br/saw/*

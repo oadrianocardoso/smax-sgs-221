@@ -97,7 +97,7 @@ Quando essas informações estão presentes na resposta interna do SMAX, um bloc
 
 O tratamento de anexos foi aprimorado para:
 
-- posicionar a área de anexos no início do formulário;
+- preservar a posição nativa da área de anexos para não reinicializar componentes do formulário;
 - abrir imagens em uma visualização ampliada;
 - abrir documentos PDF em nova aba;
 - reconhecer anexos mesmo quando o nome ou o tipo não está evidente no link;
