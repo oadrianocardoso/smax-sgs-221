@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         ARIA
-// @version      3.6
+// @version      3.7
 // @description  Assistente de Resolução Integradas e Automações - SGS 2.3.2
 // @author       FELIPY WILLIAM FERREIRA
 // @updateURL    https://gist.github.com/felipywf/dff2f20be7fc0d366889ad5922b3e2c8/raw/aria.user.js
@@ -305,6 +305,47 @@
             element.dispatchEvent(event);
         });
     };
+
+    // O Select2 do filtro de discussões é um componente nativo sensível a
+    // cliques/focos artificiais. Automações da página não devem abri-lo;
+    // interações reais do usuário continuam passando normalmente.
+    function initDiscussionFilterProtection() {
+        if (window.smaxDiscussionFilterProtectionBound) return;
+        window.smaxDiscussionFilterProtectionBound = true;
+
+        const FILTER_SELECTOR = '.discussion-tab-filtering-div';
+        let userIntentUntil = 0;
+
+        const isFilterTarget = (target) => target?.closest?.(FILTER_SELECTOR);
+        const registerUserIntent = (event) => {
+            if (!event.isTrusted) return;
+            if (isFilterTarget(event.target) || event.key === 'Tab') {
+                userIntentUntil = Date.now() + 1200;
+            }
+        };
+
+        document.addEventListener('pointerdown', registerUserIntent, true);
+        document.addEventListener('keydown', registerUserIntent, true);
+
+        ['mousedown', 'mouseup', 'click'].forEach((eventType) => {
+            document.addEventListener(eventType, (event) => {
+                if (!isFilterTarget(event.target) || event.isTrusted) return;
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }, true);
+        });
+
+        document.addEventListener('focusin', (event) => {
+            if (!isFilterTarget(event.target) || Date.now() <= userIntentUntil) return;
+            // Um focus() sem gesto do usuário é suficiente para o Select2
+            // abrir. Retirar esse foco não altera o valor selecionado.
+            queueMicrotask(() => {
+                if (Date.now() > userIntentUntil && event.target === document.activeElement) {
+                    event.target.blur?.();
+                }
+            });
+        }, true);
+    }
 
     // =========================================================================
     // ROTINAS DE INTERFACE E ALERTAS
@@ -1959,11 +2000,13 @@
         const container = document.querySelector('pl-entity-comment-tab');
         if (!container || document.getElementById('smax-discussion-bank-bar')) return;
 
-        const bar = buildBankBar('smax-discussion-bank', 'Discussões:', true);
-
         const editorContent = container.querySelector('.currentUserComment .editor-content');
         const commentEditorArea = container.querySelector('.currentUserComment');
-        const filterArea = container.querySelector('.comment-filter');
+
+        // Aguarde o editor existir; não use o filtro Select2 como âncora.
+        if (!editorContent && !commentEditorArea) return;
+
+        const bar = buildBankBar('smax-discussion-bank', 'Discussões:', true);
 
         if (editorContent) {
             editorContent.insertBefore(bar, editorContent.firstChild);
@@ -1971,10 +2014,6 @@
             bar.style.marginLeft = '55px';
             bar.style.width = 'calc(100% - 55px)';
             commentEditorArea.parentNode.insertBefore(bar, commentEditorArea);
-        } else if (filterArea) {
-            filterArea.parentNode.insertBefore(bar, filterArea.nextSibling);
-        } else {
-            container.prepend(bar);
         }
     }
 
@@ -6705,6 +6744,7 @@
 
     function initOrchestrator() {
         CONFIG.features = loadSettings().features;
+        initDiscussionFilterProtection();
         initDarkModeEngine();
         initFlagUsersSkull();
         initAttachmentsPreview();
