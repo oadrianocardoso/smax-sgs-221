@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SMAX SGS 221
 // @namespace    https://github.com/oadrianocardoso/smax-sgs-221
-// @version      22
+// @version      23
 // @description  SMAX SGS 221 (modularizado)
 // @author       ADRIANO AUGUSTO CARDOSO E SANTOS
 // @match        https://suporte.tjsp.jus.br/saw/*
@@ -29,7 +29,7 @@
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/comments.js?v=15
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/discussion-api.js?v=15
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/followers-alert.js?v=17
-// @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/discussion-advisor.js?v=21
+
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/sections.js?v=18
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/zen-mode.js?v=17
 // @require      https://raw.githubusercontent.com/oadrianocardoso/smax-sgs-221/main/modules/attachments.js?v=21
