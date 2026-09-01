@@ -106,19 +106,14 @@
     `);
   }
 
-  function moveAttachmentsIntoForm() {
+  function keepAttachmentsVisible() {
     const doc = root.document;
     const attachments = doc.querySelector('div.pl-entity-page-component[data-aid="attachments"]');
-    const form = doc.querySelector('ng-form[name="form"]');
-    if (!attachments || !form) return;
+    if (!attachments) return;
 
+    // O componente pertence ao Angular do SMAX. Reparentear esse no pode
+    // fazer o ng-repeat remover a area de anexos durante uma nova renderizacao.
     attachments.style.display = '';
-
-    if (attachments.parentNode === form && form.firstElementChild === attachments) {
-      return;
-    }
-
-    form.insertBefore(attachments, form.firstElementChild || null);
   }
 
   function normalizeUrl(rawUrl) {
@@ -663,7 +658,7 @@
 
   function maintain() {
     maintainScheduled = false;
-    moveAttachmentsIntoForm();
+    keepAttachmentsVisible();
     wirePreviewLinks();
     wireInlineImages();
   }
