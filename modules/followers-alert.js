@@ -59,7 +59,10 @@
   }
 
   function findHost() {
-    return root.document.querySelector('.overview-buttons-container');
+    const hosts = Array.from(root.document.querySelectorAll(
+      '.overview-buttons-container:not(.tmx-clone-lifecycle)'
+    ));
+    return hosts.find(host => host.getClientRects().length > 0) || hosts[0] || null;
   }
 
   function removePopover() {
@@ -153,7 +156,7 @@
   async function fetchFollowers(requestId) {
     const tenantId = getTenantId();
     const url = `/rest/${encodeURIComponent(tenantId)}/ems/Request/${encodeURIComponent(requestId)}`
-      + '/associations/FollowedByUsers?layout=Id,Name,DisplayLabel,Upn';
+      + '/associations/FollowedByUsers?layout=Name';
     const controller = typeof AbortController === 'function' ? new AbortController() : null;
     const request = { requestId, controller };
     pendingRequest = request;
