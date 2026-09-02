@@ -580,6 +580,8 @@
               : ''
             ) +
 
+            '<div class="smax-eproc-followers-host" style="display:none; align-items:center; margin-top:6px;"></div>' +
+
           '</div>' +
         '</div>' +
       '</div>';

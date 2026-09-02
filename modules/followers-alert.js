@@ -59,10 +59,9 @@
   }
 
   function findHost() {
-    const hosts = Array.from(root.document.querySelectorAll(
-      '.overview-buttons-container:not(.tmx-clone-lifecycle)'
-    ));
-    return hosts.find(host => host.getClientRects().length > 0) || hosts[0] || null;
+    return root.document.querySelector(
+      '#initdata_eproc_block .smax-eproc-followers-host'
+    );
   }
 
   function removePopover() {
@@ -72,6 +71,8 @@
   function removeUi() {
     removePopover();
     root.document.getElementById(BADGE_ID)?.remove();
+    const host = findHost();
+    if (host) host.style.display = 'none';
   }
 
   function positionPopover(popover, badge) {
@@ -151,6 +152,7 @@
       : `${followers.length} seguidores: ${followers.map(item => item.name).join(', ')}`;
 
     if (badge.parentElement !== host) host.prepend(badge);
+    host.style.display = 'flex';
   }
 
   async function fetchFollowers(requestId) {
@@ -234,7 +236,7 @@
     style.id = 'smax-followers-alert-style';
     style.textContent = `
       #${BADGE_ID}.smax-followers-alert {
-        box-sizing: border-box; min-width: 52px; height: 28px; margin-right: 10px;
+        box-sizing: border-box; min-width: 52px; height: 28px; margin: 0;
         padding: 0 10px; border: 1px solid #1a252f; border-radius: 4px;
         background: #2c3e50; color: #fff; font: 700 11px/26px Inter, Arial, sans-serif;
         cursor: pointer;
